@@ -49,6 +49,7 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.video',
     'pustakalaya_apps.image',
     'pustakalaya_apps.other',
+    'pustakalaya_apps.dashboard'
 
 ]
 
@@ -69,7 +70,7 @@ ROOT_URLCONF = 'pustakalaya.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,3 +134,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Don't put static root in version control
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+# Per application basic
+# static_dist files are dispatched automatically by webpack by reading static_src directory.
+STATICFILES_DIRS = (
+    ('static_dist'),
+)
+
+
+# Media Configuration
+# dont' put media in version control.
+MEDIA_URL = '/media/'
+# TODO: change this to store somewhere else.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

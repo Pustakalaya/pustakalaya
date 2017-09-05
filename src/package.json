@@ -1,0 +1,36 @@
+{
+  "name": "pustakalaya",
+  "version": "1.0.0",
+  "description": "Pustakalaya from olenepal",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.dev.js",
+    "builddev": "webpack --config webpack.dev.js",
+    "buildprod": "webpack --config webpack.prod.js",
+    "watch": "webpack --config webpack.dev.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manoj Gautam",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "mdbootstrap": "^4.4.1",
+    "popper.js": "^1.12.5"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.7",
+    "file-loader": "^0.11.2",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.5.5",
+    "webpack-merge": "^4.1.0"
+  }
+}
