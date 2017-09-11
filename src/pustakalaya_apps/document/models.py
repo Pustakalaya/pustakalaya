@@ -1,5 +1,5 @@
 #  document/models.py
-
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -12,7 +12,9 @@ from pustakalaya_apps.collection.models import Collection
 
 
 class Document(AbstractItem):
-    """Book document type to store book type item"""
+    """Book document type to store book type item
+    Child class of AbstractItem
+    """
 
     DOCUMENT_TYPE = (
         ("book", _("Book")),
@@ -121,3 +123,12 @@ class DocumentFileUpload(AbstractTimeStampModel):
         return self.file_name
 
 
+
+class Note(models.Model):
+    user = models.ForeignKey(User)
+    pub_date = models.DateTimeField()
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+
+    def __unicode__(self):
+        return self.title

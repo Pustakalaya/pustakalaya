@@ -1,0 +1,5 @@
+Django==1.11.4
+django-haystack==2.6.1
+pysolr==3.6.0
+djangorestframework==3.6.4
+pytz==2017.2

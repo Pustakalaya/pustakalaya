@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+THIRDPARTY_APPS = [
+    'haystack',
+]
+
 PUSTAKALAYA_APPS = [
 
     'pustakalaya_apps.core',
@@ -53,7 +57,7 @@ PUSTAKALAYA_APPS = [
 
 ]
 
-INSTALLED_APPS += PUSTAKALAYA_APPS
+INSTALLED_APPS += THIRDPARTY_APPS + PUSTAKALAYA_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,3 +154,14 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 # TODO: change this to store somewhere else.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Search engine connection
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr/default'
+        # ...or for multicore...
+        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
+    },
+}
