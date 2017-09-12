@@ -1,23 +1,26 @@
 from django.contrib import admin
+from pustakalaya_apps.collection.models import Collection
 
 from .models import (
     Document,
-    DocumentAuthor,
-    DocumentEditor,
-    DocumentIllustrator,
     DocumentSeries,
     DocumentFileUpload,
     Note
 )
 
-from pustakalaya_apps.collection.models import Collection
+
+class DocumentFileUploadInline(admin.StackedInline):
+    model = DocumentFileUpload
+
+@admin.register(Document)
+class DocumentAdmin(admin.ModelAdmin):
+    inlines = [
+        DocumentFileUploadInline,
+    ]
 
 
-admin.site.register(Document)
-admin.site.register(DocumentAuthor)
-admin.site.register(DocumentEditor)
 admin.site.register(DocumentFileUpload)
 admin.site.register(DocumentSeries)
-admin.site.register(DocumentIllustrator)
+
 admin.site.register(Collection)
 admin.site.register(Note)

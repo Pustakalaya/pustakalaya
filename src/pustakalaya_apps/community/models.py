@@ -4,12 +4,12 @@ from pustakalaya_apps.core.abstract_models import AbstractTimeStampModel
 
 class Community(AbstractTimeStampModel):
     community_name = models.CharField(
-        _("Collection name"),
+        _("Community name"),
         max_length=255
     )
 
     community_description = models.CharField(
-        _("Collection description"),
+        _("Community description"),
         max_length=255
     )
 

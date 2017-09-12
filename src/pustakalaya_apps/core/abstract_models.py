@@ -2,6 +2,8 @@
 
 from django.db import models
 from django.utils.translation import ugettext as _
+
+
 # from pustakalaya_apps.collection.models import Collection
 
 
@@ -25,7 +27,29 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     """Base author class that holds the common attributes for other author class."""
 
     first_name = models.CharField(_("First name"), max_length=255)
+    middle_name = models.CharField(_("Middle name"), max_length=255, blank=True)
     last_name = models.CharField(_("Last name"), max_length=255)
+    description = models.TextField(
+        _("Description")
+    )
+    dob = models.DateField(
+        verbose_name=_("Date of birth"),
+        blank=True
+    )
+    pen_name = models.CharField(
+        verbose_name=_("Pen name"),
+        max_length=255
+    )
+    address = models.TextField(
+        verbose_name=_("Address")
+    )
+
+    genre = models.TextField(
+        verbose_name=_("Genre"),
+        max_length=100
+    )
+
+
 
     def __str__(self):
         return self.first_name
@@ -39,6 +63,10 @@ class AbstractSeries(AbstractTimeStampModel):
     series_name = models.CharField(
         _("Series name"),
         max_length=255
+    )
+
+    description = models.TextField(
+        verbose_name=_("Description")
     )
 
     class Meta:
@@ -63,46 +91,47 @@ class AbstractItem(AbstractTimeStampModel):
         ("mit license", _("MIT License")),
     )
 
-    ITEM_INTERACTIVE_TYPE = (
-        ("interactive", _("Interactive")),
-        ("noninteractive", _("Non interactive")),
+    TYPE = (
+        ("document", _("Document")),
+        ("audio", _("Audio")),
+        ("video", _("Video")),
+        ("image", _("Image")),
+        ("wikipedia", _("Wikipedia")),
+        ("map", _("Map")),
     )
 
+    CATEGORY = (
+        ("literatures and arts", _("Literature and arts")),
+        ("course materials", _("Course materials")),
+        ("teaching materials", _("Teaching materials")),
+        ("reference materials", _("Reference materials")),
+    )
 
-
-    item_title = models.CharField(
+    title = models.CharField(
         _("Title"),
         max_length=255,
         unique=True
     )
 
-    item_abstract = models.TextField(
-        _("Item abstract")
+
+    abstract = models.TextField(
+        _("Abstract")
     )
 
-
-
-    item_label = models.CharField(
+    education_label = models.CharField(
         _("Education Level"),
         max_length=255,
         choices=ITEM_LABEL
 
     )
 
-    item_interactivity = models.CharField(
-        _("Item Interactive"),
-        max_length=15,
-        choices=ITEM_INTERACTIVE_TYPE
+    category = models.CharField(
+        choices=CATEGORY,
+        max_length=255
     )
 
-    #
-    # item_category = models.ManyToManyField(
-    #     ItemCategory,
-    #     verbose_name=_("Item category")
-    # )
-
-    item_language = models.CharField(
-        _("Item Language"),
+    language = models.CharField(
+        _("Language"),
         choices=(
             ("nepali", _("Nepali")),
             ("english", _("English")),
@@ -110,66 +139,54 @@ class AbstractItem(AbstractTimeStampModel):
         max_length=255  # TODO
     )
 
-    item_citation = models.CharField(
+    citation = models.CharField(
         _("Citation"),
         max_length=255,
         blank=True
     )
 
-    item_reference_link = models.URLField(
-        _('Item reference link'),
+    reference_link = models.URLField(
+        _('Reference link'),
         blank=True
     )
 
-    item_additional_node = models.TextField(
+    additional_note = models.TextField(
         _("Additional Note"),
         blank=True
     )
 
-    item_sponsors = models.CharField(
-        _("Sponsors"),
+    sponsor = models.CharField(
+        _("Sponsor"),
         max_length=255,
         blank=True,
     )
 
-    item_description = models.TextField(
-        _("Item description"),
+    description = models.TextField(
+        _("Description"),
     )
 
-    item_license_type = models.CharField(
-        _("Item license type"),
+    license_type = models.CharField(
+        _("License type"),
         choices=ITEM_LICENSE_TYPE,
         max_length=255,
     )
 
-    item_custom_license = models.TextField(
-        _("Item custom license"),
+    custom_license = models.TextField(
+        _("Custom license"),
         blank=True
     )
 
-    item_years_of_available = models.DateField(
-        _("Years of available"),
+    year_of_available = models.DateField(
+        _("Year of available"),
         blank=True
     )
 
-    item_date_of_issue = models.DateField(
-        _("Item date of issue"),
+    date_of_issue = models.DateField(
+        _("Date of issue"),
         blank=True
     )
 
-    item_identifier_type = models.CharField(
-        _("Item identifier type"),
-        choices=(
-            ("issn", _("ISSN")),
-            ("ismn", _("ISMN")),
-            ("govt doc", _("Gov't Doc")),
-            ("uri", _("URI")),
-            ("isbn", _("ISBN"))
-        ),
-        max_length=255  # TODO
-    )
-
-    item_place_of_publication = models.CharField(
+    place_of_publication = models.CharField(
         _("Place of publication"),
         max_length=255,
         blank=True
@@ -179,6 +196,7 @@ class AbstractItem(AbstractTimeStampModel):
 
     # Comment TODO
 
+    # Grade TODO
 
     # Keyword TODO: ManyToManyField
 

@@ -3,18 +3,36 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from pustakalaya_apps.core.abstract_models import AbstractItem
-from pustakalaya_apps.core.abstract_models import AbstractBaseAuthor
-from pustakalaya_apps.core.abstract_models import AbstractSeries
-from pustakalaya_apps.core.abstract_models import AbstractTimeStampModel
+from pustakalaya_apps.core.abstract_models import (
+    AbstractItem,
+    AbstractSeries,
+    AbstractTimeStampModel
+)
 
 from pustakalaya_apps.collection.models import Collection
+from pustakalaya_apps.core.models import (
+    Publisher,
+    Biography,
+    Category,
+    Keyword,
+)
 
+
+def __file_upload_path(instance, filepath):
+    # Should return itemtype/year/month/filename
+    # return instance.type
+    # return document/pdf/year/month/filename
+    pass
 
 class Document(AbstractItem):
     """Book document type to store book type item
     Child class of AbstractItem
     """
+
+    ITEM_INTERACTIVE_TYPE = (
+        ("interactive", _("Interactive")),
+        ("noninteractive", _("Non interactive")),
+    )
 
     DOCUMENT_TYPE = (
         ("book", _("Book")),
@@ -38,7 +56,7 @@ class Document(AbstractItem):
         ("mobi", _("Mobi")),
     )
 
-    item_Collection = models.ManyToManyField(
+    collection = models.ManyToManyField(
         Collection,
         verbose_name=_("Add to these collections")
     )
@@ -61,25 +79,76 @@ class Document(AbstractItem):
         on_delete=models.CASCADE
     )
 
-    document_total_pages = models.PositiveIntegerField(
+    document_interactivity = models.CharField(
+        verbose_name=_("Interactive type"),
+        max_length=15,
+        choices=ITEM_INTERACTIVE_TYPE
+    )
+
+    # This field should be same on all other model to make searching easy in search engine.
+    type = models.CharField(
+        max_length=255, editable=False, default="document"
+    )
+
+    document_category = models.ForeignKey(
+        Category,
+            verbose_name=_("Document Category")
+    )
+
+    document_total_page = models.PositiveIntegerField(
         verbose_name=_("Document pages")
     )
 
     document_author = models.ManyToManyField(
-        "DocumentAuthor",
-        verbose_name=_("Document Author")
+        Biography,
+        verbose_name=_("Document Author"),
+        related_name="authors"
     )
+
     document_editor = models.ManyToManyField(
-        "DocumentEditor",
-        verbose_name=_("Document Editor")
+        Biography,
+        verbose_name=_("Document Editor"),
+        related_name="editors"
     )
+
     document_illustrator = models.ManyToManyField(
-        "DocumentIllustrator",
-        verbose_name=_("Document Illustrator")
+        Biography,
+        verbose_name=_("Document Illustrator"),
+        related_name="illustrators"
+    )
+
+    document_identifier_type = models.CharField(
+        _("Identifier type"),
+        choices=(
+            ("issn", _("ISSN")),
+            ("ismn", _("ISMN")),
+            ("govt doc", _("Gov't Doc")),
+            ("uri", _("URI")),
+            ("isbn", _("ISBN"))
+        ),
+        max_length=255  # TODO
+    )
+
+    publisher = models.ForeignKey(
+        Publisher,
+        verbose_name=_("Publisher name")
+    )
+
+    keyword = models.ManyToManyField(
+        Keyword,
+        verbose_name=_("Select list of keywords")
+    )
+
+    document_thumbnail = models.ImageField(
+        upload_to="uploads/thumbnails/%Y/%m/%d",
+        max_length=255
     )
 
     class Meta:
-        ordering = ('item_title',)
+        ordering = ('title',)
+
+    def __str__(self):
+        return self.title
 
 
 class DocumentSeries(AbstractSeries):
@@ -89,18 +158,6 @@ class DocumentSeries(AbstractSeries):
         return self.series_name
 
 
-class DocumentAuthor(AbstractBaseAuthor):
-   pass
-
-
-class DocumentEditor(AbstractBaseAuthor):
-   pass
-
-
-class DocumentIllustrator(AbstractBaseAuthor):
-   pass
-
-
 class DocumentFileUpload(AbstractTimeStampModel):
     """Class to upload the multiple document objects"""
 
@@ -108,20 +165,19 @@ class DocumentFileUpload(AbstractTimeStampModel):
         _("File name"),
         max_length=255,
     )
+
     document = models.ForeignKey(
         Document,
         on_delete=models.CASCADE
     )
 
-
     upload = models.FileField(
-        upload_to="uploads/%Y/%m/%d",
-        max_length=100
+        upload_to="uploads/documents/%Y/%m/",
+        max_length=255
     )
 
     def __str__(self):
         return self.file_name
-
 
 
 class Note(models.Model):
