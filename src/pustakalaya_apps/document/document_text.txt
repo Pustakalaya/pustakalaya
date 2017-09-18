@@ -1,3 +1,0 @@
-{{ object.item_title }}
-{{ object.collection.collection_name }}
-{{ object.collection.community.community_name }}

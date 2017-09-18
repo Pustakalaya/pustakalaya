@@ -2,4 +2,7 @@ from django.apps import AppConfig
 
 
 class CommunityConfig(AppConfig):
-    name = 'community'
+    name = 'pustakalaya_apps.community'
+
+    def ready(self):
+        from . import signals

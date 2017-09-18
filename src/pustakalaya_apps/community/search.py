@@ -3,7 +3,6 @@ from elasticsearch.helpers import bulk
 from elasticsearch_dsl.connections import connections
 from django.conf import settings
 
-
 # reuse this field in other module
 community_field = Object(
     properties={
@@ -21,18 +20,10 @@ class CommunityDoc(DocType):
     community_name = Text(),
     community_description = Text()
 
-
     class Meta:
         index = settings.ES_INDEX
         doc_type = "community"
 
-
-#
-#
-# Create an index and register the doc type
-# # TODO: need to move somewhere sensible place.
-# index = Index(settings.ES_INDEX)
-# index.settings(number_of_shards=1, number_of_replicas=0)
 
 def index_community():
     from .models import Community
@@ -43,4 +34,3 @@ def index_community():
     # Index all community with nested collection
     print("Indexing communities and collection")
     bulk(client=es, actions=(b.index() for b in Community.objects.all().iterator()))
-

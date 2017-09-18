@@ -64,6 +64,10 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
 
 class AbstractSeries(AbstractTimeStampModel):
     """Abstract Series models for data item"""
+
+    class Meta:
+        abstract = True
+
     series_name = models.CharField(
         _("Series name"),
         max_length=255
@@ -201,5 +205,4 @@ class AbstractItem(AbstractTimeStampModel):
 
     # FileUpload ForeignKey.
 
-    class Meta:
-        abstract = True
+
