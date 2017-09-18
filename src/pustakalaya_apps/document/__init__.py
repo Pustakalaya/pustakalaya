@@ -1,0 +1,1 @@
+default_app_config = "pustakalaya_apps.document.apps.DocumentConfig"

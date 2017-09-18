@@ -1,7 +1,9 @@
 from django.contrib import admin
 from .models import (
     AudioFileUpload,
-    Audio
+    Audio,
+    AudioGenre,
+    AudioSeries
 )
 
 
@@ -14,3 +16,7 @@ class DocumentAdmin(admin.ModelAdmin):
     inlines = [
         AudioFileUploadInline,
     ]
+
+
+admin.site.register(AudioGenre)
+admin.site.register(AudioSeries)

@@ -3,7 +3,6 @@ from django.dispatch import receiver
 
 from .models import Community
 
-
 @receiver(post_save, sender=Community)
 def index_community(sender, instance, **kwargs):
     """Update an instance to index server."""

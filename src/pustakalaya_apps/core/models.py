@@ -19,6 +19,9 @@ class Category(AbstractTimeStampModel):
     def __str__(self):
         return self.category_name
 
+    class Meta:
+        db_table = "category"
+
 
 class Publisher(AbstractTimeStampModel):
     publisher_name = models.CharField(
@@ -33,6 +36,7 @@ class Publisher(AbstractTimeStampModel):
 
     class Meta:
         ordering = ("publisher_name",)
+        db_table = "publisher"
 
     def __str__(self):
         return self.publisher_name
@@ -52,17 +56,23 @@ class Keyword(AbstractTimeStampModel):
     def __str__(self):
         return self.keyword
 
+    class Meta:
+        db_table = "keyword"
+
 
 class Biography(AbstractBaseAuthor):
     """Biography class to create an instace of document author, editor, illustrator,
     video director, video producer and audio recorder"""
     keywords = models.ManyToManyField(
          Keyword,
-         verbose_name=_("Search Keywords")
+         verbose_name=_("Search Keywords"),
      )
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    class Meta:
+        db_table = "biography"
 
 
 class Sponsor(AbstractTimeStampModel):
@@ -78,3 +88,6 @@ class Sponsor(AbstractTimeStampModel):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = "sponsor"

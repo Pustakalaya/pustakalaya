@@ -31,7 +31,7 @@ class Audio(AbstractItem):
 
     collection = models.ManyToManyField(
         Collection,
-        verbose_name=_("Add this audio to these collection")
+        verbose_name=_("Add this audio to these collection"),
     )
 
     type = models.CharField(
@@ -88,8 +88,9 @@ class Audio(AbstractItem):
         max_length=255
     )
 
-    def index(self):
-        """index all the document to elastic search index server"""
+
+
+    def doc(self):
         obj = AudioDoc(
             meta={'id': self.id},
             id=self.id,
@@ -113,21 +114,32 @@ class Audio(AbstractItem):
             collections=[c.collection_name for c in self.collection.all()],  # ToDO generator
             keywords=[keyword.keyword for keyword in self.keywords.all()],
 
-            # Document type specific
-            video_category=self.video_category,
-            video_running_time=self.video_running_time,
-            video_thumbnail=self.video_thumbnail.name,
-            video_director=self.video_director.getname,
-            video_series=[series.series_name for series in self.video_series.all()],
-            video_certificate_license=self.video_certificate_license
-
+            # Audio type specific
+            audio_category=self.audio_category.category_name,
+            audio_running_time=self.audio_running_time,
+            audio_thumbnail=self.audio_thumbnail.name,
+            audio_read_by = self.audio_read_by.getname,
+            audio_series=self.audio_series.series_name,
         )
 
-        obj.save()
-        return obj.to_dict(include_meta=True)
+        return obj
+
+    def index(self):
+        """index all the document to elastic search index server"""
+        self.doc().save()
+        return self.doc().to_dict(include_meta=True)
+
+    def delete_index(self):
+        try:
+            self.doc().delete()
+        except Exception as e:
+            print(e)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        db_table = "audio"
 
 
 class AudioGenre(AbstractTimeStampModel):
@@ -140,10 +152,18 @@ class AudioGenre(AbstractTimeStampModel):
         verbose_name=_("Genre description")
     )
 
+    class Meta:
+        db_table = "audio_genre"
+
+    def __str__(self):
+        return self.genre
 
 class AudioSeries(AbstractSeries):
     def __str__(self):
         return "{}".format(self.series_name)
+
+    class Meta:
+        db_table = "audio_series"
 
 
 class AudioFileUpload(AbstractTimeStampModel):
@@ -166,3 +186,7 @@ class AudioFileUpload(AbstractTimeStampModel):
 
     def __str__(self):
         return self.file_name
+
+
+    class Meta:
+        db_table = "audio_file"

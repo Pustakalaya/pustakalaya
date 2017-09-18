@@ -14,7 +14,6 @@ class AudioDoc(ItemDoc):
     audio_thumbnail = Text()
     audio_read_by = Text()
     audio_type = Text()
-    audio_genre = Text()
     audio_series = Text()
 
     class Meta:

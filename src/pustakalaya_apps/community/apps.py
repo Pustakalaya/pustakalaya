@@ -6,3 +6,4 @@ class CommunityConfig(AppConfig):
 
     def ready(self):
         from . import signals
+        print("Signals")

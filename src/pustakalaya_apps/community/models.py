@@ -59,3 +59,7 @@ class Community(AbstractTimeStampModel):
 
     def __str__(self):
         return self.community_name
+
+
+    class Meta:
+        db_table = "community"

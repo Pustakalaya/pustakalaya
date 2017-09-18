@@ -60,7 +60,7 @@ class Document(AbstractItem):
 
     collection = models.ManyToManyField(
         Collection,
-        verbose_name=_("Add to these collections")
+        verbose_name=_("Add to these collections"),
     )
 
     document_type = models.CharField(
@@ -94,6 +94,7 @@ class Document(AbstractItem):
 
     document_category = models.ForeignKey(
         Category,
+        on_delete=models.CASCADE,
         verbose_name=_("Document Category")
     )
 
@@ -158,8 +159,8 @@ class Document(AbstractItem):
     def __str__(self):
         return self.title
 
-    def index(self):
-        """index all the document to elastic search index server"""
+    def doc(self):
+        """Create and return document object"""
         obj = DocumentDoc(
             meta={'id': self.id},
             id=self.id,
@@ -199,15 +200,19 @@ class Document(AbstractItem):
                 ],  # Multi value TODO generator
             document_editors=[
                 editor.getname for editor in self.document_editor.all()
-            ]  # Multi value
-
-
+                ]  # Multi value
 
         )
 
-        obj.save()
-        return obj.to_dict(include_meta=True)
+        return obj
 
+    def index(self):
+        """index or update a document instance to elastic search index server"""
+        self.doc().save()
+        return self.doc().to_dict(include_meta=True)
+
+    def delete_index(self):
+        self.doc().delete()
 
 
 class DocumentSeries(AbstractSeries):

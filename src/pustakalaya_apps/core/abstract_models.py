@@ -181,12 +181,14 @@ class AbstractItem(AbstractTimeStampModel):
 
     year_of_available = models.DateField(
         _("Year of available"),
-        blank=True
+        blank=True,
+        null=True
     )
 
     date_of_issue = models.DateField(
         _("Date of issue"),
-        blank=True
+        blank=True,
+        null=True
     )
 
     place_of_publication = models.CharField(
@@ -205,4 +207,5 @@ class AbstractItem(AbstractTimeStampModel):
 
     # FileUpload ForeignKey.
 
-
+    class Meta:
+        abstract = True

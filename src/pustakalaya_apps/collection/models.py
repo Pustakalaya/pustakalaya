@@ -6,6 +6,7 @@ from .search import CollectionDoc
 
 
 class Collection(AbstractTimeStampModel):
+
     collection_name = models.CharField(
         _("Collection name"),
         max_length=255
@@ -37,6 +38,10 @@ class Collection(AbstractTimeStampModel):
 
     def __str__(self):
         return self.collection_name
+
+
+    class Meta:
+        db_table = "collection"
 
 
 
