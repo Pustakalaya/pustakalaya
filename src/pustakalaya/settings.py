@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'pustakalaya_apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -44,7 +46,6 @@ THIRDPARTY_APPS = [
 ]
 
 PUSTAKALAYA_APPS = [
-
     'pustakalaya_apps.core',
     'pustakalaya_apps.document',
     'pustakalaya_apps.collection',
@@ -53,7 +54,8 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.video',
     'pustakalaya_apps.image',
     'pustakalaya_apps.other',
-    'pustakalaya_apps.dashboard'
+    'pustakalaya_apps.dashboard',
+    'pustakalaya_apps.pustakalaya_search'
 
 ]
 
@@ -165,3 +167,26 @@ HAYSTACK_CONNECTIONS = {
         # 'URL': 'http://127.0.0.1:8983/solr/mysite',
     },
 }
+
+# Elastic search settings.
+
+ES_HOST = os.environ.get('ES_HOST', '127.0.0.1')
+
+ES_INDEX = os.environ.get('ES_INDEX', 'pustakalaya')
+ES_INDEX_SETTINGS = {
+    'number_of_shards': 1,
+    'number_of_replicas': 0,
+}
+
+ES_CONNECTIONS = {
+    'default': {
+        'hosts': [{
+            'host': ES_HOST,
+            'verify_certs': False,
+            'use_ssl': os.environ.get('ES_USE_SSL', False) == 'True',
+            'port': os.environ.get('ES_PORT', '9200'),
+        }]
+    }
+}
+
+

@@ -1,5 +1,7 @@
 # Modules that host all abstract class.
 
+import uuid
+
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -12,7 +14,7 @@ from django.utils.translation import ugettext as _
 
 class AbstractTimeStampModel(models.Model):
     """TimeStampModel that holds created_date and updated_date field"""
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_date = models.DateTimeField(_("Created date"), auto_now_add=True)
     updated_date = models.DateTimeField(_("Updated date"), auto_now=True)
 
@@ -49,7 +51,9 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
         max_length=100
     )
 
-
+    @property
+    def getname(self):
+        return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)
 
     def __str__(self):
         return self.first_name
@@ -113,12 +117,11 @@ class AbstractItem(AbstractTimeStampModel):
         unique=True
     )
 
-
     abstract = models.TextField(
         _("Abstract")
     )
 
-    education_label = models.CharField(
+    education_level = models.CharField(
         _("Education Level"),
         max_length=255,
         choices=ITEM_LABEL
@@ -155,11 +158,7 @@ class AbstractItem(AbstractTimeStampModel):
         blank=True
     )
 
-    sponsor = models.CharField(
-        _("Sponsor"),
-        max_length=255,
-        blank=True,
-    )
+    # TODO: sponsors should be listed in every model.
 
     description = models.TextField(
         _("Description"),

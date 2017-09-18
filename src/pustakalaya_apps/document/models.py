@@ -3,19 +3,20 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
     AbstractSeries,
     AbstractTimeStampModel
 )
-
-from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.models import (
     Publisher,
     Biography,
     Category,
     Keyword,
+    Sponsor,
 )
+from .search import DocumentDoc
 
 
 def __file_upload_path(instance, filepath):
@@ -23,6 +24,7 @@ def __file_upload_path(instance, filepath):
     # return instance.type
     # return document/pdf/year/month/filename
     pass
+
 
 class Document(AbstractItem):
     """Book document type to store book type item
@@ -92,7 +94,7 @@ class Document(AbstractItem):
 
     document_category = models.ForeignKey(
         Category,
-            verbose_name=_("Document Category")
+        verbose_name=_("Document Category")
     )
 
     document_total_page = models.PositiveIntegerField(
@@ -133,15 +135,21 @@ class Document(AbstractItem):
         Publisher,
         verbose_name=_("Publisher name")
     )
-
-    keyword = models.ManyToManyField(
+    # Better to have plural name
+    keywords = models.ManyToManyField(
         Keyword,
         verbose_name=_("Select list of keywords")
     )
 
     document_thumbnail = models.ImageField(
-        upload_to="uploads/thumbnails/%Y/%m/%d",
+        upload_to="uploads/thumbnails/audio/%Y/%m/%d",
         max_length=255
+    )
+
+    sponsors = models.ManyToManyField(
+        Sponsor,
+        verbose_name=_("Sponsor"),
+
     )
 
     class Meta:
@@ -149,6 +157,57 @@ class Document(AbstractItem):
 
     def __str__(self):
         return self.title
+
+    def index(self):
+        """index all the document to elastic search index server"""
+        obj = DocumentDoc(
+            meta={'id': self.id},
+            id=self.id,
+            title=self.title,
+            abstract=self.abstract,
+            type=self.type,
+            education_level=self.education_level,
+            category=self.category,
+            language=self.language,
+            additional_note=self.additional_note,
+            description=self.description,
+            license_type=self.license_type,
+            year_of_available=self.year_of_available,
+            date_of_issue=self.date_of_issue,
+            place_of_publication=self.place_of_publication,
+            created_date=self.created_date,
+            updated_date=self.updated_date,
+            # Common fields in document, audio and video library
+            publisher=self.publisher.publisher_name,
+            sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
+            collections=[c.collection_name for c in self.collection.all()],  # ToDO generator
+            keywords=[keyword.keyword for keyword in self.keywords.all()],
+
+            # Document type specific
+            document_thumbnail=self.document_thumbnail.name,
+            document_identifier_type=self.document_identifier_type,
+            document_total_page=self.document_total_page,
+            document_category=self.document_category.category_name,
+            document_file_type=self.document_file_type,
+            document_interactivity=self.document_interactivity,
+            document_type=self.document_type,
+            document_authors=[
+                author.getname for author in self.document_author.all()
+                ],
+            document_illustrators=[
+                illustrator.getname for illustrator in self.document_illustrator.all()
+                ],  # Multi value TODO generator
+            document_editors=[
+                editor.getname for editor in self.document_editor.all()
+            ]  # Multi value
+
+
+
+        )
+
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
 
 
 class DocumentSeries(AbstractSeries):

@@ -5,7 +5,8 @@ from .models import (
     Document,
     DocumentSeries,
     DocumentFileUpload,
-    Note
+    Publisher,
+    Note,
 )
 
 
@@ -21,6 +22,6 @@ class DocumentAdmin(admin.ModelAdmin):
 
 admin.site.register(DocumentFileUpload)
 admin.site.register(DocumentSeries)
-
+admin.site.register(Publisher)
 admin.site.register(Collection)
 admin.site.register(Note)

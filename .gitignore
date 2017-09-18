@@ -178,3 +178,4 @@ fabric.properties
 # *.ipr
 
 # Sonarlint plugin
+venv/

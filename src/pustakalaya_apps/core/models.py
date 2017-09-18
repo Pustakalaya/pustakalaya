@@ -49,6 +49,9 @@ class Keyword(AbstractTimeStampModel):
         verbose_name=_("Keyword description")
     )
 
+    def __str__(self):
+        return self.keyword
+
 
 class Biography(AbstractBaseAuthor):
     """Biography class to create an instace of document author, editor, illustrator,
@@ -60,3 +63,18 @@ class Biography(AbstractBaseAuthor):
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+
+class Sponsor(AbstractTimeStampModel):
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_("Sponsor Name"),
+        unique=True
+    )
+
+    description = models.TextField(
+        verbose_name=_("Description")
+    )
+
+    def __str__(self):
+        return self.name

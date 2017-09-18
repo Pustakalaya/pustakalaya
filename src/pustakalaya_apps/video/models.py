@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext as _
-
+from .search import VideoDoc
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
     AbstractSeries,
@@ -13,6 +13,8 @@ from pustakalaya_apps.core.models import (
     Category,
     Keyword,
     Biography,
+    Sponsor,
+    Publisher
 )
 
 class Video(AbstractItem):
@@ -29,7 +31,7 @@ class Video(AbstractItem):
         related_name="directors"
     )
 
-    video_producer = models.ManyToManyField(
+    video_producers = models.ManyToManyField(
         Biography,
         verbose_name=_("Producer"),
         related_name="producers"
@@ -47,8 +49,71 @@ class Video(AbstractItem):
         max_length=255
     )
 
-    # TODO
-    # cover_image = models.ImageField()
+    sponsors = models.ManyToManyField(
+        Sponsor,
+        verbose_name=_("Sponsor")
+    )
+
+    publisher = models.ForeignKey(
+        Publisher,
+        verbose_name=_("Publisher"),
+    )
+
+    keywords = models.ManyToManyField(
+        Keyword,
+        verbose_name=_("Keywords")
+    )
+
+    video_thumbnail = models.ImageField(
+        upload_to="uploads/thumbnails/video/%Y/%m/%d",
+        max_length=255
+    )
+
+    video_running_time = models.CharField(
+        verbose_name=_("Running time in minutes"),
+        max_length=3
+    )
+
+
+    def index(self):
+        """index all the document to elastic search index server"""
+        obj = VideoDoc(
+            meta={'id': self.id},
+            id=self.id,
+            title=self.title,
+            abstract=self.abstract,
+            type=self.type,
+            education_level=self.education_level,
+            category=self.category,
+            language=self.language,
+            additional_note=self.additional_note,
+            description=self.description,
+            license_type=self.license_type,
+            year_of_available=self.year_of_available,
+            date_of_issue=self.date_of_issue,
+            place_of_publication=self.place_of_publication,
+            created_date=self.created_date,
+            updated_date=self.updated_date,
+            # Common fields in document, audio and video library
+            publisher=self.publisher.publisher_name,
+            sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
+            collections=[c.collection_name for c in self.collection.all()],  # ToDO generator
+            keywords=[keyword.keyword for keyword in self.keywords.all()],
+
+            # Document type specific
+            video_category=self.video_category,
+            video_running_time = self.video_running_time,
+            video_thumbnail = self.video_thumbnail.name,
+            video_director = self.video_director.getname,
+            video_series=[series.series_name for series in self.video_series.all()],
+            video_certificate_license = self.video_certificate_license
+
+
+        )
+
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
 
 
 
