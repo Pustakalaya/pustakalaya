@@ -1,6 +1,7 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext as _
+from pustakalaya_apps.collection.models import Collection
 from .search import VideoDoc
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
@@ -17,12 +18,18 @@ from pustakalaya_apps.core.models import (
     Publisher
 )
 
+
 class Video(AbstractItem):
     """Video item class"""
 
     video_category = models.ForeignKey(
         Category,
         verbose_name=_("Video Category")
+    )
+
+    collection = models.ManyToManyField(
+        Collection,
+        verbose_name=_("Add this audio to these collection"),
     )
 
     video_director = models.ForeignKey(
@@ -37,13 +44,17 @@ class Video(AbstractItem):
         related_name="producers"
     )
 
-
     video_series = models.ForeignKey(
         "VideoSeries",
         verbose_name=_("Video series"),
         on_delete=models.CASCADE
     )
 
+    type = models.CharField(
+        editable=False,
+        default="video",
+        max_length=4
+    )
     video_certificate_license = models.CharField(
         verbose_name=_("Certificate license name"),
         max_length=255
@@ -74,9 +85,7 @@ class Video(AbstractItem):
         max_length=3
     )
 
-
-    def index(self):
-        """index all the document to elastic search index server"""
+    def doc(self):
         obj = VideoDoc(
             meta={'id': self.id},
             id=self.id,
@@ -101,21 +110,27 @@ class Video(AbstractItem):
             keywords=[keyword.keyword for keyword in self.keywords.all()],
 
             # Document type specific
-            video_category=self.video_category,
-            video_running_time = self.video_running_time,
-            video_thumbnail = self.video_thumbnail.name,
-            video_director = self.video_director.getname,
-            video_series=[series.series_name for series in self.video_series.all()],
-            video_certificate_license = self.video_certificate_license
-
-
+            video_category=self.video_category.category_name,
+            video_running_time=self.video_running_time,
+            video_thumbnail=self.video_thumbnail.name,
+            video_director=self.video_director.getname,
+            video_series=self.video_series.series_name,
+            video_certificate_license=self.video_certificate_license
         )
+        return obj
 
-        obj.save()
-        return obj.to_dict(include_meta=True)
+    def index(self):
+        """index all the document to elastic search index server"""
 
+        self.doc().save()
+        return self.doc().to_dict(include_meta=True)
 
+    def delete_index(self):
 
+        self.doc().delete()
+
+    def __str__(self):
+        return self.title
 
 
 class VideoSeries(AbstractSeries):
