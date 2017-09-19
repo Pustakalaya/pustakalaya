@@ -5,8 +5,7 @@ from elasticsearch_dsl.connections import connections
 
 
 class PustakalayaSearchConfig(AppConfig):
-    name = 'pustakalaya_search'
+    name = 'pustakalaya_apps.pustakalaya_search'
 
     def ready(self):
-        x = connections.configure(**settings.ES_CONNECTIONS)
-        print(x, "hello")
+        connections.configure(**settings.ES_CONNECTIONS)

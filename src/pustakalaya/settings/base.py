@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import sys
+import json
+from django.core.exceptions import ImproperlyConfigured
+
+# Pull configuration detail from config/config.json file
+with open('config/config.json') as config_file:
+    config = json.load(config_file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,8 +34,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-INTERNAL_IPS = ["127.0.0.1"]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,7 +47,6 @@ INSTALLED_APPS = [
 
 THIRDPARTY_APPS = [
     'haystack',
-    'debug_toolbar',
 
 ]
 
@@ -129,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -143,7 +146,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Don't put static root in version control
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+try:
+    STATIC_ROOT = config["STATIC_ROOT"]
+except KeyError:
+    raise ImproperlyConfigured("Set the {} config.json".format("STATIC_ROOT"))
+
 
 # Per application basic
 # static_dist files are dispatched automatically by webpack by reading static_src directory.
@@ -152,10 +159,11 @@ STATICFILES_DIRS = (
 )
 
 # Media Configuration
-# dont' put media in version control.
 MEDIA_URL = '/media/'
-# TODO: change this to store somewhere else.
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+try:
+    MEDIA_ROOT = config["MEDIA_ROOT"]
+except KeyError:
+    raise ImproperlyConfigured("Set the {} config.json".format("MEDIA_ROOT"))
 
 # Search engine connection
 HAYSTACK_CONNECTIONS = {

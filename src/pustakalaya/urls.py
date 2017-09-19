@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^$', include('pustakalaya_apps.core.urls')),
     # search url
     url(r'^search/', include('haystack.urls')),
+    url(r'^community/', include('pustakalaya_apps.community.urls')),
 ]
 
 if settings.DEBUG:

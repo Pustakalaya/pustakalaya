@@ -1,0 +1,4 @@
+{
+  "MEDIA_ROOT": "/var/pustakalaya/media",
+  "STATIC_ROOT": "/var/pustakalaya/static"
+}

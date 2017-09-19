@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Hello world</title>
+    </head>
+    <body>
+        {% block content %}
+    <div>
+        <ul>
+        {%  for community in c %}
+            <li>community.community_name</li>
+        {%  endfor %}
+        </ul>
+    </div>
+{% endblock content %}
+    </body>
+</html>

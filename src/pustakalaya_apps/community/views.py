@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Community
+
+def index(request):
+    # Grab all the communities from a table
+    c = Community.objects.all()
+    return render(request, 'community/index.html', {'c':c})
