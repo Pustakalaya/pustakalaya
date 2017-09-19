@@ -24,8 +24,7 @@ urlpatterns = [
     url(r'^dashboard', include('pustakalaya_apps.dashboard.urls')),
     # Homepage url will handle by core app.
     url(r'^$', include('pustakalaya_apps.core.urls')),
-    # search url
-    url(r'^search/', include('haystack.urls')),
+    # Serve community page
     url(r'^community/', include('pustakalaya_apps.community.urls')),
 ]
 

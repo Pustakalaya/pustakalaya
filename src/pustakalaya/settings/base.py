@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 ]
 
 THIRDPARTY_APPS = [
-    'haystack',
+
 
 ]
 

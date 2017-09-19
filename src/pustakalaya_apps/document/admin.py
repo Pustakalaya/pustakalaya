@@ -6,7 +6,6 @@ from .models import (
     DocumentSeries,
     DocumentFileUpload,
     Publisher,
-    Note,
 )
 
 
@@ -24,4 +23,4 @@ admin.site.register(DocumentFileUpload)
 admin.site.register(DocumentSeries)
 admin.site.register(Publisher)
 admin.site.register(Collection)
-admin.site.register(Note)
+
