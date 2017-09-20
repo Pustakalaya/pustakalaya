@@ -92,11 +92,11 @@ class Document(AbstractItem):
         max_length=255, editable=False, default="document"
     )
 
-    document_category = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        verbose_name=_("Document Category")
-    )
+    # document_category = models.ForeignKey(
+    #     Category,
+    #     on_delete=models.CASCADE,
+    #     verbose_name=_("Document Category")
+    # )
 
     document_total_page = models.PositiveIntegerField(
         verbose_name=_("Document pages")

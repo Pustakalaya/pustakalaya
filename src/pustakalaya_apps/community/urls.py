@@ -6,7 +6,9 @@ from . import views
 
 
 urlpatterns = [
-    url(r'teardown/$', views.teardown),
-    url(r'^$', cache_page(60 * 15)(views.index)),
+    url(r'cache_request/$', views.cache_request),
+    url(r'community_detail/$', views.community_detail),
+    #url(r'teardown/$', views.teardown),
+    url(r'^$', views.index), # Cache for 15 minutes.
 
 ]

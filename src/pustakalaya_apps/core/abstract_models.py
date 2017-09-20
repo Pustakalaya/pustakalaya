@@ -108,12 +108,7 @@ class AbstractItem(AbstractTimeStampModel):
         ("map", _("Map")),
     )
 
-    CATEGORY = (
-        ("literatures and arts", _("Literature and arts")),
-        ("course materials", _("Course materials")),
-        ("teaching materials", _("Teaching materials")),
-        ("reference materials", _("Reference materials")),
-    )
+
 
     title = models.CharField(
         _("Title"),
@@ -130,11 +125,6 @@ class AbstractItem(AbstractTimeStampModel):
         max_length=255,
         choices=ITEM_LABEL
 
-    )
-
-    category = models.CharField(
-        choices=CATEGORY,
-        max_length=255
     )
 
     language = models.CharField(

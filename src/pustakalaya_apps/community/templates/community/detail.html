@@ -6,7 +6,11 @@
         {% block content %}
     <div>
         <ul>
-        {{ c.community_name }}
+        <h1>Total data {{ communities.count }}</h1>
+        {%  for community in communities %}
+                <li>community.community_name</li>
+                <p>community.community_description</p>
+            {%  endfor %}
         </ul>
     </div>
 {% endblock content %}

@@ -6,15 +6,22 @@ from .search import CommunityDoc
 
 
 class Community(AbstractTimeStampModel):
+    CATEGORY = (
+        ("literatures and arts", _("Literature and arts")),
+        ("course materials", _("Course materials")),
+        ("teaching materials", _("Teaching materials")),
+        ("reference materials", _("Reference materials")),
+    )
+
     community_name = models.CharField(
-        _("Community name"),
+        choices=CATEGORY,
         max_length=255,
         unique=True
     )
 
     community_description = models.CharField(
         _("Community description"),
-        max_length=255
+        max_length=255,
     )
 
     def doc(self):
@@ -39,7 +46,6 @@ class Community(AbstractTimeStampModel):
 
         return obj
 
-
     @property
     def collections(self):
         return self.collection_set.order_by('-created_date')
@@ -54,12 +60,10 @@ class Community(AbstractTimeStampModel):
         try:
             self.doc().delete()
         except Exception as e:
-            print(e) #TODO: Log exception to std err
-
+            print(e)  # TODO: Log exception to std err
 
     def __str__(self):
         return self.community_name
-
 
     class Meta:
         db_table = "community"
