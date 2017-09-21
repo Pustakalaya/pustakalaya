@@ -9,15 +9,19 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+import json
 import os
 import sys
-import json
+
 from django.core.exceptions import ImproperlyConfigured
+from pkg_resources import resource_filename
+
+# config.json contains the keys that need to overwrite in base.py
+config_file = resource_filename("config", "config.json")
 
 # Pull configuration detail from config/config.json file
-with open('config/config.json') as config_file:
-    config = json.load(config_file)
+with open(config_file) as configuration:
+    config = json.load(configuration)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,7 +36,7 @@ SECRET_KEY = '*=up=#to)&a6g@v0jjx%9kj4ema&wr5g4yw44fagd#*e1l0^7v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ["192.168.5.68"]
+# ALLOWED_HOSTS = ["192.168.5.68"]
 
 # Application definition
 
@@ -48,7 +52,6 @@ INSTALLED_APPS = [
 ]
 
 THIRDPARTY_APPS = [
-
 
 ]
 
@@ -153,7 +156,6 @@ try:
 except KeyError:
     raise ImproperlyConfigured("Set the {} config.json".format("STATIC_ROOT"))
 
-
 # Per application basic
 # static_dist files are dispatched automatically by webpack by reading static_src directory.
 STATICFILES_DIRS = (
@@ -209,4 +211,3 @@ CACHES = {
         "KEY_PREFIX": "pustakalaya"
     }
 }
-
