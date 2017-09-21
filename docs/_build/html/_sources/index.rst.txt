@@ -7,9 +7,13 @@ Welcome to Pustakalaya's documentation!
 =======================================
 
 .. toctree::
+   :numbered:
+   :titlesonly:
+   :glob:
    :maxdepth: 2
    :caption: Contents:
 
+   install.rst
    modules/models
 
 
@@ -20,3 +24,5 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
