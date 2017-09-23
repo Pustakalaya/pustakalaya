@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Pustakalaya's documentation!
+Welcome to Pustakalaya documentation!
 =======================================
 
 .. toctree::
@@ -14,6 +14,9 @@ Welcome to Pustakalaya's documentation!
    :caption: Contents:
 
    install.rst
+   apps/index.rst
+   architecture/index.rst
+   rest/index.rst
    modules/models
 
 

@@ -25,8 +25,6 @@ urlpatterns = [
     url(r'^dashboard', include('pustakalaya_apps.dashboard.urls')),
     # Homepage url will handle by core app.
     url(r'^$', include('pustakalaya_apps.core.urls')),
-    # Serve community page
-    url(r'^community/', include('pustakalaya_apps.community.urls')),
 ]
 
 if settings.DEBUG:
