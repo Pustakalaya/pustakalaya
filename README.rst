@@ -14,4 +14,4 @@ Pustakalaya
 
 Getting started guide
 =======================
-Check out latest pustakalaya `docs <http://pustakalaya.readthedocs.io/install.html>`_
+Check out our latest pustakalaya `docs <http://pustakalaya.readthedocs.io/install.html>`_
