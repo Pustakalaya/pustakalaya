@@ -21,6 +21,10 @@ class DocumentAdmin(admin.ModelAdmin):
         DocumentFileUploadInline,
     ]
 
+    fields = (
+
+    )
+
 @admin.register(DocumentSeries)
 class DocumentSeriesAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):

@@ -160,7 +160,7 @@ except KeyError:
 # Per application basic
 # static_dist files are dispatched automatically by webpack by reading static_src directory.
 STATICFILES_DIRS = (
-    ('static_dist'),
+    ('static'),
 )
 
 # Media Configuration
