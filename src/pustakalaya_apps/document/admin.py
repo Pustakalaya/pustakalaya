@@ -9,8 +9,11 @@ from .models import (
 )
 
 
-class DocumentFileUploadInline(admin.StackedInline):
+class DocumentFileUploadInline(admin.TabularInline):
     model = DocumentFileUpload
+    extra = 1
+
+
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
@@ -18,9 +21,21 @@ class DocumentAdmin(admin.ModelAdmin):
         DocumentFileUploadInline,
     ]
 
+@admin.register(DocumentSeries)
+class DocumentSeriesAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
 
-admin.site.register(DocumentFileUpload)
-admin.site.register(DocumentSeries)
-admin.site.register(Publisher)
-admin.site.register(Collection)
+@admin.register(Publisher)
+class PublisherAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
+
+@admin.register(Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
+
+#admin.site.register(DocumentFileUpload)
+
 

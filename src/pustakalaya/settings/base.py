@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import json
 import os
 import sys
+from django.utils.translation import ugettext_lazy as _
 
 from django.core.exceptions import ImproperlyConfigured
 from pkg_resources import resource_filename
@@ -211,3 +212,7 @@ CACHES = {
         "KEY_PREFIX": "pustakalaya"
     }
 }
+
+# Django jet configuration
+JET_DEFAULT_THEME = 'default'
+JET_SIDE_MENU_COMPACT = True

@@ -18,5 +18,19 @@ class DocumentAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(AudioGenre)
-admin.site.register(AudioSeries)
+
+@admin.register(AudioGenre)
+class AudioGenreAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
+
+@admin.register(AudioSeries)
+class AudioSeriesAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}

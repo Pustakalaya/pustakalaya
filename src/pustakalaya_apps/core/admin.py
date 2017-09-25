@@ -6,8 +6,20 @@ from .models import (
     Sponsor,
 )
 
-admin.site.register(Sponsor)
-admin.site.register(Keyword)
-admin.site.register(Category)
-admin.site.register(Biography)
 
+@admin.register(Sponsor)
+class SponsorAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
+
+
+@admin.register(Keyword)
+class KeyWordAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Category)
+class PublisherAdmin(admin.ModelAdmin):
+    pass
+
+# admin.site.register(DocumentFileUpload)
