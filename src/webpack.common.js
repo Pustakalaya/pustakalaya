@@ -1,15 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
     entry: {
-        app: './static_src/app.js'
+        app: './static/assets/app.js'
     },
     output: {
         filename: '[name].bundle.js',
         chunkFilename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'static_dist')
+        path: path.resolve(__dirname, 'static/bundles')
     },
     module: {
         rules: [
@@ -45,6 +46,7 @@ module.exports = {
 
     plugins: [
         new CleanWebpackPlugin(['static_dist']),
+        new BundleTracker({filename: './webpack-stats.json'}),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',

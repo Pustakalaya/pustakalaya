@@ -1,0 +1,1 @@
+{"status":"error","error":"ModuleParseError","message":"Module parse failed: /home/dspace/workspace/custompustakalaya/src/static/assets/app.js Unexpected token (5:14)\nYou may need an appropriate loader to handle this file type.\n| module.exports = React.createClass({\n|    render: function(){\n|        return <h1>Hello, world.</h1>\n|    }\n| })"}
