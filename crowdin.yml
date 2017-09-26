@@ -1,0 +1,3 @@
+files:
+  - source: /src/locale/**/*.po
+    translation: LC_MESSAGES/%file_name%
