@@ -1,23 +1,21 @@
 #####################
-Getting started
+Quick installation
 #####################
 
 
-
-
-1. Install redis server for caching
-
+Install redis server for caching
+---------------------------------
 
 .. code-block:: bash
 
     $ sudo apt-get install redis-server
 
-2. Install elastic search engine
-
+Install elastic search engine
+--------------------------------
 Download and install elastic search engine > 5.5 as per OS.
 
-3. Install an application
-
+Install an application
+------------------------
 
 Create a working directory
 

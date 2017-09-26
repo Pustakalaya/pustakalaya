@@ -60,7 +60,6 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.core',
     'pustakalaya_apps.document',
     'pustakalaya_apps.collection',
-    'pustakalaya_apps.community',
     'pustakalaya_apps.audio',
     'pustakalaya_apps.video',
     'pustakalaya_apps.image',
@@ -197,6 +196,7 @@ ES_CONNECTIONS = {
             'verify_certs': False,
             'use_ssl': os.environ.get('ES_USE_SSL', False) == 'True',
             'port': os.environ.get('ES_PORT', '9200'),
+            'timeout':10
         }]
     }
 }

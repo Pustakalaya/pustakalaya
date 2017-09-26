@@ -20,7 +20,9 @@ from pustakalaya_apps.core.models import (
 
 
 class Video(AbstractItem):
-    """Video item class"""
+    """
+    Video item class
+    """
 
     video_category = models.ForeignKey(
         Category,
