@@ -23,6 +23,10 @@ indent_size = 2
 indent_size = 2
 insert_final_newline = ignore
 
+[*.js]
+indent_size = 2
+insert_final_newline = ignore
+
 [**/admin/js/vendor/**]
 indent_style = ignore
 indent_size = ignore
