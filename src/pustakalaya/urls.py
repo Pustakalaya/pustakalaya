@@ -50,10 +50,13 @@ urlpatterns = [
     url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls')),
 
     # Document App
+    url(r'^document/', include('pustakalaya_apps.document.urls')),
 
     # Video App
+    url(r'^video/', include('pustakalaya_apps.video.urls')),
 
     # Audio App
+    url(r'^audio/', include('pustakalaya_apps.audio.urls')),
 
     # Wiki App
 

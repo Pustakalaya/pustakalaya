@@ -213,3 +213,17 @@ CACHES = {
 # Django jet configuration
 JET_DEFAULT_THEME = 'default'
 JET_SIDE_MENU_COMPACT = True
+
+## Translation settings.
+LANGUAGES = (
+    ('en', _('English')),
+    ('ne', _('Nepali')),
+)
+
+# Default language
+LANGUAGE_CODE = 'ne'
+
+# Translation local path
+LOCALE_PATHS = (
+    os.path.join(os.path.dirname(BASE_DIR), 'locale'),
+)

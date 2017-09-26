@@ -1,0 +1,479 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-26 15:29+0545\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: pustakalaya/settings/base.py:219
+#: pustakalaya_apps/core/abstract_models.py:135
+msgid "English"
+msgstr ""
+
+#: pustakalaya/settings/base.py:220
+#: pustakalaya_apps/core/abstract_models.py:134
+msgid "Nepali"
+msgstr ""
+
+#: pustakalaya_apps/audio/apps.py:9
+#: pustakalaya_apps/core/abstract_models.py:105
+msgid "Audio"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:23
+msgid "Audio Book"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:27
+msgid "Audio type"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:34
+msgid "Add this audio to these collection"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:43 pustakalaya_apps/video/models.py:81
+msgid "Running time in minutes"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:52
+msgid "Read / Voice by"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:58
+msgid "Audio publisher"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:63
+msgid "Audio Category"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:68 pustakalaya_apps/document/models.py:142
+msgid "Select list of keywords"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:73
+msgid "Audio Genre"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:78
+msgid "Audio Series / Volume"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:83 pustakalaya_apps/document/models.py:152
+#: pustakalaya_apps/video/models.py:62
+msgid "Sponsor"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:147
+msgid "Genre name"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:152
+msgid "Genre description"
+msgstr ""
+
+#: pustakalaya_apps/audio/models.py:173 pustakalaya_apps/document/models.py:232
+#: pustakalaya_apps/video/models.py:142
+msgid "File name"
+msgstr ""
+
+#: pustakalaya_apps/collection/apps.py:7
+msgid "Categories"
+msgstr ""
+
+#: pustakalaya_apps/collection/models.py:18
+#: pustakalaya_apps/community/models.py:10
+msgid "Literature and arts"
+msgstr ""
+
+#: pustakalaya_apps/collection/models.py:19
+#: pustakalaya_apps/community/models.py:11
+msgid "Course materials"
+msgstr ""
+
+#: pustakalaya_apps/collection/models.py:20
+#: pustakalaya_apps/community/models.py:12
+msgid "Teaching materials"
+msgstr ""
+
+#: pustakalaya_apps/collection/models.py:21
+#: pustakalaya_apps/community/models.py:13
+msgid "Reference materials"
+msgstr ""
+
+#: pustakalaya_apps/collection/models.py:27
+msgid "Community"
+msgstr ""
+
+#: pustakalaya_apps/collection/models.py:31
+msgid "Collection name"
+msgstr ""
+
+#: pustakalaya_apps/collection/models.py:37
+msgid "Collection description"
+msgstr ""
+
+#: pustakalaya_apps/community/models.py:23
+msgid "Community description"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:18
+msgid "Created date"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:19
+msgid "Updated date"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:31
+msgid "First name"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:32
+msgid "Middle name"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:33
+msgid "Last name"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:35
+#: pustakalaya_apps/core/abstract_models.py:77
+#: pustakalaya_apps/core/abstract_models.py:159
+#: pustakalaya_apps/core/models.py:87
+msgid "Description"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:38
+msgid "Date of birth"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:42
+msgid "Pen name"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:46
+msgid "Address"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:50
+msgid "Genre"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:72
+msgid "Series name"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:87
+msgid "Early primary level"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:88
+msgid "Primary level"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:89
+msgid "Middle school level"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:90
+msgid "Highschool level"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:91
+msgid "Intermediate level"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:95
+#: pustakalaya_apps/core/abstract_models.py:98
+msgid "Creative Commons"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:96
+msgid "Copyright retained"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:97
+msgid "Apache License 2.0"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:99
+msgid "MIT License"
+msgstr "मानोज"
+
+#: pustakalaya_apps/core/abstract_models.py:100
+msgid "Custom License"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:104
+#: pustakalaya_apps/document/apps.py:7
+msgid "Document"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:106
+#: pustakalaya_apps/video/apps.py:7
+msgid "Video"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:107
+msgid "Image"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:108
+msgid "Wikipedia"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:109
+msgid "Map"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:115
+msgid "Title"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:121
+msgid "Abstract"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:125
+msgid "Education Level"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:132
+msgid "Language"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:141
+msgid "Citation"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:147
+msgid "Reference link"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:152
+msgid "Additional Note"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:163
+msgid "License type"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:169
+msgid "Custom license"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:174
+msgid "Year of available"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:180
+msgid "Date of issue"
+msgstr ""
+
+#: pustakalaya_apps/core/abstract_models.py:186
+msgid "Place of publication"
+msgstr ""
+
+#: pustakalaya_apps/core/apps.py:7
+msgid "Core Application"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:12
+msgid "Category name"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:17
+msgid "Category description"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:29 pustakalaya_apps/document/models.py:137
+msgid "Publisher name"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:34
+msgid "Publisher description"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:49
+msgid "Keyword"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:53
+msgid "Keyword description"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:68
+msgid "Search Keywords"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:76
+msgid "Author"
+msgstr ""
+
+#: pustakalaya_apps/core/models.py:82
+msgid "Sponsor Name"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:35
+msgid "Interactive"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:36
+msgid "Non interactive"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:40
+msgid "Book"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:41
+msgid "Working paper"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:42
+msgid "Thesis"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:43
+msgid "Journal paper"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:44
+msgid "Technical report"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:45
+msgid "Article"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:50
+msgid "PPT"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:51
+msgid "Doc"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:52
+msgid "Docx"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:53
+#: pustakalaya_apps/document/models.py:54
+msgid "PDF"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:55
+msgid "Excel"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:56
+msgid "Epub"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:57
+msgid "Rtf"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:58
+msgid "Mobi"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:63
+msgid "Add to these collections"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:67
+msgid "Document type"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:73
+msgid "Document file type"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:80
+msgid "Document series"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:85
+msgid "Interactive type"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:102
+msgid "Document pages"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:107
+msgid "Document Author"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:113
+msgid "Document Editor"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:119
+msgid "Document Illustrator"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:124
+msgid "Identifier type"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:126
+msgid "ISSN"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:127
+msgid "ISMN"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:128
+msgid "Gov't Doc"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:129
+msgid "URI"
+msgstr ""
+
+#: pustakalaya_apps/document/models.py:130
+msgid "ISBN"
+msgstr ""
+
+#: pustakalaya_apps/video/models.py:29
+msgid "Add this video to these collection"
+msgstr ""
+
+#: pustakalaya_apps/video/models.py:40
+msgid "Producer"
+msgstr ""
+
+#: pustakalaya_apps/video/models.py:46
+msgid "Video series"
+msgstr ""
+
+#: pustakalaya_apps/video/models.py:56
+msgid "Certificate license name"
+msgstr ""
+
+#: pustakalaya_apps/video/models.py:67
+msgid "Publisher"
+msgstr ""
+
+#: pustakalaya_apps/video/models.py:72
+msgid "Keywords"
+msgstr ""
