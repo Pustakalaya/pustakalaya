@@ -181,4 +181,4 @@ fabric.properties
 venv/
 
 # Webpack compiled filed
-src/bundles/*
+src/bundles/*.js
