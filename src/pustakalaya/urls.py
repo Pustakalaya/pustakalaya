@@ -17,18 +17,53 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.decorators.cache import cache_page
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    # Static pages
+    # about page http://pustakalaya.org/about/
+    url(
+        r'^about/$',
+        cache_page(60 * 15)(TemplateView.as_view(template_name="static_pages/about.html")),
+        name="about"
+    ),
+    # Feedback page
+    # /feedback/
+    url(
+        r'^feedback/$',
+        cache_page(60 * 15)(TemplateView.as_view(template_name="static_pages/feedback.html")),
+        name="feedback"
+    ),
+    # Help page
+    # /help/
+    url(
+        r'^help/$', TemplateView.as_view(template_name="static_pages/help.html"),
+        name="help"
+    ),
+
+    # Django admin
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(r'^admin/', admin.site.urls),
-    # dashboard
-    url(r'^dashboard', include('pustakalaya_apps.dashboard.urls')),
-    # Homepage url will handle by core app.
-    url(r'^$', include('pustakalaya_apps.core.urls')),
+
+    # Dashboard app
+    url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls')),
+
+    # Document App
+
+    # Video App
+
+    # Audio App
+
+    # Wiki App
+
+    # Homepage
+    url(r'^', include('pustakalaya_apps.core.urls')),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns = [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
+                      url(r'^__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

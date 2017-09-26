@@ -214,6 +214,9 @@ class Document(AbstractItem):
     def delete_index(self):
         self.doc().delete()
 
+    def get_absolute_url(self):
+        pass
+
 
 class DocumentSeries(AbstractSeries):
     """BookSeries table inherited from AbstractSeries"""
