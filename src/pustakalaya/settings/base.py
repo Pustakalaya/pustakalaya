@@ -192,10 +192,17 @@ ES_CONNECTIONS = {
 }
 
 ## Cache server configuration.
+try:
+    REDIS_IP = config["REDIS_SERVER"]["IP"]
+    REDIS_PORT = config["REDIS_SERVER"]["PORT"]
+
+except KeyError:
+    raise ImproperlyConfigured("{} in config.json".format("REDIS_SERVER"))
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://{}:{}/1".format(REDIS_IP, REDIS_PORT),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
         },
