@@ -14,7 +14,6 @@ class DocumentFileUploadInline(admin.TabularInline):
     extra = 1
 
 
-
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     inlines = [
@@ -25,21 +24,16 @@ class DocumentAdmin(admin.ModelAdmin):
 
     )
 
+
 @admin.register(DocumentSeries)
 class DocumentSeriesAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         return {}
 
-@admin.register(Publisher)
-class PublisherAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}
 
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         return {}
 
-#admin.site.register(DocumentFileUpload)
-
-
+# admin.site.register(DocumentFileUpload)

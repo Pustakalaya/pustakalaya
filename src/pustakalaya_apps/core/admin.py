@@ -4,22 +4,26 @@ from .models import (
     Category,
     Biography,
     Sponsor,
+    Publisher
 )
 
 
 @admin.register(Sponsor)
 class SponsorAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}
-
+   pass
 
 @admin.register(Keyword)
 class KeyWordAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Category)
+@admin.register(Biography)
+class BiographyAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
     pass
 
-# admin.site.register(DocumentFileUpload)
+

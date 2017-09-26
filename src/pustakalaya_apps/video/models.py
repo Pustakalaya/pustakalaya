@@ -24,14 +24,9 @@ class Video(AbstractItem):
     Video item class
     """
 
-    video_category = models.ForeignKey(
-        Category,
-        verbose_name=_("Video Category")
-    )
-
     collection = models.ManyToManyField(
         Collection,
-        verbose_name=_("Add this audio to these collection"),
+        verbose_name=_("Add this video to these collection"),
     )
 
     video_director = models.ForeignKey(

@@ -97,7 +97,7 @@ class AbstractItem(AbstractTimeStampModel):
         ("apache License 2.0", _("Apache License 2.0")),
         ("creative commons", _("Creative Commons")),
         ("mit license", _("MIT License")),
-        ("custom license", _("MIT License")),
+        ("custom license", _("Custom License")),
     )
 
     TYPE = (
@@ -163,7 +163,6 @@ class AbstractItem(AbstractTimeStampModel):
         _("License type"),
         choices=ITEM_LICENSE_TYPE,
         max_length=255,
-        blank=True
     )
 
     custom_license = models.TextField(

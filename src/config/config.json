@@ -1,4 +1,8 @@
 {
   "MEDIA_ROOT": "/var/pustakalaya/media",
-  "STATIC_ROOT": "/var/pustakalaya/static"
+  "STATIC_ROOT": "/var/pustakalaya/static",
+  "REDIS_SERVER": {
+    "IP": "127.0.0.1",
+    "PORT":"6379"
+  }
 }

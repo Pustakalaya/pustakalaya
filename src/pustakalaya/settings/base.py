@@ -169,16 +169,6 @@ try:
 except KeyError:
     raise ImproperlyConfigured("Set the {} config.json".format("MEDIA_ROOT"))
 
-# Search engine connection
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/default'
-        # ...or for multicore...
-        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
-    },
-}
-
 # Elastic search settings.
 
 ES_HOST = os.environ.get('ES_HOST', '127.0.0.1')
@@ -196,7 +186,7 @@ ES_CONNECTIONS = {
             'verify_certs': False,
             'use_ssl': os.environ.get('ES_USE_SSL', False) == 'True',
             'port': os.environ.get('ES_PORT', '9200'),
-            'timeout':10
+            'timeout': 10
         }]
     }
 }

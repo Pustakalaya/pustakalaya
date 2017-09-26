@@ -6,6 +6,7 @@ from .abstract_models import (
 
 )
 
+
 class Category(AbstractTimeStampModel):
     category_name = models.CharField(
         _("Category name"),
@@ -42,7 +43,6 @@ class Publisher(AbstractTimeStampModel):
         return self.publisher_name
 
 
-
 class Keyword(AbstractTimeStampModel):
     keyword = models.CharField(
         max_length=255,
@@ -64,15 +64,16 @@ class Biography(AbstractBaseAuthor):
     """Biography class to create an instace of document author, editor, illustrator,
     video director, video producer and audio recorder"""
     keywords = models.ManyToManyField(
-         Keyword,
-         verbose_name=_("Search Keywords"),
-     )
+        Keyword,
+        verbose_name=_("Search Keywords"),
+    )
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
 
     class Meta:
         db_table = "biography"
+        verbose_name = _("Author")
 
 
 class Sponsor(AbstractTimeStampModel):
