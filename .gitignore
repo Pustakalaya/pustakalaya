@@ -182,3 +182,6 @@ venv/
 
 # Webpack compiled filed
 src/bundles/*.js
+
+# Configuration file 
+src/config/config.json

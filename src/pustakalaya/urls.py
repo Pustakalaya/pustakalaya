@@ -19,20 +19,24 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from . import views
+
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 urlpatterns = [
     # Static pages
     # about page http://pustakalaya.org/about/
     url(
         r'^about/$',
-        cache_page(60 * 15)(TemplateView.as_view(template_name="static_pages/about.html")),
+        cache_page(CACHE_TTL)(TemplateView.as_view(template_name="static_pages/about.html")),
         name="about"
     ),
     # Feedback page
     # /feedback/
     url(
         r'^feedback/$',
-        cache_page(60 * 15)(TemplateView.as_view(template_name="static_pages/feedback.html")),
+        views.feedback,
         name="feedback"
     ),
     # Help page

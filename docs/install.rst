@@ -48,12 +48,45 @@ Create and activate virtualenv
     $ virtualenv venv -p /usr/bin/python3
     $ source venv/bin/activate
 
-Install project dependencies libraries.
+Install project dependencies.
 ----------------------------------------
 
 .. code-block:: bash
 
     $ pip install -r pustakalaya/src/requirements/requirements_dev.txt
+
+Configure the project settings
+-------------------------------
+Inside `src/config` directory, copy `config.example.json` to `config.json` and configure your project settings accordingly.
+ Sample Configuration of `config.json` file.
+.. code-block:: json
+
+    {
+      "MEDIA_ROOT": "/var/www/example.com/media/",
+      "STATIC_ROOT": "/var/www/example.com/static/",
+      "REDIS_SERVER": {
+        "IP": "127.0.0.1",
+        "PORT": "6379"
+      },
+      "EMAIL": {
+        "ADMIN_EMAILS": [
+          "admin@example.org",
+          "admin1@example.org"
+        ],
+        "EMAIL_PORT": 587,
+        "EMAIL_HOST_USER": "admin",
+        "EMAIL_HOST_PASSWORD": "slkjfa",
+        "EMAIL_USE_TLS": "False",
+        "EMAIL_USE_SSL": "False"
+      },
+      "FEEDBACK_EMAILS": [
+        "admin@example.com",
+        "admin1@example.org"
+      ]
+    }
+
+// TODO: refactor
+
 
 Run migrations and create super user
 --------------------------------------

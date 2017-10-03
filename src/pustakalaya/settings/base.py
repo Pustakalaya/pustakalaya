@@ -37,7 +37,7 @@ SECRET_KEY = '*=up=#to)&a6g@v0jjx%9kj4ema&wr5g4yw44fagd#*e1l0^7v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["192.168.5.68"]
+ALLOWED_HOSTS = ["192.168.5.68"]
 
 # Application definition
 
@@ -199,6 +199,8 @@ try:
 except KeyError:
     raise ImproperlyConfigured("{} in config.json".format("REDIS_SERVER"))
 
+# Cache time to live is 0 minutes.
+CACHE_TTL = 60 * 0  # 0 minutes
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -227,3 +229,19 @@ LANGUAGE_CODE = 'ne'
 LOCALE_PATHS = (
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
 )
+
+# Email settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+try:
+    FEEDBACK_EMAILS = config["FEEDBACK_EMAILS"]
+    EMAIL_PORT = config["EMAIL"]["EMAIL_PORT"]
+    EMAIL_HOST_USER = config["EMAIL"]["EMAIL_HOST_USER"]
+    EMAIL_HOST_PASSWORD = config["EMAIL"]["EMAIL_HOST_PASSWORD"]
+    EMAIL_USE_TLS = config["EMAIL"]["EMAIL_USE_TLS"]
+    EMAIL_USE_SSL = config["EMAIL"]["EMAIL_USE_SSL"]
+    ADMINS = config["EMAIL"]["ADMIN_EMAILS"]
+
+
+except KeyError:
+    raise ImproperlyConfigured("Email settings in config.json")

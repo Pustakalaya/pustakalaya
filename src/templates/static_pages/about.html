@@ -1,1 +1,61 @@
-<h1>About</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+    <div>
+        <div class="container">
+            <h5 class=" text-uppercase">{% trans "About epustakalaya" %}</h5>
+            <p class="text-justify">
+                {% blocktrans %}
+
+                    E-Pustakalaya is an education-focused digital library containing full-text documents, books, images,
+                    videos, audio files, and interactive educational software that can be accessed through an intranet
+                    or on the Internet. OLE Nepal started the development of E-Pustakalaya in 2008 with the aim to
+                    improve children's reading skills and develop a reading culture in schools by giving them free and
+                    open access to age-appropriate reading materials and to enable students to do research projects and
+                    promote habit of independent inquiry. Since E-Pustakalaya went live in 2009, teachers as well as
+                    other adults have also benefited widely from various teaching resources, and educational materials
+                    in agriculture, health, environment, local technologies, and so on.
+                    <br/><br/>
+
+                    Users of E-Pustakalaya can browse through various sections looking for items they like, or they can
+                    search for specific items based on full or partial author name, title, publisher and/or keywords.
+                    Users can also link to similar items based on author, publisher or keywords through a single click.
+                    Users can read books and documents, view videos, listen to audio clips, play educational games
+                    directly from E-Pustakalaya, and in the case of books and documents, download and store for later
+                    viewing. E-Pustakalaya can also be accessed from android device through E-Pustakalaya app. Using
+                    this app users can acess E-Pustakalaya hosted on online or on offline server.
+                    <br/><br/>
+
+                    The use of the materials in E-Pustakalaya is governed by Creative Commons 3.0 Attribution-Non
+                    Commercial-Share Alike copyright licenses. Links provided within E-Pustakalaya are not directly
+                    affiliated to OLE Nepal, and are pointers to non-affiliated sites that have been included only for
+                    the benefit of the users.
+                    <br/><br/>
+
+
+                    E-Pustakalaya can also be installed in low power servers and deployed in schools and community
+                    libraries that either do not have Internet connectivity or have low bandwidth connection. Such local
+                    instances of E-Pustakalaya will enable better user experience through fast access and quick
+                    downloads.
+                    <br/><br/>
+
+                    <address>
+                    <h5>E-Pustakalaya</h5>
+                    <hr/>
+                    Open Learning Exchange Nepal<br/>
+                    Telephone: +977-1-554-4441, 552-0075<br/>
+                    PO Box 8975, EPC 2394<br/>
+                    Kathmandu, Nepal <br/><br/>
+                    pustakalaya@olenepal.org <br/><br/>
+
+                    </address>
+
+
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+{% endblock content %}
