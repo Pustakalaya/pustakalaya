@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pustakalaya\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-26 15:29+0545\n"
-"PO-Revision-Date: 2017-10-02 23:42-0400\n"
+"PO-Revision-Date: 2017-10-03 00:01-0400\n"
 "Last-Translator: nix1947 <openpy.manoj@gmail.com>\n"
 "Language-Team: Nepali\n"
 "Language: ne_NP\n"
@@ -19,25 +19,25 @@ msgstr ""
 #: pustakalaya/settings/base.py:219
 #: pustakalaya_apps/core/abstract_models.py:135
 msgid "English"
-msgstr ""
+msgstr "अंग्रेजी"
 
 #: pustakalaya/settings/base.py:220
 #: pustakalaya_apps/core/abstract_models.py:134
 msgid "Nepali"
-msgstr ""
+msgstr "नेपाली"
 
 #: pustakalaya_apps/audio/apps.py:9
 #: pustakalaya_apps/core/abstract_models.py:105
 msgid "Audio"
-msgstr ""
+msgstr "अडियो"
 
 #: pustakalaya_apps/audio/models.py:23
 msgid "Audio Book"
-msgstr ""
+msgstr "अडियो पुस्तक"
 
 #: pustakalaya_apps/audio/models.py:27
 msgid "Audio type"
-msgstr ""
+msgstr "अडियो प्रकार"
 
 #: pustakalaya_apps/audio/models.py:34
 msgid "Add this audio to these collection"
