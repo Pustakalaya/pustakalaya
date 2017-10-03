@@ -5,15 +5,15 @@ msgstr ""
 "POT-Creation-Date: 2017-09-26 15:29+0545\n"
 "PO-Revision-Date: 2017-10-02 23:42-0400\n"
 "Last-Translator: nix1947 <openpy.manoj@gmail.com>\n"
-"Language-Team: Nepali\n"
-"Language: ne_NP\n"
+"Language-Team: Norwegian\n"
+"Language: no_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: crowdin.com\n"
 "X-Crowdin-Project: pustakalaya\n"
-"X-Crowdin-Language: ne-NP\n"
+"X-Crowdin-Language: no\n"
 "X-Crowdin-File: /master/src/locale/ne/LC_MESSAGES/django.po\n"
 
 #: pustakalaya/settings/base.py:219
@@ -211,7 +211,7 @@ msgstr ""
 
 #: pustakalaya_apps/core/abstract_models.py:99
 msgid "MIT License"
-msgstr "मानोज"
+msgstr ""
 
 #: pustakalaya_apps/core/abstract_models.py:100
 msgid "Custom License"
