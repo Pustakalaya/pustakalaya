@@ -1,0 +1,157 @@
+{% load static %}
+{% load i18n %}
+<!-- inline style for log -->
+<style>
+    .footer-logo {
+        width: 80px;
+        height: auto;
+    }
+
+    .section-padding {
+        padding: 20px 0px;
+    }
+
+
+</style>
+
+<!-- Major and past partners -->
+<div class="section-padding" class="bg-light">
+    <div class="container">
+
+        <div class="row">
+            <!-- Major partners -->
+            <div class="col-md-6 col-xs-12">
+                <h5 class="description text-uppercase">{% trans "Major partners" %}</h5>
+                <hr/>
+
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/irdf.png' %}" alt="IRDF"/>
+                    <p class="text-black">2017 now</p>
+                </a>
+            </div>
+            <!-- Past partners -->
+            <div class="col-md-6 col-xs-12">
+
+                <h5 class="description text-uppercase">{% trans "Past partners" %}</h5>
+                <hr/>
+                <!-- TODO: replace with sliding banner -->
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <img class="footer-logo" src="{% static 'images/logos/maitri-trust.webp' %}"
+                                 alt="British council">
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <img class="footer-logo" src="{% static 'images/logos/nepal-library-foundation.png' %}"
+                                 alt="British council">
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Contributed partners -->
+<div id="contributed-partner" class="section-padding">
+    <div class="container">
+        <h5 class="text-uppercase description">{% trans "Content contribution from" %}</h5>
+        <hr/>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/bc.png' %}" alt="British council">
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/gorkhapatra.png' %}" alt="British council">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/madanpuraskar.gif' %}" alt="Gorkhapatra">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/nepalacademy.png' %}" alt="British council">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/neschil.png' %}" alt="British council">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/rbf.png' %}" alt="British council">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/xworld.png' %}" alt="British council">
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+
+<!-- footer navigation -->
+<footer class="footer bg-dark section-padding" style="color:#FFF !important;">
+    <div class="container">
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'help' %}">
+                        {% trans "Help" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'about' %}">
+                        {% trans "About us" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://olenepal.org/blog">
+                        {% trans "Blog" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Terms and condition
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            ©
+            <script>
+                document.write(new Date().getFullYear())
+            </script>
+            , {% trans "Developed By" %}
+            <a href="http://www.olenepal.org" target="_blank">{% trans "OLE Nepal" %}</a>.
+        </div>
+    </div>
+</footer>

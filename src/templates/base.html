@@ -44,46 +44,11 @@
                     </a>.</h6>
             </div>
         </div>
-
-        <footer class="footer" data-background-color="black">
-            <div class="container">
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="https://www.creative-tim.com">
-                                Creative Tim
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://presentation.creative-tim.com">
-                                About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://blog.creative-tim.com">
-                                Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md">
-                                MIT License
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="copyright">
-                    &copy;
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>, Designed by
-                    <a href="http://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-                    <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                </div>
-            </div>
-        </footer>
+        <div id="footer">
+            {% include '_partials/footer.html' %}
+        </div>
     </div>
 
-    <div id="footer"></div>
 </body>
 <!--   Core JS Files   -->
 <script src="{% static 'base_assets/js/core/jquery.3.2.1.min.js' %}" type="text/javascript"></script>
@@ -97,7 +62,7 @@
 <script src="{% static 'base_assets/js/plugins/bootstrap-datepicker.js' %}" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="{% static 'base_assets/js/now-ui-kit.js'%}" type="text/javascript"></script>
-<script src="{% static 'bundles/homepage.bundle.js'%}" type="text/javascript"></script>
+{#<script src="{% static 'bundles/homepage.bundle.js'%}" type="text/javascript"></script>#}
 
 <script type="text/javascript">
     $(document).ready(function() {
