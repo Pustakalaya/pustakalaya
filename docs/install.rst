@@ -58,8 +58,9 @@ Install project dependencies.
 Configure the project settings
 -------------------------------
 Inside `src/config` directory, copy `config.example.json` to `config.json` and configure your project settings accordingly.
- Sample Configuration of `config.json` file.
-.. code-block:: json
+Sample Configuration of `config.json` file.
+
+.. code-block:: javascript
 
     {
       "MEDIA_ROOT": "/var/www/example.com/media/",
@@ -70,22 +71,22 @@ Inside `src/config` directory, copy `config.example.json` to `config.json` and c
       },
       "EMAIL": {
         "ADMIN_EMAILS": [
-          "admin@example.org",
-          "admin1@example.org"
+          "senderrortoadmin@example.org",
+          "senderrortodev@example.org"
         ],
         "EMAIL_PORT": 587,
-        "EMAIL_HOST_USER": "admin",
-        "EMAIL_HOST_PASSWORD": "slkjfa",
+        "EMAIL_HOST_USER": "iwillsendemail@example.com",
+        "EMAIL_HOST_PASSWORD": "yourpassword",
         "EMAIL_USE_TLS": "False",
         "EMAIL_USE_SSL": "False"
       },
       "FEEDBACK_EMAILS": [
-        "admin@example.com",
-        "admin1@example.org"
+        "feedbackemail@example.com",
+        "feedbackemail@example.org"
       ]
     }
 
-// TODO: refactor
+
 
 
 Run migrations and create super user
