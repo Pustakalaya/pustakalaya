@@ -6,16 +6,18 @@ from .search import VideoDoc
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
     AbstractSeries,
-    AbstractTimeStampModel
+    AbstractTimeStampModel,
+    LinkInfo
 
 )
 
 from pustakalaya_apps.core.models import (
-    Category,
     Keyword,
     Biography,
     Sponsor,
-    Publisher
+    Publisher,
+    Language,
+    EducationLevel,
 )
 
 
@@ -41,6 +43,15 @@ class Video(AbstractItem):
         related_name="producers"
     )
 
+    education_levels = models.ManyToManyField(
+        EducationLevel,
+        verbose_name=_("Education Level")
+    )
+    languages = models.ManyToManyField(
+        Language,
+        verbose_name=_("Languages")
+    )
+
     video_series = models.ForeignKey(
         "VideoSeries",
         verbose_name=_("Video series"),
@@ -53,8 +64,13 @@ class Video(AbstractItem):
         max_length=4
     )
     video_certificate_license = models.CharField(
-        verbose_name=_("Certificate license name"),
+        verbose_name=_("Certification"),
         max_length=255
+    )
+    age = models.CharField(
+        verbose_name=_("Age group"),
+        max_length=255,
+        blank=True,
     )
 
     sponsors = models.ManyToManyField(
@@ -123,7 +139,6 @@ class Video(AbstractItem):
         return self.doc().to_dict(include_meta=True)
 
     def delete_index(self):
-
         self.doc().delete()
 
     def __str__(self):
@@ -155,3 +170,15 @@ class VideoFileUpload(AbstractTimeStampModel):
 
     def __str__(self):
         return self.file_name
+
+
+class VideoLinkInfo(LinkInfo):
+    document = models.ForeignKey(
+        Video,
+        verbose_name=_("Link"),
+        on_delete=models.CASCADE,
+
+    )
+
+    def __str__(self):
+        return self.audio.title

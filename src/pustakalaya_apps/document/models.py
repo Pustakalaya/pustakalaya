@@ -7,14 +7,16 @@ from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
     AbstractSeries,
-    AbstractTimeStampModel
+    AbstractTimeStampModel,
+    LinkInfo
 )
 from pustakalaya_apps.core.models import (
     Publisher,
     Biography,
-    Category,
     Keyword,
     Sponsor,
+    EducationLevel,
+    Language
 )
 from .search import DocumentDoc
 
@@ -32,8 +34,9 @@ class Document(AbstractItem):
     """
 
     ITEM_INTERACTIVE_TYPE = (
-        ("interactive", _("Interactive")),
-        ("noninteractive", _("Non interactive")),
+        ("yes", _("Yes")),
+        ("no", _("No")),
+        ("NA", _("Not applicable")),
     )
 
     DOCUMENT_TYPE = (
@@ -58,7 +61,7 @@ class Document(AbstractItem):
         ("mobi", _("Mobi")),
     )
 
-    collection = models.ManyToManyField(
+    collections = models.ManyToManyField(
         Collection,
         verbose_name=_("Add to these collections"),
     )
@@ -77,12 +80,23 @@ class Document(AbstractItem):
 
     document_series = models.ForeignKey(
         "DocumentSeries",
-        verbose_name=_("Document series"),
+        verbose_name=_("Series"),
         on_delete=models.CASCADE
     )
 
+    education_levels = models.ManyToManyField(
+        EducationLevel,
+        verbose_name=_("Education Levels"),
+        blank=True
+    )
+
+    languages = models.ManyToManyField(
+        Language,
+        verbose_name=_("Language(s)")
+    )
+
     document_interactivity = models.CharField(
-        verbose_name=_("Interactive type"),
+        verbose_name=_("Interactive"),
         max_length=15,
         choices=ITEM_INTERACTIVE_TYPE
     )
@@ -99,37 +113,29 @@ class Document(AbstractItem):
     # )
 
     document_total_page = models.PositiveIntegerField(
-        verbose_name=_("Document pages")
+        verbose_name=_("Total Pages"),
+        blank=True,
     )
 
-    document_author = models.ManyToManyField(
+    document_authors = models.ManyToManyField(
         Biography,
-        verbose_name=_("Document Author"),
-        related_name="authors"
+        verbose_name=_("Author(s)"),
+        related_name="authors",
+        blank=True,
     )
 
-    document_editor = models.ManyToManyField(
+    document_editors = models.ManyToManyField(
         Biography,
-        verbose_name=_("Document Editor"),
-        related_name="editors"
+        verbose_name=_("Editor(s)"),
+        related_name="editors",
+        blank=True,
     )
 
-    document_illustrator = models.ManyToManyField(
+    document_illustrators = models.ManyToManyField(
         Biography,
         verbose_name=_("Document Illustrator"),
-        related_name="illustrators"
-    )
-
-    document_identifier_type = models.CharField(
-        _("Identifier type"),
-        choices=(
-            ("issn", _("ISSN")),
-            ("ismn", _("ISMN")),
-            ("govt doc", _("Gov't Doc")),
-            ("uri", _("URI")),
-            ("isbn", _("ISBN"))
-        ),
-        max_length=255  # TODO
+        related_name="illustrators",
+        blank=True
     )
 
     publisher = models.ForeignKey(
@@ -150,6 +156,7 @@ class Document(AbstractItem):
     sponsors = models.ManyToManyField(
         Sponsor,
         verbose_name=_("Sponsor"),
+        blank=True,
 
     )
 
@@ -167,39 +174,36 @@ class Document(AbstractItem):
             title=self.title,
             abstract=self.abstract,
             type=self.type,
-            education_level=self.education_level,
-            category=self.category,
-            language=self.language,
-            additional_note=self.additional_note,
-            description=self.description,
+            education_level=[education_level.level for education_level in self.education_levels.all()],
+            communities= [collection.community_name for collection in self.collections.all()],
+            collections = [collection.collection_name for collection in self.collections.all()],
+            language= [language.language for language in self.languages.all()],
             license_type=self.license_type,
             year_of_available=self.year_of_available,
-            date_of_issue=self.date_of_issue,
+            publication_year=self.publication_year,
             place_of_publication=self.place_of_publication,
             created_date=self.created_date,
             updated_date=self.updated_date,
+
             # Common fields in document, audio and video library
             publisher=self.publisher.publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
-            collections=[c.collection_name for c in self.collection.all()],  # ToDO generator
             keywords=[keyword.keyword for keyword in self.keywords.all()],
 
             # Document type specific
             document_thumbnail=self.document_thumbnail.name,
-            document_identifier_type=self.document_identifier_type,
-            document_total_page=self.document_total_page,
-            document_category=self.document_category.category_name,
+            # document_identifier_type=self.document_identifier_type,
             document_file_type=self.document_file_type,
             document_interactivity=self.document_interactivity,
             document_type=self.document_type,
             document_authors=[
-                author.getname for author in self.document_author.all()
+                author.getname for author in self.document_authors.all()
                 ],
             document_illustrators=[
-                illustrator.getname for illustrator in self.document_illustrator.all()
+                illustrator.getname for illustrator in self.document_illustrators.all()
                 ],  # Multi value TODO generator
             document_editors=[
-                editor.getname for editor in self.document_editor.all()
+                editor.getname for editor in self.document_editors.all()
                 ]  # Multi value
 
         )
@@ -245,3 +249,43 @@ class DocumentFileUpload(AbstractTimeStampModel):
 
     def __str__(self):
         return self.file_name
+
+
+class DocumentLinkInfo(LinkInfo):
+    document = models.ForeignKey(
+        Document,
+        verbose_name=_("Link"),
+        on_delete=models.CASCADE,
+
+    )
+
+    def __str__(self):
+        return self.document.title
+
+
+class DocumentIdentifier(AbstractTimeStampModel):
+    identifier_type = models.CharField(
+        verbose_name=_("Identifier Type"),
+        max_length=8,
+        choices=(
+            ("issn", _("ISSN")),
+            ("ismn", _("ISMN")),
+            ("govt_doc", _("Gov't Doc")),
+            ("uri", _("URI")),
+            ("isbn", _("ISBN"))
+        )
+    )
+    identifier_id = models.CharField(
+        _("Identifier ID"),
+        blank=True,
+        max_length=10
+    )
+
+    document = models.OneToOneField(
+        Document,
+        verbose_name=_("document"),
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.identifier_type

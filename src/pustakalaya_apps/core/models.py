@@ -5,6 +5,7 @@ from .abstract_models import (
     AbstractBaseAuthor
 
 )
+from .constants import LANGUAGES
 
 
 class Category(AbstractTimeStampModel):
@@ -92,3 +93,48 @@ class Sponsor(AbstractTimeStampModel):
 
     class Meta:
         db_table = "sponsor"
+
+
+class EducationLevel(models.Model):
+    """Education level"""
+
+    EDUCATION_LEVEL = (
+        ("early primary level", _("Early primary level")),
+        ("primary level", _("Primary level")),
+        ("Middle school level", _("Middle school level")),
+        ("highschool level", _("Highschool level")),
+        ("intermediate level", _("Intermediate level")),
+    )
+
+    level = models.CharField(
+        _("Education Level"),
+        max_length=255,
+        choices=EDUCATION_LEVEL
+
+    )
+
+    description = models.CharField(
+        max_length=500,
+        blank=True
+    )
+
+    def __str__(self):
+        return self.level
+
+    class Meta:
+        db_table = "education_level"
+
+
+class Language(models.Model):
+    language = models.CharField(
+        choices=LANGUAGES,
+        max_length=7,
+        verbose_name=_("Language")
+
+    )
+
+    class Meta:
+        db_table = "language"
+
+    def __str__(self):
+        return u"%s" % (self.get_language_display())

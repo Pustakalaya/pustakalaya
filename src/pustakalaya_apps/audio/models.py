@@ -5,31 +5,29 @@ from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
     AbstractTimeStampModel,
-    AbstractSeries
+    AbstractSeries,
+    LinkInfo,
 )
 from pustakalaya_apps.core.models import (
-    Category,
     Keyword,
     Publisher,
     Biography,
-    Sponsor
+    Sponsor,
+    Language,
+    EducationLevel
 )
 from .search import AudioDoc
 
 
 class Audio(AbstractItem):
     """Audio class to store audio"""
-    AUDIO_TYPE = (
-        ('audio book', _("Audio Book")),
-    )
 
-    audio_type = models.CharField(
+    audio_type = models.ManyToManyField(
+        "AudioType",
         verbose_name=_("Audio type"),
-        choices=AUDIO_TYPE,
-        max_length=12  # TODO replace dynamically.
     )
 
-    collection = models.ManyToManyField(
+    collections = models.ManyToManyField(
         Collection,
         verbose_name=_("Add this audio to these collection"),
     )
@@ -41,7 +39,8 @@ class Audio(AbstractItem):
     )
     audio_running_time = models.CharField(
         verbose_name=_("Running time in minutes"),
-        max_length=3
+        max_length=3,
+        blank=True,
     )
 
     # TODO file size
@@ -50,17 +49,13 @@ class Audio(AbstractItem):
     audio_read_by = models.ForeignKey(
         Biography,
         verbose_name=_("Read / Voice by"),
+        blank=True
 
     )
 
     publisher = models.ForeignKey(
         Publisher,
         verbose_name=_("Audio publisher")
-    )
-
-    audio_category = models.ForeignKey(
-        Category,
-        verbose_name=_("Audio Category")
     )
 
     keywords = models.ManyToManyField(
@@ -70,25 +65,36 @@ class Audio(AbstractItem):
 
     audio_genre = models.ForeignKey(
         "AudioGenre",
-        verbose_name=_("Audio Genre")
+        verbose_name=_("Audio Genre"),
+        blank=True,
+    )
+
+    languages = models.ManyToManyField(
+        Language,
+        verbose_name=_("Languages")
+    )
+
+    education_levels = models.ManyToManyField(
+        EducationLevel,
+        verbose_name=("Education Levels")
     )
 
     audio_series = models.ForeignKey(
         'AudioSeries',
-        verbose_name=_("Audio Series / Volume")
+        verbose_name=_("Audio Series / Volume"),
+        blank=True,
     )
 
     sponsors = models.ManyToManyField(
         Sponsor,
-        verbose_name=_("Sponsor")
+        verbose_name=_("Sponsor"),
+        blank=True
     )
 
     audio_thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/audio/%Y/%m/%d",
         max_length=255
     )
-
-
 
     def doc(self):
         obj = AudioDoc(
@@ -97,28 +103,26 @@ class Audio(AbstractItem):
             title=self.title,
             abstract=self.abstract,
             type=self.type,
-            education_level=self.education_level,
-            category=self.category,
-            language=self.language,
-            additional_note=self.additional_note,
-            description=self.description,
+            education_level=[education_level.level for education_level in self.education_levels.all()],
+            communities=[collection.community_name for collection in self.collections.all()],
+            collections=[collection.collection_name for collection in self.collections.all()],
+            language=[language.language for language in self.languages.all()],
             license_type=self.license_type,
             year_of_available=self.year_of_available,
-            date_of_issue=self.date_of_issue,
+            publication_year=self.publication_year,
             place_of_publication=self.place_of_publication,
             created_date=self.created_date,
             updated_date=self.updated_date,
+
             # Common fields in document, audio and video library
             publisher=self.publisher.publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
-            collections=[c.collection_name for c in self.collection.all()],  # ToDO generator
             keywords=[keyword.keyword for keyword in self.keywords.all()],
 
             # Audio type specific
-            audio_category=self.audio_category.category_name,
             audio_running_time=self.audio_running_time,
             audio_thumbnail=self.audio_thumbnail.name,
-            audio_read_by = self.audio_read_by.getname,
+            audio_read_by=self.audio_read_by.getname,
             audio_series=self.audio_series.series_name,
         )
 
@@ -158,6 +162,7 @@ class AudioGenre(AbstractTimeStampModel):
     def __str__(self):
         return self.genre
 
+
 class AudioSeries(AbstractSeries):
     def __str__(self):
         return "{}".format(self.series_name)
@@ -187,6 +192,39 @@ class AudioFileUpload(AbstractTimeStampModel):
     def __str__(self):
         return self.file_name
 
-
     class Meta:
         db_table = "audio_file"
+
+
+class AudioLinkInfo(LinkInfo):
+    document = models.ForeignKey(
+        Audio,
+        verbose_name=_("Link"),
+        on_delete=models.CASCADE,
+
+    )
+
+    def __str__(self):
+        return self.audio.title
+
+
+class AudioType(models.Model):
+    """DB to store type of audios"""
+    AUDIO_TYPES = (
+        ('rhymes', _('Rhymes')),
+        ('novel', _('Novel')),
+        ('short story', _('Short Story')),
+        ('children song', _('Children Song')),
+    )
+
+    name = models.CharField(
+        verbose_name=_("Audio type"),
+        max_length=255,
+    )
+
+    description = models.TextField(
+        verbose_name=_("Audio description")
+    )
+
+    def __str__(self):
+        return self.name

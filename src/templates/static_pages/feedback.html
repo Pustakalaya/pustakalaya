@@ -7,39 +7,44 @@
     <div>
         <div class="container">
             <h6 class=" text-uppercase">{% trans "Feedback" %}</h6>
-            <p>{% blocktrans %}
+            <p class="" text-justify>{% blocktrans %}
                 Please use the form below to give details about what you liked in our website or about what can be
-                improved. <br/>
+                improved.
 
                 Your feedback will be invaluable in our attempts to continually improve the quality and user experience
                 of E-Pustakalaya.
             {% endblocktrans %}
             </p>
-
+            <hr/>
 
             <!-- some test -->
             <div class="container bg-faded">
                 <!-- Feedback form -->
                 <div class="row">
                     <div class="col-12 mx-auto">
+                        {{ form.non_field_errors }}
+
+                        {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field.errors }}
+                            {{ hidden_field }}
+                        {% endfor %}
                         <form action="" method="post">
-                    {% csrf_token %}
-                    {% for field in form.visible_fields %}
-                        <p>{{ field.label_tag }}</p>
-                        <p class="text-danger">{{ field.errors }}</p>
-                        <div class="form-group">
-                            {{ field }}
-                            {{ field.help_text }}
-                        </div>
+                            {% csrf_token %}
+                            {% for field in form.visible_fields %}
+                                <p>{{ field.label_tag }}</p>
+                                <p class="text-danger">{{ field.errors }}</p>
+                                <div class="form-group">
+                                    {{ field }}
+                                    {{ field.help_text }}
+                                </div>
 
-                    {% endfor %}
+                            {% endfor %}
 
-                    <input class="btn btn-outline-success" type="submit" value="{% trans 'Send Feedback' %}">
-                </form>
+                            <input class="btn btn-outline-success" type="submit" value="{% trans 'Send Feedback' %}">
+                        </form>
 
                     </div>
                 </div>
-
 
             </div>
         </div>

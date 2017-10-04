@@ -4,12 +4,7 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-
-# from pustakalaya_apps.collection.models import Collection
-
-
-# from .models import ItemCategory
+from .constants import LANGUAGES
 
 
 class AbstractTimeStampModel(models.Model):
@@ -83,21 +78,15 @@ class AbstractSeries(AbstractTimeStampModel):
 
 class AbstractItem(AbstractTimeStampModel):
     """Item base class that share common attributes for digital item"""
-    ITEM_LABEL = (
-        ("early primary level", _("Early primary level")),
-        ("primary level", _("Primary level")),
-        ("Middle school level", _("Middle school level")),
-        ("highschool level", _("Highschool level")),
-        ("intermediate level", _("Intermediate level")),
-    )
 
     ITEM_LICENSE_TYPE = (
-        ("creative commons", _("Creative Commons")),
+        ("creative commons", _("Creative commons")),
         ("copyright retained", _("Copyright retained")),
-        ("apache License 2.0", _("Apache License 2.0")),
-        ("creative commons", _("Creative Commons")),
+        ("apache License 2.0", _("Apache license 2.0")),
+        ("creative commons", _("Creative commons")),
         ("mit license", _("MIT License")),
         ("custom license", _("Custom License")),
+        ("na", _("Not available")),
     )
 
     TYPE = (
@@ -109,44 +98,22 @@ class AbstractItem(AbstractTimeStampModel):
         ("map", _("Map")),
     )
 
-
-
     title = models.CharField(
         _("Title"),
         max_length=255,
-        unique=True
     )
 
     abstract = models.TextField(
-        _("Abstract")
-    )
-
-    education_level = models.CharField(
-        _("Education Level"),
-        max_length=255,
-        choices=ITEM_LABEL
-
-    )
-
-    language = models.CharField(
-        _("Language"),
-        choices=(
-            ("nepali", _("Nepali")),
-            ("english", _("English")),
-        ),
-        max_length=255  # TODO
-    )
-
-    citation = models.CharField(
-        _("Citation"),
-        max_length=255,
+        _("Abstract/Summary"),
         blank=True
     )
 
-    reference_link = models.URLField(
-        _('Reference link'),
-        blank=True
-    )
+    # TODO: Implemenet in second phase with Marc21 format.
+    # citation = models.CharField(
+    #     _("Citation"),
+    #     max_length=255,
+    #     blank=True
+    # )
 
     additional_note = models.TextField(
         _("Additional Note"),
@@ -157,6 +124,7 @@ class AbstractItem(AbstractTimeStampModel):
 
     description = models.TextField(
         _("Description"),
+        blank=True
     )
 
     license_type = models.CharField(
@@ -166,7 +134,7 @@ class AbstractItem(AbstractTimeStampModel):
     )
 
     custom_license = models.TextField(
-        _("Custom license"),
+        _("Rights"),
         blank=True
     )
 
@@ -176,8 +144,8 @@ class AbstractItem(AbstractTimeStampModel):
         null=True
     )
 
-    date_of_issue = models.DateField(
-        _("Date of issue"),
+    publication_year = models.DateField(
+        _("Publication year"),
         blank=True,
         null=True
     )
@@ -188,10 +156,36 @@ class AbstractItem(AbstractTimeStampModel):
         blank=True
     )
 
+    volume = models.CharField(
+        max_length=254,
+        default="",
+        blank=True
+    )
+
+    edition = models.CharField(
+        max_length=254,
+        default="",
+        blank=True
+    )
+
     # Rating TODO
 
     # Comment TODO
 
+
+    class Meta:
+        abstract = True
+
+
+class LinkInfo(AbstractTimeStampModel):
+    link_name = models.URLField(
+        verbose_name=_("Link URL")
+    )
+
+    link_description = models.CharField(
+        max_length=500,
+        verbose_name=_("Link Description")
+    )
 
     class Meta:
         abstract = True

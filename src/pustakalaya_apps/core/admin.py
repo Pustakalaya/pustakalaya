@@ -1,10 +1,11 @@
 from django.contrib import admin
 from .models import (
     Keyword,
-    Category,
     Biography,
     Sponsor,
-    Publisher
+    Publisher,
+    EducationLevel,
+    Language,
 )
 
 
@@ -26,4 +27,10 @@ class BiographyAdmin(admin.ModelAdmin):
 class PublisherAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(EducationLevel)
+class EducationLevelAdmin(admin.ModelAdmin):
+    pass
 
+@admin.register(Language)
+class LanguageAdmin(admin.ModelAdmin):
+    pass

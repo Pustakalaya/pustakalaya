@@ -17,7 +17,7 @@ class FeedBackForm(forms.Form):
         widget=forms.TextInput(attrs={
             'autocomplete': 'off',
             'class': 'form-control',
-            'placeholder': _("Your Email")
+            'placeholder': _("Email")
         })
     )
 
@@ -51,7 +51,9 @@ class FeedBackForm(forms.Form):
             attrs={
                 'autocomplete': 'off',
                 'class': 'form-control',
-                'placeholder': _("Your Message")
+                'placeholder': _("Your Message"),
+                'cols': 50,
+                'rows': 5
             }
 
         )
