@@ -35,14 +35,11 @@ Video App URLS
  - URL: **/video/<video_details>/**
 
 
-
-
-
 Collection
 ----------------------
   - Name: `collection:collections`
   - URL:**/collections/**
   - Name: `collection:collection_detail`
   - URL:**/collections/<collection_detail>/**
-  
+
 
