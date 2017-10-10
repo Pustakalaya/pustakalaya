@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
+from elasticsearch.exceptions import NotFoundError
 
 from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
@@ -22,9 +23,9 @@ from .search import AudioDoc
 class Audio(AbstractItem):
     """Audio class to store audio"""
 
-    audio_type = models.ManyToManyField(
+    audio_types = models.ManyToManyField(
         "AudioType",
-        verbose_name=_("Audio type"),
+        verbose_name=_("Audio types"),
     )
 
     collections = models.ManyToManyField(
@@ -97,47 +98,41 @@ class Audio(AbstractItem):
     )
 
     def doc(self):
-        obj = AudioDoc(
-            meta={'id': self.id},
-            id=self.id,
-            title=self.title,
-            abstract=self.abstract,
-            type=self.type,
-            education_level=[education_level.level for education_level in self.education_levels.all()],
-            communities=[collection.community_name for collection in self.collections.all()],
-            collections=[collection.collection_name for collection in self.collections.all()],
-            language=[language.language for language in self.languages.all()],
-            license_type=self.license_type,
-            year_of_available=self.year_of_available,
-            publication_year=self.publication_year,
-            place_of_publication=self.place_of_publication,
-            created_date=self.created_date,
-            updated_date=self.updated_date,
-
-            # Common fields in document, audio and video library
+        # Parent attributes
+        item_attr = super(Audio, self).doc()
+        # Audio attributes
+        audio_attr = dict(
+            **item_attr,
             publisher=self.publisher.publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
-
-            # Audio type specific
+            audio_types=[audio.name for audio in self.audio_types.all()],
             audio_running_time=self.audio_running_time,
             audio_thumbnail=self.audio_thumbnail.name,
             audio_read_by=self.audio_read_by.getname,
+            audio_genre=self.audio_genre.genre,
             audio_series=self.audio_series.series_name,
+
+        )
+
+        obj = AudioDoc(
+            **audio_attr
         )
 
         return obj
 
     def index(self):
-        """index all the document to elastic search index server"""
+        """index an instance of audio to elastic search index server"""
         self.doc().save()
+
+    def bulk_index(self):
         return self.doc().to_dict(include_meta=True)
 
     def delete_index(self):
         try:
             self.doc().delete()
-        except Exception as e:
-            print(e)
+        except NotFoundError as e:
+            pass
 
     def __str__(self):
         return self.title
@@ -197,7 +192,7 @@ class AudioFileUpload(AbstractTimeStampModel):
 
 
 class AudioLinkInfo(LinkInfo):
-    document = models.ForeignKey(
+    audio = models.ForeignKey(
         Audio,
         verbose_name=_("Link"),
         on_delete=models.CASCADE,

@@ -28,7 +28,8 @@ class Category(AbstractTimeStampModel):
 class Publisher(AbstractTimeStampModel):
     publisher_name = models.CharField(
         _("Publisher name"),
-        max_length=255
+        max_length=255,
+        unique=True,
     )
 
     publisher_description = models.CharField(
@@ -47,7 +48,8 @@ class Publisher(AbstractTimeStampModel):
 class Keyword(AbstractTimeStampModel):
     keyword = models.CharField(
         max_length=255,
-        verbose_name=_("Keyword")
+        verbose_name=_("Keyword"),
+        unique=True
     )
 
     keyword_description = models.TextField(
@@ -62,7 +64,7 @@ class Keyword(AbstractTimeStampModel):
 
 
 class Biography(AbstractBaseAuthor):
-    """Biography class to create an instace of document author, editor, illustrator,
+    """Biography class to create an instance of document author, editor, illustrator,
     video director, video producer and audio recorder"""
     keywords = models.ManyToManyField(
         Keyword,
@@ -70,7 +72,7 @@ class Biography(AbstractBaseAuthor):
     )
 
     def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)
 
     class Meta:
         db_table = "biography"
@@ -109,7 +111,8 @@ class EducationLevel(models.Model):
     level = models.CharField(
         _("Education Level"),
         max_length=255,
-        choices=EDUCATION_LEVEL
+        choices=EDUCATION_LEVEL,
+        unique=True
 
     )
 
@@ -129,7 +132,8 @@ class Language(models.Model):
     language = models.CharField(
         choices=LANGUAGES,
         max_length=7,
-        verbose_name=_("Language")
+        verbose_name=_("Language"),
+        unique=True
 
     )
 

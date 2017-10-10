@@ -9,16 +9,16 @@ from pustakalaya_apps.core.abstract_search import ItemDoc
 class DocumentDoc(ItemDoc):
     """Elastic search schema for document type"""
     # Document type specific
+
+
     document_thumbnail = Text()
-    document_identifier_type = Text()
     document_total_page = Long()
-    document_category = Text()
     document_file_type = Text()
-    document_interactivity = Text()
     document_type = Text()
     document_authors = Text(multi=True)
     document_illustrators = Text(multi=True)  # Multi value TODO generator
     document_editors = Text(multi=True)
+    document_interactivity = Text()
 
     class Meta:
         index = settings.ES_INDEX
@@ -33,4 +33,4 @@ def index_document():
     es = connections.get_connection()
     # Index all community with nested collection
     print("Indexing Document data type...")
-    bulk(client=es, actions=(b.index() for b in Document.objects.all().iterator()))
+    bulk(client=es, actions=(b.bulk_index() for b in Document.objects.all().iterator()))

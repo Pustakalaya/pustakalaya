@@ -9,12 +9,12 @@ from pustakalaya_apps.core.abstract_search import ItemDoc
 class AudioDoc(ItemDoc):
     """Elastic search schema for video type"""
     # Document type specific
-    audio_category = Text()
+    audio_types = Text(multi=True)
     audio_running_time = Text()
-    audio_thumbnail = Text()
+    audio_running_time = Text()
     audio_read_by = Text()
-    audio_type = Text()
-    audio_series = Text()
+    audio_genre = Text()
+    audio_thumbnail = Text()
 
     class Meta:
         index = settings.ES_INDEX
@@ -29,4 +29,4 @@ def index_audio():
     es = connections.get_connection()
     # Index all community with nested collection
     print("Indexing Audios...")
-    bulk(client=es, actions=(b.index() for b in Audio.objects.all().iterator()))
+    bulk(client=es, actions=(b.bulk_index() for b in Audio.objects.all().iterator()))

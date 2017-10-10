@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from pustakalaya_apps.collection.models import Collection
+from elasticsearch.exceptions import NotFoundError
 from .search import VideoDoc
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
@@ -26,7 +27,7 @@ class Video(AbstractItem):
     Video item class
     """
 
-    collection = models.ManyToManyField(
+    collections = models.ManyToManyField(
         Collection,
         verbose_name=_("Add this video to these collection"),
     )
@@ -34,13 +35,17 @@ class Video(AbstractItem):
     video_director = models.ForeignKey(
         Biography,
         verbose_name=("Director"),
-        related_name="directors"
+        related_name="directors",
+        blank=True,
+        null=True
     )
 
     video_producers = models.ManyToManyField(
         Biography,
         verbose_name=_("Producer"),
-        related_name="producers"
+        related_name="producers",
+        blank=True,
+        null=True
     )
 
     education_levels = models.ManyToManyField(
@@ -55,7 +60,9 @@ class Video(AbstractItem):
     video_series = models.ForeignKey(
         "VideoSeries",
         verbose_name=_("Video series"),
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
 
     type = models.CharField(
@@ -65,7 +72,8 @@ class Video(AbstractItem):
     )
     video_certificate_license = models.CharField(
         verbose_name=_("Certification"),
-        max_length=255
+        max_length=255,
+        blank=True
     )
     age = models.CharField(
         verbose_name=_("Age group"),
@@ -75,7 +83,16 @@ class Video(AbstractItem):
 
     sponsors = models.ManyToManyField(
         Sponsor,
-        verbose_name=_("Sponsor")
+        verbose_name=_("Sponsor"),
+        blank=True,
+        null=True
+    )
+
+    video_genre = models.ForeignKey(
+        "VideoGenre",
+        verbose_name=_("Video Genre"),
+        blank=True,
+        null=True
     )
 
     publisher = models.ForeignKey(
@@ -95,51 +112,54 @@ class Video(AbstractItem):
 
     video_running_time = models.CharField(
         verbose_name=_("Running time in minutes"),
-        max_length=3
+        max_length=3,
+        blank=True,
+        default="0"
     )
 
     def doc(self):
-        obj = VideoDoc(
-            meta={'id': self.id},
-            id=self.id,
-            title=self.title,
-            abstract=self.abstract,
-            type=self.type,
-            education_level=self.education_level,
-            category=self.category,
-            language=self.language,
-            additional_note=self.additional_note,
-            description=self.description,
-            license_type=self.license_type,
-            year_of_available=self.year_of_available,
-            date_of_issue=self.date_of_issue,
-            place_of_publication=self.place_of_publication,
-            created_date=self.created_date,
-            updated_date=self.updated_date,
-            # Common fields in document, audio and video library
+        # Parent attr
+        item_attr = super(Video, self).doc()
+        # Combine item attr and video attr to index in search server
+        videoattr = dict(
+            **item_attr,
             publisher=self.publisher.publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
-            collections=[c.collection_name for c in self.collection.all()],  # ToDO generator
             keywords=[keyword.keyword for keyword in self.keywords.all()],
-
-            # Document type specific
-            video_category=self.video_category.category_name,
             video_running_time=self.video_running_time,
             video_thumbnail=self.video_thumbnail.name,
-            video_director=self.video_director.getname,
-            video_series=self.video_series.series_name,
-            video_certificate_license=self.video_certificate_license
+            video_director=getattr(self.video_director, "getname", ""),
+            video_series=getattr(self.video_series, "series_name", ""),
+            video_certificate_license=self.video_certificate_license,
+            video_genre=getattr(self.video_genre, "genre", "")
+
         )
+        # Create a video  instance
+        obj = VideoDoc(**videoattr)
         return obj
 
     def index(self):
-        """index all the document to elastic search index server"""
-
+        """
+        Call this method to index an instance to search server
+        """
+        # Save video instance
         self.doc().save()
+
+    def bulk_index(self):
+        """
+        call this method to during bulk indexing an instance to search server.
+        method used by `search.py module`
+        """
         return self.doc().to_dict(include_meta=True)
 
     def delete_index(self):
-        self.doc().delete()
+        """method to delete a video instance from search server
+        This method is called by `signals.py` module
+        """
+        try:
+            self.doc().delete()
+        except NotFoundError:
+            pass
 
     def __str__(self):
         return self.title
@@ -173,7 +193,7 @@ class VideoFileUpload(AbstractTimeStampModel):
 
 
 class VideoLinkInfo(LinkInfo):
-    document = models.ForeignKey(
+    video = models.ForeignKey(
         Video,
         verbose_name=_("Link"),
         on_delete=models.CASCADE,
@@ -181,4 +201,21 @@ class VideoLinkInfo(LinkInfo):
     )
 
     def __str__(self):
-        return self.audio.title
+        return self.video.title
+
+
+class VideoGenre(AbstractTimeStampModel):
+    genre = models.CharField(
+        _("Genre name"),
+        max_length=255
+    )
+
+    genre_description = models.TextField(
+        verbose_name=_("Genre description")
+    )
+
+    class Meta:
+        db_table = "video_genre"
+
+    def __str__(self):
+        return self.genre

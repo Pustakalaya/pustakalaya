@@ -26,32 +26,31 @@ class DocumentAdmin(admin.ModelAdmin):
         AudioFileUploadInline,
     ]
 
-    # fields = (
-    #     "title",
-    #     "abstract",
-    #     "collections",
-    #     "education_levels",
-    #     "languages",
-    #     "place_of_publication",
-    #     "publisher",
-    #     "year_of_available",
-      #      "audio_type",
-    # "audio_running_time",
-    # "audio_read_by",
-    # "audio_genre",
-    # "audio_series",
-    #     "keywords",
-    #     "document_series",
-    #     "volume",
-    #     "edition",
-    #     "additional_note",
-    #     "description",
-    #     "license_type",
-    #     "custom_license",
-    #     "date_of_issue",
-    #     "sponsors",
-    #     "audio_thumbnail"
-    # )
+    fields = (
+        "title",
+        "abstract",
+        "collections",
+        "education_levels",
+        "languages",
+        "place_of_publication",
+        "publisher",
+        "year_of_available",
+        "audio_types",
+        "audio_running_time",
+        "audio_read_by",
+        "audio_genre",
+        "keywords",
+        "audio_series",
+        "volume",
+        "edition",
+        "additional_note",
+        "description",
+        "license_type",
+        "custom_license",
+        "publication_year",
+        "sponsors",
+        "audio_thumbnail"
+    )
 
 
 @admin.register(AudioGenre)

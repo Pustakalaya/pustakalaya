@@ -27,21 +27,29 @@ class VideoAdmin(admin.ModelAdmin):
     fields = (
         "title",
         "abstract",
-        "collection",
+        "collections",
         "education_levels",
-        "language",
+        "languages",
         "place_of_publication",
         "publisher",
         "year_of_available",
+        "video_running_time",
+        "video_director",
+        "video_producers",
+        "video_certificate_license",
+        "age",
+        "video_genre",
         "keywords",
+        "video_series",
         "volume",
         "edition",
         "additional_note",
         "description",
         "license_type",
         "custom_license",
-        "date_of_issue",
+        "publication_year",
         "sponsors",
+        "video_thumbnail"
     )
 
 

@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
+from elasticsearch.exceptions import NotFoundError
 
 from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
@@ -115,6 +116,7 @@ class Document(AbstractItem):
     document_total_page = models.PositiveIntegerField(
         verbose_name=_("Total Pages"),
         blank=True,
+        default=0
     )
 
     document_authors = models.ManyToManyField(
@@ -168,24 +170,9 @@ class Document(AbstractItem):
 
     def doc(self):
         """Create and return document object"""
-        obj = DocumentDoc(
-            meta={'id': self.id},
-            id=self.id,
-            title=self.title,
-            abstract=self.abstract,
-            type=self.type,
-            education_level=[education_level.level for education_level in self.education_levels.all()],
-            communities= [collection.community_name for collection in self.collections.all()],
-            collections = [collection.collection_name for collection in self.collections.all()],
-            language= [language.language for language in self.languages.all()],
-            license_type=self.license_type,
-            year_of_available=self.year_of_available,
-            publication_year=self.publication_year,
-            place_of_publication=self.place_of_publication,
-            created_date=self.created_date,
-            updated_date=self.updated_date,
-
-            # Common fields in document, audio and video library
+        item_attr = super(Document, self).doc()
+        document_attr = dict(
+            **item_attr,
             publisher=self.publisher.publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
@@ -194,7 +181,6 @@ class Document(AbstractItem):
             document_thumbnail=self.document_thumbnail.name,
             # document_identifier_type=self.document_identifier_type,
             document_file_type=self.document_file_type,
-            document_interactivity=self.document_interactivity,
             document_type=self.document_type,
             document_authors=[
                 author.getname for author in self.document_authors.all()
@@ -204,8 +190,16 @@ class Document(AbstractItem):
                 ],  # Multi value TODO generator
             document_editors=[
                 editor.getname for editor in self.document_editors.all()
-                ]  # Multi value
+                ],  # Multi value
+            document_total_page=self.document_total_page,
+            # Document interactivity
+            document_interactivity=self.document_interactivity
 
+        )
+
+        # Create ES Document for indexing
+        obj = DocumentDoc(
+            **document_attr,
         )
 
         return obj
@@ -213,10 +207,16 @@ class Document(AbstractItem):
     def index(self):
         """index or update a document instance to elastic search index server"""
         self.doc().save()
+
+    def bulk_index(self):
         return self.doc().to_dict(include_meta=True)
 
     def delete_index(self):
-        self.doc().delete()
+        try:
+            self.doc().delete()
+        except NotFoundError:
+            # TODO:
+            pass
 
     def get_absolute_url(self):
         pass

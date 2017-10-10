@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save, pre_delete, m2m_changed
 from django.dispatch import receiver
 
 from .models import Video
@@ -8,6 +8,7 @@ from .models import Video
 def index_or_update_video(sender, instance, **kwargs):
     """Update or create an instance to index server."""
     # TODO: use logging system
+    # Move to search
     print("Index video")
     instance.index()
 

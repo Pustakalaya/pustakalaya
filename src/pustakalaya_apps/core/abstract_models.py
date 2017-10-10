@@ -1,6 +1,7 @@
 # Modules that host all abstract class.
 
 import uuid
+import abc
 
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -175,6 +176,53 @@ class AbstractItem(AbstractTimeStampModel):
 
     class Meta:
         abstract = True
+
+    def doc_attributes(self):
+        """
+        Return a dictionary object containing attributes that need to be index in es server
+        """
+        return dict(
+            meta={'id': self.id},
+            id=self.id,
+            title=self.title,
+            abstract=self.abstract,
+            type=self.type,
+            education_levels=[education_level.level for education_level in self.education_levels.all()],
+            communities=[collection.community_name for collection in self.collections.all()],
+            collections=[collection.collection_name for collection in self.collections.all()],
+            languages=[language.language for language in self.languages.all()],
+            license_type=self.license_type,
+            description=self.description,
+            year_of_available=self.year_of_available,
+            publication_year=self.publication_year,
+            created_date=self.created_date,
+            updated_date=self.updated_date,
+        )
+
+    def doc(self):
+        return dict(
+            meta={'id': self.id},
+            id=self.id,
+            title=self.title,
+            abstract=self.abstract,
+            type=self.type,
+            education_levels=[education_level.level for education_level in self.education_levels.all()],
+            communities=[collection.community_name for collection in self.collections.all()],
+            collections=[collection.collection_name for collection in self.collections.all()],
+            languages=[language.language for language in self.languages.all()],
+            license_type=self.license_type,
+            description=self.description,
+            year_of_available=self.year_of_available,
+            publication_year=self.publication_year,
+            created_date=self.created_date,
+            updated_date=self.updated_date,
+        )
+
+    def bulk_index(self):
+        """
+        Call this method to index an instance to index server.
+        """
+        pass
 
 
 class LinkInfo(AbstractTimeStampModel):
