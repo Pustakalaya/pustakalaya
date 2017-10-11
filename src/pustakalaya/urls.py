@@ -25,13 +25,46 @@ from . import views
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 urlpatterns = [
-    # Static pages
-    # about page http://pustakalaya.org/about/
+
+    # Homepage and core urls
+    url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),
+
+    # Document App
+    # /documents/
+    url(r'^documents/', include('pustakalaya_apps.document.urls', namespace="document")),
+
+    # Video app
+    # /videos/
+    url(r'^videos/', include('pustakalaya_apps.video.urls', namespace="video")),
+
+    # Audio app
+    # /audios/
+    url(r'^audios/', include('pustakalaya_apps.audio.urls', namespace="audio")),
+
+    # Wikipedia app
+    # TODO:
+
+    # Maps app
+    # TODO:
+
+    # Dashboard app
+    # /dashboard/
+    url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls')),
+
+    # Django Admin jet
+    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(r'^admin/', admin.site.urls),
+
+    ########################### Static Page urls ####################################
+
+    # About page
+    # /about/
     url(
         r'^about/$',
         cache_page(CACHE_TTL)(TemplateView.as_view(template_name="static_pages/about.html")),
         name="about"
     ),
+
     # Feedback page
     # /feedback/
     url(
@@ -39,33 +72,13 @@ urlpatterns = [
         views.feedback,
         name="feedback"
     ),
+
     # Help page
     # /help/
     url(
         r'^help/$', TemplateView.as_view(template_name="static_pages/help.html"),
         name="help"
     ),
-
-    # Django admin
-    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    url(r'^admin/', admin.site.urls),
-
-    # Dashboard app
-    url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls')),
-
-    # Document App
-    url(r'^document/', include('pustakalaya_apps.document.urls')),
-
-    # Video App
-    url(r'^video/', include('pustakalaya_apps.video.urls')),
-
-    # Audio App
-    url(r'^audio/', include('pustakalaya_apps.audio.urls')),
-
-    # Wiki App
-
-    # Homepage
-    url(r'^', include('pustakalaya_apps.core.urls')),
 ]
 
 if settings.DEBUG:
