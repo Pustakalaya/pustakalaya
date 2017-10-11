@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Document
+from django.views.generic import DetailView
 
 
 def documents(request):
-    return HttpResponse("Hello world")
+    documents = Document.objects.all()
+    return render(request, 'document/documents.html', {'documents': documents})
 
 
-def document_detail(request, pk):
-    return render(request, 'collection/collection_detail.html', {'msg':"He"})
-
+class DocumentDetailView(DetailView):
+    model = Document
+    template_name = "document/document_detail.html"

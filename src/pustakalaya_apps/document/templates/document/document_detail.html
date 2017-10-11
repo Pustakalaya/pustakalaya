@@ -1,9 +1,14 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 
-{%  block content %}
+{% block content %}
     <div class="container bg-secondary">
         <h1>Book detail page</h1>
-            {{ msg }}
+        <p>ID: {{ object.id }}</p>
+        <p>abstract: {{ object.abstract }}</p>
+        <p>Published: {{ object.created_date }}</p>
+        <p></p>
+
+
     </div>
 
-{%  endblock content %}
+{% endblock content %}

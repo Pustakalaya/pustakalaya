@@ -55,7 +55,6 @@ class Document(AbstractItem):
         ("doc", _("Doc")),
         ("docx", _("Docx")),
         ("pdf", _("PDF")),
-        ("pdf", _("PDF")),
         ("xlsx", _("Excel")),
         ("epub", _("Epub")),
         ("rtf", _("Rtf")),
@@ -76,7 +75,8 @@ class Document(AbstractItem):
     document_file_type = models.CharField(
         _("Document file type"),
         choices=DOCUMENT_FILE_TYPE,
-        max_length=23
+        max_length=23,
+        default="pdf"
     )
 
     document_series = models.ForeignKey(
@@ -223,7 +223,9 @@ class Document(AbstractItem):
             pass
 
     def get_absolute_url(self):
-        pass
+        from django.urls import reverse
+        return reverse("document:document_detail", kwargs={"pk":self.pk})
+
 
 
 class DocumentSeries(AbstractSeries):

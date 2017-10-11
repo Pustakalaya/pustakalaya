@@ -1,0 +1,17 @@
+{%  extends 'base.html' %}
+
+{%  block content %}
+
+    <div class="container">
+        <ul>
+        {%  if not documents %}
+            <h1>No documents found</h1>
+
+        {%  endif %}
+     {%  for document in documents %}
+         <li>{{ document }}</li>
+     {%  endfor %}
+    </ul>
+    </div>
+
+{%  endblock content %}
