@@ -173,10 +173,14 @@ class Document(AbstractItem):
         item_attr = super(Document, self).doc()
         document_attr = dict(
             **item_attr,
+            type=self.type,
+            education_levels=[education_level.level for education_level in self.education_levels.all()],
+            communities=[collection.community_name for collection in self.collections.all()],
+            collections=[collection.collection_name for collection in self.collections.all()],
+            languages=[language.language for language in self.languages.all()],
             publisher=self.publisher.publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
-
             # Document type specific
             document_thumbnail=self.document_thumbnail.name,
             # document_identifier_type=self.document_identifier_type,

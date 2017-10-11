@@ -24,11 +24,15 @@ class AbstractTimeStampModel(models.Model):
 class AbstractBaseAuthor(AbstractTimeStampModel):
     """Base author class that holds the common attributes for other author class."""
 
-    first_name = models.CharField(_("First name"), max_length=255)
+    first_name = models.CharField(
+        _("First name"),
+        max_length=255,
+    )
     middle_name = models.CharField(_("Middle name"), max_length=255, blank=True)
     last_name = models.CharField(_("Last name"), max_length=255)
     description = models.TextField(
-        _("Description")
+        _("Description"),
+        blank=True,
     )
     dob = models.DateField(
         verbose_name=_("Date of birth"),
@@ -36,15 +40,18 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     )
     pen_name = models.CharField(
         verbose_name=_("Pen name"),
-        max_length=255
+        max_length=255,
+        blank=True
     )
     address = models.TextField(
-        verbose_name=_("Address")
+        verbose_name=_("Address"),
+        blank=True
     )
 
-    genre = models.TextField(
+    genre = models.CharField(
         verbose_name=_("Genre"),
-        max_length=100
+        max_length=100,
+        blank = True
     )
 
     @property
@@ -177,39 +184,12 @@ class AbstractItem(AbstractTimeStampModel):
     class Meta:
         abstract = True
 
-    def doc_attributes(self):
-        """
-        Return a dictionary object containing attributes that need to be index in es server
-        """
-        return dict(
-            meta={'id': self.id},
-            id=self.id,
-            title=self.title,
-            abstract=self.abstract,
-            type=self.type,
-            education_levels=[education_level.level for education_level in self.education_levels.all()],
-            communities=[collection.community_name for collection in self.collections.all()],
-            collections=[collection.collection_name for collection in self.collections.all()],
-            languages=[language.language for language in self.languages.all()],
-            license_type=self.license_type,
-            description=self.description,
-            year_of_available=self.year_of_available,
-            publication_year=self.publication_year,
-            created_date=self.created_date,
-            updated_date=self.updated_date,
-        )
-
     def doc(self):
         return dict(
             meta={'id': self.id},
             id=self.id,
             title=self.title,
             abstract=self.abstract,
-            type=self.type,
-            education_levels=[education_level.level for education_level in self.education_levels.all()],
-            communities=[collection.community_name for collection in self.collections.all()],
-            collections=[collection.collection_name for collection in self.collections.all()],
-            languages=[language.language for language in self.languages.all()],
             license_type=self.license_type,
             description=self.description,
             year_of_available=self.year_of_available,
@@ -218,6 +198,7 @@ class AbstractItem(AbstractTimeStampModel):
             updated_date=self.updated_date,
         )
 
+    @abc.abstractmethod
     def bulk_index(self):
         """
         Call this method to index an instance to index server.

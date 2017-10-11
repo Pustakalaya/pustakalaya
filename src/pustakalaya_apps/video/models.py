@@ -126,6 +126,11 @@ class Video(AbstractItem):
             publisher=self.publisher.publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
+            type=self.type,
+            education_levels=[education_level.level for education_level in self.education_levels.all()],
+            communities=[collection.community_name for collection in self.collections.all()],
+            collections=[collection.collection_name for collection in self.collections.all()],
+            languages=[language.language for language in self.languages.all()],
             video_running_time=self.video_running_time,
             video_thumbnail=self.video_thumbnail.name,
             video_director=getattr(self.video_director, "getname", ""),

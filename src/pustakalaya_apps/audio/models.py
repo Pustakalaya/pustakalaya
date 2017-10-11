@@ -107,6 +107,11 @@ class Audio(AbstractItem):
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             audio_types=[audio.name for audio in self.audio_types.all()],
+            type=self.type,
+            education_levels=[education_level.level for education_level in self.education_levels.all()],
+            communities=[collection.community_name for collection in self.collections.all()],
+            collections=[collection.collection_name for collection in self.collections.all()],
+            languages=[language.language for language in self.languages.all()],
             audio_running_time=self.audio_running_time,
             audio_thumbnail=self.audio_thumbnail.name,
             audio_read_by=self.audio_read_by.getname,
