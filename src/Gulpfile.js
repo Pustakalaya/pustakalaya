@@ -8,7 +8,7 @@ gulp.task('sass', function () {
   return gulp.src('./static/base_assets/base.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./static/bundles'));
+    .pipe(gulp.dest('./static/base_assets/css/'));
 });
 
 gulp.task('sass:watch', function () {

@@ -1,19 +1,17 @@
-var $ = require("jquery")
-// now ui-kit css file
-// bootstrap as a dependencies
-import './css/bootstrap.min.css'
-import './sass/now-ui-kit.scss'
+/* This file will splitted on the two files by webpack
+  base.css: contain all the base css files
+            bootstrap
+            now-ui-kit styles
 
-// js files that now ui-kit depends on
+  base.js: contains jquery, popper.js, bootstrap 4 and now-ui kit
+            dependencies
+ */
+
+
+// Import required js files
 import 'jquery'
 import 'popper.js'
 import 'bootstrap'
-
-
-
-
-
-
-
-// now-ui-kit javascript file from now-ui theme
 import './js/now-ui-kit'
+
+
