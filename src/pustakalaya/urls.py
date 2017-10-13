@@ -15,11 +15,12 @@ Including another URLconf
 """
 
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.contrib import admin
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
+
 from . import views
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -54,6 +55,9 @@ urlpatterns = [
     # Django Admin jet
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(r'^admin/', admin.site.urls),
+
+    # Authentication urls
+    url(r'^accounts/', include('allauth.urls')),
 
     ########################### Static Page urls ####################################
 

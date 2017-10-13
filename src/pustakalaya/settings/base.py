@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # dependent third party apps
     'jet',
     'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -53,6 +54,12 @@ INSTALLED_APPS = [
 ]
 
 THIRDPARTY_APPS = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.google',
 
 ]
 
@@ -222,7 +229,6 @@ LANGUAGES = (
     ('ne', _('Nepali')),
 )
 
-
 # Translation local path
 LOCALE_PATHS = (
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
@@ -243,3 +249,13 @@ try:
 
 except KeyError:
     raise ImproperlyConfigured("Email settings in config.json")
+
+## Django allauth configuration
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
