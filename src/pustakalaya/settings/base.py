@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import json
 import os
 import sys
-from django.utils.translation import ugettext_lazy as _
 
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import ugettext_lazy as _
 from pkg_resources import resource_filename
 
 # config.json contains the keys that need to overwrite in base.py
