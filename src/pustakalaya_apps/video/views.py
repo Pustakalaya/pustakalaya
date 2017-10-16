@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+from .models import Video
+from django.views.generic import DetailView
 
 from .search import VideoSearch
 
@@ -38,3 +40,8 @@ def videos(request):
         print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
 
     return HttpResponse("Hello world")
+
+
+class VideoDetailView(DetailView):
+    model = Video
+    template_name = "video/video_detail.html"
