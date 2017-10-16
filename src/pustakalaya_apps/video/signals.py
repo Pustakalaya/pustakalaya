@@ -9,6 +9,10 @@ from .models import Video
 
 
 @receiver(m2m_changed, sender=Video.keywords.through)
+@receiver(m2m_changed, sender=Video.video_producers.through)
+@receiver(m2m_changed, sender=Video.languages.through)
+@receiver(m2m_changed, sender=Video.collections.through)
+@receiver(m2m_changed, sender=Video.sponsors.through)
 @receiver(post_save, sender=Video)
 @transaction.atomic
 def index_or_update_video(sender, instance, **kwargs):
@@ -20,6 +24,7 @@ def index_or_update_video(sender, instance, **kwargs):
 
 
 @receiver(pre_delete, sender=Video)
+@transaction.atomic
 def delete_video(sender, instance, **kwargs):
     """Delete an item from index server."""
     # TODO: Use logging system

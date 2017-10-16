@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{%  load pustakalaya_filters %}
 
 {% block content %}
     <div class="container bg-secondary">
         <h1>Book detail page</h1>
-        <h1>{{ object. }}</h1>
+        <h1>{{ object.title | transtolocal }}</h1>
         <h2>Title: {{ object.title }}</h2>
         <p>ID: {{ object.id }}</p>
         <p>abstract: {{ object.abstract }}</p>

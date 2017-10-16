@@ -68,6 +68,7 @@ class Audio(AbstractItem):
         "AudioGenre",
         verbose_name=_("Audio Genre"),
         blank=True,
+        null=True
     )
 
     languages = models.ManyToManyField(
@@ -149,7 +150,7 @@ class Audio(AbstractItem):
 class AudioGenre(AbstractTimeStampModel):
     genre = models.CharField(
         _("Genre name"),
-        max_length=255
+        max_length=255,
     )
 
     genre_description = models.TextField(
