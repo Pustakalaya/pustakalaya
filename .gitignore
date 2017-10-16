@@ -189,3 +189,5 @@ src/config/config.json
 # Webpack modules
 static/bundles/
 
+# base.css file
+src/static/base_assets/css/base.css
