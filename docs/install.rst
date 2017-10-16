@@ -102,3 +102,20 @@ Run migrations and create super user
 
     # Start local development server
     $ ./manage.py runserver --settings=pustakalaya.settings.development
+
+
+Compile frontend assets
+-------------------------------
+Gulp and webapack has been used to compile front-end dependencies
+
+- `Install yarn <https://yarnpkg.com/lang/en/docs/install/>`_.
+- Install all the dependencies packages listed on `package.json` file.
+    .. code-block::
+
+        yarn
+
+- Compile the sass assets using gulp
+
+    .. code-block::
+
+        gulp sass

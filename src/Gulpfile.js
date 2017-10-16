@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-let cleanCSS = require('gulp-clean-css');
+var cleanCSS = require('gulp-clean-css');
 
 gulp.task('sass', function () {
   return gulp.src('./static/base_assets/base.scss')
