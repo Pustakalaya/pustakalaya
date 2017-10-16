@@ -2,16 +2,239 @@
 {%  load pustakalaya_filters %}
 
 {% block content %}
-    <div class="container bg-secondary">
-        <h1>Book detail page</h1>
-        <h1>{{ object.title | transtolocal }}</h1>
-        <h2>Title: {{ object.title }}</h2>
-        <p>ID: {{ object.id }}</p>
-        <p>abstract: {{ object.abstract }}</p>
-        <p>Published: {{ object.created_date }}</p>
-        <p>Abstract:{{ object.abstract }}</p>
+
+        <div class="main">
+            <div class="section section-images">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-md-3">
+                           <p>
+
+                               <img src="{{ STATIC_URL }}{{ object.document_thumbnail.url }}" alt="">
+                           </p>
+                           <i class="fa fa-file-pdf-o fa-lg mx-auto">24MB</i><br/>
+                           <button class="btn btn-primary">Download Book</button><br/>
+                           <p>Share</p>
+                           <a href="http://www.facebook.com" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                           <a href="http://www.twitter.com" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a href="http://www.linkedin.com" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+                             <a href="http://www.mail.com" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>
 
 
+                      </div>
+                        <div class="col-md-5">
+
+                          <h3>
+
+
+                                {{ object.title }}
+
+
+                          </h3>
+
+
+                            {%  for author in object.document_authors.all %}
+
+                                {{ author }}
+
+                            {%  endfor %}
+
+
+                        {%  for illustrator in object.document_authors.all %}
+
+                                {{ author }}
+
+                            {%  endfor %}
+
+
+
+                          <div class="row">
+                                   <i class="fa fa-star fa-5x pull-left" aria-hidden="true"></i>
+                                   <p>Your rating:</p>
+                                  <style type="text/css">
+                                      @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+                                    fieldset, label { margin: 0; padding: 0; }
+                                    body{ margin: 20px; }
+                                    h1 { font-size: 1.5em; margin: 10px; }
+
+                                    /****** Style Star Rating Widget *****/
+
+                                    .rating {
+                                      border: none;
+                                      float: left;
+                                    }
+
+                                    .rating > input { display: none; }
+                                    .rating > label:before {
+                                      margin: 5px;
+                                      font-size: 1.25em;
+                                      font-family: FontAwesome;
+                                      display: inline-block;
+                                      content: "\f005";
+                                    }
+
+                                    .rating > .half:before {
+                                      content: "\f089";
+                                      position: absolute;
+                                    }
+
+                                    .rating > label {
+                                      color: #ddd;
+                                     float: right;
+                                    }
+
+                                    /***** CSS Magic to Highlight Stars on Hover *****/
+
+                                    .rating > input:checked ~ label, /* show gold star when clicked */
+                                    .rating:not(:checked) > label:hover, /* hover current star */
+                                    .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+                                    .rating > input:checked + label:hover, /* hover current star when changing rating */
+                                    .rating > input:checked ~ label:hover,
+                                    .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+                                    .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+                                  </style>
+
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                                <p class="align-baseline align-middle text-sm-left">This item has not yet been rated.Be the first to rate this item.</p>
+                        </div>
+                        <p>{{ object.abstract }}</p>
+                      </div>
+
+                    </div>
+                </div>
+                 <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Author(s):
+
+                             {%  for author in object.document_authors.all %}
+
+                                {{ author }}
+
+                            {%  endfor %}
+                            </p>
+
+                            <p>Illustrator(s):
+
+
+                            {%  for illustrator in object.document_illustrators.all %}
+
+                                {{ illustrator }}
+
+                            {%  endfor %}
+                            </p>
+
+                            <p>Editor(s):
+
+
+                            {%  for editor in object.document_editors.all %}
+
+                                {{ editor }}
+
+                            {%  endfor %}
+                            </p>
+
+                            <p>Publisher:
+                            {{ object.publisher }}
+
+
+
+                            </p>
+                            <p>Place of Publication:
+
+
+                            </p>
+                            <p>Publication Year:
+                                 {{ object.publication_year }}
+
+                            </p>
+                            <p>Year Available:
+
+                             {{ object.updated_date }}
+
+                            </p>
+                            <p>Keyword(s):
+                            {% for keyword in object.keywords.all %}
+                                {{ keyword }}
+                            {% endfor %}
+                            </p>
+                            <p>Description:
+
+                            </p>
+                            <p>License Type:
+
+                                {% for license in object.license_type %}
+                                    {{ license }}
+                                {% endfor %}
+                            </p>
+                            <p>Rights:</p>
+                            <p>Sponsor:
+                              {% for sponsor in object.sponsors.all %}
+                                  {{ sponsor }}
+                                {% endfor %}
+                            </p>
+
+
+                        </div>
+                        <div class="col-md-4">
+                             <p>Series:
+                                {{ object.document_series }}
+                             </p>
+                            <p>Edition:
+                            {{ object.edition }}
+                            </p>
+                            <p>Volume:
+                            {{ object.volume }}
+                            </p>ISB
+                            {{ object.documentidentifier.identifier_type }}
+                                {{ object.documentidentifier.identifier_id }}
+                            </p>
+                            <p>Total Pages:
+
+                                {{ object.document_total_page }}
+
+                            </p>
+                            <p>Language(s):
+                            {% for language in object.languages.all %}
+                                <li>{{ language }}</li>
+                                <li>Language code: {{ language.language }}</li>
+
+                            {% endfor %}
+                            </p>
+                            <p>Education Level:
+
+                                {% for education_level in object.education_levels.all%}
+                                    {{ education_level}}
+
+                                {% endfor %}
+
+
+                            </p>
+                            <p>Interactive:
+
+                            {{ object.document_interactivity }}
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
+    </div>
 {% endblock content %}
