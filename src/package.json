@@ -1,11 +1,8 @@
 {
   "name": "pustakalaya",
   "version": "1.0.0",
+  "author": "Manoj Gautam",
   "description": "Pustakalaya from olenepal",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "build": "webpack --config webpack.dev.js",
     "builddev": "webpack --config webpack.dev.js",
@@ -13,29 +10,51 @@
     "watch": "webpack --config webpack.dev.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Manoj Gautam",
-  "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^4.0.0-beta",
-    "jquery": "^3.2.1",
-    "lodash": "^4.17.4",
-    "mdbootstrap": "^4.4.1",
-    "popper.js": "^1.12.5"
-  },
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.16",
-    "css-loader": "^0.28.7",
-    "file-loader": "^0.11.2",
-    "node-sass": "^4.5.3",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^3.5.5",
+    "eslint": "^4.8.0",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "file-loader": "^1.1.5",
+    "react-hot-loader": "^3.0.0",
+    "webpack": "^3.7.1",
     "webpack-bundle-tracker": "^0.2.0",
+    "webpack-dev-server": "^2.9.1"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.6.0",
+    "bootstrap": "4.0.0-beta",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "es6-promise": "^4.1.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-sass": "^3.1.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "node-sass": "^4.5.3",
+    "popper.js": "1.11",
+    "postcss-loader": "^2.0.7",
+    "precss": "^2.0.0",
+    "radium": "^0.19.5",
+    "react": "^15.3.0",
+    "react-cookie": "^2.1.1",
+    "react-dom": "^15.3.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-devtools": "^3.4.0",
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
     "webpack-merge": "^4.1.0"
-  }
+  },
+  "main": "index.js",
+  "license": "MIT"
 }

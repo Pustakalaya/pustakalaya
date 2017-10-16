@@ -15,23 +15,60 @@ Including another URLconf
 """
 
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.contrib import admin
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
+
 from . import views
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 urlpatterns = [
-    # Static pages
-    # about page http://pustakalaya.org/about/
+
+    # Homepage and core urls
+    url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),
+
+    # Document App
+    # /documents/
+    url(r'^documents/', include('pustakalaya_apps.document.urls', namespace="document")),
+
+    # Video app
+    # /videos/
+    url(r'^videos/', include('pustakalaya_apps.video.urls', namespace="video")),
+
+    # Audio app
+    # /audios/
+    url(r'^audios/', include('pustakalaya_apps.audio.urls', namespace="audio")),
+
+    # Wikipedia app
+    # TODO:
+
+    # Maps app
+    # TODO:
+
+    # Dashboard app
+    # /dashboard/
+    url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls')),
+
+    # Django Admin jet
+    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(r'^admin/', admin.site.urls),
+
+    # Authentication urls
+    url(r'^accounts/', include('allauth.urls')),
+
+    ########################### Static Page urls ####################################
+
+    # About page
+    # /about/
     url(
         r'^about/$',
         cache_page(CACHE_TTL)(TemplateView.as_view(template_name="static_pages/about.html")),
         name="about"
     ),
+
     # Feedback page
     # /feedback/
     url(
@@ -39,33 +76,13 @@ urlpatterns = [
         views.feedback,
         name="feedback"
     ),
+
     # Help page
     # /help/
     url(
         r'^help/$', TemplateView.as_view(template_name="static_pages/help.html"),
         name="help"
     ),
-
-    # Django admin
-    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    url(r'^admin/', admin.site.urls),
-
-    # Dashboard app
-    url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls')),
-
-    # Document App
-    url(r'^document/', include('pustakalaya_apps.document.urls')),
-
-    # Video App
-    url(r'^video/', include('pustakalaya_apps.video.urls')),
-
-    # Audio App
-    url(r'^audio/', include('pustakalaya_apps.audio.urls')),
-
-    # Wiki App
-
-    # Homepage
-    url(r'^', include('pustakalaya_apps.core.urls')),
 ]
 
 if settings.DEBUG:

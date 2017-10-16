@@ -1,8 +1,10 @@
 from django.conf import settings
-from pustakalaya_apps.core.abstract_search import ItemDoc
-from elasticsearch_dsl import Integer, Text, Long, Date
-from elasticsearch_dsl.connections import connections
 from elasticsearch.helpers import bulk
+from elasticsearch_dsl import FacetedSearch, Q, TermsFacet, DateHistogramFacet
+from elasticsearch_dsl import Text
+from elasticsearch_dsl.connections import connections
+
+from pustakalaya_apps.core.abstract_search import ItemDoc
 
 
 class VideoDoc(ItemDoc):
@@ -39,3 +41,56 @@ def index_video():
     # Index all community with nested collection
     print("Indexing videos...")
     bulk(client=es, actions=(b.bulk_index() for b in Video.objects.all().iterator()))
+
+
+class VideoSearch(FacetedSearch):
+    doc_types = ["video"]
+    index = settings.ES_INDEX
+
+    fields = ['title^5', 'abstract^3']
+
+    facets = {
+        'keywords': TermsFacet(field='keywords.keyword', size=5),
+        'languages': TermsFacet(field='languages.keyword', size=10),
+        'education_levels': TermsFacet(field='education_levels.keyword', size=10),
+        'communities': TermsFacet(field='communities.keyword', size=10),
+        'year_of_available': DateHistogramFacet(field='year_of_available', interval='month', min_doc_count=0),
+
+        # 'months': DateHistogramFacet(
+        #     field='created_date',
+        #     interval='month',
+        #     min_doc_count=0),
+    }
+
+    def query(self, search, query):
+        if not query:
+            return search
+        # query in tags, title and body for query
+        q = Q('multi_match', fields=['title', 'abstract'], query=query)
+        # also find questions that have answers matching query
+        # q |= Q(
+        #     'has_child',
+        #     type='answer',
+        #     query=Q('match', body=query),
+        #     inner_hits={
+        #         'highlight': {
+        #             "pre_tags": ["[[["],
+        #             "post_tags": ["]]]"],
+        #             'fields': {'body': {'fragment_size': 30}}
+        #         },
+        #         '_source': False,
+        #         'size': 1
+        #     }
+        # )
+
+        # take the rating field into account when sorting
+        search = search.query(
+            'function_score',
+            query=q,
+            # functions=[SF('field_value_factor', field='keywords')]
+        )
+
+        return search
+
+    def highlight(self, search):
+        return search

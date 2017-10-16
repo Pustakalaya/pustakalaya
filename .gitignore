@@ -187,4 +187,5 @@ src/bundles/*.js
 src/config/config.json
 
 # Webpack modules
-static/bundles/*.js
+static/bundles/
+

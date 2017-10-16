@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import json
 import os
 import sys
-from django.utils.translation import ugettext_lazy as _
 
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import ugettext_lazy as _
 from pkg_resources import resource_filename
 
 # config.json contains the keys that need to overwrite in base.py
@@ -37,7 +37,7 @@ SECRET_KEY = '*=up=#to)&a6g@v0jjx%9kj4ema&wr5g4yw44fagd#*e1l0^7v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # dependent third party apps
     'jet',
     'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -53,6 +54,12 @@ INSTALLED_APPS = [
 ]
 
 THIRDPARTY_APPS = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.google',
 
 ]
 
@@ -135,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ne'
 
 TIME_ZONE = 'Asia/Kathmandu'
 
@@ -222,9 +229,6 @@ LANGUAGES = (
     ('ne', _('Nepali')),
 )
 
-# Default language
-LANGUAGE_CODE = 'ne'
-
 # Translation local path
 LOCALE_PATHS = (
     os.path.join(os.path.dirname(BASE_DIR), 'locale'),
@@ -245,3 +249,75 @@ try:
 
 except KeyError:
     raise ImproperlyConfigured("Email settings in config.json")
+
+## Django allauth configuration
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+## Django logging settings
+LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         },
+#         'null': {
+#             'level':'DEBUG',
+#             'class':'django.utils.log.NullHandler',
+#         },
+#         'console':{
+#             'level':'DEBUG',
+#             'class':'logging.StreamHandler',
+#             'formatter': 'verbose'
+#         },
+#         'logfile': {
+#             'level':'DEBUG',
+#             'class':'logging.handlers.RotatingFileHandler',
+#             'filename': os.path.join(LOG_DIR, 'pustakalaya.log'),
+#             'maxBytes': 1024*1024*5, # 5MB
+#             'backupCount': 0,
+#             'formatter': 'verbose',
+#         },
+#     },
+#     'formatters': {
+#         'verbose': {
+#             'format': '%(levelname)s|%(asctime)s|%(module)s|%(process)d|%(thread)d|%(message)s',
+#             'datefmt' : "%d/%b/%Y %H:%M:%S"
+#         },
+#         'simple': {
+#             'format': '%(levelname)s|%(message)s'
+#         },
+#     },
+#     'loggers': {
+#         'myapp.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#         'myapp.tasks': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#         'myapp.management': {
+#             'handlers': ['console', 'logfile'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#         'myapp.models': {
+#             'handlers': ['console', 'logfile'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     }
+# }

@@ -16,7 +16,6 @@ Welcome to Pustakalaya documentation!
    install.rst
    apps/index.rst
    urls.rst
-   css.rst
    architecture/index.rst
    rest/index.rst
    modules/models
