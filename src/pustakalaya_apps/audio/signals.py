@@ -4,11 +4,11 @@ from django.db import transaction
 from .models import Audio
 
 
-@receiver(post_save, sender=Audio)
 @receiver(post_save, sender=Audio.keywords.through)
 @receiver(post_save, sender=Audio.collections.through)
 @receiver(post_save, sender=Audio.languages.through)
 @receiver(post_save, sender=Audio.education_levels.through)
+@receiver(post_save, sender=Audio)
 @transaction.atomic
 def index_or_update_audio(sender, instance, **kwargs):
     """
