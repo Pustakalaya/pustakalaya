@@ -50,7 +50,8 @@ class Audio(AbstractItem):
     audio_read_by = models.ForeignKey(
         Biography,
         verbose_name=_("Read / Voice by"),
-        blank=True
+        blank=True,
+        null=True
 
     )
 
@@ -85,6 +86,7 @@ class Audio(AbstractItem):
         'AudioSeries',
         verbose_name=_("Audio Series / Volume"),
         blank=True,
+        null=True
     )
 
     sponsors = models.ManyToManyField(
