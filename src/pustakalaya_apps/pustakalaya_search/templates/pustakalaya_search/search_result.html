@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+<!--
+    Available attributes:
+    total_found:
+    "hits":
+    "types":
+    "languages":
+    "education_levels":
+    "communities":
+    "collection":
+    "keywords":
+    "year_of_available":
+    "license_type":
+    "publication_year":
+
+            for (type, count, selected) in response.facets.type:
+                print(type, ' (SELECTED):' if selected else ':', count)
+
+        for (language, count, selected) in response.facets.languages:
+            print(language, ' (SELECTED):' if selected else ':', count)
+
+        for (education_level, count, selected) in response.facets.education_levels:
+            print(education_level, ' (SELECTED):' if selected else ':', count)
+
+        for (community, count, selected) in response.facets.communities:
+            print(community, ' (SELECTED):' if selected else ':', count)
+
+        for (collection, count, selected) in response.facets.collections:
+            print(collection, ' (SELECTED):' if selected else ':', count)
+
+        for (keyword, count, selected) in response.facets.keywords:
+            print(keyword, ' (SELECTED):' if selected else ':', count)
+
+        for (month, count, selected) in response.facets.year_of_available:
+            print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
+
+        for (license_type, count, selected) in response.facets.license_type:
+            print(license_type, ' (SELECTED):' if selected else ':', count)
+
+        for (month, count, selected) in response.facets.publication_year:
+            print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
+
+ -->
+<!-- css blocks -->
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pustakalaya_search/pustakalaya_search.css' %}">
+
+{% endblock style %}
+
+
+{% block content %}
+    <div class="bg-white">
+        <div class="container">
+            <h3>Total item founds {{ total_found }}</h3>
+            <!-- include search form -->
+            {% include 'pustakalaya_search/search_form.html' %}
+            <!-- Result container -->
+            <div class="row">
+                <div class="col-3">
+                    <!-- Facets -->
+                    {% if types %}
+                        <h3>Type</h3>
+                    {% endif %}
+
+                </div>
+                <div class="col-9">
+                    <!-- Result container -->
+                    {% if hits %}
+
+                    {% else %}
+                        <h3 class="text-danger">No results found</h3>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock content %}
+
+<!-- script blocks -->
+{% block script %}
+    <!-- Inherit base scripts -->
+    {{ block.super }}
+    <!-- inject custom script for this page -->
+    <script>
+
+    </script>
+{% endblock script %}

@@ -27,6 +27,9 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 urlpatterns = [
 
+    # Search endpoint
+    url(r'^search/', include('pustakalaya_apps.pustakalaya_search.urls', namespace="search")),
+
     # Homepage and core urls
     url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),
 

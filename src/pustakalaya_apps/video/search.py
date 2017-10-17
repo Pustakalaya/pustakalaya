@@ -44,7 +44,7 @@ def index_video():
 
 
 class VideoSearch(FacetedSearch):
-    doc_types = ["video"]
+    doc_types = [VideoDoc]
     index = settings.ES_INDEX
 
     fields = ['title^5', 'abstract^3']
