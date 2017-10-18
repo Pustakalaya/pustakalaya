@@ -18,7 +18,7 @@ class DocumentDoc(ItemDoc):
     # Document type specific
 
 
-    document_thumbnail = Text()
+    thumbnail = Text()
     document_total_page = Long()
     document_file_type = Text()
     document_type = Text()

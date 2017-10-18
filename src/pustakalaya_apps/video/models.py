@@ -105,7 +105,7 @@ class Video(AbstractItem):
         verbose_name=_("Keywords")
     )
 
-    video_thumbnail = models.ImageField(
+    thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/video/%Y/%m/%d",
         max_length=255
     )
@@ -132,7 +132,7 @@ class Video(AbstractItem):
             collections=[collection.collection_name for collection in self.collections.all()],
             languages=[language.language for language in self.languages.all()],
             video_running_time=self.video_running_time,
-            video_thumbnail=self.video_thumbnail.name,
+            thumbnail=self.thumbnail.name,
             video_director=getattr(self.video_director, "getname", ""),
             video_series=getattr(self.video_series, "series_name", ""),
             video_certificate_license=self.video_certificate_license,

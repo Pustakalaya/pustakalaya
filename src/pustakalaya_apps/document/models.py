@@ -150,7 +150,7 @@ class Document(AbstractItem):
         verbose_name=_("Select list of keywords")
     )
 
-    document_thumbnail = models.ImageField(
+    thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/audio/%Y/%m/%d",
         max_length=255
     )
@@ -182,7 +182,7 @@ class Document(AbstractItem):
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             # Document type specific
-            document_thumbnail=self.document_thumbnail.name,
+            thumbnail=self.thumbnail.name,
             # document_identifier_type=self.document_identifier_type,
             document_file_type=self.document_file_type,
             document_type=self.document_type,
