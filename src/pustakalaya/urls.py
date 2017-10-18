@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
@@ -26,6 +27,9 @@ from . import views
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 urlpatterns = [
+
+    # Search endpoint
+    url(r'^search/', include('pustakalaya_apps.pustakalaya_search.urls', namespace="core")),
 
     # Homepage and core urls
     url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),
@@ -86,6 +90,9 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    # Serve media in development mode
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
     import debug_toolbar
 
     urlpatterns = [

@@ -17,7 +17,7 @@ class VideoDoc(ItemDoc):
     keywords = Text(multi=True)
 
     video_running_time = Text()
-    video_thumbnail = Text()
+    thumbnail = Text()
     video_director = Text()
     video_series = Text()
     video_certificate_license = Text()
@@ -44,7 +44,7 @@ def index_video():
 
 
 class VideoSearch(FacetedSearch):
-    doc_types = ["video"]
+    doc_types = [VideoDoc]
     index = settings.ES_INDEX
 
     fields = ['title^5', 'abstract^3']

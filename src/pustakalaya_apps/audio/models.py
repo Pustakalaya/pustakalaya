@@ -95,7 +95,7 @@ class Audio(AbstractItem):
         blank=True
     )
 
-    audio_thumbnail = models.ImageField(
+    thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/audio/%Y/%m/%d",
         max_length=255
     )
@@ -116,7 +116,7 @@ class Audio(AbstractItem):
             collections=[collection.collection_name for collection in self.collections.all()],
             languages=[language.language for language in self.languages.all()],
             audio_running_time=self.audio_running_time,
-            audio_thumbnail=self.audio_thumbnail.name,
+            thumbnail=self.thumbnail.name,
             audio_read_by=self.audio_read_by.getname,
             audio_genre=self.audio_genre.genre,
             audio_series=self.audio_series.series_name,

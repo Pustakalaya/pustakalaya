@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^$', views.videos, name="videos"),
 
     # /videos/<video_id>
-    url(r'^detail/(?P<pk>\b[0-9A-Fa-f]{8}\b(-\b[0-9A-Fa-f]{4}\b){3}-\b[0-9A-Fa-f]{12}\b)/',
-        views.VideoDetailView.as_view(), name="video_detail")
+    url(r'^(?P<title>).*/detail/(?P<pk>\b[0-9A-Fa-f]{8}\b(-\b[0-9A-Fa-f]{4}\b){3}-\b[0-9A-Fa-f]{12}\b)/',
+        views.VideoDetailView.as_view(), name="detail")
 ]

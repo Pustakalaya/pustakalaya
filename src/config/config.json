@@ -1,6 +1,6 @@
 {
   "MEDIA_ROOT": "/var/www/html/media_root",
-  "STATIC_ROOT": "/var/ww/html/static_root",
+  "STATIC_ROOT": "/var/www/html/static_root",
   "REDIS_SERVER": {
     "IP": "127.0.0.1",
     "PORT": "6379"

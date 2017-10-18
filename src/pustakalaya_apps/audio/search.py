@@ -14,7 +14,7 @@ class AudioDoc(ItemDoc):
     audio_running_time = Text()
     audio_read_by = Text()
     audio_genre = Text()
-    audio_thumbnail = Text()
+    thumbnail = Text()
 
     class Meta:
         index = settings.ES_INDEX
