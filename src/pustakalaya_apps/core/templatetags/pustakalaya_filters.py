@@ -51,3 +51,8 @@ def transtolocal(value):
 
     if current_language not in ENGLISH_LANGUAGE and not second:
         return first or " "
+
+
+@register.filter(name='split')
+def split(value, arg):
+    return value.split(arg)

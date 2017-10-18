@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from django.shortcuts import render
 from .search import PustakalayaSearch
 
@@ -16,26 +17,46 @@ def search(request):
         query_string = request.POST.get('q', " ")
         search_obj = PustakalayaSearch(query=query_string)
         response = search_obj.execute()
-        search_result["total_result"] = response.hits.total
 
-        if response is not None:
-            search_result = {
-                "total_found": response.hits.total,
-                "hits": response.hits,
-                "types": response.facets.type,
-                "languages": response.facets.languages,
-                "education_levels": response.facets.education_levels,
-                "communities": response.facets.communities,
-                "collection": response.facets.collections,
-                "keywords": response.facets.keywords,
-                "year_of_available": response.facets.year_of_available,
-                "license_type": response.facets.license_type,
-                "publication_year": response.facets.publication_year,
-                "response": response,
-            }
+        search_result["response"] = response
+        search_result["hits"] = response.hits
+        search_result["type"] = response.facets.type
+        search_result["languages"] = response.facets.languages
+        search_result["education_levels"] = response.facets.education_levels
+        search_result["communities"] = response.facets.communities
+        search_result["collections"] = response.facets.collections
+        search_result["publication_year"] = response.facets.publication_year
+        search_result["keywords"] = response.facets.keywords
+        search_result["year_of_available"] = response.facets.year_of_available
+        search_result["license_type"] = response.facets.license_type
 
-        else:
-            search_result = {}
+
+        for (type, count, selected) in response.facets.type:
+            print(type, ' (SELECTED):' if selected else ':', count)
+
+        for (language, count, selected) in response.facets.languages:
+            print(language, ' (SELECTED):' if selected else ':', count)
+
+        for (education_level, count, selected) in response.facets.education_levels:
+            print(education_level, ' (SELECTED):' if selected else ':', count)
+
+        for (community, count, selected) in response.facets.communities:
+            print(community, ' (SELECTED):' if selected else ':', count)
+
+        for (collection, count, selected) in response.facets.collections:
+            print(collection, ' (SELECTED):' if selected else ':', count)
+
+        for (keyword, count, selected) in response.facets.keywords:
+            print(keyword, ' (SELECTED):' if selected else ':', count)
+
+        for (month, count, selected) in response.facets.year_of_available:
+            print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
+
+        for (license_type, count, selected) in response.facets.license_type:
+            print(license_type, ' (SELECTED):' if selected else ':', count)
+
+        for (month, count, selected) in response.facets.publication_year:
+            print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
 
         return render(request, "pustakalaya_search/search_result.html", search_result)
 

@@ -43,6 +43,9 @@
         for (month, count, selected) in response.facets.publication_year:
             print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
 
+
+
+
  -->
 <!-- css blocks -->
 {% block style %}
@@ -59,18 +62,177 @@
             <!-- include search form -->
             {% include 'pustakalaya_search/search_form.html' %}
             <!-- Result container -->
-            <div class="row">
-                <div class="col-3">
-                    <!-- Facets -->
-                    {% if types %}
-                        <h3>Type</h3>
-                    {% endif %}
+            {% if hits %}
+                <div class="row">
+                    <div class="col-md-3  col-sm-12">
+                        <!-- Facets List -->
+                        <!-- type facets -->
+                        {% if type %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "types" %}</p>
 
-                </div>
-                <div class="col-9">
-                    <!-- Result container -->
-                    <div class="row">
-                        {% if hits %}
+                                    {% for type, count, selected in response.facets.type %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- Language facets -->
+                        {% if languages %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "language" %}</p>
+                                    {% for language, count, selected in languages %}
+                                        <div class="checkbox">
+                                            <input id="{{ language }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ language }}">
+                                                {% blocktrans %} {{ language }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- education languages -->
+                        {% if education_levels %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "education level" %}</p>
+                                    {% for type, count, selected in education_levels %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- communities -->
+                        {% if communities %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "communities" %}</p>
+                                    {% for type, count, selected in communities %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- collections -->
+                        {% if collections %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "collections" %}</p>
+                                    {% for type, count, selected in collections %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- keywords -->
+                        {% if keywords %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "keywords" %}</p>
+                                    {% for type, count, selected in keywords %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- license type -->
+                        {% if license_type %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "license type" %}</p>
+                                    {% for type, count, selected in license_type %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- year of available -->
+                        {% if year_of_available %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "year of available" %}</p>
+                                    {% for type, count, selected in year_of_available %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                        <!-- publication year -->
+                        {% if publication_year %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize">{% trans "publication year" %}</p>
+                                    {% for type, count, selected in publication_year %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <!-- Results -->
+                    <div class="col-md-9 col-sm-12">
+                        <!-- Result container -->
+                        <div class="row">
                             {% for hit in hits %}
                                 <div class="col-md-4 col-sm-6">
                                     <div class="card card-blog">
@@ -101,15 +263,16 @@
                                     <div class="w-100"></div>
                                 {% endif %}
                             {% endfor %}
-                        {% else %}
-                            <h3 class="text-danger">
-                                {% trans 'No result found' %}
-                            </h3>
-                        {% endif %}
+                        </div>
                     </div>
-
                 </div>
-            </div>
+            {% else %}
+                <h3 class="text-danger">
+                    {% trans 'No result found' %}
+                </h3>
+
+
+            {% endif %}
         </div>
 
     </div>
