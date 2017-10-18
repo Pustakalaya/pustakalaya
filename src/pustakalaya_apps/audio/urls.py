@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'^$', views.audios, name="audios"),
 
     # /documents/<document_id>
-    url(r'^detail/(?P<pk>\b[0-9A-Fa-f]{8}\b(-\b[0-9A-Fa-f]{4}\b){3}-\b[0-9A-Fa-f]{12}\b)/', views.AudioDetailView.as_view(), name="document_detail")
+    url(r'^(?P<title>).*/detail/(?P<pk>\b[0-9A-Fa-f]{8}\b(-\b[0-9A-Fa-f]{4}\b){3}-\b[0-9A-Fa-f]{12}\b)/', views.AudioDetailView.as_view(), name="detail")
 ]
+
+

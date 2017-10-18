@@ -75,7 +75,8 @@
                                 <div class="col-md-4 col-sm-6">
                                     <div class="card card-blog">
                                         <div class="card-image">
-                                            <a href="{{ hit.title }}">
+
+                                            <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">
                                                 <img class="img" src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
                                             </a>
                                         </div>
