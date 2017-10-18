@@ -1,4 +1,225 @@
-{%  extends 'base.html' %}
-{%  block content %}
-    audio detail
-{%  endblock content %}
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3  col-xs-12">
+                    <!-- Logo -->
+                    <img class="img-responsive rounded w-100" src="http://placehold.it/200X250" alt="">
+
+                    <!--view-->
+                    <!--p>Views:273</p>
+                    <i class="fa  fa-thumbs-up">271</i>
+                    <i class="fa fa-thumbs-down">36</i-->
+
+
+                    <!-- share buttons -->
+                    <div>
+                        <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                        <a href="http://www.twitter.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="http://www.google.com/E-pustakalaya" class="btn btn-default btn-icon btn-round">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="http://www.linkedin.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col content-center">
+                    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+                        <source type="audio/mp3" src="http://www.archive.org/download/bolero_69/Bolero.mp3">
+                        Sorry, your browser does not support HTML5 audio.
+                    </audio>
+                    <ul id="playlist">
+                        <li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel
+                            Bolero</a></li>
+                        <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight
+                            Sonata - Beethoven</a></li>
+                        <li><a href="http://www.archive.org/download/CanonInD_261/CanoninD.mp3">Canon in D Pachabel</a>
+                        </li>
+                        <li>
+                            <a href="http://www.archive.org/download/PatrikbkarlChamberSymph/PatrikbkarlChamberSymph_vbr_mp3.zip">patrikbkarl
+                                chamber symph</a></li>
+
+                    </ul>
+                </div>
+                <div class="col-9  col-xs-12">
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 "><b>{{ object.title }}</b></h4>
+                    <p>
+
+                        {% for author in object.audio_authors.all %}
+
+                            {{ author }}
+
+                        {% endfor %}
+                    </p>
+
+                    <p>
+
+
+                        {% for ready_by in object.audio_read_by.all %}
+
+                            {{ ready_by }}
+
+                        {% endfor %}
+                    </p>
+                    <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
+                    <!-- Authors section -->
+                    <hr/>
+                    <div class="row">
+                        <div class="col">
+
+                            <p><b>Author(s):</b>
+
+                                {% for author in object.audio_authors.all %}
+
+                                    {{ author }}
+
+                                {% endfor %}
+                            </p>
+
+                            <p><b>Read/Voice by:</b>
+
+
+                                {% for read_by in object.audio_read_by.all %}
+
+                                    {{ read_by }}
+
+                                {% endfor %}
+                            </p>
+
+
+                            <p><b>Publisher:</b>
+                                {{ object.publisher }}
+
+
+                            </p>
+                            <p><b>Place of Publication:</b>
+
+
+                            </p>
+                            <p><b>Publication Year:</b>
+                                {{ object.publication_year }}
+
+                            </p>
+                            <p><b>Year Available:</b>
+
+                                {{ object.updated_date }}
+
+                            </p>
+                            <p><b>Keyword(s):</b>
+                                {% for keyword in object.keywords.all %}
+                                    {{ keyword }}
+                                {% endfor %}
+                            </p>
+                            <p><b>Description:</b>
+
+                            </p>
+                            <p><b>License Type:</b>
+
+                                {% for license in object.license_type %}
+                                    {{ license }}
+                                {% endfor %}
+                            </p>
+                            <p><b>Rights:</b></p>
+                            <p><b>Sponsor:</b>
+                                {% for sponsor in object.sponsors.all %}
+                                    {{ sponsor }}
+                                {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b>Series:</b>
+                                {{ object.audio_series }}
+                            </p>
+                            <p><b>Edition:</b>
+                                {{ object.edition }}
+                            </p>
+                            <p><b>Volume:</b>
+                                {{ object.volume }}
+                            </p><b>Genre:</b>
+                            {{ object.audio_genre }}
+                            </p>
+
+                            <p><b>Language(s):</b>
+                                {% for language in object.languages.all %}
+
+                                    {{ language }}
+
+                                {% endfor %}
+                            </p>
+                            <p><b>Education Level:</b>
+
+                                {% for education_level in object.education_levels.all %}
+                                    {{ education_level }}
+
+                                {% endfor %}
+
+
+                            </p>
+                        </div>
+                    </div>
+                    <b>Related Links</b>
+                    <div class="row">
+
+                        <div class="col">
+                            <b>Link</b>
+                            <hr/>
+                        </div>
+                        <div class="col">
+                            <b>Descrition</b>
+                            <hr/>
+                        </div>
+                        <hr/>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var audio;
+        var playlist;
+        var tracks;
+        var current;
+
+        init();
+
+        function init() {
+            current = 0;
+            audio = $('audio');
+            playlist = $('#playlist');
+            tracks = playlist.find('li a');
+            len = tracks.length - 1;
+            audio[0].volume = .10;
+            playlist.find('a').click(function (e) {
+                e.preventDefault();
+                link = $(this);
+                current = link.parent().index();
+                run(link, audio[0]);
+            });
+            audio[0].addEventListener('ended', function (e) {
+                current++;
+                if (current == len) {
+                    current = 0;
+                    link = playlist.find('a')[0];
+                } else {
+                    link = playlist.find('a')[current];
+                }
+                run($(link), audio[0]);
+            });
+        }
+
+        function run(link, player) {
+            player.src = link.attr('href');
+            par = link.parent();
+            par.addClass('active').siblings().removeClass('active');
+            audio[0].load();
+            audio[0].play();
+        }
+    </script>
+{% endblock content %}

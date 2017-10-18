@@ -1,9 +1,200 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 
-{%  block content %}
+{% block content %}
+    <link href="http://vjs.zencdn.net/6.2.8/video-js.css" rel="stylesheet">
+
+    <!-- If you'd like to support IE8 -->
+    <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+
     <div>
-        <div class="container">
-            <h1>{{ object.title }}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col pull-right">
+                <div id="instructions">
+
+                    <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
+                           controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                           data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+                        <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'/>
+                        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm'/>
+                    </video>
+                    <br>
+                    <br>
+                </div>
+
+
+                <div class="col-3  col-xs-12">
+
+                    <!-- share buttons -->
+                    <div>
+                        <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                        <a href="http://www.twitter.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="http://www.google.com/Epustakalaya" class="btn btn-default btn-icon btn-round">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="http://www.linkedin.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-9  col-xs-12">
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 "><b>{{ object.title }}</b></h4>
+                    <p>
+
+                        {% for author in object.video_authors.all %}
+
+                            {{ author }}
+
+                        {% endfor %}
+                    </p>
+
+                    <p>
+
+
+                        {% for producer in object.video_producers.all %}
+
+                            {{ producer }}
+
+                        {% endfor %}
+                    </p>
+                    <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
+                    <!-- Authors section -->
+                    <hr/>
+                    <div class="row">
+                        <div class="col">
+
+                            <p><b>Author(s):</b>
+
+                                {% for author in object.video_authors.all %}
+
+                                    {{ author }}
+
+                                {% endfor %}
+                            </p>
+
+                            <p><b>Producer(s):</b>
+
+
+                                {% for producer in object.video_producers.all %}
+
+                                    {{ producer }}
+
+                                {% endfor %}
+                            </p>
+
+                            <p><b>Director(s):</b>
+
+
+                                {% for director in object.video_director.all %}
+
+                                    {{ director }}
+
+                                {% endfor %}
+                            </p>
+
+                            <p><b>Publisher:</b>
+                                {{ object.publisher }}
+
+
+                            </p>
+                            <p><b>Place of Publication:</b>
+
+
+                            </p>
+                            <p><b>Release Year:</b>
+                                {{ object.publication_year }}
+
+                            </p>
+                            <p><b>Year Available:</b>
+
+                                {{ object.updated_date }}
+
+                            </p>
+                            <p><b>Keyword(s):</b>
+                                {% for keyword in object.keywords.all %}
+                                    {{ keyword }}
+                                {% endfor %}
+                            </p>
+                            <p><b>Description:</b>
+
+                            </p>
+                            <p><b>License Type:</b>
+
+                                {% for license in object.license_type %}
+                                    {{ license }}
+                                {% endfor %}
+                            </p>
+                            <p><b>Rights:</b></p>
+                            <p><b>Sponsor:</b>
+                                {% for sponsor in object.sponsors.all %}
+                                    {{ sponsor }}
+                                {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p><b>Series:</b>
+                                {{ object.video_series }}
+                            </p>
+                            <p><b>Edition:</b>
+                                {{ object.edition }}
+                            </p>
+                            <p><b>Volume:</b>
+                                {{ object.volume }}
+
+
+                            <p><b>Language(s):</b>
+                                {% for language in object.languages.all %}
+
+                                    {{ language }}
+
+                                {% endfor %}
+                            </p>
+                            <p><b>Education Level:</b>
+
+                                {% for education_level in object.education_levels.all %}
+                                    {{ education_level }}
+
+                                {% endfor %}
+
+
+                            </p>
+
+                            </p><b>Genre:</b>
+                            {{ object.video_genre }}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-{%  endblock content %}
+
+    <script>
+        $(function () {
+            var $refreshButton = $('#refresh');
+
+            var $results = $('#css_result');
+
+            function refresh() {
+                var css = $('style.cp-pen-styles').text();
+                $results.html(css);
+            }
+
+            refresh();
+            $refreshButton.click(refresh);
+
+            // Select all the contents when clicked
+            $results.click(function () {
+                $(this).select();
+            });
+        });
+
+    </script>
+    <script src="http://vjs.zencdn.net/6.2.8/video.js"></script>
+{% endblock content %}
