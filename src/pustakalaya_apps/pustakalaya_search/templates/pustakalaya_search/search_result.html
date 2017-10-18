@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load pustakalaya_filters %}
+{% load i18n %}
 <!--
     Available attributes:
     total_found:
@@ -67,16 +69,46 @@
                 </div>
                 <div class="col-9">
                     <!-- Result container -->
-                    {% if hits %}
+                    <div class="row">
+                        {% if hits %}
+                            {% for hit in hits %}
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card card-blog">
+                                        <div class="card-image">
+                                            <a href="{{ hit.document_url }}">
+                                                <img class="img" src="http://placehold.it/260X230">
+                                            </a>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h5 class="description text-info h5 card-title">{{ hit.title | transtolocal | title }}
+                                            </h5>
+                                            <div class="card-description">
+                                                {{ hit.abstract | transtolocal | truncatechars:20  }}
+                                            </div>
+                                            <!--
+                                            <div class="card-footer mb-0">
+                                                <a href="#pablo" class="btn btn-block btn-round">View</a>
+                                            </div>
 
-                    {% else %}
-                        <h3 class="text-danger">No results found</h3>
-                    {% endif %}
+                                            -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if forloop.counter|divisibleby:"3" %}
+                                    <div class="w-100"></div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <h3 class="text-danger">
+                                {% trans 'No result found' %}
+                            </h3>
+                        {% endif %}
+                    </div>
 
                 </div>
             </div>
         </div>
-
 
     </div>
 
