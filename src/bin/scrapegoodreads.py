@@ -23,7 +23,7 @@ except ImportError:
 URL = "https://www.goodreads.com/list/show/1.Best_Books_Ever"
 page=1
 ENDPAGE = 500
-books = "/home/{0}/books.json".format(os.getlogin())
+books = "books.json"
 
 
 
