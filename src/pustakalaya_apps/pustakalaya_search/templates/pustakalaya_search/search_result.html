@@ -63,7 +63,10 @@
             <!-- include search form -->
             <form method="GET" action="." id="searchForm">
                 <div class="form-group">
-                    <input class="form-control" id="search_input" type="text" name="q" , placeholder="Search">
+                    <input class="form-control" id="search_input"
+                           autocomplete="on"
+                           maxlength="200"
+                           type="text" name="q" , placeholder="Search pustakalaya..">
                     <input type="hidden" id="filterData"
                            name="form-filter"/>
                     <input type="submit" class="btn btn-info btn-block" value="Submit">
@@ -273,7 +276,10 @@
                                         <div class="card-image">
 
                                             <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">
-                                                <img class="img" src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
+                                                <img class="img"
+                                                     height="240"
+                                                     width="260"
+                                                     src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
                                             </a>
                                         </div>
                                         <div class="card-body text-center">
