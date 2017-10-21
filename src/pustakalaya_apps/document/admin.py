@@ -59,7 +59,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "license_type",
         "custom_license",
         "sponsors",
-        "document_thumbnail"
+        "thumbnail"
     )
 
 

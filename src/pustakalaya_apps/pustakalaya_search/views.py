@@ -1,7 +1,9 @@
+import json
 from collections import OrderedDict
 from django.shortcuts import render
 from .search import PustakalayaSearch
-
+from django.shortcuts import redirect
+from json import JSONDecodeError
 
 def search(request):
     # Store search result in dict obj
@@ -10,12 +12,24 @@ def search(request):
     # Query string from user input
     query_string = " "
 
-    # Filters dict object
-    filters = {}
 
-    if request.method == "POST":
-        query_string = request.POST.get('q', " ")
-        search_obj = PustakalayaSearch(query=query_string)
+
+    if request.method == "GET":
+        # Grab query from form.
+        query_string = request.GET.get('q')
+        print("Query string from form is", query_string)
+
+        #Get data ajax request
+        try:
+            filters = json.loads(request.GET.get("form-filter", {}))
+            print("I got filters", filters)
+        except (TypeError, JSONDecodeError):
+            filters = {}
+            print("I can't get filters")
+
+        # Search in elastic search
+        search_obj = PustakalayaSearch(query=query_string,filters=filters)
+
         response = search_obj.execute()
 
         search_result["response"] = response
@@ -29,6 +43,7 @@ def search(request):
         search_result["keywords"] = response.facets.keywords
         search_result["year_of_available"] = response.facets.year_of_available
         search_result["license_type"] = response.facets.license_type
+        print(dir(response))
 
 
         for (type, count, selected) in response.facets.type:
@@ -60,4 +75,3 @@ def search(request):
 
         return render(request, "pustakalaya_search/search_result.html", search_result)
 
-    return render(request, "pustakalaya_search/search_page.html", search_result)

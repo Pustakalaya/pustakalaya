@@ -49,7 +49,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "custom_license",
         "publication_year",
         "sponsors",
-        "audio_thumbnail"
+        "thumbnail"
     )
 
 

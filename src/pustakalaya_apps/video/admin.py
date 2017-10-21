@@ -49,7 +49,7 @@ class VideoAdmin(admin.ModelAdmin):
         "custom_license",
         "publication_year",
         "sponsors",
-        "video_thumbnail"
+        "thumbnail"
     )
 
 

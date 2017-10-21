@@ -58,23 +58,35 @@
 {% block content %}
     <div class="bg-white">
         <div class="container">
-            <h3>Total item founds {{ total_found }}</h3>
+            <h3>Total item founds {{ response.hits.total }}</h3>
+            <h4>Query time {{ response.took  }} ms</h4>
             <!-- include search form -->
-            {% include 'pustakalaya_search/search_form.html' %}
+            <form method="GET" action="." id="searchForm">
+                <div class="form-group">
+                    <input class="form-control" id="search_input" type="text" name="q" , placeholder="Search">
+                    <input type="hidden" id="filterData"
+                           name="form-filter"/>
+                    <input type="submit" class="btn btn-info btn-block" value="Submit">
+                </div>
+            </form>
+
             <!-- Result container -->
             {% if hits %}
                 <div class="row">
-                    <div class="col-md-3  col-sm-12">
+                    <div class="col-md-3  col-sm-12" id="facet">
                         <!-- Facets List -->
                         <!-- type facets -->
                         {% if type %}
-                            <div class="row" id="checkRadios">
+                            <div class="row" id="type">
                                 <div class="col-sm-12 col-lg-12">
                                     <p class="text-capitalize">{% trans "types" %}</p>
 
                                     {% for type, count, selected in response.facets.type %}
                                         <div class="checkbox">
-                                            <input id="{{ type }}" type="checkbox">
+                                            <input id="{{ type }}" value="{{ type }}"
+                                                   {% if selected %} checked {% endif %}
+                                                   type="checkbox"
+                                                   onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ type }}">
                                                 {% blocktrans %} {{ type }} {% endblocktrans %} <span
                                                     class="badge badge-default">{{ count }}</span>
@@ -87,12 +99,15 @@
 
                         <!-- Language facets -->
                         {% if languages %}
-                            <div class="row" id="checkRadios">
+                            <div class="row" id="languages">
                                 <div class="col-sm-12 col-lg-12">
                                     <p class="text-capitalize">{% trans "language" %}</p>
                                     {% for language, count, selected in languages %}
                                         <div class="checkbox">
-                                            <input id="{{ language }}" type="checkbox">
+                                            <input id="{{ language }}" value="{{ language }}"
+                                                    {% if selected %} checked {% endif %}
+                                                   type="checkbox"
+                                                   onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ language }}">
                                                 {% blocktrans %} {{ language }} {% endblocktrans %} <span
                                                     class="badge badge-default">{{ count }}</span>
@@ -105,12 +120,15 @@
 
                         <!-- education languages -->
                         {% if education_levels %}
-                            <div class="row" id="checkRadios">
+                            <div class="row" id="education_levels">
                                 <div class="col-sm-12 col-lg-12">
                                     <p class="text-capitalize">{% trans "education level" %}</p>
                                     {% for type, count, selected in education_levels %}
                                         <div class="checkbox">
-                                            <input id="{{ type }}" type="checkbox">
+                                            <input id="{{ type }}" value="{{ type }}"
+                                                    {% if selected %} checked {% endif %}
+                                                   type="checkbox"
+                                                   onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ type }}">
                                                 {% blocktrans %} {{ type }} {% endblocktrans %} <span
                                                     class="badge badge-default">{{ count }}</span>
@@ -123,12 +141,15 @@
 
                         <!-- communities -->
                         {% if communities %}
-                            <div class="row" id="checkRadios">
+                            <div class="row" id="communities">
                                 <div class="col-sm-12 col-lg-12">
                                     <p class="text-capitalize">{% trans "communities" %}</p>
                                     {% for type, count, selected in communities %}
                                         <div class="checkbox">
-                                            <input id="{{ type }}" type="checkbox">
+                                            <input id="{{ type }}" type="checkbox"
+                                                    {% if selected %} checked {% endif %}
+                                                   value="{{ type }}"
+                                                   onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ type }}">
                                                 {% blocktrans %} {{ type }} {% endblocktrans %} <span
                                                     class="badge badge-default">{{ count }}</span>
@@ -141,12 +162,15 @@
 
                         <!-- collections -->
                         {% if collections %}
-                            <div class="row" id="checkRadios">
+                            <div class="row" id="collections">
                                 <div class="col-sm-12 col-lg-12">
                                     <p class="text-capitalize">{% trans "collections" %}</p>
                                     {% for type, count, selected in collections %}
                                         <div class="checkbox">
-                                            <input id="{{ type }}" type="checkbox">
+                                            <input id="{{ type }}" type="checkbox"
+                                                    {% if selected %} checked {% endif %}
+                                                   value="{{ type }}"
+                                                   onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ type }}">
                                                 {% blocktrans %} {{ type }} {% endblocktrans %} <span
                                                     class="badge badge-default">{{ count }}</span>
@@ -159,12 +183,15 @@
 
                         <!-- keywords -->
                         {% if keywords %}
-                            <div class="row" id="checkRadios">
+                            <div class="row" id="keywords">
                                 <div class="col-sm-12 col-lg-12">
                                     <p class="text-capitalize">{% trans "keywords" %}</p>
                                     {% for type, count, selected in keywords %}
                                         <div class="checkbox">
-                                            <input id="{{ type }}" type="checkbox">
+                                            <input id="{{ type }}" type="checkbox"
+                                                    {% if selected %} checked {% endif %}
+                                                   value="{{ type }}"
+                                                   onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ type }}">
                                                 {% blocktrans %} {{ type }} {% endblocktrans %} <span
                                                     class="badge badge-default">{{ count }}</span>
@@ -177,12 +204,15 @@
 
                         <!-- license type -->
                         {% if license_type %}
-                            <div class="row" id="checkRadios">
+                            <div class="row" id="license_type">
                                 <div class="col-sm-12 col-lg-12">
                                     <p class="text-capitalize">{% trans "license type" %}</p>
                                     {% for type, count, selected in license_type %}
                                         <div class="checkbox">
-                                            <input id="{{ type }}" type="checkbox">
+                                            <input id="{{ type }}" type="checkbox"
+                                                    {% if selected %} checked {% endif %}
+                                                   value="{{ type }}"
+                                                   onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ type }}">
                                                 {% blocktrans %} {{ type }} {% endblocktrans %} <span
                                                     class="badge badge-default">{{ count }}</span>
@@ -194,6 +224,7 @@
                         {% endif %}
 
                         <!-- year of available -->
+
                         {% if year_of_available %}
                             <div class="row" id="checkRadios">
                                 <div class="col-sm-12 col-lg-12">
@@ -210,6 +241,7 @@
                                 </div><!-- end col-sm-12 -->
                             </div>
                         {% endif %}
+
 
                         <!-- publication year -->
                         {% if publication_year %}
@@ -229,6 +261,8 @@
                         {% endif %}
 
                     </div>
+
+
                     <!-- Results -->
                     <div class="col-md-9 col-sm-12">
                         <!-- Result container -->
@@ -247,7 +281,7 @@
                                             </h5>
                                             <hr/>
                                             <p class="text-dark">
-                                                {{ hit.abstract | transtolocal | truncatechars:20  }}
+                                                {{ hit.abstract | transtolocal | truncatechars:20 }}
                                             </p>
                                             <!--
                                             <div class="card-footer mb-0">
@@ -279,12 +313,96 @@
 
 {% endblock content %}
 
+<script>
+    console.log("hello world");
+</script>
+
 <!-- script blocks -->
 {% block script %}
     <!-- Inherit base scripts -->
     {{ block.super }}
     <!-- inject custom script for this page -->
     <script>
+        function queryAndFilter() {
 
+            // Grab the input field
+            var q = $("#search_input").val() || " ";
+            var type = [];
+            var languages = [];
+            var education_levels = [];
+            var communities = [];
+            var collections = [];
+            var keywords = [];
+            var license_type = [];
+            // var publication_year = []
+            // var year_of_available = []
+
+            // grab type fields
+            $('#filter, #type input:checked').each(function () {
+                type.push($(this).val());
+            });
+
+            // grab language fields
+            $('#filter, #languages input:checked').each(function () {
+                languages.push($(this).val());
+            });
+
+            // grab education levels
+            $('#filter, #education_levels input:checked').each(function () {
+                education_levels.push($(this).val());
+                console.log($(this).val());
+            });
+
+            // grab communities
+            $('#filter, #communities input:checked').each(function () {
+                communities.push($(this).val());
+            });
+
+            // grab collections
+            $('#filter, #collections input:checked').each(function () {
+                collections.push($(this).val());
+            });
+
+            // grab keywords
+            $('#filter, #keywords input:checked').each(function () {
+                keywords.push($(this).val());
+            });
+
+            // grab license type
+            $('#filter, #license_type input:checked').each(function () {
+                license_type.push($(this).val());
+            });
+
+
+            // Filters
+            filters = {
+                "type": type,
+                "languages": languages,
+                "education_levels": education_levels,
+                "communities": communities,
+                "collections": collections,
+                "keywords": keywords,
+                "license_type": license_type
+
+            }
+
+            // construct the query
+            var query = {
+                'q': q,
+                'filters': filters
+            }
+
+            // set the hidden field value
+            $('#searchForm, #filterData').val(JSON.stringify(filters));
+
+            // Submit the form.
+
+            $("#searchForm").submit();
+
+
+        }
     </script>
+    <!-- some script abov here -->
+
+
 {% endblock script %}
