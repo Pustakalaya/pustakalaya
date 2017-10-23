@@ -59,7 +59,7 @@
     <div class="bg-white">
         <div class="container">
             <h3>Total item founds {{ response.hits.total }}</h3>
-            <h4>Query time {{ response.took  }} ms</h4>
+            <h4>Query time {{ response.took }} ms</h4>
             <!-- include search form -->
             <form method="GET" action="." id="searchForm">
                 <div class="form-group">
@@ -82,12 +82,12 @@
                         {% if type %}
                             <div class="row" id="type">
                                 <div class="col-sm-12 col-lg-12">
-                                        <h4 class="text-capitalize">{% trans "types" %}</h4>
+                                    <h4 class="text-capitalize">{% trans "types" %}</h4>
 
                                     {% for type, count, selected in response.facets.type %}
                                         <div class="checkbox">
                                             <input id="{{ type }}" value="{{ type }}"
-                                                   {% if selected %} checked {% endif %}
+                                                    {% if selected %} checked {% endif %}
                                                    type="checkbox"
                                                    onclick="queryAndFilter()">
                                             <label class="text-capitalize" for="{{ type }}">
