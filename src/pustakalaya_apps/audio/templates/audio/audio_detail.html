@@ -162,21 +162,145 @@
 
                             </p>
                         </div>
-                    </div>
-                    <b>Related Links</b>
-                    <div class="row">
+                        <!-- meta data section -->
+                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                        <div class="col">
-                            <b>Link</b>
-                            <hr/>
+                             audio_read_by=self.audio_read_by.getname,
+                                audio_genre=self.audio_genre.genre,
+                             audio_series=self.audio_series.series_name,
+
+
+
+                            <!-- publisher section -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
+
+                            </div>
+
+                            <!-- place of publication -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
+
+                            </div>
+
+                            <!-- Publication year -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
+
+                            </div>
+
+                            <!-- audio read by -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.audio_read_by.getname }}</span>
+
+                            </div>
+
+                             <!-- audio type -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                {%  for audio in self.audio_types.all %}
+                                <span class="text-secondary text-capitalize"> {{ audio.name}}</span>
+                                {%  endfor %}
+
+                            </div>
+
+                            <!-- audio genre -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.audio_genre.genre }}</span>
+
+                            </div>
+
+                            <!-- audio series -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.audio_series.series_name }}</span>
+
+                            </div>
+
+                            <!-- Available year -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
+
+                            </div>
+
+                            <!-- Keywords -->
+                            <div class="pb-1 border-line">
+
+                                <!-- TODO pluralization -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
+                                {% for keyword in object.keywords.all %}
+                                    <span class="text-secondary text-capitalize"> {{ keyword.keyword }}</span>
+
+                                {% endfor %}
+
+
+                            </div>
+
+                            <!-- Description -->
+                            <div class="pb-1 border-line">
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.description }}</span>
+
+                            </div>
+
+                            <!-- License type -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
+                            </div>
+
+                            <!-- Language -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
+                                <span class="text-secondary"> {{ object.document_total_page }}</span>
+                            </div>
+
+                            <!-- Education level -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
+                                {% for education_level in object.education_levels.all %}
+                                    <span class="text-secondary"> {{ object.document_total_page }}</span>
+                                {% endfor %}
+
+
+                            </div>
+
+                            <!-- Rights -->
+                            <div class="pb-1 border-line">
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
+                                <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
+                            </div>
+
+                            <!-- sponsor -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
+                                {% for keyword in object.sponsors.all %}
+                                    <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
-                        <div class="col">
-                            <b>Descrition</b>
-                            <hr/>
-                        </div>
-                        <hr/>
 
                     </div>
+
+
                 </div>
             </div>
         </div>
