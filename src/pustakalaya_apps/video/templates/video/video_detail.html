@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block style %}
+    <!-- inherit all the base styles -->
+    {{ block.super }}
+    <style>
+        /* Some css to override styles */
+        /* TODO: move this css to pustakalaya.css */
+        .border-line {
+            padding-top: 5px;
+            padding-bottom: 5px !important;
+            padding-left: 3px;
+            border-top: 1px solid #dddddd;
+        }
+
+        .border-line span {
+            display: inline-block;
+            width: 300px;
+
+        }
+
+    </style>
+{% endblock style %}
 
 {% block content %}
     <link href="http://vjs.zencdn.net/6.2.8/video-js.css" rel="stylesheet">
-
     <!-- If you'd like to support IE8 -->
     <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
@@ -27,7 +50,7 @@
                 <div class="col-3  col-xs-12">
 
                     <!-- share buttons -->
-                    <div>
+                    <div> <span class=""> {% trans "Share on" %} </span>
                         <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
                             <i class="fa fa-facebook-square"></i>
                         </a>
@@ -42,132 +65,135 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-9  col-xs-12">
-                    <h4 class="text-capitalize h4 lead mt-0 pt-0 "><b>{{ object.title }}</b></h4>
-                    <p>
-
-                        {% for author in object.video_authors.all %}
-
-                            {{ author }}
-
-                        {% endfor %}
-                    </p>
-
-                    <p>
-
-
-                        {% for producer in object.video_producers.all %}
-
-                            {{ producer }}
-
-                        {% endfor %}
-                    </p>
+                <br>
+                <div class="col-md-12 col-sm-12 col-lg-12  col-xs-12">
+                       <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
                     <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
                     <!-- Authors section -->
-                    <hr/>
+
                     <div class="row">
-                        <div class="col">
+                        <!-- metadata section -->
+                        <div class="col-md-12 col-sm-12 col-xs-12">
 
-                            <p><b>Author(s):</b>
+                            <!-- publisher section -->
+                            <div class="pb-1 border-line">
 
-                                {% for author in object.video_authors.all %}
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
 
-                                    {{ author }}
+                            </div>
 
-                                {% endfor %}
-                            </p>
+                            <!-- place of publication -->
+                            <div class="pb-1 border-line">
 
-                            <p><b>Producer(s):</b>
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
 
+                            </div>
 
-                                {% for producer in object.video_producers.all %}
+                            <!-- Publication year -->
+                            <div class="pb-1 border-line">
 
-                                    {{ producer }}
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
 
-                                {% endfor %}
-                            </p>
+                            </div>
 
-                            <p><b>Director(s):</b>
+                            <!-- Available year -->
+                            <div class="pb-1 border-line">
 
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
 
-                                {% for director in object.video_director.all %}
+                            </div>
 
-                                    {{ director }}
+                            <!-- Keywords -->
+                            <div class="pb-1 border-line">
 
-                                {% endfor %}
-                            </p>
-
-                            <p><b>Publisher:</b>
-                                {{ object.publisher }}
-
-
-                            </p>
-                            <p><b>Place of Publication:</b>
-
-
-                            </p>
-                            <p><b>Release Year:</b>
-                                {{ object.publication_year }}
-
-                            </p>
-                            <p><b>Year Available:</b>
-
-                                {{ object.updated_date }}
-
-                            </p>
-                            <p><b>Keyword(s):</b>
+                                <!-- TODO pluralization -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
                                 {% for keyword in object.keywords.all %}
-                                    {{ keyword }}
-                                {% endfor %}
-                            </p>
-                            <p><b>Description:</b>
-
-                            </p>
-                            <p><b>License Type:</b>
-
-                                {% for license in object.license_type %}
-                                    {{ license }}
-                                {% endfor %}
-                            </p>
-                            <p><b>Rights:</b></p>
-                            <p><b>Sponsor:</b>
-                                {% for sponsor in object.sponsors.all %}
-                                    {{ sponsor }}
-                                {% endfor %}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p><b>Series:</b>
-                                {{ object.video_series }}
-                            </p>
-                            <p><b>Edition:</b>
-                                {{ object.edition }}
-                            </p>
-                            <p><b>Volume:</b>
-                                {{ object.volume }}
-
-
-                            <p><b>Language(s):</b>
-                                {% for language in object.languages.all %}
-
-                                    {{ language }}
+                                    <span class="text-secondary text-capitalize"> {{ keyword.keyword }}</span>
 
                                 {% endfor %}
-                            </p>
-                            <p><b>Education Level:</b>
 
+
+                            </div>
+
+                            <!-- Description -->
+                            <div class="pb-1 border-line">
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.description }}</span>
+
+                            </div>
+
+                            <!-- License type -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
+                            </div>
+
+                            <!-- video series -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_series }}</span>
+                            </div>
+
+                            <!-- video running time -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "running time" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_running_time }}</span>
+                            </div>
+
+                            <!-- video certificate license -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_certificate_license }}</span>
+                            </div>
+
+                            <!-- video genre -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "genre:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_genre }}</span>
+                            </div>
+
+                            <!-- Language -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
+                                <span class="text-secondary"> {{ object.document_total_page }}</span>
+                            </div>
+
+                            <!-- Education level -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
                                 {% for education_level in object.education_levels.all %}
-                                    {{ education_level }}
-
+                                    <span class="text-secondary"> {{ object.document_total_page }}</span>
                                 {% endfor %}
 
 
-                            </p>
+                            </div>
 
-                            </p><b>Genre:</b>
-                            {{ object.video_genre }}
-                            </p>
+                            <!-- Rights -->
+                            <div class="pb-1 border-line">
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
+                                <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
+                            </div>
 
+                            <!-- sponsor -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
+                                {% for keyword in object.sponsors.all %}
+                                    <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>

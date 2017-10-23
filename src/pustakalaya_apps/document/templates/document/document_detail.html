@@ -55,7 +55,7 @@
                     <div class="pb-1">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
-                        <strong class="capitalize font-weight-normal text-dark">{% trans "Authors:" %}</strong>
+                        <strong class="text-capitalize font-weight-normal text-dark">{% trans "Authors:" %}</strong>
                         {% for author in object.document_authors.all %}
                             <span class="text-secondary text-capitalize">{{ author }}</span>
                         {% endfor %}
@@ -66,7 +66,7 @@
                     <div class="pb-1">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
-                        <strong class="capitalize font-weight-normal text-dark">{% trans "Illustrators:" %}</strong>
+                        <strong class="text-capitalize font-weight-normal text-dark">{% trans "Illustrators:" %}</strong>
                         {% for author in object.document_illustrators.all %}
                             <span class="text-secondary text-capitalize"> {{ illustrator }}</span>
                         {% endfor %}
@@ -100,7 +100,7 @@
                             <div class="pb-1 border-line">
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
-                                <span class="capitalize font-weight-normal text-dark">{% trans "Illustrators:" %}</span>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
                                 {% for author in object.document_illustrators.all %}
                                     <span class="text-secondary text-capitalize"> {{ illustrator }}</span>
                                 {% endfor %}
@@ -112,7 +112,7 @@
                             <div class="pb-1 border-line">
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
-                                <span class="capitalize font-weight-normal text-dark">{% trans "Editors:" %}</span>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Editors:" %}</span>
                                 {% for author in object.document_editors.all %}
                                     <span class="text-secondary text-capitalize"> {{ editor }}</span>
                                 {% endfor %}
@@ -123,7 +123,7 @@
                             <!-- publisher section -->
                             <div class="pb-1 border-line">
 
-                                <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
                                 <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
 
                             </div>
@@ -131,7 +131,7 @@
                             <!-- place of publication -->
                             <div class="pb-1 border-line">
 
-                                <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
                                 <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
 
                             </div>
