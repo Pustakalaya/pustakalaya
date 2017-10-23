@@ -66,6 +66,7 @@
                     <input class="form-control" id="search_input"
                            autocomplete="on"
                            maxlength="200"
+                           value="{{ q }}"
                            type="text" name="q" , placeholder="Search pustakalaya..">
                     <input type="hidden" id="filterData"
                            name="form-filter"/>
@@ -83,7 +84,6 @@
                             <div class="row" id="type">
                                 <div class="col-sm-12 col-lg-12">
                                     <h4 class="text-capitalize">{% trans "types" %}</h4>
-
                                     {% for type, count, selected in response.facets.type %}
                                         <div class="checkbox">
                                             <input id="{{ type }}" value="{{ type }}"

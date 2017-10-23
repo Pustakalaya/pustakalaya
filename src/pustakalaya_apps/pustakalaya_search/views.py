@@ -43,6 +43,7 @@ def search(request):
         search_result["keywords"] = response.facets.keywords
         search_result["year_of_available"] = response.facets.year_of_available
         search_result["license_type"] = response.facets.license_type
+        search_result["q"]=query_string or " "
         print(dir(response))
 
 
