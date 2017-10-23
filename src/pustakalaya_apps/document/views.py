@@ -49,3 +49,4 @@ def documents(request):
 class DocumentDetailView(DetailView):
     model = Document
     template_name = "document/document_detail.html"
+
