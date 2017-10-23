@@ -58,8 +58,8 @@
 {% block content %}
     <div class="bg-white">
         <div class="container">
-            <h3>Total item founds {{ response.hits.total }}</h3>
-            <h4>Query time {{ response.took }} ms</h4>
+            <p class="text-dark text-center">{{ response.hits.total }} {% trans "results found in 0.3418 secs" %}results found
+                in {{ response.took }} {% trans "secs" %}</p>
             <!-- include search form -->
             <form method="GET" action="." id="searchForm">
                 <div class="form-group">
@@ -293,18 +293,18 @@
                                             </a>
                                         </div>
                                         <div class="card-body text-center">
-                                            <p  class="  text-primary">
-                                                  <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
-                                                     style="text-decoration: none"
-                                                  >
-                                                      {{ hit.title | transtolocal | title }}
-                                                  </a>
+                                            <p class="  text-primary">
+                                                <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
+                                                   style="text-decoration: none"
+                                                >
+                                                    {{ hit.title | transtolocal | title }}
+                                                </a>
 
                                             </p>
 
-{#                                            <p class="text-dark">#}
-{#                                                {{ hit.abstract | transtolocal | truncatechars:20 }}#}
-{#                                            </p>#}
+                                            {#                                            <p class="text-dark">#}
+                                            {#                                                {{ hit.abstract | transtolocal | truncatechars:20 }}#}
+                                            {#                                            </p>#}
                                             <!--
                                             <div class="card-footer mb-0">
                                                 <a href="#pablo" class="btn btn-block btn-round">View</a>
