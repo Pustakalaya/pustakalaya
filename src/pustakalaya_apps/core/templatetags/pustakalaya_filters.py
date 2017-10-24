@@ -29,16 +29,15 @@ def transtolocal(value):
     ENGLISH_LANGUAGE = ['en-us', 'en-gb', 'en-au', 'en']
 
     try:
-        first =  value.rstrip("]]").split("[[")[0]
+        first = value.rstrip("]]").split("[[")[0]
     except IndexError:
         first = None
 
     try:
-        second =  value.rstrip("]]").split("[[")[1] or None
+        second = value.rstrip("]]").split("[[")[1] or None
         print(second)
     except IndexError:
         second = None
-
 
     if current_language in ENGLISH_LANGUAGE and first:
         return first
@@ -56,3 +55,11 @@ def transtolocal(value):
 @register.filter(name='split')
 def split(value, arg):
     return value.split(arg)
+
+
+@register.filter(name='cast')
+def split(value, type):
+    try:
+        return type(value)
+    except ValueError:
+        return value
