@@ -1,54 +1,75 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-{%  load pustakalaya_filters %}
+{% load pustakalaya_filters %}
 
 {% block title %}
-{% trans "homepage" %}
-{%  endblock title %}
+    {% trans "homepage" %}
+{% endblock title %}
 
 {% block content %}
-        <!--search-->
+    <!--search-->
     <div class="container">
+        <!-- search -->
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-2 hidden-xs hidden-sm"></div>
+            <div class="col-md-8 col-xs-12 col-sm-12">
                 <form action="/search" method="GET">
-                    <div class="form-group ">
-                        <input type="text" name="q" value="" placeholder="Search" class="form-control"><i
-                            class="fa fa-search"></i>
+                    <div class="input-group">
+
+                            <select class="custom-select" >
+                            <option selected>Categories</option>
+                            <option value="1">Books</option>
+                            <option value="2">Audios</option>
+                            <option value="3">Videos</option>
+                        </select>
+
+
+                        <input class="form-control border-right-0" type="search" name="q" value="" placeholder="Search">
+                        <span class="input-group-addon bg-white border-left-0"><i
+                                class="mt-0 fa fa-search fa-pull-right"></i></span>
                     </div>
                     <!--<div class="col">
-                      <select style="" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelectPref">
-                        <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
+
                     </div>-->
                 </form>
             </div>
+            <div class="col-md-2"></div>
         </div>
-    </div>
-    <div class="container">
+        <!-- Browse by -->
         <div class="row">
             <div class="col-md-3 col-xs-12 col-sm-12">
 
                 <!--pustakalaya browse by option-->
-                <h3 class="text-capitalize">Browse</h3>
-                <p><a href="" class="text-capitalize"><i class="fa fa-book" aria-hidden="true"></i> literaure and
-                    Art</a></p>
-                <p><a href="" class="text-capitalize"><i class="fa fa-desktop" aria-hidden="true"></i> Course Materials</a>
+                <h5 class="description text-uppercase">{% trans "Browse" %}</h5>
+                <p class="">
+                    <a href="" class="text-capitalize">
+                        <i class="fa fa-book" aria-hidden="true"></i>{% trans "literaure and Art" %}</a>
                 </p>
-                <p><a href="" class="text-capitalize"><i class="fa  fa-flask" aria-hidden="true"></i> Teaching Materials</a>
+                <p>
+                    <a href="" class="text-capitalize">
+                        <i class="fa fa-desktop" aria-hidden="true"></i>{% trans "Course Materials" %}</a>
                 </p>
-                <p><a href="" class="text-capitalize"><i class="fa fa-file-text-o" aria-hidden="true"></i> Reference
-                    Materials</a></p>
-                <p><a href="" class="text-capitalize"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Newspapers &
-                    Magazines</a></p>
-                <p><a href="" class="text-capitalize"><i class="fa fa-hdd-o" aria-hidden="true"></i> Other Educational
-                    Materials</a></p>
-                <p><a href="" class="text-capitalize">All Categories</a></p>
-                <p><a href="" class="text-capitalize">All Titles | Authours</a></p>
+                <p>
+                    <a href="" class="text-capitalize">
+                        <i class="fa  fa-flask" aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
+                </p>
+                <p>
+                    <a href="" class="text-capitalize">
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>{% trans "Reference Materials" %}</a>
+                </p>
+                <p>
+                    <a href="" class="text-capitalize">
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>{% trans "Newspapers &  Magazines" %}</a>
+                </p>
+                <p>
+                    <a href="" class="text-capitalize">
+                        <i class="fa fa-hdd-o" aria-hidden="true"></i>{% trans "Other Educational Materials" %}
+                    </a></p>
+                <p>
+                    <a href="" class="text-capitalize">{% trans "All Categories" %}</a></p>
+                <p>
+                    <a href="" class="text-capitalize">{% trans "All Titles" %} | {% trans "Authors" %}</a></p>
             </div>
             <div class="col-md-9 col-sm-12 col-xs-12">
 
@@ -86,31 +107,28 @@
                                  height="200px"/></a>
             </div>
         </div>
-    </div>
-
-    <!--educational softwares-->
-    <div class="container">
+        <!-- Education section -->
         <div class="row">
             <div class="mt-4">
-                <h3 class="mb-4 text-capitalize">Educational Softwares</h3>
+                <h5 class="mb-4 description text-uppercase">{% trans "Educational Softwares" %}</h5>
                 <a href="http://pustakalaya.org/epaath/" target="_blank">
-                    <img class="img-responsive mr-4" src="{% static 'base_assets/img/epaath.png' %}" width="150px"
-                         height="180px"/>
+                    <img class="img-responsive mr-5" src="{% static 'base_assets/img/epaath.png' %}" width="140px"
+                         height="160px"/>
                 </a>
-                <a href=""><img class="img-responsive mr-4" src="{% static 'images/logos/phet.png' %}" width="150px"
-                                height="180px"/></a>
-                <a href=""><img class="img-responsive mr-4" src="{% static 'images/logos/elearning.png' %}"
+                <a href=""><img class="img-responsive mr-5" src="{% static 'images/logos/phet.png' %}" width="140px"
+                                height="160px"/></a>
+                <a href=""><img class="img-responsive mr-5" src="{% static 'images/logos/elearning.png' %}"
                                 width="150px"
                                 height="180px"/></a>
-                <a href=""><img class="img-responsive mr-4" src="{% static 'base_assets/img/klite.png' %}" width="150px"
-                                height="180px"/></a>
-                <a href=""><img class="img-responsive mr-4" src="{% static 'base_assets/img/ ' %}" width="150px"
-                                height="180px"/></a>
+                <a href=""><img class="img-responsive mr-5" src="{% static 'base_assets/img/klite.png' %}" width="140px"
+                                height="160px"/></a>
+                <a href=""><img class="img-responsive mr-5" src="{% static 'base_assets/img/ ' %}" width="140px"
+                                height="160px"/></a>
             </div>
 
             <!--Reference materials-->
             <div class="mt-4">
-                <h3 class="mb-4 text-capitalize">Reference Materials</h3>
+                <h5 class="mb-4 description text-uppercase">{% trans "Reference Materials" %}</h5>
                 <a href=""><img class="img-responsive mr-2" src="{% static 'base_assets/img/wiktionary.png' %}"
                                 width="140px"
                                 height="160px"/></a>
@@ -124,7 +142,8 @@
 
                 <!--description about pustakalaya-->
                 <div>
-                    <p>E-Pustakalaya is an education-focused digital library containing full-text documents, images,
+                    <p>{% blocktrans %}
+                        E-Pustakalaya is an education-focused digital library containing full-text documents, images,
                         videos and
                         audio files that can be accessed through an intranet or the internet. The user can either read
                         documents, view
@@ -132,16 +151,12 @@
                         materials to
                         her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
                         English
-                        languages. In the future, we will also add materials in other national languages of Nepal. <a
-                                href="#">Read
-                            More</a> ...</p>
+                        languages. In the future, we will also add materials in other national languages of
+                        Nepal. {% endblocktrans %}
+                        <a href="#">{% trans "Read More" %}</a> ...
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-{%  endblock content %}
+{% endblock content %}

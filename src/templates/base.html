@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-{% load  i18n %}
+{% load i18n %}
 <html lang="en">
 
 <head>
@@ -15,9 +15,9 @@
     {% block style %}
         <!--     Fonts and icons     -->
 
-        <link rel="stylesheet" href="{%  static 'base_assets/css/font-awesome.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'base_assets/css/font-awesome.min.css' %}"/>
         <!-- CSS Files -->
-        {#    {%  include '_partials/css.html' %}#}
+        {# {% include '_partials/css.html' %}#}
         <link rel="stylesheet" href="{% static 'base_assets/css/base.css' %}">
         <!-- TODO: CSS Just for demo purpose, don't include it in your project -->
 
@@ -31,7 +31,6 @@
 <!-- Content -->
 {% block content %}
 
-
 {% endblock content %}
 
 <!-- Footer -->
@@ -39,7 +38,6 @@
 </body>
 {% block script %}
     {% include '_partials/js.html' %}
-
     <script type="text/javascript">
         $(document).ready(function () {
             // the body of this function is in assets/js/now-ui-kit.js
@@ -55,7 +53,6 @@
             }
         }
     </script>
-
 {% endblock script %}
 
 

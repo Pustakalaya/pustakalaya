@@ -63,15 +63,17 @@
                 {{ time }} {% trans "sec" %}</p>
             <!-- include search form -->
             <form method="GET" action="." id="searchForm">
-                <div class="form-group">
+                <div class="input-group">
                     <input class="form-control" id="search_input"
                            autocomplete="on"
                            maxlength="200"
                            value="{{ q }}"
                            type="text" name="q" , placeholder="Search pustakalaya..">
+                    <span class="input-group-addon bg-white border-left-0"><i
+                            class="mt-0 fa fa-search fa-pull-right"></i></span>
                     <input type="hidden" id="filterData"
                            name="form-filter"/>
-                    <input type="submit" class="btn btn-info btn-block" value="Submit">
+                    {#                    <input type="submit" class="btn btn-info btn-block" value="Submit">#}
                 </div>
             </form>
 
