@@ -52,7 +52,7 @@ class Collection(AbstractTimeStampModel):
             id=self.id,
             created_date=self.created_date,
             updated_date=self.updated_date,
-            collection_name=self.community_name,
+            collection_name=self.collection_name,
             collection_description=self.collection_description,
             community_name=self.community_name
         )

@@ -1,11 +1,5 @@
 from django.shortcuts import render
-from elasticsearch import Elasticsearch
-from django.conf import settings
-from elasticsearch_dsl import Search
-from django.http import HttpResponse
 from .models import Collection
-from pustakalaya_apps.pustakalaya_search.search import PustakalayaSearch
-from pustakalaya_apps.document.search import DocumentDoc
 
 
 def community_detail(request, community_name):

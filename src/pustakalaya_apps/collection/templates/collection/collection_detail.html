@@ -3,4 +3,9 @@
 
 {% block content %}
 
+
+    {%  for hit in response %}
+      {{ hit.title}}
+
+    {% endfor %}
 {% endblock content %}
