@@ -55,11 +55,12 @@
 {% endblock style %}
 
 
+
 {% block content %}
     <div class="bg-white">
         <div class="container">
-            <p class="text-dark text-center">{{ response.hits.total }} {% trans "results found in 0.3418 secs" %}results found
-                in {{ response.took }} {% trans "secs" %}</p>
+            <p class="text-dark text-center">{{ response.hits.total }} {% trans "results found in " %}
+                {{ time }} {% trans "sec" %}</p>
             <!-- include search form -->
             <form method="GET" action="." id="searchForm">
                 <div class="form-group">

@@ -5,6 +5,7 @@ from .search import PustakalayaSearch
 from django.shortcuts import redirect
 from json import JSONDecodeError
 
+
 def search(request):
     # Store search result in dict obj
     search_result = {}
@@ -12,14 +13,12 @@ def search(request):
     # Query string from user input
     query_string = " "
 
-
-
     if request.method == "GET":
         # Grab query from form.
         query_string = request.GET.get('q')
         print("Query string from form is", query_string)
 
-        #Get data ajax request
+        # Get data ajax request
         try:
             filters = json.loads(request.GET.get("form-filter", {}))
             print("I got filters", filters)
@@ -28,7 +27,7 @@ def search(request):
             print("I can't get filters")
 
         # Search in elastic search
-        search_obj = PustakalayaSearch(query=query_string,filters=filters)
+        search_obj = PustakalayaSearch(query=query_string, filters=filters)
 
         response = search_obj.execute()
 
@@ -43,9 +42,8 @@ def search(request):
         search_result["keywords"] = response.facets.keywords
         search_result["year_of_available"] = response.facets.year_of_available
         search_result["license_type"] = response.facets.license_type
-        search_result["q"]=query_string or ""
-        print(dir(response))
-
+        search_result["q"] = query_string or ""
+        search_result["time"] = response.took / float(1000) # Convert time in msec
 
         for (type, count, selected) in response.facets.type:
             print(type, ' (SELECTED):' if selected else ':', count)
@@ -75,4 +73,3 @@ def search(request):
             print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
 
         return render(request, "pustakalaya_search/search_result.html", search_result)
-
