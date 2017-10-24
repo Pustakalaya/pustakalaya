@@ -46,6 +46,14 @@ urlpatterns = [
     # /audios/
     url(r'^audios/', include('pustakalaya_apps.audio.urls', namespace="audio")),
 
+    # Community page aka category
+    # /community/literatures-and-arts/
+    #url(r'^category/', include('pustakalaya_apps.collection.urls', namespace="community")),
+    url(r'^collection/', include('pustakalaya_apps.collection.urls', namespace="collection")),
+    url(r'^community/', include('pustakalaya_apps.collection.community_urls', namespace="community")),
+
+
+
     # Wikipedia app
     # TODO:
 

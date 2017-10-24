@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% load i18n %}
+{% block title %} {% endblock title %}
 {#TODO: move it to pustakalaya css#}
 <style type="text/css">
 
@@ -114,3 +116,8 @@
 
 
 </div>
+{% block content %}
+    {{ total_count }}
+    {{ collection_list }}
+{% endblock content %}
+
