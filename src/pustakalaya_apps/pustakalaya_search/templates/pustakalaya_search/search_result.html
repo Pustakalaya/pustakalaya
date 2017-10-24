@@ -287,18 +287,21 @@
                                 <div class="col-md-3 col-sm-6">
                                     <div class="card card-blog">
                                         <div class="card-image">
-
-                                            <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">
-                                                <img class="img"
+                                            <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
+                                               style="text-decoration: none"
+                                               class="text-capitalize"
+                                            >
+                                                <img class="img img-responsive"
                                                      width="186px"
                                                      height="210px"
                                                      src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
                                             </a>
                                         </div>
                                         <div class="card-body text-center">
-                                            <p class="  text-primary">
+                                            <p class=" text-capitalize text-primary">
                                                 <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
-                                                   style="text-decoration: none"
+                                                   class="text-capitalize"
+                                                   style="text-decoration: none;"
                                                 >
                                                     {{ hit.title | transtolocal | title }}
                                                 </a>
