@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from django.shortcuts import HttpResponse
 
-# Create your views here.
+
+def collection_detail(request, name, pk):
+    return HttpResponse(name + "Hello" + pk)
