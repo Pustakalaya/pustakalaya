@@ -9,7 +9,9 @@ from pustakalaya_apps.document.search import DocumentDoc
 
 
 def collection_detail(request, name, pk):
+    print("Collection", name)
     collection_name = " ".join(name.split("-"))
+    print("COllection name", collection_name)
     collection = Collection.objects.get(pk=pk)
     context = {}
 
@@ -23,6 +25,8 @@ def collection_detail(request, name, pk):
 
 
     context["response"] = response
+    context["collection_name"] = collection_name
+    context["community_name"] = collection.community_name
 
 
     return render(request, "collection/collection_detail.html", context)
