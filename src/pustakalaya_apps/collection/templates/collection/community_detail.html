@@ -1,123 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block title %} {% endblock title %}
-{#TODO: move it to pustakalaya css#}
-<style type="text/css">
-
-    li {
-        list-style-type: none;
-        list-style: none;
-    }
-</style>
-
-<h3>Community List:::</h3>
-<hr>
-<!--community detail list-->
-<div class="communityDetail">
-
-    <li>
-        <div style="margin-bottom: 20px; overflow: hidden; padding-top: 5px;">
-            <div class="left-floater clear-all" style="width:100%">
-
-                <!--						-->
-
-
-                <a href="list.php?collection_pid=Pustakalaya:41" title="अङ्ग्रेजी बाल साहित्य [English Children" s=""
-                   literature]'="">
-                <img valign="top" align="left"
-                     src="data:image/webp;base64,UklGRswBAABXRUJQVlA4IMABAADQCQCdASoYABgAPm0wkkckIqGhKAqogA2JbACdMzQ+N6r+KtSB1K/UBnAP1VyTveXfJNpUmrJMqtsCmO+PTUD/KUM6w2g4f1soVVKVRRkq95Io/QjIAAAA/vkHoX4f6lH2YcqIjGz6RUNsyeQEqIx2xrNzk+o9uuRop2DfvLez8acXMQGOzUE4ZbiRDE4nw7zSJ/r3RMTs5ohPC5SGmkdw0KxM8jKwHsvB7mvCyWk8yKm5jECy90lNs1N/4M1LS6xHRzy0B4Vfya93A6RSFk4f/ro4F6VWZLHBxn/DCT1L7i1izf+Mh90Cgpbe4pg6Qxn+0eONCMipOfjKKumj4RSd0dNjWXeroWP+ysDfpXl2W6VwavPRspZ9P6qFtz7j612eZ2c5PrAntpwCJeD+cr+1uTbFMXbdfpTCQkHOB+86Qe/O9shdi69tzbteZ1O8WHraXPgZzjMyF0vA9XLSpCMUell4Lg0Va5oTJb/CNhfqmyiP3HhFJnTz/55JClXXdFMbzOxKvtZpW2q4B1B2opimHW+lq+16Hsrq8/n/Q8MnZ+6b5xbP0/7aZ+jE0yo4PCyDqfrdVmVbfaPXpcKHIeAA"
-                     alt="" border="0" style="margin-right: 15px; margin-top: -3px;">
-
-                अङ्ग्रेजी बाल साहित्य
-                </a>
-
-
-            </div> <!--  end of left-floater clear-all-->
-        </div> <!--  end of margin-bottom: 20px; overflow: hidden; padding-top: 5px;-->
-    </li>
-    <li>
-        <div style="margin-bottom: 20px; overflow: hidden; padding-top: 5px;">
-            <div class="left-floater clear-all" style="width:100%">
-
-                <!--						-->
-
-
-                <a href="list.php?collection_pid=Pustakalaya:169" title="अङ्ग्रेजी साहित्य [English Literature]">
-                    <img valign="top" align="left"
-                         src="data:image/webp;base64,UklGRswBAABXRUJQVlA4IMABAADQCQCdASoYABgAPm0wkkckIqGhKAqogA2JbACdMzQ+N6r+KtSB1K/UBnAP1VyTveXfJNpUmrJMqtsCmO+PTUD/KUM6w2g4f1soVVKVRRkq95Io/QjIAAAA/vkHoX4f6lH2YcqIjGz6RUNsyeQEqIx2xrNzk+o9uuRop2DfvLez8acXMQGOzUE4ZbiRDE4nw7zSJ/r3RMTs5ohPC5SGmkdw0KxM8jKwHsvB7mvCyWk8yKm5jECy90lNs1N/4M1LS6xHRzy0B4Vfya93A6RSFk4f/ro4F6VWZLHBxn/DCT1L7i1izf+Mh90Cgpbe4pg6Qxn+0eONCMipOfjKKumj4RSd0dNjWXeroWP+ysDfpXl2W6VwavPRspZ9P6qFtz7j612eZ2c5PrAntpwCJeD+cr+1uTbFMXbdfpTCQkHOB+86Qe/O9shdi69tzbteZ1O8WHraXPgZzjMyF0vA9XLSpCMUell4Lg0Va5oTJb/CNhfqmyiP3HhFJnTz/55JClXXdFMbzOxKvtZpW2q4B1B2opimHW+lq+16Hsrq8/n/Q8MnZ+6b5xbP0/7aZ+jE0yo4PCyDqfrdVmVbfaPXpcKHIeAA"
-                         alt="" border="0" style="margin-right: 15px; margin-top: -3px;">
-
-                    अङ्ग्रेजी साहित्य
-                </a>
-
-
-            </div> <!--  end of left-floater clear-all-->
-        </div> <!--  end of margin-bottom: 20px; overflow: hidden; padding-top: 5px;-->
-    </li>
-    <li>
-        <div style="margin-bottom: 20px; overflow: hidden; padding-top: 5px;">
-            <div class="left-floater clear-all" style="width:100%">
-
-                <!--						-->
-
-
-                <a href="list.php?collection_pid=Pustakalaya:171"
-                   title="नेपालका अन्य भाषाका साहित्य [Literature in Other Nepali Languages]">
-                    <img valign="top" align="left"
-                         src="data:image/webp;base64,UklGRswBAABXRUJQVlA4IMABAADQCQCdASoYABgAPm0wkkckIqGhKAqogA2JbACdMzQ+N6r+KtSB1K/UBnAP1VyTveXfJNpUmrJMqtsCmO+PTUD/KUM6w2g4f1soVVKVRRkq95Io/QjIAAAA/vkHoX4f6lH2YcqIjGz6RUNsyeQEqIx2xrNzk+o9uuRop2DfvLez8acXMQGOzUE4ZbiRDE4nw7zSJ/r3RMTs5ohPC5SGmkdw0KxM8jKwHsvB7mvCyWk8yKm5jECy90lNs1N/4M1LS6xHRzy0B4Vfya93A6RSFk4f/ro4F6VWZLHBxn/DCT1L7i1izf+Mh90Cgpbe4pg6Qxn+0eONCMipOfjKKumj4RSd0dNjWXeroWP+ysDfpXl2W6VwavPRspZ9P6qFtz7j612eZ2c5PrAntpwCJeD+cr+1uTbFMXbdfpTCQkHOB+86Qe/O9shdi69tzbteZ1O8WHraXPgZzjMyF0vA9XLSpCMUell4Lg0Va5oTJb/CNhfqmyiP3HhFJnTz/55JClXXdFMbzOxKvtZpW2q4B1B2opimHW+lq+16Hsrq8/n/Q8MnZ+6b5xbP0/7aZ+jE0yo4PCyDqfrdVmVbfaPXpcKHIeAA"
-                         alt="" border="0" style="margin-right: 15px; margin-top: -3px;">
-
-                    नेपालका अन्य भाषाका साहित्य
-                </a>
-
-
-            </div> <!--  end of left-floater clear-all-->
-        </div> <!--  end of margin-bottom: 20px; overflow: hidden; padding-top: 5px;-->
-    </li>
-    <li>
-        <div style="margin-bottom: 20px; overflow: hidden; padding-top: 5px;">
-            <div class="left-floater clear-all" style="width:100%">
-
-                <!--						-->
-
-
-                <a href="list.php?collection_pid=Pustakalaya:152" title="नेपाली बाल साहित्य [Nepali Childrens"
-                   literature]'="">
-                <img valign="top" align="left"
-                     src="data:image/webp;base64,UklGRswBAABXRUJQVlA4IMABAADQCQCdASoYABgAPm0wkkckIqGhKAqogA2JbACdMzQ+N6r+KtSB1K/UBnAP1VyTveXfJNpUmrJMqtsCmO+PTUD/KUM6w2g4f1soVVKVRRkq95Io/QjIAAAA/vkHoX4f6lH2YcqIjGz6RUNsyeQEqIx2xrNzk+o9uuRop2DfvLez8acXMQGOzUE4ZbiRDE4nw7zSJ/r3RMTs5ohPC5SGmkdw0KxM8jKwHsvB7mvCyWk8yKm5jECy90lNs1N/4M1LS6xHRzy0B4Vfya93A6RSFk4f/ro4F6VWZLHBxn/DCT1L7i1izf+Mh90Cgpbe4pg6Qxn+0eONCMipOfjKKumj4RSd0dNjWXeroWP+ysDfpXl2W6VwavPRspZ9P6qFtz7j612eZ2c5PrAntpwCJeD+cr+1uTbFMXbdfpTCQkHOB+86Qe/O9shdi69tzbteZ1O8WHraXPgZzjMyF0vA9XLSpCMUell4Lg0Va5oTJb/CNhfqmyiP3HhFJnTz/55JClXXdFMbzOxKvtZpW2q4B1B2opimHW+lq+16Hsrq8/n/Q8MnZ+6b5xbP0/7aZ+jE0yo4PCyDqfrdVmVbfaPXpcKHIeAA"
-                     alt="" border="0" style="margin-right: 15px; margin-top: -3px;">
-
-                नेपाली बाल साहित्य
-                </a>
-
-
-            </div> <!--  end of left-floater clear-all-->
-        </div> <!--  end of margin-bottom: 20px; overflow: hidden; padding-top: 5px;-->
-    </li>
-    <li>
-        <div style="margin-bottom: 20px; overflow: hidden; padding-top: 5px;">
-            <div class="left-floater clear-all" style="width:100%">
-
-                <!--						-->
-
-
-                <a href="list.php?collection_pid=Pustakalaya:170" title="नेपाली साहित्य [Nepali Literature]">
-                    <img valign="top" align="left"
-                         src="data:image/webp;base64,UklGRswBAABXRUJQVlA4IMABAADQCQCdASoYABgAPm0wkkckIqGhKAqogA2JbACdMzQ+N6r+KtSB1K/UBnAP1VyTveXfJNpUmrJMqtsCmO+PTUD/KUM6w2g4f1soVVKVRRkq95Io/QjIAAAA/vkHoX4f6lH2YcqIjGz6RUNsyeQEqIx2xrNzk+o9uuRop2DfvLez8acXMQGOzUE4ZbiRDE4nw7zSJ/r3RMTs5ohPC5SGmkdw0KxM8jKwHsvB7mvCyWk8yKm5jECy90lNs1N/4M1LS6xHRzy0B4Vfya93A6RSFk4f/ro4F6VWZLHBxn/DCT1L7i1izf+Mh90Cgpbe4pg6Qxn+0eONCMipOfjKKumj4RSd0dNjWXeroWP+ysDfpXl2W6VwavPRspZ9P6qFtz7j612eZ2c5PrAntpwCJeD+cr+1uTbFMXbdfpTCQkHOB+86Qe/O9shdi69tzbteZ1O8WHraXPgZzjMyF0vA9XLSpCMUell4Lg0Va5oTJb/CNhfqmyiP3HhFJnTz/55JClXXdFMbzOxKvtZpW2q4B1B2opimHW+lq+16Hsrq8/n/Q8MnZ+6b5xbP0/7aZ+jE0yo4PCyDqfrdVmVbfaPXpcKHIeAA"
-                         alt="" border="0" style="margin-right: 15px; margin-top: -3px;">
-
-                    नेपाली साहित्य
-                </a>
-
-
-            </div> <!--  end of left-floater clear-all-->
-        </div> <!--  end of margin-bottom: 20px; overflow: hidden; padding-top: 5px;-->
-    </li>
-
-
-</div>
 {% block content %}
-    {{ total_count }}
-    {{ collection_list }}
+    <div class="container">
+        <h5 class="text-capitalize">Section: <span class="text-info">{{ community_name }}</span></h5>
+        <hr>
+        {% for collection in collection_list %}
+            <li style="list-style: none; list-style-type: none;">
+                <a href="{% url "collection:collection_detail" collection.collection_name|slugify collection.pk %}">
+                    <i
+                            class="fa fa-book" aria-hidden="true"></i>
+                    {{ collection.collection_name }}
+                </a>
+                <span class="badge badge-pill badge-default">{{ collection.total_count }}</span>
+            </li>
+        {% endfor %}
+    </div>
 {% endblock content %}
 

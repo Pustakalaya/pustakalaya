@@ -35,5 +35,6 @@ def community_detail(request, community_name):
 
     # Sort list to display in alphabetical order.
     context["collection_list"] = collection_list
+    context["community_name"] = community_name
 
     return render(request, "collection/community_detail.html", context)

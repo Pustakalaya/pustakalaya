@@ -20,7 +20,6 @@
                 <!-- search -->
                 <form action="/search" method="GET">
                     <div class="input-group">
-
                         <select class="custom-select" style="border-radius: 0px; border-right: 0px;">
                             <option selected value=" ">All</option>
                             <option value="document">Documents</option>
@@ -41,7 +40,7 @@
             </div>
         </div>
 
-        <!-- Browse by and books list section -->
+    <!-- Browse by and books list section -->
         <div class="row">
             <!-- Browse by -->
             <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
@@ -52,17 +51,17 @@
                     <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Browse Pustakalaya" %}</p>
 
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'all' %}" class="text-capitalize">
                             <i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i>{% trans "All" %}</a>
                     </p>
 
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'title' %}" class="text-capitalize">
                             <i class="fa text-secondary  fa-file-audio-o mr-2" aria-hidden="true"></i>{% trans "title" %}</a>
                     </p>
 
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'author' %}" class="text-capitalize">
                             <i class="fa  text-secondary fa-file-video-o mr-2" aria-hidden="true"></i>{% trans "author" %}</a>
                     </p>
 
@@ -74,31 +73,31 @@
                     <p class="description text-uppercase text-dark text-dark mb-2">{% trans "browse by subjects" %}</p>
 
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'literatures-and-arts' %}" class="text-capitalize">
                             <i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
                     </p>
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'course-materials' %}" class="text-capitalize">
                             <i class="fa text-secondary fa-desktop mr-2" aria-hidden="true"></i>{% trans "Course Materials" %}</a>
                     </p>
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'teaching-materials' %}" class="text-capitalize">
                             <i class="fa text-secondary fa-flask mr-2" aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
                     </p>
 
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'reference-materials' %}" class="text-capitalize">
                             <i class="fa text-secondary fa-flask mr-2" aria-hidden="true"></i>{% trans "reference Materials" %}</a>
                     </p>
 
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'other-educational-materials' %}" class="text-capitalize">
                             <i class="fa text-secondary fa-flask mr-2"
                                aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
                     </p>
 
                     <p>
-                        <a href="" class="text-capitalize">
+                        <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}" class="text-capitalize">
                             <i class="fa text-secondary fa-newspaper-o mr-2"
                                aria-hidden="true"></i>{% trans "Newspapers &  Magazines" %}</a>
                     </p>
@@ -299,7 +298,6 @@
 
             </div>
         </div>
-
 
         <!-- Footer description -->
         <div class="row mt-4">

@@ -5,7 +5,9 @@
 {% block content %}
     <div class="container">
         <div class="breadcrumb-item">
-            <a href="{% url "community:community_detail" community_name|slugify %}">{{ community_name }}</a>
+            <a href="{% url "community:community_detail" community_name|slugify %}">
+                {{ community_name }}
+            </a>
         </div>
         <h3>{{ collection_name }}</h3>
         <hr>
@@ -20,7 +22,7 @@
                         <div class="media-body hidden-sm hidden-xs">
                             <h5 class="mt-0 mb-1"><a
                                     class="text-capitalize"
-                                    href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">{{ hit.title }}</a>
+                                    href="">{{ hit.title }}</a>
                             </h5>
                             {{ hit.abstract }}
                         </div>
