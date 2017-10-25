@@ -54,6 +54,13 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
         blank = True
     )
 
+    thumbnail = models.ImageField(
+        verbose_name=_("Creator image"),
+        blank=True,
+        null=True,
+        upload_to="uploads/creator"
+    )
+
     @property
     def getname(self):
         return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)

@@ -52,6 +52,9 @@ urlpatterns = [
     url(r'^collection/', include('pustakalaya_apps.collection.urls', namespace="collection")),
     url(r'^community/', include('pustakalaya_apps.collection.community_urls', namespace="community")),
 
+    # Author url
+    #/authors/
+    url(r'^authors/', include('pustakalaya_apps.core.author_urls', namespace="author")),
 
 
     # Wikipedia app
