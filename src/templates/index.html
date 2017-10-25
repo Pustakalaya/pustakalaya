@@ -10,22 +10,21 @@
 {% block content %}
     <!--search-->
     <div class="container">
-        <!-- search -->
         <div class="row">
-            <div class="col-md-2 hidden-xs hidden-sm"></div>
-            <div class="col-md-8 col-xs-12 col-sm-12">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <!-- search -->
                 <form action="/search" method="GET">
                     <div class="input-group">
-
-                        <select class="custom-select">
-                            <option selected>Categories</option>
-                            <option value="1">Books</option>
-                            <option value="2">Audios</option>
-                            <option value="3">Videos</option>
+                        <select class="custom-select" style="border-radius: 0px; border-right: 0px;">
+                            <option selected value=" ">All</option>
+                            <option value="document">Documents</option>
+                            <option value="audio">Audio</option>
+                            <option value="video">Video</option>
                         </select>
 
 
-                        <input class="form-control border-right-0" type="search" name="q" value="" placeholder="Search">
+                        <input class="form-control border-right-0" type="search" name="q" value=""
+                               placeholder="{% trans "Search pustakalaya" %}">
                         <span class="input-group-addon bg-white border-left-0"><i
                                 class="mt-0 fa fa-search fa-pull-right"></i></span>
                     </div>
@@ -34,86 +33,217 @@
                     </div>-->
                 </form>
             </div>
-            <div class="col-md-2"></div>
         </div>
-        <!-- Browse by -->
+        <br>
         <div class="row">
-            <div class="col-md-3 col-xs-12 col-sm-12">
+            <!-- Browse by -->
+            <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
 
-                <!--pustakalaya browse by option-->
-                <h5 class="description text-uppercase">{% trans "Browse" %}</h5>
-                <p class="">
-                    <a href="{% url 'community:community_detail' 'literatures-and-arts' %}" class="text-capitalize">
-                        <i class="fa fa-book" aria-hidden="true"></i>{% trans " literaures and Art" %}</a>
-                </p>
-                <p>
-                    <a href="{% url 'community:community_detail' 'course-materials' %}" class="text-capitalize">
-                        <i class="fa fa-desktop" aria-hidden="true"></i>{% trans " Course Materials" %}</a>
-                </p>
-                <p>
-                    <a href="{% url 'community:community_detail' 'teaching-materials' %}" class="text-capitalize">
-                        <i class="fa  fa-flask" aria-hidden="true"></i>{% trans " Teaching Materials" %}</a>
-                </p>
-                <p>
-                    <a href="{% url 'community:community_detail' 'reference-materials' %}" class="text-capitalize">
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>{% trans " Reference Materials" %}</a>
-                </p>
-                <p>
-                    <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}" class="text-capitalize">
-                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>{% trans " Newspapers & Magazines" %}</a>
-                </p>
-                <p>
-                    <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
-                       class="text-capitalize">
-                        <i class="fa fa-hdd-o" aria-hidden="true"></i>{% trans " Other Educational Materials" %}
-                    </a></p>
-                <p>
-                    <a href="{% url 'community:community_detail' 'all-categories' %}"
-                       class="text-capitalize">{% trans "All Categories" %}</a></p>
-                <p>
-                    <a href="{% url 'community:community_detail' 'all-titles' %}"
-                       class="text-capitalize">{% trans "All Titles" %} | {% trans "Authors" %}</a></p>
+                <!-- Browse Pustakalaya -->
+                <div class="mt-0">
+                    <!--pustakalaya browse by option-->
+                    <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Browse Pustakalaya" %}</p>
+
+                    <p>
+                        <a href="{% url 'community:community_detail' 'all' %}" class="text-capitalize">
+                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "All" %}</a>
+                    </p>
+
+                    <p>
+                        <a href="{% url 'community:community_detail' 'title' %}" class="text-capitalize">
+                            <i class="fa fa-file-audio-o mr-2" aria-hidden="true"></i>{% trans "title" %}</a>
+                    </p>
+
+                    <p>
+                        <a href="{% url 'community:community_detail' 'author' %}" class="text-capitalize">
+                            <i class="fa fa-file-video-o mr-2" aria-hidden="true"></i>{% trans "author" %}</a>
+                    </p>
+
+                </div>
+
+                <!-- Browse by subjects -->
+                <div class="mt-1">
+                    <!--pustakalaya browse by option-->
+                    <p class="description text-uppercase text-dark text-dark mb-2">{% trans "browse by subjects" %}</p>
+
+                    <p>
+                        <a href="{% url 'community:community_detail' 'literatures-and-arts' %}" class="text-capitalize">
+                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'course-materials' %}" class="text-capitalize">
+                            <i class="fa fa-desktop mr-2" aria-hidden="true"></i>{% trans "Course Materials" %}</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'teaching-materials' %}" class="text-capitalize">
+                            <i class="fa  fa-flask mr-2" aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
+                    </p>
+
+                    <p>
+                        <a href="{% url 'community:community_detail' 'reference-materials' %}" class="text-capitalize">
+                            <i class="fa  fa-flask mr-2" aria-hidden="true"></i>{% trans "reference Materials" %}</a>
+                    </p>
+
+                    <p>
+                        <a href="{% url 'community:community_detail' 'other-educational-materials' %}" class="text-capitalize">
+                            <i class="fa  fa-flask mr-2"
+                               aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
+                    </p>
+
+                    <p>
+                        <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}" class="text-capitalize">
+                            <i class="fa fa-newspaper-o mr-2"
+                               aria-hidden="true"></i>{% trans "Newspapers &  Magazines" %}</a>
+                    </p>
+
+                </div>
+
+                <!-- Browse softwares -->
+{#                <div class="mt-1">#}
+{#                    <!--pustakalaya browse by option-->#}
+{#                    <p class="description text-uppercase text-dark mb-2">{% trans "Brows" %}</p>#}
+{##}
+{#                    <p>#}
+{#                        <a href="" class="text-capitalize">#}
+{#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Books" %}</a>#}
+{#                    </p>#}
+{##}
+{#                     <p>#}
+{#                        <a href="" class="text-capitalize">#}
+{#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Audio & Video" %}</a>#}
+{#                    </p>#}
+{##}
+{##}
+{#                     <p>#}
+{#                        <a href="" class="text-capitalize">#}
+{#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Educational softwares" %}</a>#}
+{#                    </p>#}
+{##}
+{##}
+{#                </div>#}
             </div>
-            <div class="col-md-9 col-sm-12 col-xs-12">
 
-                <a href="">
-                    <img class="img-responsive mt-2 mr-2" src="{% static 'base_assets/img/1.jpg' %}" width="150px"
-                         height="200px"/>
-                </a>
 
-                <a href=""><img class="img-responsive mt-2 mr-2" src="{% static 'base_assets/img/2.jpg' %}"
-                                width="150px"
-                                height="200px"/></a>
-                <a href=""> <img class="img-responsive mt-2 mr-2" src="{% static 'base_assets/img/3.jpg' %}"
-                                 width="150px"
-                                 height="200px"/></a>
-                <a href=""> <img class="img-responsive  mt-2 mr-2" src="{% static 'base_assets/img/4.jpg' %}"
-                                 width="150px"
-                                 height="200px"/></a>
-                <a href=""><img class="img-responsive  mt-2 mr-2" src="{% static 'base_assets/img/5.jpg' %}"
-                                width="150px"
-                                height="200px"/></a>
-                <a href=""><img class="img-responsive  mt-4 mr-2" src="{% static 'base_assets/img/6.jpg' %}"
-                                width="150px"
-                                height="200px"/></a>
-                <a href=""><img class="img-responsive  mt-4 mr-2" src="{% static 'base_assets/img/7.jpg' %}"
-                                width="150px"
-                                height="200px"/></a>
-                <a href=""><img class="img-responsive  mt-4 mr-2" src="{% static 'base_assets/img/book.png' %}"
-                                width="150px"
-                                height="200px"/></a>
-                <a href=""><img class="img-responsive mt-4 mr-2" src="{% static 'base_assets/img/2.jpg' %}"
-                                width="150px"
-                                height="200px"/></a>
-                <a href=""> <img class="img-responsive mt-4 mr-2" src="{% static 'base_assets/img/3.jpg' %}"
-                                 width="150px"
-                                 height="200px"/></a>
+            <!-- Featured books -->
+            <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
+                <section>
+                    <p class="description  text-uppercase text-primary  mb-2">Books we love</p>
+                    <div class="row rounded pt-3 pb-2" style="background: #F3EDD7;" class="pt-5 pb-5 ">
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
+                                            width="130px"
+                                            height="195px"/></a>
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
+                                            width="130px"
+                                            height="195px"/></a>
+
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
+                                             width="130px"
+                                             height="195px"/></a>
+
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-xs-12 col-sm-12 pr-0">
+
+                            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/4.jpg' %}"
+                                             width="130px"
+                                             height="195px"/></a>
+
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
+                                            width="130px"
+                                            height="195px"/></a>
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
+                                             width="130px"
+                                             height="195px"/></a>
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mt-3">
+                    <p class="description text-primary text-uppercase mb-2">Featured audio books</p>
+                    <div class="row rounded pt-3 pb-2" style="background: #F3EDD7;" class="pt-5 pb-5 ">
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
+                                            width="130px"
+                                            height="195px"/></a>
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
+                                            width="130px"
+                                            height="195px"/></a>
+
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
+                                             width="130px"
+                                             height="195px"/></a>
+
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-xs-12 col-sm-12 pr-0">
+
+                            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/4.jpg' %}"
+                                             width="130px"
+                                             height="195px"/></a>
+
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
+                                            width="130px"
+                                            height="195px"/></a>
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
+                            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
+                                             width="130px"
+                                             height="195px"/></a>
+                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-        <!-- Education section -->
+
+    <!-- Education section -->
         <div class="row">
             <div class="mt-4">
-                <h5 class="mb-4 description text-uppercase">{% trans "Educational Softwares" %}</h5>
+                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Interactive educational software" %}</p>
                 <a href="http://pustakalaya.org/epaath/" target="_blank">
                     <img class="img-responsive mr-5" src="{% static 'base_assets/img/epaath.png' %}" width="140px"
                          height="160px"/>
