@@ -42,7 +42,7 @@
         }
 
         .nav-link:not(.btn){
-            text-transform: uppercase;
+            text-transform: none;
             font-size: $font-size-mini;
             padding: $padding-base-vertical $padding-base-horizontal;
             line-height: $line-height-nav-link;
