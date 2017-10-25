@@ -3,36 +3,38 @@
 {% block title %} {% endblock title %}
 
 {% block content %}
-<div class="container">
-  <div class="breadcrumb-item">
-    <a href="{% url " community:community_detail" community_name|slugify %}">{{ community_name }}</a>
-  </div>
-  <h3>{{ collection_name }}</h3>
-  <hr>
-  <ul class="list-unstyled">
-    {% for hit in response %}
-
-    <div class="row">
-      <div class="col-md-2">
-        <img class="mr-3" src="{{ MEDIA_URL }}{{ hit.thumbnail }}" alt="{{ hit.title }}">
-      </div>
-      <div class="col-md-10">
-        <div class="media-body hidden-sm hidden-xs">
-          <h5 class="mt-0 mb-1"><a
-            class="text-capitalize"
-            href="{% url hit.type|add:" :detail" hit.title|slugify hit.id %}">{{ hit.title }}</a>
-          </h5>
-          {{ hit.abstract }}
+    <div class="container">
+        <div class="breadcrumb-item">
+            <a href="{% url "community:community_detail" community_name|slugify %}">
+                {{ community_name }}
+            </a>
         </div>
-      </div>
+        <h3>{{ collection_name }}</h3>
+        <hr>
+        <ul class="list-unstyled">
+            {% for hit in response %}
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <img class="mr-3" src="{{ MEDIA_URL }}{{ hit.thumbnail }}" alt="{{ hit.title }}">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="media-body hidden-sm hidden-xs">
+                            <h5 class="mt-0 mb-1"><a
+                                    class="text-capitalize"
+                                    href="">{{ hit.title }}</a>
+                            </h5>
+                            {{ hit.abstract }}
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+
+        </ul>
+
+
     </div>
-
-
-    {% endfor %}
-
-  </ul>
-
-
-</div>
 {% endblock content %}
 

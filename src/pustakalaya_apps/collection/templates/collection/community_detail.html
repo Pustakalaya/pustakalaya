@@ -1,37 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block title %} {% endblock title %}
-{#TODO: move it to pustakalaya css#}
-
 {% block content %}
-
-<style type="text/css">
-
-  li {
-    list-style-type: none;
-    list-style: none;
-  }
-</style>
-
-{% for collection in collection_list %}
-<div class="container">
-
-  <li>
-    <div style="margin-bottom: 20px; overflow: hidden; padding-top: 5px;">
-      <div class="left-floater clear-all" style="width:100%">
-
-        <a href="{%  url " collection:collection_detail" collection.collection_name|slugify collection.pk %}"><i
-        class="fa fa-book" aria-hidden="true"></i>
-        {{ collection.collection_name }}
-        </a>
-        {{ collection.total_count }}
-
-      </div>
+    <div class="container">
+        <h5 class="text-capitalize">Section: <span class="text-info">{{ community_name }}</span></h5>
+        <hr>
+        {% for collection in collection_list %}
+            <li style="list-style: none; list-style-type: none;">
+                <a href="{% url "collection:collection_detail" collection.collection_name|slugify collection.pk %}">
+                    <i
+                            class="fa fa-book" aria-hidden="true"></i>
+                    {{ collection.collection_name }}
+                </a>
+                <span class="badge badge-pill badge-default">{{ collection.total_count }}</span>
+            </li>
+        {% endfor %}
     </div>
-  </li>
-
-
-</div>
-{% endfor %}
 {% endblock content %}
 

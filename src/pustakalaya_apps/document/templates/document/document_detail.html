@@ -5,270 +5,273 @@
 
 <!-- override some css -->
 {% block style %}
-{{ block.super }}
-<style>
-  /* Some css to override styles */
-  /* TODO: move this css to pustakalaya.css */
-  .border-line {
-    padding-top: 5px;
-    padding-bottom: 5px !important;
-    padding-left: 3px;
-    border-top: 1px solid #dddddd;
-  }
+    {{ block.super }}
+    <style>
+        /* Some css to override styles */
+        /* TODO: move this css to pustakalaya.css */
+        .border-line {
+            padding-top: 5px;
+            padding-bottom: 5px !important;
+            padding-left: 3px;
+            border-top: 1px solid #dddddd;
+        }
 
-  .border-line span {
-    display: inline-block;
-    width: 300px;
+        .border-line span {
+            display: inline-block;
+            width: 300px;
 
-  }
+        }
 
-</style>
+    </style>
 {% endblock style %}
 
 {% block content %}
-<div>
-  <div class="container">
-    <div class="row">
+    <div>
+        <div class="container">
+            <div class="row">
 
-      <div class="col-md-3 col-sm-12  col-xs-12">
-        <!-- Logo -->
-        <img class="img-responsive rounded w-100" src="http://placehold.it/218X300" alt="">
+                <div class="col-md-3 col-sm-12  col-xs-12">
+                    <!-- Logo -->
+                    <img class="img-responsive rounded w-100" src="http://placehold.it/218X300" alt="">
 
-        <a href="/viewer.html" role="button" class="btn w-100 btn-success btn-sm">Download</a>
-        <p>फाइल साइज : 11.69 MB</p>
-        <!-- share buttons -->
-        <div>
-          <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
-            <i class="fa fa-facebook-square"></i>
-          </a>
-          <a href="http://www.twitter.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
-            <i class="fa fa-twitter"></i>
-          </a>
-          <a href="http://www.google.com/E-pustakalaya" class="btn btn-default btn-icon btn-round">
-            <i class="fa fa-google-plus"></i>
-          </a>
-          <a href="http://www.linkedin.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
-            <i class="fa fa-linkedin"></i>
-          </a>
+                    <a href="/viewer.html" role="button" class="btn w-100 btn-success btn-sm">Download</a>
+                    <p>फाइल साइज : 11.69 MB</p>
+                    <!-- share buttons -->
+                    <div>
+                        <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                        <a href="http://www.twitter.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="http://www.google.com/E-pustakalaya" class="btn btn-default btn-icon btn-round">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="http://www.linkedin.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <!-- title of a document -->
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
+                    <!-- author section -->
+                    <div class="pb-1">
+                        <!-- Authors -->
+                        <!-- TODO pluralization -->
+                        <strong class="text-capitalize font-weight-normal text-dark">{% trans "Authors:" %}</strong>
+                        {% for author in object.document_authors.all %}
+                            <span class="text-secondary text-capitalize">{{ author }}</span>
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Illustrator section -->
+                    <div class="pb-1">
+                        <!-- Authors -->
+                        <!-- TODO pluralization -->
+                        <strong class="text-capitalize font-weight-normal text-dark">{% trans "Illustrators:" %}</strong>
+                        {% for author in object.document_illustrators.all %}
+                            <span class="text-secondary text-capitalize"> {{ illustrator }}</span>
+                        {% endfor %}
+
+
+                    </div>
+                    <!-- abstract -->
+                    <!-- abstract of a document -->
+                    <div>
+
+                        <p class="text-justify description text-dark">{{ object.abstract }}</p>
+                    </div>
+
+                    <!-- Metadata section -->
+                    <div class="row">
+                        <!-- Left half section -->
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+
+                            <!-- author section -->
+                            <div class="pb-1 border-line">
+                                <!-- Authors -->
+                                <!-- TODO pluralization -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Authors:" %}</span>
+                                {% for author in object.document_authors.all %}
+                                    <span class="text-secondary text-capitalize">{{ author }}</span>
+                                {% endfor %}
+
+                            </div>
+
+                            <!-- Illustrator section -->
+                            <div class="pb-1 border-line">
+                                <!-- Authors -->
+                                <!-- TODO pluralization -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
+                                {% for illustrator in object.document_illustrators.all %}
+                                    <span class="text-secondary text-capitalize"> {{ illustrator }}</span>
+                                {% endfor %}
+
+
+                            </div>
+
+                            <!-- editor section -->
+                            <div class="pb-1 border-line">
+                                <!-- Authors -->
+                                <!-- TODO pluralization -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Editors:" %}</span>
+                                {% for editor in object.document_editors.all %}
+                                    <span class="text-secondary text-capitalize"> {{ editor }}</span>
+                                {% endfor %}
+
+
+                            </div>
+
+
+                            <!-- publisher section -->
+                            <div class="pb-1 border-line">
+
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
+
+                            </div>
+
+                            <!-- place of publication -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
+
+                            </div>
+
+
+                            <!-- Publication year -->
+                            <div class="pb-1 border-line">
+
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
+
+
+                            </div>
+
+                            <!-- Available year -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
+
+                            </div>
+
+                            <!-- Keywords -->
+                            <div class="pb-1 border-line">
+
+                                <!-- TODO pluralization -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
+                                {% for keyword in object.keywords.all %}
+                                    <span class="text-secondary text-capitalize"> {{ keyword.keyword }}</span>
+
+
+                                {% endfor %}
+
+
+                            </div>
+
+                            <!-- Description -->
+                            <div class="pb-1 border-line" {% if not object.description %}
+                                 style="display: none" {% endif %}>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.description }}</span>
+
+                            </div>
+
+                            <!-- License type -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
+                            </div>
+
+                            <!-- document series -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.document_series }}</span>
+                            </div>
+
+                            <!-- document edition -->
+                            <div class="pb-1 border-line">
+                                <span class="capitalize text-dark text-capitalize">{% trans "edition:" %}</span>
+                                <span class="text-secondary">{{ object.edition }}</span>
+                            </div>
+
+                            <!-- document volume -->
+                            <div class="pb-1 border-line">
+                                <span class="capitalize text-dark text-capitalize">{% trans "volume:" %}</span>
+                                <span class="text-secondary">{{ object.volume }}</span>
+                            </div>
+
+                            <!-- isbn -->
+                            <!-- document isb -->
+                            <div class="pb-1 border-line" {% if not object.documentidentifier.identifier_type %}
+                                 style="display: none" {% endif %}>
+                                <span class="capitalize text-dark text-capitalize">{{ object.documentidentifier.identifier_type }}:</span>
+                                <span class="text-secondary">{{ object.documentidentifier.identifier_id }}</span>
+                            </div>
+
+                            <!-- total page -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize text-dark text-capitalize">{% trans "total pages" %}:</span>
+                                <span class="text-secondary"> {{ object.document_total_page }}</span>
+                            </div>
+
+                            <!-- Language -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
+                                {% for language in object.languages.all %}
+                                    <span class="text-secondary"> {{ language }}</span>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Education level -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
+                                {% for education_level in object.education_levels.all %}
+                                    <span class="text-secondary"> {{ object.education_level }}</span>
+                                {% endfor %}
+
+
+                            </div>
+
+                            <!-- Interactivity -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "interactivity" %}:</span>
+                                <span class="text-secondary"> {{ object.document_interactivity }}</span>
+                            </div>
+
+
+                            <!-- Rights -->
+                            <div class="pb-1 border-line" {% if not object.custom_license %} style="..." {% endif %}>
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
+                                <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
+                            </div>
+
+                            <!-- sponsor -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
+                                {% for keyword in object.sponsors.all %}
+                                    <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="col-md-9 col-sm-12 col-xs-12">
-        <!-- title of a document -->
-        <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
-        <!-- author section -->
-        <div class="pb-1">
-          <!-- Authors -->
-          <!-- TODO pluralization -->
-          <strong class="text-capitalize font-weight-normal text-dark">{% trans "Authors:" %}</strong>
-          {% for author in object.document_authors.all %}
-          <span class="text-secondary text-capitalize">{{ author }}</span>
-          {% endfor %}
-
-        </div>
-
-        <!-- Illustrator section -->
-        <div class="pb-1">
-          <!-- Authors -->
-          <!-- TODO pluralization -->
-          <strong class="text-capitalize font-weight-normal text-dark">{% trans "Illustrators:" %}</strong>
-          {% for author in object.document_illustrators.all %}
-          <span class="text-secondary text-capitalize"> {{ illustrator }}</span>
-          {% endfor %}
-
-
-        </div>
-        <!-- abstract -->
-        <!-- abstract of a document -->
-        <div>
-
-          <p class="text-justify description text-dark">{{ object.abstract }}</p>
-        </div>
-
-        <!-- Metadata section -->
-        <div class="row">
-          <!-- Left half section -->
-          <div class="col-md-12 col-sm-12 col-xs-12">
-
-            <!-- author section -->
-            <div class="pb-1 border-line">
-              <!-- Authors -->
-              <!-- TODO pluralization -->
-              <span class="capitalize font-weight-normal text-dark">{% trans "Authors:" %}</span>
-              {% for author in object.document_authors.all %}
-              <span class="text-secondary text-capitalize">{{ author }}</span>
-              {% endfor %}
-
-            </div>
-
-            <!-- Illustrator section -->
-            <div class="pb-1 border-line">
-              <!-- Authors -->
-              <!-- TODO pluralization -->
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
-              {% for author in object.document_illustrators.all %}
-              <span class="text-secondary text-capitalize"> {{ illustrator }}</span>
-              {% endfor %}
-
-
-            </div>
-
-            <!-- editor section -->
-            <div class="pb-1 border-line">
-              <!-- Authors -->
-              <!-- TODO pluralization -->
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "Editors:" %}</span>
-              {% for author in object.document_editors.all %}
-              <span class="text-secondary text-capitalize"> {{ editor }}</span>
-              {% endfor %}
-
-
-            </div>
-
-
-            <!-- publisher section -->
-            <div class="pb-1 border-line">
-
-
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
-              <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
-
-            </div>
-
-            <!-- place of publication -->
-            <div class="pb-1 border-line">
-
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
-              <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
-
-            </div>
-
-
-            <!-- Publication year -->
-            <div class="pb-1 border-line">
-
-
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
-              <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
-
-
-            </div>
-
-            <!-- Available year -->
-            <div class="pb-1 border-line">
-
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
-              <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
-
-            </div>
-
-            <!-- Keywords -->
-            <div class="pb-1 border-line">
-
-              <!-- TODO pluralization -->
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
-              {% for keyword in object.keywords.all %}
-              <span class="text-secondary text-capitalize"> {{ keyword.keyword }}</span>
-
-
-              {% endfor %}
-
-
-            </div>
-
-            <!-- Description -->
-            <div class="pb-1 border-line">
-              <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
-              <span class="text-secondary text-capitalize"> {{ object.description }}</span>
-
-            </div>
-
-            <!-- License type -->
-            <div class="pb-1 border-line">
-              <!-- TODO pluralization -->
-              <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
-              <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
-            </div>
-
-            <!-- document series -->
-            <div class="pb-1 border-line">
-              <!-- Add 2px right margin in each -->
-              <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
-              <span class="text-secondary text-capitalize">{{ object.document_series }}</span>
-            </div>
-
-            <!-- document edition -->
-            <div class="pb-1 border-line">
-              <span class="capitalize text-dark text-capitalize">{% trans "edition:" %}</span>
-              <span class="text-secondary">{{ object.edition }}</span>
-            </div>
-
-            <!-- document volume -->
-            <div class="pb-1 border-line">
-              <span class="capitalize text-dark text-capitalize">{% trans "volume:" %}</span>
-              <span class="text-secondary">{{ object.volume }}</span>
-            </div>
-
-            <!-- isbn -->
-            <!-- document isb -->
-            <div class="pb-1 border-line" {% if not object.documentidentifier.identifier_type %}
-                 style="display: none" {% endif %}>
-              <span class="capitalize text-dark text-capitalize">{{ object.documentidentifier.identifier_type }}:</span>
-              <span class="text-secondary">{{ object.documentidentifier.identifier_id }}</span>
-            </div>
-
-            <!-- total page -->
-            <div class="pb-1 border-line">
-              <!-- TODO: implement pluralization in total page -->
-              <span class="text-capitalize text-dark text-capitalize">{% trans "total pages" %}:</span>
-              <span class="text-secondary"> {{ object.document_total_page }}</span>
-            </div>
-
-            <!-- Language -->
-            <div class="pb-1 border-line">
-              <!-- TODO: implement pluralization in total page -->
-              <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
-              <span class="text-secondary"> {{ object.document_total_page }}</span>
-            </div>
-
-            <!-- Education level -->
-            <div class="pb-1 border-line">
-              <!-- TODO: implement pluralization in total page -->
-              <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
-              {% for education_level in object.education_levels.all %}
-              <span class="text-secondary"> {{ object.document_total_page }}</span>
-              {% endfor %}
-
-
-            </div>
-
-            <!-- Interactivity -->
-            <div class="pb-1 border-line">
-              <!-- TODO: implement pluralization in total page -->
-              <span class="text-capitalize hidden text-dark text-capitalize">{% trans "interactivity" %}:</span>
-              <span class="text-secondary"> {{ object.document_interactivity }}</span>
-            </div>
-
-
-            <!-- Rights -->
-            <div class="pb-1 border-line">
-              <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
-              <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
-            </div>
-
-            <!-- sponsor -->
-            <div class="pb-1 border-line">
-              <!-- TODO pluralization -->
-              <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
-              {% for keyword in object.sponsors.all %}
-              <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
-              {% endfor %}
-            </div>
-          </div>
-
-        </div>
-      </div>
     </div>
-  </div>
-</div>
 {% endblock content %}

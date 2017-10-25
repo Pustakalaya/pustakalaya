@@ -3,225 +3,225 @@
 {% load static %}
 
 {% block style %}
-<!-- inherit all the base styles -->
-{{ block.super }}
-<style>
-  /* Some css to override styles */
-  /* TODO: move this css to pustakalaya.css */
-  .border-line {
-    padding-top: 5px;
-    padding-bottom: 5px !important;
-    padding-left: 3px;
-    border-top: 1px solid #dddddd;
-  }
+    <!-- inherit all the base styles -->
+    {{ block.super }}
+    <style>
+        /* Some css to override styles */
+        /* TODO: move this css to pustakalaya.css */
+        .border-line {
+            padding-top: 5px;
+            padding-bottom: 5px !important;
+            padding-left: 3px;
+            border-top: 1px solid #dddddd;
+        }
 
-  .border-line span {
-    display: inline-block;
-    width: 300px;
+        .border-line span {
+            display: inline-block;
+            width: 300px;
 
-  }
+        }
 
-</style>
+    </style>
 {% endblock style %}
 
 {% block content %}
-<link href="http://vjs.zencdn.net/6.2.8/video-js.css" rel="stylesheet">
-<!-- If you'd like to support IE8 -->
-<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    <link href="http://vjs.zencdn.net/6.2.8/video-js.css" rel="stylesheet">
+    <!-- If you'd like to support IE8 -->
+    <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
 
-<div>
-  <div class="container">
-    <div class="row">
-      <div class="col pull-right">
-        <div id="instructions">
+    <div>
+    <div class="container">
+        <div class="row">
+            <div class="col pull-right">
+                <div id="instructions">
 
-          <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
-                 controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
-                 data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-            <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'/>
-            <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm'/>
-          </video>
-          <br>
-          <br>
-        </div>
-
-
-        <div class="col-3  col-xs-12">
-
-          <!-- share buttons -->
-          <div><span class=""> {% trans "Share on" %} </span>
-
-            <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
-              <i class="fa fa-facebook-square"></i>
-            </a>
-            <a href="http://www.twitter.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a href="http://www.google.com/Epustakalaya" class="btn btn-default btn-icon btn-round">
-              <i class="fa fa-google-plus"></i>
-            </a>
-            <a href="http://www.linkedin.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
-              <i class="fa fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-        <br>
-        <div class="col-md-12 col-sm-12 col-lg-12  col-xs-12">
-          <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
-          <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
-          <!-- Authors section -->
-
-          <div class="row">
-            <!-- metadata section -->
-            <div class="col-md-12 col-sm-12 col-xs-12">
-
-              <!-- publisher section -->
-              <div class="pb-1 border-line">
-
-                <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
-                <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
-
-              </div>
-
-              <!-- place of publication -->
-              <div class="pb-1 border-line">
-
-                <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
-                <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
-
-              </div>
-
-              <!-- Publication year -->
-              <div class="pb-1 border-line">
-
-                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
-                <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
-
-              </div>
-
-              <!-- Available year -->
-              <div class="pb-1 border-line">
-
-                <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
-                <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
-
-              </div>
-
-              <!-- Keywords -->
-              <div class="pb-1 border-line">
-
-                <!-- TODO pluralization -->
-                <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
-                {% for keyword in object.keywords.all %}
-                <span class="text-secondary text-capitalize"> {{ keyword.keyword }}</span>
-
-                {% endfor %}
+                    <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
+                           controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                           data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+                        <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'/>
+                        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm'/>
+                    </video>
+                    <br>
+                    <br>
+                </div>
 
 
-              </div>
+                <div class="col-3  col-xs-12">
 
-              <!-- Description -->
-              <div class="pb-1 border-line">
-                <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
-                <span class="text-secondary text-capitalize"> {{ object.description }}</span>
+                    <!-- share buttons -->
+                    <div><span class=""> {% trans "Share on" %} </span>
 
-              </div>
+                        <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                        <a href="http://www.twitter.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="http://www.google.com/Epustakalaya" class="btn btn-default btn-icon btn-round">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a href="http://www.linkedin.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-12 col-sm-12 col-lg-12  col-xs-12">
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
+                    <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
+                    <!-- Authors section -->
 
-              <!-- License type -->
-              <div class="pb-1 border-line">
-                <!-- TODO pluralization -->
-                <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
-                <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
-              </div>
+                    <div class="row">
+                        <!-- metadata section -->
+                        <div class="col-md-12 col-sm-12 col-xs-12">
 
-              <!-- video series -->
-              <div class="pb-1 border-line">
-                <!-- Add 2px right margin in each -->
-                <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
-                <span class="text-secondary text-capitalize">{{ object.video_series }}</span>
-              </div>
+                            <!-- publisher section -->
+                            <div class="pb-1 border-line">
 
-              <!-- video running time -->
-              <div class="pb-1 border-line">
-                <!-- Add 2px right margin in each -->
-                <span class="text-capitalize font-weight-normal text-dark">{% trans "running time" %}</span>
-                <span class="text-secondary text-capitalize">{{ object.video_running_time }}</span>
-              </div>
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
 
-              <!-- video certificate license -->
-              <div class="pb-1 border-line">
-                <!-- Add 2px right margin in each -->
-                <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
-                <span class="text-secondary text-capitalize">{{ object.video_certificate_license }}</span>
-              </div>
+                            </div>
 
-              <!-- video genre -->
-              <div class="pb-1 border-line">
-                <!-- Add 2px right margin in each -->
-                <span class="text-capitalize font-weight-normal text-dark">{% trans "genre:" %}</span>
-                <span class="text-secondary text-capitalize">{{ object.video_genre }}</span>
-              </div>
+                            <!-- place of publication -->
+                            <div class="pb-1 border-line">
 
-              <!-- Language -->
-              <div class="pb-1 border-line">
-                <!-- TODO: implement pluralization in total page -->
-                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
-                <span class="text-secondary"> {{ object.document_total_page }}</span>
-              </div>
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
 
-              <!-- Education level -->
-              <div class="pb-1 border-line">
-                <!-- TODO: implement pluralization in total page -->
-                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
-                {% for education_level in object.education_levels.all %}
-                <span class="text-secondary"> {{ object.document_total_page }}</span>
-                {% endfor %}
+                            </div>
+
+                            <!-- Publication year -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
+
+                            </div>
+
+                            <!-- Available year -->
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
+
+                            </div>
+
+                            <!-- Keywords -->
+                            <div class="pb-1 border-line">
+
+                                <!-- TODO pluralization -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
+                                {% for keyword in object.keywords.all %}
+                                    <span class="text-secondary text-capitalize"> {{ keyword.keyword }}</span>
+
+                                {% endfor %}
 
 
-              </div>
+                            </div>
 
-              <!-- Rights -->
-              <div class="pb-1 border-line">
-                <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
-                <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
-              </div>
+                            <!-- Description -->
+                            <div class="pb-1 border-line" {% if not object.description %} style="..." {% endif %}>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.description }}</span>
 
-              <!-- sponsor -->
-              <div class="pb-1 border-line">
-                <!-- TODO pluralization -->
-                <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
-                {% for keyword in object.sponsors.all %}
-                <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
-                {% endfor %}
-              </div>
+                            </div>
+
+                            <!-- License type -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
+                                <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
+                            </div>
+
+                            <!-- video series -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_series }}</span>
+                            </div>
+
+                            <!-- video running time -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "running time" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_running_time }}</span>
+                            </div>
+
+                            <!-- video certificate license -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_certificate_license }}</span>
+                            </div>
+
+                            <!-- video genre -->
+                            <div class="pb-1 border-line">
+                                <!-- Add 2px right margin in each -->
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "genre:" %}</span>
+                                <span class="text-secondary text-capitalize">{{ object.video_genre }}</span>
+                            </div>
+
+                            <!-- Language -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
+                                <span class="text-secondary"> {{ object.languages.all }}</span>
+                            </div>
+
+                            <!-- Education level -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO: implement pluralization in total page -->
+                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
+                                {% for education_level in object.education_levels.all %}
+                                    <span class="text-secondary"> {{ education_level }}</span>
+                                {% endfor %}
+
+
+                            </div>
+
+                            <!-- Rights -->
+                            <div class="pb-1 border-line">
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
+                                <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
+                            </div>
+
+                            <!-- sponsor -->
+                            <div class="pb-1 border-line">
+                                <!-- TODO pluralization -->
+                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
+                                {% for sponsor in object.sponsors.all %}
+                                    <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <script>
-    $(function () {
-      var $refreshButton = $('#refresh');
+    <script>
+        $(function () {
+            var $refreshButton = $('#refresh');
 
-      var $results = $('#css_result');
+            var $results = $('#css_result');
 
-      function refresh() {
-        var css = $('style.cp-pen-styles').text();
-        $results.html(css);
-      }
+            function refresh() {
+                var css = $('style.cp-pen-styles').text();
+                $results.html(css);
+            }
 
-      refresh();
-      $refreshButton.click(refresh);
+            refresh();
+            $refreshButton.click(refresh);
 
-      // Select all the contents when clicked
-      $results.click(function () {
-        $(this).select();
-      });
-    });
+            // Select all the contents when clicked
+            $results.click(function () {
+                $(this).select();
+            });
+        });
 
-  </script>
-  <script src="http://vjs.zencdn.net/6.2.8/video.js"></script>
-  {% endblock content %}
+    </script>
+    <script src="http://vjs.zencdn.net/6.2.8/video.js"></script>
+{% endblock content %}
