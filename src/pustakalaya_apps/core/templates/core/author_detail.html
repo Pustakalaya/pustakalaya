@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+
+
+
+
+    <div class="row">
+           <!-- Author Name -->
+
+        <div class="col-md-2 col-xs-12 col-sm-12">
+            <img src="{{ MEDIA_URL }}{{ object.thumbnail }}"
+                     width="210px"
+                    height="230px"
+                     title="{{ object }}"
+                     alt="{{ object }}" class="rounded img img-responsive">
+            <p class="text-capitalize  text-primary description h5 mt-2 ">{{ object }}</p>
+            <p>
+                <strong class="text-capitalize">{% trans "keywords" %}:</strong>
+                {%  for keyword in object.keywords.all %}
+                    <span><a href="#" style="text-decoration: none;">{{ keyword }}</a>,</span>
+
+                {%  endfor %}
+            </p>
+        </div>
+        <div class="col-md-10 col-xs-12 col-sm-12">
+             <div class="p-4 rounded" style="background: #f3edd7;">
+                    <p class="description text-uppercase rounded text-black text-uppercase mb-2">
+                        <span class="border border-top-0 border-right-0 border-left-0 border-secondary">{% trans "About"%} {{ object }}</span>
+                    </p>
+                    <p class="text-secondary">
+                        {{ object.description }}
+                    </p>
+
+                 <p><b>{%  trans "Address" %}:</b><span class="ml-3">{{ object.address }}</span></p>
+                <p><b>{% trans "Date of birth" %}: </b><span class="ml-3">{{ object.dob }}</span></p>
+                <p><b>{% trans "Pen name" %}:</b><span class="ml-3">{{ object.pen_name }}</span></p>
+                 <p><b>{% trans "Genre" %}: </b><span class="ml-3">{{ object.genre }}</span></p>
+                </div>
+
+
+        </div>
+    </div>
+    </div>
+
+{% endblock content %}
