@@ -21,31 +21,38 @@
         <div class="row">
             <!-- Major partners -->
             <div class="col-md-6 col-xs-12">
-                <h5 class="description text-uppercase">{% trans "Major partners" %}</h5>
+                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Major partners" %}</p>
                 <hr/>
 
                 <a class="nav-link active" href="#">
-                    <img class="footer-logo" src="{% static 'images/logos/irdf.png' %}" alt="IRDF"/>
+                    <img  src="{% static 'images/logos/irdf.png' %}"
+                         width="150px"
+                         height="50px"
+                         alt="IRDF"/>
                     <p class="text-black">2017 now</p>
                 </a>
             </div>
             <!-- Past partners -->
             <div class="col-md-6 col-xs-12">
+                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Past partners" %}</p>
 
-                <h5 class="description text-uppercase">{% trans "Past partners" %}</h5>
                 <hr/>
                 <!-- TODO: replace with sliding banner -->
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            <img class="footer-logo" src="{% static 'images/logos/maitri-trust.webp' %}"
+                            <img class="img img-responsive" src="{% static 'images/logos/maitri-trust.webp' %}"
+                                 width="150px"
+                                 height="50px"
                                  alt="British council">
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            <img class="footer-logo" src="{% static 'images/logos/nepal-library-foundation.png' %}"
+                            <img class="img" src="{% static 'images/logos/nepal-library-foundation.png' %}"
+                                 width="150px"
+                                 height="50px"
                                  alt="British council">
                         </a>
                     </li>
@@ -61,28 +68,34 @@
 <!-- Contributed partners -->
 <div id="contributed-partner" class="section-padding">
     <div class="container">
-        <h5 class="text-uppercase description">{% trans "Content contribution from" %}</h5>
+         <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Content contribution from" %}</p>
         <hr/>
-        <ul class="nav">
+        <div class="text-center">
+             <ul class="nav text-center">
             <li class="nav-item">
                 <a class="nav-link active" href="#">
-                    <img class="footer-logo" src="{% static 'images/logos/bc.png' %}" alt="British council">
+                    <img class="footer-logo" src="{% static 'images/logos/bc.png' %}"
+                         alt="British council">
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link active" href="#">
-                    <img class="footer-logo" src="{% static 'images/logos/gorkhapatra.png' %}" alt="British council">
+                    <img class="footer-logo" src="{% static 'images/logos/gorkhapatra.png' %}"
+                         width="150px"
+                         height="50px"
+                         alt="British council">
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#">
-                    <img class="footer-logo" src="{% static 'images/logos/madanpuraskar.gif' %}" alt="Gorkhapatra">
+                    <img class="img img-responsive" src="{% static 'images/logos/madanpuraskar.gif' %}" alt="Gorkhapatra">
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#">
-                    <img class="footer-logo" src="{% static 'images/logos/nepalacademy.png' %}" alt="British council">
+                    <img src="{% static 'images/logos/nepalacademy.png' %}"
+                         alt="Nepal academy">
                 </a>
             </li>
             <li class="nav-item">
@@ -92,7 +105,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="#">
-                    <img class="footer-logo" src="{% static 'images/logos/rbf.png' %}" alt="British council">
+                    <img class="footer-logo" src="{% static 'base_assets/img/partnerslogo/rtf.png' %}" alt="British council">
                 </a>
             </li>
             <li class="nav-item">
@@ -115,6 +128,7 @@
 
 
         </ul>
+        </div>
     </div>
 </div>
 

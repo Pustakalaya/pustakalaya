@@ -6,10 +6,15 @@
 {% block title %}
     {% trans "homepage" %}
 {% endblock title %}
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "base_assets/css/lightslider.min.css" %}">
+{% endblock style %}
 
 {% block content %}
     <!--search-->
     <div class="container">
+        <!-- Search bar section -->
         <div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12">
                 <!-- search -->
@@ -35,7 +40,8 @@
                 </form>
             </div>
         </div>
-        <br>
+
+        <!-- Browse by and books list section -->
         <div class="row">
             <!-- Browse by -->
             <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
@@ -100,28 +106,28 @@
                 </div>
 
                 <!-- Browse softwares -->
-{#                <div class="mt-1">#}
-{#                    <!--pustakalaya browse by option-->#}
-{#                    <p class="description text-uppercase text-dark mb-2">{% trans "Brows" %}</p>#}
-{##}
-{#                    <p>#}
-{#                        <a href="" class="text-capitalize">#}
-{#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Books" %}</a>#}
-{#                    </p>#}
-{##}
-{#                     <p>#}
-{#                        <a href="" class="text-capitalize">#}
-{#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Audio & Video" %}</a>#}
-{#                    </p>#}
-{##}
-{##}
-{#                     <p>#}
-{#                        <a href="" class="text-capitalize">#}
-{#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Educational softwares" %}</a>#}
-{#                    </p>#}
-{##}
-{##}
-{#                </div>#}
+                {#                <div class="mt-1">#}
+                {#                    <!--pustakalaya browse by option-->#}
+                {#                    <p class="description text-uppercase text-dark mb-2">{% trans "Brows" %}</p>#}
+                {##}
+                {#                    <p>#}
+                {#                        <a href="" class="text-capitalize">#}
+                {#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Books" %}</a>#}
+                {#                    </p>#}
+                {##}
+                {#                     <p>#}
+                {#                        <a href="" class="text-capitalize">#}
+                {#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Audio & Video" %}</a>#}
+                {#                    </p>#}
+                {##}
+                {##}
+                {#                     <p>#}
+                {#                        <a href="" class="text-capitalize">#}
+                {#                            <i class="fa fa-book mr-2" aria-hidden="true"></i>{% trans "Educational softwares" %}</a>#}
+                {#                    </p>#}
+                {##}
+                {##}
+                {#                </div>#}
             </div>
 
 
@@ -241,56 +247,144 @@
             </div>
         </div>
 
-    <!-- Education section -->
-        <div class="row">
-            <div class="mt-4">
-                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Interactive educational software" %}</p>
-                <a href="http://pustakalaya.org/epaath/" target="_blank">
-                    <img class="img-responsive mr-5" src="{% static 'base_assets/img/epaath.png' %}" width="140px"
-                         height="160px"/>
-                </a>
-                <a href=""><img class="img-responsive mr-5" src="{% static 'images/logos/phet.png' %}" width="140px"
-                                height="160px"/></a>
-                <a href=""><img class="img-responsive mr-5" src="{% static 'images/logos/elearning.png' %}"
-                                width="150px"
-                                height="180px"/></a>
-                <a href=""><img class="img-responsive mr-5" src="{% static 'base_assets/img/klite.png' %}" width="140px"
-                                height="160px"/></a>
-                <a href=""><img class="img-responsive mr-5" src="{% static 'base_assets/img/ ' %}" width="140px"
-                                height="160px"/></a>
-            </div>
+        <!-- Education section -->
+        <div class="row mt-4 ">
+            <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 " style="background: #ecece0">
+                   <p class="description text-uppercase rounded text-black text-uppercase mb-2">{% trans "Interactive educational software" %}</p>
+                <ul id="lightSlider">
+                    <li class="mr-2">
+                        <a href="">
+                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
+                                  width="130px"
+                                 height="auto"
+                                 alt="">
+                        </a>
+                    </li>
+                      <li class="mr-2">
+                        <a href="">
+                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
+                                 width="130px"
+                                 height="auto"
+                                 alt="">
+                        </a>
+                    </li>
+                      <li class="mr-2">
+                        <a href="">
+                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
+                                  width="130px"
+                                 height="auto"
+                                 alt="">
+                        </a>
+                    </li>
+                      <li class="mr-2">
+                        <a href="">
+                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/nepal-dictionary.png' %}"
+                                 alt="">
+                        </a>
+                    </li>
+                      <li class="mr-2">
+                        <a href="">
+                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/audiable-text-book.png' %}"
+                                 width="130px"
+                                 height="auto"
+                                 alt="">
+                        </a>
+                    </li>
 
-            <!--Reference materials-->
-            <div class="mt-4">
-                <h5 class="mb-4 description text-uppercase">{% trans "Reference Materials" %}</h5>
-                <a href=""><img class="img-responsive mr-2" src="{% static 'base_assets/img/wiktionary.png' %}"
-                                width="140px"
-                                height="160px"/></a>
-                <a href=""><img class="img-responsive mr-2" src="{% static 'base_assets/img/openstreet.jpg' %}"
-                                width="140px"
-                                height="160px"/></a>
-                <a href=""><img class="img-responsive mr-2" src="{% static 'base_assets/img/ ' %}" width="140px"
-                                height="160px"/></a>
-                <a href=""> <img class="img-responsive mr-2" src="{% static 'base_assets/img/ ' %}" width="140px"
-                                 height="160px"/></a><br/><br/>
+                </ul>
 
-                <!--description about pustakalaya-->
-                <div>
-                    <p>{% blocktrans %}
-                        E-Pustakalaya is an education-focused digital library containing full-text documents, images,
-                        videos and
-                        audio files that can be accessed through an intranet or the internet. The user can either read
-                        documents, view
-                        videos, and listen to audio clips directly from the E-library server or she can download these
-                        materials to
-                        her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
-                        English
-                        languages. In the future, we will also add materials in other national languages of
-                        Nepal. {% endblocktrans %}
-                        <a href="#">{% trans "Read More" %}</a> ...
-                    </p>
-                </div>
+
             </div>
         </div>
+
+
+        <!-- Footer description -->
+        <div class="row mt-4">
+            <div class="p-4 rounded" style="background: #f3edd7;">
+            <p class="description text-uppercase rounded text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
+                <p class="text-secondary">{% blocktrans %}
+                    E-Pustakalaya is an education-focused digital library containing full-text documents, images,
+                    videos and
+                    audio files that can be accessed through an intranet or the internet. The user can either read
+                    documents, view
+                    videos, and listen to audio clips directly from the E-library server or she can download these
+                    materials to
+                    her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
+                    English
+                    languages. In the future, we will also add materials in other national languages of
+                    Nepal. {% endblocktrans %}
+                    <a href="{% url "about" %}">{% trans "Read More" %}</a> ...
+                </p>
+            </div>
+        </div>
+
     </div>
 {% endblock content %}
+
+{% block script %}
+    {{ block.super }}
+    <!-- load lightslider js -->
+    <script src="{% static 'base_assets/js/plugins/lightslider.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lightSlider").lightSlider({
+                item: 4,
+                autoWidth: false,
+                slideMove: 4, // slidemove will be 1 if loop is true
+                slideMargin: 10,
+
+                addClass: '',
+                mode: "slide",
+                useCSS: true,
+                cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
+                easing: 'linear', //'for jquery animation',////
+
+                speed: 400, //ms'
+                auto: false,
+                loop: false,
+                slideEndAnimation: true,
+                pause: 2000,
+
+                keyPress: false,
+                controls: true,
+                prevHtml: '',
+                nextHtml: '',
+
+                rtl: false,
+                adaptiveHeight: false,
+
+                vertical: false,
+                verticalHeight: 500,
+                vThumbWidth: 100,
+
+                thumbItem: 10,
+                pager: true,
+                gallery: false,
+                galleryMargin: 5,
+                thumbMargin: 5,
+                currentPagerPosition: 'middle',
+
+                enableTouch: true,
+                enableDrag: true,
+                freeMove: true,
+                swipeThreshold: 40,
+
+                responsive: [true],
+
+                onBeforeStart: function (el) {
+                },
+                onSliderLoad: function (el) {
+                },
+                onBeforeSlide: function (el) {
+                },
+                onAfterSlide: function (el) {
+                },
+                onBeforeNextSlide: function (el) {
+                },
+                onBeforePrevSlide: function (el) {
+                }
+            });
+        });
+    </script>
+
+{% endblock script %}
