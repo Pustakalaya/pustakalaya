@@ -36,11 +36,56 @@
                     <a class="nav-link " href="{% url 'feedback' %}">{% trans "Feedback" %}</a>
                 </li>
 
+
                 <li class="nav-item">
 
-                    <a class="nav-link active" data-toggle="tab" href="" role="tab" aria-expanded="true">
+                    <!--button  trigger modal-->
+                    <a class="nav-link active" aria-expanded="true" data-toggle="modal" data-target="#myModal">
                         <i class="now-ui-icons users_single-02"></i>
                         {% trans "Log In" %}</a>
+
+                    <!-- Modal Core -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h3>Log in pustakalaya</h3>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="card card-login card-plain">
+                                        <form class="form" method="" action="">
+                                            <div class="content">
+                                                <div class="input-group form-group-no-border">
+
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Enter e-mail address" required>
+                                                </div>
+                                                <div class="input-group form-group-no-border">
+                                                    <input type="password" placeholder="password" class="form-control"  required>
+                                                </div>
+                                            </div>
+                                            <div class="footer pull-right">
+                                                <a href="#" class="btn btn-info">Log In</a>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="button" class="btn btn-info btn-simple">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- language selection -->
@@ -58,7 +103,7 @@
                             </select>
                         </div>
                     </form>
-                    {% else %}
+                {% else %}
                 {% endif %}
 
 
