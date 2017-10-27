@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
@@ -26,10 +27,17 @@ from . import views
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+# Url patterns that don't need to localize
 urlpatterns = [
+    # Change language
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 
+]
+
+# Enable i18n based urls
+urlpatterns += i18n_patterns(
     # Search endpoint
-    url(r'^search/', include('pustakalaya_apps.pustakalaya_search.urls', namespace="core")),
+    url(r'^search/', include('pustakalaya_apps.pustakalaya_search.urls', namespace="search")),
 
     # Homepage and core urls
     url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),
@@ -101,7 +109,7 @@ urlpatterns = [
         r'^help/$', TemplateView.as_view(template_name="static_pages/help.html"),
         name="help"
     ),
-]
+)
 
 if settings.DEBUG:
     # Serve media in development mode
