@@ -73,3 +73,18 @@ def search(request):
             print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
 
         return render(request, "pustakalaya_search/search_result.html", search_result)
+
+
+def browse(request):
+    """
+    Browse the urls based on querystring
+    :param request: all, title, author
+    :return: response
+    """
+
+    if request.method == "GET":
+        # Grab the browse by, sort by variables
+        browse_by = request.GET.get('browse_by', "title") # Default is title
+        return render(request, "pustakalaya_search/browse.html",{
+            "browse_by":browse_by
+        })
