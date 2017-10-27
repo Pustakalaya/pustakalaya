@@ -1,3 +1,6 @@
+"""
+urls to browse all items.
+"""
 from django.conf.urls import url
 from . import views
 
