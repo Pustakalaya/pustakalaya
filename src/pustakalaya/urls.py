@@ -48,14 +48,17 @@ urlpatterns = [
 
     # Community page aka category
     # /community/literatures-and-arts/
-    #url(r'^category/', include('pustakalaya_apps.collection.urls', namespace="community")),
+    # url(r'^category/', include('pustakalaya_apps.collection.urls', namespace="community")),
     url(r'^collection/', include('pustakalaya_apps.collection.urls', namespace="collection")),
     url(r'^community/', include('pustakalaya_apps.collection.community_urls', namespace="community")),
 
     # Author url
-    #/authors/
+    # /authors/
     url(r'^authors/', include('pustakalaya_apps.core.author_urls', namespace="author")),
 
+    # Keyword url
+    # /keywords/
+    url(r'^keywords/', include('pustakalaya_apps.core.keyword_urls', namespace="keyword")),
 
     # Wikipedia app
     # TODO:

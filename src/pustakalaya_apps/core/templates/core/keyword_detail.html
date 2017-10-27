@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <!--thumbnail display-->
+            <div class="col-md-2 col-sm-12 col-xs-12">
+                <img src="http://placehold.it/120x150" alt="{{ keyword }}" title="{{ keyword }}">
+            </div>
+            <div class="col-md-10">
+
+                <!-- search keyword | title-->
+                <p class="text-capitalize  text-primary description  mt-2 ">{{ keyword }}</p>
+
+                <!--Description of the searched media-->
+                <p class="description">{{ object.keyword_description }}</p>
+                <p>
+                    <!--author link-->
+                    <span>{% trans 'Author:   ' %}<a href="" style="text-decoration: none;"><strong
+                            class="text-capitalize"></strong></a></span>
+                    <!--rating info-->
+                    <span>{% trans 'Rating:  ' %}<a href="#" style="text-decoration: none;">   321 view</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
