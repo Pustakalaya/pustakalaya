@@ -6,6 +6,10 @@ from .forms import FeedBackForm
 from django.conf import settings
 
 
+def change_language(request):
+    return HttpResponse("Change language")
+
+
 def feedback(request):
     if request.method == 'GET':
         form = FeedBackForm()
