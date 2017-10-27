@@ -67,11 +67,8 @@ urlpatterns += i18n_patterns(
     # /authors/
     url(r'^authors/', include('pustakalaya_apps.core.author_urls', namespace="author")),
 
-    # Keyword url
     # /keywords
     url(r'^keywords/', include('pustakalaya_apps.core.keyword_urls', namespace="keyword")),
-
-
     # Wikipedia app
     # TODO:
 
