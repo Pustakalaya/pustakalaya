@@ -43,26 +43,52 @@
                         {% trans "Log In" %}</a>
                 </li>
 
-                <!-- language selection -->
-                {% if settings.USE_I18N and languages|length > 1 %}
-                    <form action="{% url "set_language" %}" method="post" class="navbar-form navbar-right">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <select name="language" class="form-control" onchange="this.form.submit()">
-                                {% for language in languages %}
-                                    <option value="{{ language.code }}"
-                                            {% if language.code == LANGUAGE_CODE %}selected="selected"{% endif %}>
-                                        {{ language.name_local }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </form>
+
+                <!-- language selection button -->
+                <form action="{% url 'set_language' %}" method="post" id="changeLanguageForm" class=" btn btn-sm
+                btn-white bg-white">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}"/>
+                    <!-- don't change the name language -->
+                    {% if LANGUAGE_CODE == "en" %}
+                        <i class="flag-icon flag-icon-gb"></i>
                     {% else %}
-                {% endif %}
+                        <i class="flag-icon flag-icon-{{ LANGUAGE_CODE }}"></i>
+                    {% endif %}
+                    <select name="language"
+                            class="text-secondary"
+                            style="border: none; background:none; outline:none;">
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang in LANGUAGES %}
+                            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}
+                                    selected="selected"{% endif %}
+                                    style="outline:none;"
+                            >
+                                {{ lang.1 }}
+
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
 
 
             </ul>
         </div>
     </div>
 </nav>
+
+<!-- script to reload selected country -->
+<script>
+    (function () {
+        // Grab language selection form
+        var changeLanguageForm = document.getElementById("changeLanguageForm");
+        // Select language input
+        var languageInput = changeLanguageForm.elements.language;
+        // listen change event on select input
+        languageInput.onchange = function () {
+            // If there is change submit the form.
+            changeLanguageForm.submit();
+        }
+    })();
+</script>
