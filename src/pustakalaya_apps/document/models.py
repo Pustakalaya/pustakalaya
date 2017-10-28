@@ -28,6 +28,9 @@ def __file_upload_path(instance, filepath):
     # return document/pdf/year/month/filename
     pass
 
+class FeaturedItemManager(models.Manager):
+    def get_queryset(self):
+        return super(FeaturedItemManager, self).get_queryset().filter(featured="yes").order_by("-updated_date")[:6]
 
 class Document(AbstractItem):
     """Book document type to store book type item
@@ -161,6 +164,10 @@ class Document(AbstractItem):
         blank=True,
 
     )
+
+    # Manager to return the featured objects.
+    objects = models.Manager()
+    featured_objects = FeaturedItemManager()
 
     class Meta:
         ordering = ('title',)
