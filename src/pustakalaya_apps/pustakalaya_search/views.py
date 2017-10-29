@@ -4,6 +4,13 @@ from django.shortcuts import render
 from .search import PustakalayaSearch
 from django.shortcuts import redirect
 from json import JSONDecodeError
+from elasticsearch_dsl import Search
+from elasticsearch import Elasticsearch
+from django.conf import settings
+from elasticsearch_dsl.connections import connections
+from elasticsearch_dsl import Q
+
+
 
 
 def search(request):
@@ -75,16 +82,33 @@ def search(request):
         return render(request, "pustakalaya_search/search_result.html", search_result)
 
 
-def browse(request):
+def browse(request, browse_by="all"):
     """
     Browse the urls based on querystring
     :param request: all, title, author
     :return: response
     """
 
+    # browse_by options
+    browse_by_options = "title", "author", "all"
+
     if request.method == "GET":
-        # Grab the browse by, sort by variables
-        browse_by = request.GET.get('browse_by', "title") # Default is title
+        if browse_by is "all" or not browse_by in browse_by_options:
+            browse_by = ["title"]
+
+        if browse_by == "author":
+            # set browse_by options as
+            browse_by = ["document_authors.keyword", "directors.keyword", "read_by.keyword"]
+
+        client = connections.get_connection()
+
+        s= Search(using=client, index=settings.ES_INDEX).query("match_all").sort(
+            {"title.keyword": {"order": "asc"}}
+        )
+        response = s.execute()
+
         return render(request, "pustakalaya_search/browse.html",{
-            "browse_by":browse_by
+            "response": response,
+
+
         })

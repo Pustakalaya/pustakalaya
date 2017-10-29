@@ -22,6 +22,8 @@ class PustakalayaSearch(FacetedSearch):
         'description',
         'collections',
         'communities',
+        "document_authors"
+
     ]
 
     facets = {

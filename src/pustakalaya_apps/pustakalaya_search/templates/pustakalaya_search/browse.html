@@ -1,9 +1,16 @@
 {%  extends 'base.html' %}
+{%  load i18n %}
 
 {%  block content %}
    <div class="container">
-    {{ browse_by }}
+
     <p>{% trans "Browse the library by " %}</p>
+    {%  for hit in response %}
+        {{ hit.title }}
+        {{ hit.id }}
+        {{ hit.document_authors }}
+        <br>
+    {%  endfor %}
 
    </div>
 {% endblock content %}

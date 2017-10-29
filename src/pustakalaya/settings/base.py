@@ -193,6 +193,8 @@ ES_CONNECTIONS = {
     'default': {
         'hosts': [{
             'host': ES_HOST,
+            'index': ES_INDEX,
+            **ES_INDEX_SETTINGS,
             'verify_certs': False,
             'use_ssl': os.environ.get('ES_USE_SSL', False) == 'True',
             'port': os.environ.get('ES_PORT', '9200'),
