@@ -15,4 +15,3 @@ def keyword_detail(request, keyword):
     context["keyword"] = keyword
 
     return render(request, "core/keyword_detail.html", context)
-
