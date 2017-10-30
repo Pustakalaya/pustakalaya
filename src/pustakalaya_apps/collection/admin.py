@@ -4,4 +4,4 @@ from .models import Collection
 
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["collection_name", "community_name"]

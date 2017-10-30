@@ -154,7 +154,7 @@ class Document(AbstractItem):
     )
 
     thumbnail = models.ImageField(
-        upload_to="uploads/thumbnails/audio/%Y/%m/%d",
+        upload_to="uploads/thumbnails/document/%Y/%m/%d",
         max_length=255
     )
 
