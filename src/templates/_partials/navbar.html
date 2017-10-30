@@ -93,7 +93,8 @@
                 btn-white bg-white">
                     {% get_current_language as LANGUAGE_CODE %}
                     {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ redirect_to }}"/>
+                    <!-- Change value to current_url without language -->
+                    <input name="next" type="hidden" value="/"/>
                     <!-- don't change the name language -->
                     {% if LANGUAGE_CODE == "en" %}
                         <i class="flag-icon flag-icon-gb"></i>
