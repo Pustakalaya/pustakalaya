@@ -31,33 +31,9 @@
                     <div class="row">
                         <div class="col-md-8">{% trans "total available" %}: {{ response.hits.total }}</div>
                         <div class="col-md-4">
-                            <span>{% trans "Sort by" %}</span>
+                            <span>{% trans "Sort by" %}&nbsp;</span>
                             <!-- sorting form -->
-                            <form action="" id="sortingForm" style="display:inline-block">
-                                <select class="default" name="sort_by" >
-                                    <option class="text-capitalize" value="title.keyword" readonly
-                                    {% if  sort_by  == "title.keword" %} selected {% endif %}
-                                    >{% trans "Title" %}</option>
-                                    <option class="text-capitalize"
-                                            value="updated_date" readonly
-                                            {% if  sort_by  == "updated_date" %} selected {% endif %}
-                                    >{% trans "updated date" %}</option>
-                                    <option class="text-capitalize" value="rating" readonly
-                                            {% if  sort_by  == "rating" %} selected {% endif %}
-                                    >{% trans "Rating" %}</option>
-
-                                </select>
-                                <!-- sort based on descendingascending -->
-                                <select class="default" name="sort_order">
-                                    <option class="text-capitalize" value="asc" {% if  sort_order  == "asc" %} selected {% endif %} >
-                                        {% trans "Ascending" %}
-                                    </option>
-                                    <option class="text-capitalize" value="desc" {% if  sort_order  == "desc" %} selected {% endif %} >
-                                        {% trans "Descending" %}
-                                    </option>
-                                </select>
-                            </form>
-
+                            {%  include "_partials/sorting_form.html" %}
                         </div>
                     </div>
                     <!-- small form to sort data -->
@@ -70,53 +46,8 @@
 
 
         <div class="row">
-            <div class="col-md-12">
-                {% for hit in response %}
-                    <ul class="list-unstyled">
-                    <li class="media mb-3">
-                        <span class="mr-2">{{ forloop.counter }}.</span>
-                        <img class="mr-3 rounded" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
-                             width="64px"
-                             height="80px"
-                             title="{{ hit.title }}"
-                             alt="{{ hit.title }}">
-                        <div class="media-body">
-                            <p class="text-capitalizemt-0 mb-1">
-                                <a class="text-capitalize"
-                                   href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">{{ hit.title }}</a>
-                            </p>
-                            <p class="text-dark text-capitalize">{{ hit.abstract | truncatechars:"30" }}</p>
-                            <div class="rating">
-                                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                            </div>
-
-                        </div>
-                    </li>
-                    <hr/>
-                {% endfor %}
-                </ul>
-            </div>
+           {%  include '_partials/list_display.html' %}
         </div>
     </div>
 {% endblock content %}
-
-{% block script %}
-    {{ block.super }}
-    <!-- script to implement sorting -->
-    <script>
-        (function (window) {
-            var sortForm = document.getElementById("sortingForm");
-            var sort_by = sortForm.elements.sort_by;
-            var sort_order = sortForm.elements.sort_order;
-
-            sortForm.onchange = function() {
-                 // OnChange sort_by or sort_order reload the page.
-            console.log("Sort By", sort_by.value);
-            console.log("Sort order", sort_order.value);
-            sortForm.submit();
-            }
-        })();
-    </script>
-
-{% endblock script %}
 
