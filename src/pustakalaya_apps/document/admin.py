@@ -39,6 +39,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "collections",
         "education_levels",
         "languages",
+        "featured",
         "document_file_type",
         "document_interactivity",
         "document_authors",
@@ -59,7 +60,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "license_type",
         "custom_license",
         "sponsors",
-        "thumbnail"
+        "thumbnail",
     )
 
 

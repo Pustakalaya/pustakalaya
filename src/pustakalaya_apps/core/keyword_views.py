@@ -1,19 +1,18 @@
 from django.shortcuts import render
-from django.views.generic.detail import DetailView
-from .models import Keyword
-from .models import Biography
-from django.shortcuts import (
-    HttpResponse,
-    render,
-)
+from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Search
 
 
-def keyword_detail(request):
-    return render(request, "index.html", {})
+def keyword_detail(request, keyword):
+    keyword = " ".join(keyword.split("-"))
+    client = Elasticsearch()
+    # TODO: explicitly define the index name
+    s = Search().using(client).query("match", keywords=keyword)
+    response = s.execute()
+    context = {}
 
+    context["response"] = response
+    context["keyword"] = keyword
 
-class KeywordDetail(DetailView):
-    model = Keyword
+    return render(request, "core/keyword_detail.html", context)
 
-
-    template_name = "core/keyword_detail.html"

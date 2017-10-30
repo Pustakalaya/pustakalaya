@@ -4,7 +4,7 @@ import uuid
 import abc
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from .constants import LANGUAGES
 
 
@@ -183,9 +183,15 @@ class AbstractItem(AbstractTimeStampModel):
         blank=True
     )
 
-    # Rating TODO
-
-    # Comment TODO
+    featured = models.CharField(
+        verbose_name=_("Featured"),
+        max_length=3,
+        default="no",
+        choices=(
+            ("yes", _("Yes")),
+            ("no", _("No"))
+        )
+    )
 
 
     class Meta:

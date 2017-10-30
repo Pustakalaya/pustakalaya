@@ -39,6 +39,9 @@ urlpatterns += i18n_patterns(
     # Search endpoint
     url(r'^search/', include('pustakalaya_apps.pustakalaya_search.urls', namespace="search")),
 
+    # Browse endpoint url
+    url(r'^browse/', include('pustakalaya_apps.pustakalaya_search.browse_urls', namespace="search")),
+
     # Homepage and core urls
     url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),
 
@@ -64,8 +67,7 @@ urlpatterns += i18n_patterns(
     # /authors/
     url(r'^authors/', include('pustakalaya_apps.core.author_urls', namespace="author")),
 
-    # Keyword url
-    # /keywords/
+    # /keywords
     url(r'^keywords/', include('pustakalaya_apps.core.keyword_urls', namespace="keyword")),
 
     # Wikipedia app

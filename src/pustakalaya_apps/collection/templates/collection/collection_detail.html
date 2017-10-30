@@ -3,38 +3,87 @@
 {% block title %} {% endblock title %}
 
 {% block content %}
-    <div class="container">
-        <div class="breadcrumb-item">
-            <a href="{% url "community:community_detail" community_name|slugify %}">
-                {{ community_name }}
-            </a>
-        </div>
-        <h3>{{ collection_name }}</h3>
-        <hr>
-        <ul class="list-unstyled">
-            {% for hit in response %}
+    <!-- Breadcums -->
 
-                <div class="row">
-                    <div class="col-md-2">
-                        <img class="mr-3" src="{{ MEDIA_URL }}{{ hit.thumbnail }}" alt="{{ hit.title }}">
-                    </div>
-                    <div class="col-md-10">
-                        <div class="media-body hidden-sm hidden-xs">
-                            <h5 class="mt-0 mb-1"><a
-                                    class="text-capitalize"
-                                    href="">{{ hit.title }}</a>
-                            </h5>
-                            {{ hit.abstract }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- breadcums -->
+                <p class="text-capitalize">
+                    {% trans "section" %}
+                    <a style="text-decoration:none;"
+                       class="text-capitalize"
+                       href="{% url "community:community_detail" community_name|slugify %}">
+                        {{ community_name }} &gt;&gt;
+
+                    </a>
+                    <a class="text-capitalize text-primary" href=""
+                       style="text-decoration:none;"
+                    >{{ collection_name }}
+                    </a>
+                </p>
+
+                <div class="text-capitalize">
+                    <div class="row">
+                        <div class="col-md-8">{% trans "total available" %}: {{ response.hits.total }}</div>
+                        <div class="col-md-4">
+                            <span>{% trans "Sort by" %}</span>
+                            <form action="" style="display:inline-block">
+                                <select class="default" name="sort_by">
+                                    <option  class="text-capitalize"  value="title"
+                                    >{% trans "Title" %}</option>
+                                    <option class="text-capitalize"
+                                    value="Updated_date"
+                                    >{% trans "updated date" %}</option>
+                                     <option class="text-capitalize" value="rating"
+                                    >{% trans "Rating" %}</option>
+
+
+
+                                </select>
+                                <!-- sort based on descendingascending -->
+                                <select class="default" name="sort_order">
+                                    <option class="text-capitalize" value="asc" selected="selected"
+                                    >{% trans "Ascending" %}</option>
+                                    <option class="text-capitalize" value="desc">{%  trans "Descending" %}</option>
+                                </select>
+                            </form>
+
                         </div>
                     </div>
+                    <!-- small form to sort data -->
+
                 </div>
 
+            </div>
+        </div>
+        <hr/>
 
-            {% endfor %}
 
-        </ul>
+        <div class="row">
+            <div class="col-md-12">
+                {% for hit in response %}
+                    <ul class="list-unstyled">
+                    <li class="media mb-3">
+                        <span class="mr-2">{{ forloop.counter }}.</span>
+                        <img class="mr-3 rounded" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
+                             width="64px"
+                             height="80px"
+                             title="{{ hit.title }}"
+                             alt="{{ hit.title }}">
+                        <div class="media-body">
+                            <p class="text-capitalizemt-0 mb-1">
+                                <a class="text-capitalize"
+                                   href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">{{ hit.title }}</a>
+                            </p>
+                            <p class="text-dark text-capitalize">{{ hit.abstract | truncatechars:"30" }}</p>
 
-
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 {% endblock content %}
 

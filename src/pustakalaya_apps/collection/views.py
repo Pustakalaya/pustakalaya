@@ -18,14 +18,15 @@ def collection_detail(request, name, pk):
     # Grab all the items for ES which belongs to this collection.
     # Dispatch to the detail page.
     client = Elasticsearch()
-
     s = Search().using(client).query("match", collections=name)
 
     response = s.execute()
+    print(response.to_dict())
 
 
     context["response"] = response
     context["collection_name"] = collection_name
+    context["collection_pk"] = pk
     context["community_name"] = collection.community_name
 
 
