@@ -1,0 +1,28 @@
+{% load static %}
+{% load i18n %}
+<div class="col-md-12">
+                {% for hit in response %}
+                    <ul class="list-unstyled">
+                    <li class="media mb-3">
+                        <span class="mr-2">{{ forloop.counter }}.</span>
+                        <img class="mr-3 rounded" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
+                             width="64px"
+                             height="80px"
+                             title="{{ hit.title }}"
+                             alt="{{ hit.title }}">
+                        <div class="media-body">
+                            <p class="text-capitalizemt-0 mb-1">
+                                <a class="text-capitalize"
+                                   href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">{{ hit.title }}</a>
+                            </p>
+                            <p class="text-dark text-capitalize">{{ hit.abstract | truncatechars:"30" }}</p>
+                            <div class="rating">
+                                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                            </div>
+
+                        </div>
+                    </li>
+                    <hr/>
+                {% endfor %}
+                </ul>
+            </div>

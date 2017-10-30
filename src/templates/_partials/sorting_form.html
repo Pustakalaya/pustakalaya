@@ -1,0 +1,42 @@
+{% load static %}
+{% load i18n %}
+<form action="" id="sortingForm" style="display:inline-block">
+    <select class="default" name="sort_by">
+        <option class="text-capitalize" value="title.keyword" readonly
+                {% if  sort_by  == "title.keword" %} selected {% endif %}
+        >{% trans "Title" %}</option>
+        <option class="text-capitalize"
+                value="updated_date" readonly
+                {% if  sort_by  == "updated_date" %} selected {% endif %}
+        >{% trans "updated date" %}</option>
+        <option class="text-capitalize" value="rating" readonly
+                {% if  sort_by  == "rating" %} selected {% endif %}
+        >{% trans "Rating" %}</option>
+
+    </select>
+    <!-- sort based on descendingascending -->
+    <select class="default" name="sort_order">
+        <option class="text-capitalize" value="asc" {% if  sort_order  == "asc" %} selected {% endif %} >
+            {% trans "Ascending" %}
+        </option>
+        <option class="text-capitalize" value="desc" {% if  sort_order  == "desc" %} selected {% endif %} >
+            {% trans "Descending" %}
+        </option>
+    </select>
+</form>
+
+
+<script>
+    // Script to send the request to controller
+    (function (window) {
+        var sortForm = document.getElementById("sortingForm");
+        var sort_by = sortForm.elements.sort_by;
+        var sort_order = sortForm.elements.sort_order;
+
+        sortForm.onchange = function () {
+            // OnChange sort_by or sort_order reload the pag
+            sortForm.submit();
+        }
+    })();
+</script>
+
