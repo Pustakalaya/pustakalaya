@@ -1,13 +1,33 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block style %}
+    {{ block.super }}
+    <style>
+        /* Some css to override styles */
+        /* TODO: move this css to pustakalaya.css */
+        .border-line {
+            padding-top: 5px;
+            padding-bottom: 5px !important;
+            padding-left: 3px;
+            border-top: 1px solid #dddddd;
+        }
+
+        .border-line span {
+            display: inline-block;
+            width: 300px;
+
+        }
+
+    </style>
+{% endblock style %}
 {% block content %}
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-3  col-xs-12">
+                <div class="col-md-3 col-sm-12 col-xs-12">
                     <!-- Logo -->
-                    <img class="img-responsive rounded w-100" src="http://placehold.it/200X250" alt="">
-
+                    <img class="img-responsive rounded w-100" height="280px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
+                         alt="{{ object.title }}" title="{{ object.title }}">
                     <!--view-->
                     <!--p>Views:273</p>
                     <i class="fa  fa-thumbs-up">271</i>
@@ -15,7 +35,7 @@
 
 
                     <!-- share buttons -->
-                    <div>
+                    <div class="text-center">
                         <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
                             <i class="fa fa-facebook-square"></i>
                         </a>
@@ -29,54 +49,41 @@
                             <i class="fa fa-linkedin"></i>
                         </a>
                     </div>
-                </div>
-                <div class="col content-center">
-                    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
-                        <source type="audio/mp3" src="http://www.archive.org/download/bolero_69/Bolero.mp3">
-                        Sorry, your browser does not support HTML5 audio.
-                    </audio>
-                    <ul id="playlist">
-                        <li class="active"><a href="http://www.archive.org/download/bolero_69/Bolero.mp3">Ravel
-                            Bolero</a></li>
-                        <li><a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">Moonlight
-                            Sonata - Beethoven</a></li>
-                        <li><a href="http://www.archive.org/download/CanonInD_261/CanoninD.mp3">Canon in D Pachabel</a>
-                        </li>
-                        <li>
-                            <a href="http://www.archive.org/download/PatrikbkarlChamberSymph/PatrikbkarlChamberSymph_vbr_mp3.zip">patrikbkarl
-                                chamber symph</a></li>
+                    <!--Audio section-->
 
-                    </ul>
                 </div>
+
+                <div class="controls">
+
+                </div>
+
                 <div class="col-9  col-xs-12">
+                    <!--Audio section -->
+                    <div>
+                        {% for audio in object.audiofileupload_set.all %}
+                            <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg"
+                                   title="{{ object.title }}" about="{{ object.title }}">
+                                <source type="audio/mp3" src="{{ MEDIA_URL }}{{ audio.upload }}">
+                                <span>{{ audio.file_name }}</span>
+                            </audio>
+                        {% endfor %}
+                    </div>
                     <h4 class="text-capitalize h4 lead mt-0 pt-0 "><b>{{ object.title }}</b></h4>
-                    <!-- author section -->
-                    <div class="pb-1 border-line">
-                        <!-- Authors -->
-                        <!-- TODO pluralization -->
-                        <span class="capitalize font-weight-normal text-dark">{% trans "Authors:" %}</span>
-                        {% for author in object.audio_authors.all %}
-                            <span class="text-secondary text-capitalize">{{ author }}</span>
-                        {% endfor %}
 
+                    <div class="pb-1 border-line">
+                        <!-- Read by/Voice -->
+                        <!-- TODO pluralization -->
+                        <span class="capitalize font-weight-normal text-dark">{% trans "Read by/Voice:" %}</span>
+
+                        <a href="{% url "author:author_detail" object.audio_read_by.getname|slugify object.audio_read_by.pk %}">
+                            <span class="text-secondary text-capitalize text-primary">{{ object.audio_read_by.getname }}</span></a>
                     </div>
 
-                    <!-- Illustrator section -->
-                    <div class="pb-1 border-line">
-                        <!-- Authors -->
-                        <!-- TODO pluralization -->
-                        <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
-                        {% for ready_by in object.audio_read_by.all %}
-                            <span class="text-secondary text-capitalize"> {{ ready_by }}</span>
-                        {% endfor %}
-
-
+                    <div>
+                        <p class="text-justify  tex-dark font-weight-normal" {% if not object.abstract %}
+                           style="..." {% endif %}>{{ object.abstract }}</p>
                     </div>
-
-                    <p class="text-justify  tex-dark font-weight-normal" {% if not object.abstract %}
-                       style="..." {% endif %}>{{ object.abstract }}</p>
-                    <!-- Authors section -->
-                    <hr/>
+                    <!-- Read by section -->
                     <div class="row">
 
 
@@ -215,45 +222,4 @@
             </div>
         </div>
     </div>
-    <script>
-        var audio;
-        var playlist;
-        var tracks;
-        var current;
-
-        init();
-
-        function init() {
-            current = 0;
-            audio = $('audio');
-            playlist = $('#playlist');
-            tracks = playlist.find('li a');
-            len = tracks.length - 1;
-            audio[0].volume = .10;
-            playlist.find('a').click(function (e) {
-                e.preventDefault();
-                link = $(this);
-                current = link.parent().index();
-                run(link, audio[0]);
-            });
-            audio[0].addEventListener('ended', function (e) {
-                current++;
-                if (current == len) {
-                    current = 0;
-                    link = playlist.find('a')[0];
-                } else {
-                    link = playlist.find('a')[current];
-                }
-                run($(link), audio[0]);
-            });
-        }
-
-        function run(link, player) {
-            player.src = link.attr('href');
-            par = link.parent();
-            par.addClass('active').siblings().removeClass('active');
-            audio[0].load();
-            audio[0].play();
-        }
-    </script>
 {% endblock content %}

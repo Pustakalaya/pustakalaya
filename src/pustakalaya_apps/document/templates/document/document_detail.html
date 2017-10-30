@@ -32,9 +32,13 @@
 
                 <div class="col-md-3 col-sm-12  col-xs-12">
                     <!-- Logo -->
-                    <img class="img-responsive rounded w-100" src="http://placehold.it/218X300" alt="">
+                    <img class="img-responsive rounded w-100" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
+                         alt="{{ object.title }}" title="{{ object.title }}">
+                    {% for document in object.documentfileupload_set.all %}
+                        <a href="{{ MEDIA_URL }}{{ document.upload }}" role="button"
+                           class="btn w-100 btn-success btn-sm">Read: {{ document.file_name }}</a>
+                    {% endfor %}
 
-                    <a href="/viewer.html" role="button" class="btn w-100 btn-success btn-sm">Download</a>
                     <p>फाइल साइज : 11.69 MB</p>
                     <!-- share buttons -->
                     <div>
@@ -60,9 +64,10 @@
                     <div class="pb-1">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
-                        <strong class="text-capitalize font-weight-normal text-dark">{% trans "Authors:" %}</strong>
+                        <strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong>
                         {% for author in object.document_authors.all %}
-                            <span class="text-secondary text-capitalize">{{ author }}</span>
+                            <a href="{% url "author:author_detail" author.getname|slugify author.pk %}"><span
+                                    class="text-secondary text-capitalize text-primary">{{ author }}</span></a>
                         {% endfor %}
 
                     </div>
