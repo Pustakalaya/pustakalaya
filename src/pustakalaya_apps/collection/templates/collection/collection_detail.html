@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %} {% endblock title %}
+{% block title %}{{ communit_name }} | {{ collection_name }} {% endblock title %}
+
+{% block style %}
+    {{ block.super }}
+{% endblock style %}
 
 {% block content %}
     <!-- Breadcums -->
@@ -28,24 +32,29 @@
                         <div class="col-md-8">{% trans "total available" %}: {{ response.hits.total }}</div>
                         <div class="col-md-4">
                             <span>{% trans "Sort by" %}</span>
-                            <form action="" style="display:inline-block">
-                                <select class="default" name="sort_by">
-                                    <option  class="text-capitalize"  value="title"
+                            <!-- sorting form -->
+                            <form action="" id="sortingForm" style="display:inline-block">
+                                <select class="default" name="sort_by" >
+                                    <option class="text-capitalize" value="title.keyword" readonly
+                                    {% if  sort_by  == "title.keword" %} selected {% endif %}
                                     >{% trans "Title" %}</option>
                                     <option class="text-capitalize"
-                                    value="Updated_date"
+                                            value="updated_date" readonly
+                                            {% if  sort_by  == "updated_date" %} selected {% endif %}
                                     >{% trans "updated date" %}</option>
-                                     <option class="text-capitalize" value="rating"
+                                    <option class="text-capitalize" value="rating" readonly
+                                            {% if  sort_by  == "rating" %} selected {% endif %}
                                     >{% trans "Rating" %}</option>
-
-
 
                                 </select>
                                 <!-- sort based on descendingascending -->
                                 <select class="default" name="sort_order">
-                                    <option class="text-capitalize" value="asc" selected="selected"
-                                    >{% trans "Ascending" %}</option>
-                                    <option class="text-capitalize" value="desc">{%  trans "Descending" %}</option>
+                                    <option class="text-capitalize" value="asc" {% if  sort_order  == "asc" %} selected {% endif %} >
+                                        {% trans "Ascending" %}
+                                    </option>
+                                    <option class="text-capitalize" value="desc" {% if  sort_order  == "desc" %} selected {% endif %} >
+                                        {% trans "Descending" %}
+                                    </option>
                                 </select>
                             </form>
 
@@ -77,13 +86,37 @@
                                    href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">{{ hit.title }}</a>
                             </p>
                             <p class="text-dark text-capitalize">{{ hit.abstract | truncatechars:"30" }}</p>
+                            <div class="rating">
+                                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                            </div>
 
                         </div>
                     </li>
+                    <hr/>
                 {% endfor %}
                 </ul>
             </div>
         </div>
     </div>
 {% endblock content %}
+
+{% block script %}
+    {{ block.super }}
+    <!-- script to implement sorting -->
+    <script>
+        (function (window) {
+            var sortForm = document.getElementById("sortingForm");
+            var sort_by = sortForm.elements.sort_by;
+            var sort_order = sortForm.elements.sort_order;
+
+            sortForm.onchange = function() {
+                 // OnChange sort_by or sort_order reload the page.
+            console.log("Sort By", sort_by.value);
+            console.log("Sort order", sort_order.value);
+            sortForm.submit();
+            }
+        })();
+    </script>
+
+{% endblock script %}
 

@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext as _
-from elasticsearch.exceptions import ConnectionError
+from elasticsearch.exceptions import ConnectionError, NotFoundError
 from elasticsearch_dsl.connections import connections
 
 from pustakalaya_apps.core.abstract_models import AbstractTimeStampModel
@@ -19,8 +19,8 @@ class Collection(AbstractTimeStampModel):
         ("course materials", _("Course materials")),
         ("teaching materials", _("Teaching materials")),
         ("reference materials", _("Reference materials")),
-        ("other educational materials", _("Reference materials")),
-        ("newspaper and  magazines", _("Reference materials")),
+        ("other educational materials", _("Other educational materials")),
+        ("newspaper and  magazines", _("newspaper and magazines")),
     )
 
     community_name = models.CharField(
@@ -69,8 +69,8 @@ class Collection(AbstractTimeStampModel):
     def delete_index(self):
         try:
             self.doc().delete()
-        except ConnectionError:
-            raise ValidationError("Cannot connect to Index server")
+        except (ConnectionError, NotFoundError):
+            pass
 
     def __str__(self):
         return self.collection_name
