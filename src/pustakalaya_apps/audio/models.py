@@ -100,6 +100,11 @@ class Audio(AbstractItem):
         max_length=255
     )
 
+    @property
+    def getauthors(self):
+        author_list = [(author.getname, author.pk) for author in [self.audio_read_by]]
+        return author_list or [None]
+
     def doc(self):
         # Parent attributes
         item_attr = super(Audio, self).doc()
@@ -120,6 +125,7 @@ class Audio(AbstractItem):
             audio_read_by=self.audio_read_by.getname,
             audio_genre=self.audio_genre.genre,
             audio_series=self.audio_series.series_name,
+            author_list = self.getauthors
 
         )
 

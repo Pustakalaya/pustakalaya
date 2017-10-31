@@ -6,10 +6,7 @@ from pustakalaya_apps.core.utils import list_search_from_elastic
 
 def keyword_detail(request, keyword):
     search_string = " ".join(keyword.split("-"))
-    # client = Elasticsearch()
-    # # TODO: explicitly define the index name
-    # s = Search().using(client).query("match", keywords=keyword)
-    # response = s.execute()
+    # TODO: explicitly define the index name
     search_field = "keywords"
     search_value = search_string
     kwargs = {search_field:search_value}

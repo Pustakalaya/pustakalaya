@@ -172,6 +172,11 @@ class Document(AbstractItem):
     class Meta:
         ordering = ('title',)
 
+    @property
+    def getauthors(self):
+        author_list = [ (author.getname, author.pk) for author in self.document_authors.all()]
+        return author_list or [None] # If emtpy, return something otherwise it will break elastic index while searching.
+
     def __str__(self):
         return self.title
 
@@ -204,7 +209,9 @@ class Document(AbstractItem):
                 ],  # Multi value
             document_total_page=self.document_total_page,
             # Document interactivity
-            document_interactivity=self.document_interactivity
+            document_interactivity=self.document_interactivity,
+            # author with name and id.
+            author_list = self.getauthors
 
         )
 

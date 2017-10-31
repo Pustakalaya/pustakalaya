@@ -10,6 +10,7 @@ from django.conf import settings
 from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Q
 from pustakalaya_apps.core.utils import list_search_from_elastic
+from pustakalaya_apps.document.search import DocumentDoc
 
 
 def browse(request):
@@ -40,23 +41,25 @@ def browse(request):
         if sort_by not in sort_by_type:
             sort_by = "title.keyword"
 
-        if browse_by == "all" or browse_by == "title" or browse_by not in browse_by_type:
-            browse_by = [
-                {"title.keyword": {"order": sort_order}}
-            ]
-
         if browse_by == "author":
-            # set browse_by options as multiple
-            browse_by = [
-                {"author.keyword": {"order": sort_order}}
-            ]
+            # sort by authors keyword
+            sort_by = sort_by or "author_list.keyword"
+
+        if browse_by == "all" or browse_by == "title" or browse_by not in browse_by_type:
+            sort_by = sort_by or "title.keyword"
+
+        # Create the query parameter
+        query = [
+            {sort_by: {"order": sort_order}},
+        ]
+        print(sort_by)
 
         client = connections.get_connection()
 
-        s = Search(using=client, index=settings.ES_INDEX).query("match_all").sort(
-            *browse_by
+        s = Search(using=client, index="pustakalaya", doc_type=DocumentDoc).query("match_all").sort(
+            *query
         )
-
+        print(s.to_dict())
         response = s.execute()
 
         return render(request, "pustakalaya_search/browse.html", {

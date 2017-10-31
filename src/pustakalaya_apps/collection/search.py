@@ -21,6 +21,8 @@ class CollectionDoc(DocType):
     collection_name = Text()
     collection_description = Text()
     community_name = Text()
+    title = Text()
+    
 
     class Meta:
         index = "pustakalaya"
