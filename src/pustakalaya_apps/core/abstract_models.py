@@ -36,7 +36,8 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     )
     dob = models.DateField(
         verbose_name=_("Date of birth"),
-        blank=True
+        blank=True,
+        null=True
     )
     pen_name = models.CharField(
         verbose_name=_("Pen name"),

@@ -40,7 +40,7 @@ urlpatterns += i18n_patterns(
     url(r'^search/', include('pustakalaya_apps.pustakalaya_search.urls', namespace="search")),
 
     # Browse endpoint url
-    url(r'^browse/', include('pustakalaya_apps.pustakalaya_search.browse_urls', namespace="search")),
+    url(r'^browse/', include('pustakalaya_apps.pustakalaya_search.browse_urls', namespace="browse")),
 
     # Homepage and core urls
     url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),

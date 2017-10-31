@@ -1,16 +1,21 @@
-{%  extends 'base.html' %}
-{%  load i18n %}
+{% extends 'base.html' %}
+{% load i18n %}
 
-{%  block content %}
-   <div class="container">
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <span mr-5>Total {{ response.hits.total }}</span>
+            </div>
+            <div class="col-md-6">
+                 {% include "_partials/sorting_form.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-left">
+                {% include '_partials/list_display.html' %}
+            </div>
 
-    <p>{% trans "Browse the library by " %}</p>
-    {%  for hit in response %}
-        {{ hit.title }}
-        {{ hit.id }}
-        {{ hit.document_authors }}
-        <br>
-    {%  endfor %}
-
-   </div>
+        </div>
+    </div>
 {% endblock content %}

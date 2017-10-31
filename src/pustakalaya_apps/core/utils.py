@@ -7,7 +7,7 @@ from elasticsearch_dsl import Search
 from elasticsearch_dsl.connections import connections
 
 
-def list_search_from_elastic(request, **kwargs):
+def list_search_from_elastic(request, query_type="match", **kwargs):
     """
     Return a list of matching document when query value matches the field value.
 
@@ -38,12 +38,11 @@ def list_search_from_elastic(request, **kwargs):
     # Query to elastic search to grab all the items related to this collection name
     # And sort the result based on the sorting options.
     client = Elasticsearch()
-    s = Search().using(client).query("match", **kwargs).sort({
+    s = Search().using(client).query(query_type, **kwargs).sort({
         sort_by: {"order": sort_order}
     })
 
     response = s.execute()
-    print(response)
 
     context["response"] = response
     context["sort_order"] = sort_order
