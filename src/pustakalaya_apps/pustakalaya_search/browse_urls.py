@@ -2,12 +2,12 @@
 urls to browse all items.
 """
 from django.conf.urls import url
-from . import views
+from . import browse_views
 
 urlpatterns = [
     # Search url
-    url(r'^$', views.browse, name="browse_all"),
-    url(r'^(?P<browse_by>[\w]+)/$', views.browse, name="browse"),
+    url(r'^$', browse_views.browse, name="browse"),
+    #url(r'^(?P<browse_by>[\w]+)/$', browse_views.browse, name="browse"),
 
 
 ]

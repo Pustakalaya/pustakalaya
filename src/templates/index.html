@@ -51,18 +51,18 @@
                     <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Browse Pustakalaya" %}</p>
 
                     <p>
-                        <a href="{% url 'community:community_detail' 'all' %}" class="text-capitalize">
+                        <a href="{% url 'browse:browse'%}?browse_by=all&sort_order=asc" class="text-capitalize">
                             <i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i>{% trans "All" %}</a>
                     </p>
 
                     <p>
-                        <a href="{% url 'community:community_detail' 'title' %}" class="text-capitalize">
+                        <a href="{% url 'browse:browse'%}?browse_by=title&sort_order=asc" class="text-capitalize">
                             <i class="fa text-secondary  fa-file-audio-o mr-2"
                                aria-hidden="true"></i>{% trans "title" %}</a>
                     </p>
 
                     <p>
-                        <a href="{% url 'community:community_detail' 'author' %}" class="text-capitalize">
+                        <a href="{% url 'browse:browse'%}?browse_by=keyword&sort_order=asc" class="text-capitalize">
                             <i class="fa  text-secondary fa-file-video-o mr-2"
                                aria-hidden="true"></i>{% trans "author" %}</a>
                     </p>
