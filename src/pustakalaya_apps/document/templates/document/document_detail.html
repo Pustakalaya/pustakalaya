@@ -64,7 +64,7 @@
                     <div class="pb-1">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
-                        <strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong>
+                        <!--strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong-->
                         {% for author in object.document_authors.all %}
                             <a href="{% url "author:author_detail" author.getname|slugify author.pk %}"><span
                                     class="text-secondary text-capitalize text-primary">{{ author }}</span></a>
@@ -76,9 +76,9 @@
                     <div class="pb-1">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
-                        <strong class="text-capitalize font-weight-normal text-dark">{% trans "Illustrators:" %}</strong>
+                        <!--strong class="text-capitalize font-weight-normal text-dark">{% trans "Illustrators:" %}</strong-->
                         {% for author in object.document_illustrators.all %}
-                            <span class="text-secondary text-capitalize"> {{ illustrator }}</span>
+                            <span class="text-secondary text-capitalize">{{ illustrator }}</span>
                         {% endfor %}
 
 

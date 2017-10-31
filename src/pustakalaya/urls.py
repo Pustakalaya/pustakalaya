@@ -105,6 +105,12 @@ urlpatterns += i18n_patterns(
         name="feedback"
     ),
 
+# Help page
+    # /help/
+    url(
+        r'^signup/$', TemplateView.as_view(template_name="static_pages/sign_up.html"),
+        name="signup"
+    ),
     # Help page
     # /help/
     url(

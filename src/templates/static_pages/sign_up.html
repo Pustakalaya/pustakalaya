@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <!--sign up page-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 offset-md-1">
+                <h4 class="text-dark">
+                    {% trans 'Create your Pustakalaya Account' %}
+                </h4>
+                <p class="text-muted font-sm">
+                    {% trans 'Register with basic information, Complete your profile and start browsing Pustakalaya' %}
+                </p>
+                <form action="/register/" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="">
+
+
+                    <input type="hidden" name="csrfmiddlewaretoken" value="">
+                    <div id="div_id_name" class="form-group">
+                        <div class="">
+                            <div class="input-group"><span class="input-group-addon"
+                                                           style="border-radius: 0 !important;"><i
+                                    class="fa fa-user-circle"></i></span>
+                                <input type="text" name="name" required="" class="textinput textInput form-control"
+                                       placeholder="Full Name" id="id_name"></div>
+                        </div>
+                    </div>
+                    <div id="div_id_contact_number" class="form-group">
+                        <div class="">
+                            <div class="input-group"><span class="input-group-addon"
+                                                           style="border-radius: 0 !important;"><i
+                                    class="fa fa-phone-square"></i></span>
+                                <input type="number" name="contact_number" required=""
+                                       class="textinput textInput form-control" placeholder="Mobile Number"
+                                       id="id_contact_number"></div>
+                        </div>
+                    </div>
+                    <div id="div_id_email" class="form-group">
+                        <div class="">
+                            <div class="input-group">
+                                <span class="input-group-addon"
+                                                           style="border-radius: 0 !important;"><i
+                                    class="fa fa-envelope-o"></i></span>
+                                <input type="email" name="email" required="" class="textinput textInput form-control"
+                                       placeholder="E-mail address" id="id_email"></div>
+                        </div>
+                    </div>
+                    <div id="div_id_password1" class="form-group">
+                        <div class="">
+                            <div class="input-group"><span class="input-group-addon"
+                                                           style="border-radius: 0 !important;"><i
+                                    class="fa fa-key"></i></span> <input type="password" name="password1"
+                                                                         required=""
+                                                                         class="textinput textInput form-control"
+                                                                         placeholder="Password" id="id_password1">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div_id_password2" class="form-group">
+                        <div class="">
+                            <div class="input-group"><span class="input-group-addon"
+                                                           style="border-radius: 0 !important;"><i
+                                    class="fa fa-key"></i></span> <input type="password" name="password2"
+                                                                         required=""
+                                                                         class="textinput textInput form-control"
+                                                                         placeholder="Password (again)"
+                                                                         id="id_password2"></div>
+                        </div>
+                    </div>
+
+
+                    <p class="text-muted font-sm">
+                        {% blocktrans %}
+                        By clicking on 'Create Pustakalaya Account' below you are agreeing to the'
+                        <a href="/terms-and-conditions/" target="_blank">terms</a> and <a href="/privacy-policy/"
+                      target="_blank">privacy</a>of  Pustakalaya!
+                        {% endblocktrans %}
+                    </p>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-10 offset-md-1">
+                                <button type="submit" class="btn btn-md btn-default btn-block text-white">
+                                    {% trans 'Create Pustakalaya Account' %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <p class="text-center pt-1"><span>{% trans 'Log in with' %}:</span>
+                    <a href="/facebook/login/" class="no-uline">
+                        <span class="fa fa-facebook-square text-muted mx-1"></span></a>
+                    <a href="/twitter/login/?method=oauth2" class="no-uline">
+                        <span class="fa fa-twitter-square text-muted"></span></a>
+                    <a href="/google/login/?method=oauth2" class="no-uline">
+                        <span class="fa fa-google-plus-square text-muted"></span></a>
+                </p>
+                <p class="text-center">{% trans 'Already have Pustakalaya account' %}? <a href="/login/">{% trans 'Log in' %}</a></p>
+            </div>
+            <div class="border-right-1 mx-3"></div>
+            <div class="col-md-5 p-4">
+                <div class="mt-4">
+                    <div class="media">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>#1 Pustakalaya Site of Nepal</h5>
+                            <span class="text-muted">Alexa Ranking, Google Analytics, Social Medias, Pustakalaya has always put us on top!</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>Most Trusted Pustakalaya in Nepal</h5>
+                            <span class="text-muted">Over 100 million + page views since the inception year 2009 over 1.5 million monthly visitors and it's growing everyday.</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>It's FREE and It will Always Be</h5>
+                            <span class="text-muted">At pustakalaya we don't put a price on opportunity, what you see is what you get! An average of 25,000 books, audio, video and reference materials to choose from. No registration fees. No hidden costs.</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>Your Confidentiality is Assured</h5>
+                            <span class="text-muted">We understand your professional goals are yours and yours only. So you can be confident that searching and applying for your next career opportunity is 100% confidential and secure.</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>We Provide offline pustakalaya</h5>
+                            <span class="text-muted">We are proud to have partnered with more than 20,000 schools and   launched 1,000,000 offline pustakalaya all over Nepal.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
