@@ -26,14 +26,14 @@ def list_search_from_elastic(request, query_type="match", **kwargs):
 
     if request.method == "GET":
         # Default sort options
-        sort_by = request.GET.get("sort_by") or "title.raw"
+        sort_by = request.GET.get("sort_by") or "updated_date"
         sort_order = request.GET.get("sort_order") or "asc"
 
         if sort_order not in sort_order_type:
             sort_order = "asc"
 
         if sort_by not in sort_by_type:
-            sort_by = "title.raw"
+            sort_by = "title.keyword"
 
     # Query to elastic search to grab all the items related to this collection name
     # And sort the result based on the sorting options.
