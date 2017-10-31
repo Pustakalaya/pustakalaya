@@ -1,0 +1,84 @@
+{% load static %}
+{% load i18n %}
+<div class="dropdown-menu dropdown-menu-right  w-50 p-3 right" id="custom-login"
+     style="width: 325px!important;">
+    <div class="tab-content">
+        <form action="" method="post" id="CustomLoginForm">
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="">
+
+
+            <div class="mt-2 mb-1">
+                <span class="">
+                    {% trans 'Login with your registered Email &amp; Password.' %}
+                </span>
+            </div>
+
+
+            <div id="div_id_login" class="form-group">
+
+                <div class="">
+                    <input type="email" name="login" class="textinput textInput form-control"
+                           placeholder="E-mail address" autofocus="autofocus" id="id_login"
+                           required="">
+                </div>
+
+            </div>
+
+
+            <div id="div_id_password" class="form-group">
+                <div class="">
+                    <input type="password" name="password" class="textinput textInput form-control"
+                           placeholder="Password" id="id_password" required="">
+                </div>
+            </div>
+
+
+            <div class="font-xs">
+                <div class="float-left login-modal">
+                    <div class="form-group">
+                        <div id="div_id_remember" class="checkbox">
+                            <label for="id_remember" class="">
+                                <input type="checkbox" name="remember" class="checkboxinput"
+                                       id="id_remember">
+                                {% trans 'Remember Me' %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-right">
+                    <a href="/reset/password/">{% trans 'Forgot Password' %}?</a>
+                </div>
+            </div>
+
+
+            <div id="CustomLoginJs">
+                <div class="clearfix"></div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-md btn-default text-white w-50">{% trans 'Log in' %}</button>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="font-sm text-center">
+                    <span><strong>{% trans 'Don\'t have an account?' %}</strong></span>
+                    <a href="{% url 'signup' %}">
+                        {% trans 'Register Now' %}
+                    </a>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="text-center">
+                    <p class="mb-1 font-weight-bold">Or</p>
+                    Log in with:
+                    <a href="/facebook/login/" class="no-uline">
+                        <span class="fa fa-facebook-square mr-1 text-muted"></span>
+                    </a>
+                    <a href="/twitter/login/?method=oauth2" class="p-1 font-sm no-uline">
+                        <span class="fa fa-twitter-square text-muted  mr-1 "></span>
+                    </a>
+                    <a href="/google/login/?method=oauth2" class="no-uline">
+                        <span class="fa fa-google-plus-square text-muted"></span>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
