@@ -35,7 +35,7 @@ def collection_detail(request, name, pk):
     # Query to elastic search to grab all the items related to this collection name
     # And sort the result based on the sorting options.
     client = Elasticsearch()
-    s = Search().using(client).query("match", collections=name).sort({
+    s = Search(doc_type="document", index="pustakalaya").using(client).query("match", collections=name).sort({
         sort_by: {"order": sort_order}
     })
 

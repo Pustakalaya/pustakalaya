@@ -22,7 +22,6 @@ class PustakalayaSearch(FacetedSearch):
         'description',
         'collections',
         'communities',
-        "document_authors"
 
     ]
 
@@ -38,14 +37,3 @@ class PustakalayaSearch(FacetedSearch):
         'publication_year': DateHistogramFacet(field='year_of_available', interval='month', min_doc_count=0),
 
     }
-
-    # def query(self, search, query):
-    #     if not query:
-    #         return search
-    #     # query in title, abstract and description
-    #     q = Q('multi_match', fields=PustakalayaSearch.fields, query=query)
-    #
-    #     return search
-    #
-    # def highlight(self, search):
-    #     return search
