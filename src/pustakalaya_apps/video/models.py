@@ -117,6 +117,11 @@ class Video(AbstractItem):
         default="0"
     )
 
+    @property
+    def getauthors(self):
+        author_list = [(author.getname, author.pk) for author in [self.video_director]]
+        return author_list or [None]
+
     def doc(self):
         # Parent attr
         item_attr = super(Video, self).doc()
@@ -136,7 +141,8 @@ class Video(AbstractItem):
             video_director=getattr(self.video_director, "getname", ""),
             video_series=getattr(self.video_series, "series_name", ""),
             video_certificate_license=self.video_certificate_license,
-            video_genre=getattr(self.video_genre, "genre", "")
+            video_genre=getattr(self.video_genre, "genre", ""),
+            author_list=self.getauthors
 
         )
         # Create a video  instance

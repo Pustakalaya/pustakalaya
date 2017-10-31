@@ -65,6 +65,7 @@ urlpatterns += i18n_patterns(
 
     # Author url
     # /authors/
+    # Don't change this hard links are used.
     url(r'^authors/', include('pustakalaya_apps.core.author_urls', namespace="author")),
 
     # /keywords

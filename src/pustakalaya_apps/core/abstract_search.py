@@ -19,3 +19,4 @@ class ItemDoc(DocType):
     publication_year = Date()
     created_date = Date()
     updated_date = Date()
+    author_list = Text(multi=True)
