@@ -1,6 +1,6 @@
 #  document/models.py
-from django.contrib.auth.models import User
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from elasticsearch.exceptions import NotFoundError
 
@@ -211,7 +211,8 @@ class Document(AbstractItem):
             # Document interactivity
             document_interactivity=self.document_interactivity,
             # author with name and id.
-            author_list = self.getauthors
+            author_list = self.getauthors,
+            url = self.get_absolute_url()
 
         )
 
@@ -238,7 +239,7 @@ class Document(AbstractItem):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("document:document_detail", kwargs={"pk":self.pk})
+        return reverse("document:detail", kwargs={"title": slugify(self.title), "pk":self.pk})
 
 
 
