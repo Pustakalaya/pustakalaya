@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from pustakalaya_apps.collection.models import Collection
 from elasticsearch.exceptions import NotFoundError
@@ -122,6 +123,10 @@ class Video(AbstractItem):
         author_list = [(author.getname, author.pk) for author in [self.video_director]]
         return author_list or [None]
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("video:detail", kwargs={"title": slugify(self.title), "pk": self.pk})
+
     def doc(self):
         # Parent attr
         item_attr = super(Video, self).doc()
@@ -142,7 +147,8 @@ class Video(AbstractItem):
             video_series=getattr(self.video_series, "series_name", ""),
             video_certificate_license=self.video_certificate_license,
             video_genre=getattr(self.video_genre, "genre", ""),
-            author_list=self.getauthors
+            author_list=self.getauthors,
+            url = self.get_absolute_url()
 
         )
         # Create a video  instance

@@ -1,16 +1,11 @@
 import json
-from collections import OrderedDict
 from django.shortcuts import render
 from .search import PustakalayaSearch
-from django.shortcuts import redirect
 from json import JSONDecodeError
 from elasticsearch_dsl import Search
-from elasticsearch import Elasticsearch
 from django.conf import settings
 from elasticsearch_dsl.connections import connections
-from elasticsearch_dsl import Q
-
-
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def search(request):
@@ -36,7 +31,18 @@ def search(request):
         # Search in elastic search
         search_obj = PustakalayaSearch(query=query_string, filters=filters)
 
-        response = search_obj.execute()
+        # Pagination configuration before executing a query.
+        paginator = Paginator(search_obj, 12)
+
+        page_no = request.GET.get('page')
+        try:
+            page = paginator.page(page_no)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+
+        response = page.object_list.execute()
 
         search_result["response"] = response
         search_result["hits"] = response.hits
@@ -50,34 +56,38 @@ def search(request):
         search_result["year_of_available"] = response.facets.year_of_available
         search_result["license_type"] = response.facets.license_type
         search_result["q"] = query_string or ""
-        search_result["time"] = response.took / float(1000) # Convert time in msec
-
-        for (type, count, selected) in response.facets.type:
-            print(type, ' (SELECTED):' if selected else ':', count)
-
-        for (language, count, selected) in response.facets.languages:
-            print(language, ' (SELECTED):' if selected else ':', count)
-
-        for (education_level, count, selected) in response.facets.education_levels:
-            print(education_level, ' (SELECTED):' if selected else ':', count)
-
-        for (community, count, selected) in response.facets.communities:
-            print(community, ' (SELECTED):' if selected else ':', count)
-
-        for (collection, count, selected) in response.facets.collections:
-            print(collection, ' (SELECTED):' if selected else ':', count)
-
-        for (keyword, count, selected) in response.facets.keywords:
-            print(keyword, ' (SELECTED):' if selected else ':', count)
-
-        for (month, count, selected) in response.facets.year_of_available:
-            print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
-
-        for (license_type, count, selected) in response.facets.license_type:
-            print(license_type, ' (SELECTED):' if selected else ':', count)
-
-        for (month, count, selected) in response.facets.publication_year:
-            print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
+        search_result["time"] = response.took / float(1000)  # Convert time in msec
+        search_result["page_obj"] = page
+        search_result["paginator"] = paginator
+        print(dir(page))
+        print("Coutn", page.count)
+        #
+        # for (type, count, selected) in response.facets.type:
+        #     print(type, ' (SELECTED):' if selected else ':', count)
+        #
+        # for (language, count, selected) in response.facets.languages:
+        #     print(language, ' (SELECTED):' if selected else ':', count)
+        #
+        # for (education_level, count, selected) in response.facets.education_levels:
+        #     print(education_level, ' (SELECTED):' if selected else ':', count)
+        #
+        # for (community, count, selected) in response.facets.communities:
+        #     print(community, ' (SELECTED):' if selected else ':', count)
+        #
+        # for (collection, count, selected) in response.facets.collections:
+        #     print(collection, ' (SELECTED):' if selected else ':', count)
+        #
+        # for (keyword, count, selected) in response.facets.keywords:
+        #     print(keyword, ' (SELECTED):' if selected else ':', count)
+        #
+        # for (month, count, selected) in response.facets.year_of_available:
+        #     print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
+        #
+        # for (license_type, count, selected) in response.facets.license_type:
+        #     print(license_type, ' (SELECTED):' if selected else ':', count)
+        #
+        # for (month, count, selected) in response.facets.publication_year:
+        #     print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
 
         return render(request, "pustakalaya_search/search_result.html", search_result)
 
@@ -102,13 +112,12 @@ def browse(request, browse_by="all"):
 
         client = connections.get_connection()
 
-        s= Search(using=client, index=settings.ES_INDEX).query("match_all").sort(
+        s = Search(using=client, index=settings.ES_INDEX).query("match_all").sort(
             {"title.keyword": {"order": "asc"}}
         )
         response = s.execute()
 
-        return render(request, "pustakalaya_search/browse.html",{
+        return render(request, "pustakalaya_search/browse.html", {
             "response": response,
-
 
         })

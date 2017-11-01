@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from elasticsearch.exceptions import NotFoundError
 
@@ -105,6 +106,10 @@ class Audio(AbstractItem):
         author_list = [(author.getname, author.pk) for author in [self.audio_read_by]]
         return author_list or [None]
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("audio:detail", kwargs={"title": slugify(self.title), "pk": self.pk})
+
     def doc(self):
         # Parent attributes
         item_attr = super(Audio, self).doc()
@@ -125,7 +130,8 @@ class Audio(AbstractItem):
             audio_read_by=self.audio_read_by.getname,
             audio_genre=self.audio_genre.genre,
             audio_series=self.audio_series.series_name,
-            author_list = self.getauthors
+            author_list = self.getauthors,
+            url = self.get_absolute_url()
 
         )
 

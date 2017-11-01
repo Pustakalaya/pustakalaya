@@ -36,14 +36,14 @@
         <p style="background: #F3EDD7;" id="video-title"
            class="text-left p3 pl-3 text-dark description text-capitalize">{{ object.videofileupload_set.first.file_name }}</p>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-7 col-sm-12 col-xs-12">
                 <video class="video-js vjs-default-skin" width="640px" height="360px"
                        id="selectedVideo" controls preload="none"
                        src="{{ MEDIA_URL }}{{ object.videofileupload_set.first.upload }}"
                        data-setup='{ "aspectRatio":"640:360", "playbackRates": [1, 1.5, 2] }'>
                 </video>
             </div>
-            <div class="col-md-5  p-5 "
+            <div class="col-md-5 col-sm-12 col-xs-12 p-5 "
                  style="height: 360px; width:426px; overflow-y: scroll; margin-left: -15px; background: #F3EDD7;">
                 <div id="videoList">
                     <h6 class="text-primary text-uppercase mb-4 description">Videos of {{ object.title }}</h6>
