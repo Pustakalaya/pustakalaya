@@ -19,7 +19,6 @@ class AuthorDetail(DetailView):
 def author_list(request):
     # hold some data.
     letters = string.ascii_lowercase
-
     nepali_letters = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऋ', 'ए','क','ख','ग' ,'घ' ,'ङ', 'च', 'छ', 'ज', 'झ', 'ञ','ट', 'ठ', 'ड', 'ढ', 'ण','त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स', 'ष', 'ह']
 
     authors = Biography.objects.all()
