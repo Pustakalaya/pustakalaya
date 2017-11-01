@@ -6,9 +6,14 @@
         <div class="row mb-5">
             <div class="col-md-12">
                 {% for l in letters %}
-                    <span><a class="btn text-uppercase btn-sm btn-primary text-white" href=""
+                    <span class=""><a class="btn btn-sm btn-primary text-uppercase text-white" href=""
                              readonly>{{ l }}</a></span>
                 {% endfor %}
+
+            {% for nepali in nepali_letter %}
+                <span><a class="btn text-uppercase btn-sm btn-primary text-white" href=""
+                             readonly>{{ nepali }}</a></span>
+            {% endfor %}
             </div>
         </div>
 
