@@ -21,208 +21,222 @@
 
         }
 
+        .anyClass {
+            height: 150px;
+            overflow-y: scroll;
+        }
+
     </style>
+    <link rel="stylesheet" href="{% static 'base_assets/css/video-js.css' %}">
 {% endblock style %}
 
 {% block content %}
-    <link href="http://vjs.zencdn.net/6.2.8/video-js.css" rel="stylesheet">
-    <!-- If you'd like to support IE8 -->
-    <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-
-
-    <div>
     <div class="container">
+        <!-- video player -->
+        <p style="background: #F3EDD7;" id="video-title"
+           class="text-left p3 pl-3 text-dark description text-capitalize">{{ object.videofileupload_set.first.file_name }}</p>
         <div class="row">
-            <div class="col pull-right">
-                <div id="instructions">
-
-                    <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
-                           controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
-                           data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-                        <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'/>
-                        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm'/>
-                    </video>
-                    <br>
-                    <br>
-                </div>
+            <div class="col-md-7">
+                <video class="video-js vjs-default-skin" width="640px" height="360px"
+                       id="selectedVideo"
+                       controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                       src="{{ MEDIA_URL }}{{ object.videofileupload_set.first.upload }}"
+                       data-setup='{ "aspectRatio":"640:360", "playbackRates": [1, 1.5, 2] }'>
 
 
-                <div class="col-3  col-xs-12">
+                </video>
+            </div>
+            <div class="col-md-5  p-5 "
+                 style="height: 360px; width:426px; overflow-y: scroll; margin-left: -15px; background: #F3EDD7;">
+                <div id="videoList">
+                    <h6 class="text-primary text-uppercase mb-4 description">Videos of {{ object.title }}</h6>
+                    {% for video in object.videofileupload_set.all %}
+                        <div class="text-dark pt-1 pb-1 pl-3 text-capitalize  {% if forloop.counter == 1 %} bg-white {% endif %}">
+                            <span style="cursor: pointer"
+                                  data-src="{{ MEDIA_URL }}{{ video.upload }}"
+                                  data-title="{{ video.file_name }}"
+                                  onclick="playVideo(this)" class="
+                                  text-dark text-capitalize ">
+                                 {{ forloop.counter }}&nbsp;.&nbsp;{{ video.file_name }}
 
-                    <!-- share buttons -->
-                    <div><span class=""> {% trans "Share on" %} </span>
-
-                        <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
-                            <i class="fa fa-facebook-square"></i>
-                        </a>
-                        <a href="http://www.twitter.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="http://www.google.com/Epustakalaya" class="btn btn-default btn-icon btn-round">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="http://www.linkedin.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-                <br>
-                <div class="col-md-12 col-sm-12 col-lg-12  col-xs-12">
-                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
-                    <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
-                    <!-- Authors section -->
-
-                    <div class="row">
-                        <!-- metadata section -->
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-
-                            <!-- publisher section -->
-                            <div class="pb-1 border-line">
-
-                                <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
-                                <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
-
-                            </div>
-
-                            <!-- place of publication -->
-                            <div class="pb-1 border-line">
-
-                                <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
-                                <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
-
-                            </div>
-
-                            <!-- Publication year -->
-                            <div class="pb-1 border-line">
-
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
-                                <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
-
-                            </div>
-
-                            <!-- Available year -->
-                            <div class="pb-1 border-line">
-
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
-                                <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
-
-                            </div>
-
-                            <!-- Keywords -->
-                            <div class="pb-1 border-line">
-
-                                <!-- TODO pluralization -->
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
-                                {% for keyword in object.keywords.all %}
-                                    <span class="text-secondary text-capitalize"> <a
-                                            href="{% url "keyword:keyword_detail" keyword.keyword %}">{{ keyword.keyword }}</a></span>
-
-                                {% endfor %}
-
-
-                            </div>
-
-                            <!-- Description -->
-                            <div class="pb-1 border-line" {% if not object.description %} style="..." {% endif %}>
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
-                                <span class="text-secondary text-capitalize"> {{ object.description }}</span>
-
-                            </div>
-
-                            <!-- License type -->
-                            <div class="pb-1 border-line">
-                                <!-- TODO pluralization -->
-                                <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
-                                <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
-                            </div>
-
-                            <!-- video series -->
-                            <div class="pb-1 border-line">
-                                <!-- Add 2px right margin in each -->
-                                <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
-                                <span class="text-secondary text-capitalize">{{ object.video_series }}</span>
-                            </div>
-
-                            <!-- video running time -->
-                            <div class="pb-1 border-line">
-                                <!-- Add 2px right margin in each -->
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "running time" %}</span>
-                                <span class="text-secondary text-capitalize">{{ object.video_running_time }}</span>
-                            </div>
-
-                            <!-- video certificate license -->
-                            <div class="pb-1 border-line">
-                                <!-- Add 2px right margin in each -->
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
-                                <span class="text-secondary text-capitalize">{{ object.video_certificate_license }}</span>
-                            </div>
-
-                            <!-- video genre -->
-                            <div class="pb-1 border-line">
-                                <!-- Add 2px right margin in each -->
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "genre:" %}</span>
-                                <span class="text-secondary text-capitalize">{{ object.video_genre }}</span>
-                            </div>
-
-                            <!-- Language -->
-                            <div class="pb-1 border-line">
-                                <!-- TODO: implement pluralization in total page -->
-                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
-                                <span class="text-secondary"> {{ object.languages.all }}</span>
-                            </div>
-
-                            <!-- Education level -->
-                            <div class="pb-1 border-line">
-                                <!-- TODO: implement pluralization in total page -->
-                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
-                                {% for education_level in object.education_levels.all %}
-                                    <span class="text-secondary"> {{ education_level }}</span>
-                                {% endfor %}
-
-
-                            </div>
-
-                            <!-- Rights -->
-                            <div class="pb-1 border-line">
-                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
-                                <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
-                            </div>
-
-                            <!-- sponsor -->
-                            <div class="pb-1 border-line">
-                                <!-- TODO pluralization -->
-                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
-                                {% for sponsor in object.sponsors.all %}
-                                    <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
-                                {% endfor %}
-                            </div>
+                            </span>
                         </div>
-                    </div>
+                        <hr/>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <!-- share buttons -->
+                <div>
+
+
+                    <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                    <a href="http://www.twitter.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="http://www.google.com/Epustakalaya" class="btn btn-default btn-icon btn-round">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a href="http://www.linkedin.com/Epustakalaya" class="btn btn-info btn-icon btn-round">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- end row -->
+        <div class="row">
+            <!-- metadata section -->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
+                <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
+
+                <!-- publisher section -->
+                <div class="pb-1 border-line">
+
+                    <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
+                    <span class="text-secondary text-capitalize"> {{ object.publisher }}</span>
+
+                </div>
+
+                <!-- place of publication -->
+                <div class="pb-1 border-line">
+
+                    <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
+                    <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
+
+                </div>
+
+                <!-- Publication year -->
+                <div class="pb-1 border-line">
+
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
+                    <span class="text-secondary text-capitalize"> {{ object.publication_year }}</span>
+
+                </div>
+
+                <!-- Available year -->
+                <div class="pb-1 border-line">
+
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
+                    <span class="text-secondary text-capitalize"> {{ object.created_date }}</span>
+
+                </div>
+
+                <!-- Keywords -->
+                <div class="pb-1 border-line">
+
+                    <!-- TODO pluralization -->
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
+                    {% for keyword in object.keywords.all %}
+                        <span class="text-secondary text-capitalize"> <a
+                                href="{% url "keyword:keyword_detail" keyword.keyword %}">{{ keyword.keyword }}</a></span>
+
+                    {% endfor %}
+
+
+                </div>
+
+                <!-- Description -->
+                <div class="pb-1 border-line" {% if not object.description %} style="..." {% endif %}>
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
+                    <span class="text-secondary text-capitalize"> {{ object.description }}</span>
+
+                </div>
+
+                <!-- License type -->
+                <div class="pb-1 border-line">
+                    <!-- TODO pluralization -->
+                    <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
+                    <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
+                </div>
+
+                <!-- video series -->
+                <div class="pb-1 border-line">
+                    <!-- Add 2px right margin in each -->
+                    <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
+                    <span class="text-secondary text-capitalize">{{ object.video_series }}</span>
+                </div>
+
+                <!-- video running time -->
+                <div class="pb-1 border-line">
+                    <!-- Add 2px right margin in each -->
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "running time" %}</span>
+                    <span class="text-secondary text-capitalize">{{ object.video_running_time }}</span>
+                </div>
+
+                <!-- video certificate license -->
+                <div class="pb-1 border-line">
+                    <!-- Add 2px right margin in each -->
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
+                    <span class="text-secondary text-capitalize">{{ object.video_certificate_license }}</span>
+                </div>
+
+                <!-- video genre -->
+                <div class="pb-1 border-line">
+                    <!-- Add 2px right margin in each -->
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "genre:" %}</span>
+                    <span class="text-secondary text-capitalize">{{ object.video_genre }}</span>
+                </div>
+
+                <!-- Language -->
+                <div class="pb-1 border-line">
+                    <!-- TODO: implement pluralization in total page -->
+                    <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
+                    <span class="text-secondary"> {{ object.languages.all }}</span>
+                </div>
+
+                <!-- Education level -->
+                <div class="pb-1 border-line">
+                    <!-- TODO: implement pluralization in total page -->
+                    <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
+                    {% for education_level in object.education_levels.all %}
+                        <span class="text-secondary"> {{ education_level }}</span>
+                    {% endfor %}
+
+
+                </div>
+
+                <!-- Rights -->
+                <div class="pb-1 border-line">
+                    <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
+                    <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
+                </div>
+
+                <!-- sponsor -->
+                <div class="pb-1 border-line">
+                    <!-- TODO pluralization -->
+                    <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
+                    {% for sponsor in object.sponsors.all %}
+                        <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        $(function () {
-            var $refreshButton = $('#refresh');
-
-            var $results = $('#css_result');
-
-            function refresh() {
-                var css = $('style.cp-pen-styles').text();
-                $results.html(css);
-            }
-
-            refresh();
-            $refreshButton.click(refresh);
-
-            // Select all the contents when clicked
-            $results.click(function () {
-                $(this).select();
-            });
-        });
-
-    </script>
-    <script src="http://vjs.zencdn.net/6.2.8/video.js"></script>
+    <!-- script to set the default video -->
 {% endblock content %}
+
+{% block script %}
+    {{ block.super }}
+    <script>
+        (function (window) {
+            window.playVideo = function (event) {
+                // get the url of selected video.
+                var selectedURL = event.getAttribute('data-src');
+                var title = event.getAttribute("data-title");
+                // Remove all active class and add the selected class.
+                $("#videoList").children("div").removeClass('bg-white');
+                // Add class to this video
+                $(event).parent().addClass('bg-white');
+                // Now change the video src
+                var videoPlayer = document.getElementById("selectedVideo");
+                videoPlayer.setAttribute("src", selectedURL);
+                $("#video-title").text(title);
+                // Play the video
+                videoPlayer.play();
+            }
+        })(window);
+    </script>
+{% endblock script %}
