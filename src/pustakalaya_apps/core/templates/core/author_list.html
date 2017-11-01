@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                {% for l in letters %}
+                    <span><a class="btn text-uppercase btn-sm btn-primary text-white" href=""
+                             readonly>{{ l }}</a></span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- author list -->
+        {% for author in authors %}
+            <div class="row mb-2">
+                <div class="col-md-12">
+                     <span class="text-dark">{{ forloop.counter }}.</span>
+                    <a style="text-decoration: none" class="text-primary" href="/authors/{{ author.getname|slugify }}/{{ author.pk }}">
+
+                    {{ author.getname }}
+                </a></div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock content %}

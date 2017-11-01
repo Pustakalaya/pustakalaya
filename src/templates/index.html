@@ -48,31 +48,29 @@
                 <!-- Browse Pustakalaya -->
                 <div class="mt-0">
                     <!--pustakalaya browse by option-->
-                    <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Browse Pustakalaya" %}</p>
+                    <!--p class="description text-uppercase  text-dark text-uppercase mb-2"> {% url 'browse:browse'%}?browse_by=all&sort_order=asc {% trans "Browse Pustakalaya" %}</p-->
 
                     <p>
-                        <a href="{% url 'browse:browse'%}?browse_by=all&sort_order=asc" class="text-capitalize">
-                            <i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i>{% trans "All" %}</a>
+                        <!--a href="#" class="text-capitalize"--><!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
+                          <p class="description text-uppercase text-dark text-dark mb-2"> {% trans "browse the library" %}</p>
                     </p>
 
                     <p>
-                        <a href="{% url 'browse:browse'%}?browse_by=title&sort_order=asc" class="text-capitalize">
-                            <i class="fa text-secondary  fa-file-audio-o mr-2"
-                               aria-hidden="true"></i>{% trans "title" %}</a>
+                        <a href="{% url 'browse:browse'%}?browse_by=title&sort_order=asc" class="text-capitalize">Titles</a> | <a href="{% url 'browse:browse'%}?browse_by=all&sort_order=asc"><span>   Authors</span></a>
                     </p>
 
-                    <p>
+                    <!--p>
                         <a href="{% url 'browse:browse'%}?browse_by=author&sort_order=asc" class="text-capitalize">
                             <i class="fa  text-secondary fa-file-video-o mr-2"
                                aria-hidden="true"></i>{% trans "author" %}</a>
-                    </p>
+                    </p-->
 
                 </div>
 
                 <!-- Browse by subjects -->
                 <div class="mt-4">
                     <!--pustakalaya browse by option-->
-                    <p class="description text-uppercase text-dark text-dark mb-2">{% trans "browse by subjects" %}</p>
+                    <p class="description text-uppercase text-dark text-dark mb-2">{% trans "sections" %}</p>
 
                     <p>
                         <a href="{% url 'community:community_detail' 'literatures-and-arts' %}" class="text-capitalize">
@@ -86,13 +84,13 @@
                     </p>
                     <p>
                         <a href="{% url 'community:community_detail' 'teaching-materials' %}" class="text-capitalize">
-                            <i class="fa text-secondary fa-flask mr-2"
+                            <i class="fa fa-graduation-cap text-secondary  mr-2"
                                aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
                     </p>
 
                     <p>
                         <a href="{% url 'community:community_detail' 'reference-materials' %}" class="text-capitalize">
-                            <i class="fa text-secondary fa-flask mr-2"
+                            <i class="fa fa-briefcase text-secondary mr-2"
                                aria-hidden="true"></i>{% trans "reference Materials" %}</a>
                     </p>
 

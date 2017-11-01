@@ -11,4 +11,11 @@ urlpatterns = [
 
     ),
 
+    url(
+        r'^$',
+        author_views.author_list,
+        name="author_list"
+
+    ),
+
 ]
