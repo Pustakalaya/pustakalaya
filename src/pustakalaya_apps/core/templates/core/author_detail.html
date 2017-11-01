@@ -15,6 +15,8 @@
                      title="{{ object }}"
                      alt="{{ object }}" class="rounded img img-responsive">
                 <p class="text-capitalize  text-primary description h5 mt-2 ">{{ object }}</p>
+            <p><strong class="text-capitalize"><a href="">{% trans "View author's book" %}</a></strong></p>
+                <hr>
                 <p>
                     <strong class="text-capitalize">{% trans "keywords" %}:</strong>
                     {% for keyword in object.keywords.all %}
