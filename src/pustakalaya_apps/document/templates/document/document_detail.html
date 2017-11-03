@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load pustakalaya_filters %}
-
+{% load static %}
 {% load i18n %}
 
 <!-- override some css -->
@@ -32,9 +32,10 @@
 
                 <div class="col-md-3 col-sm-12  col-xs-12">
                     <!-- Logo -->
-                    <img class="img-responsive rounded w-100" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
+                    <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
                          alt="{{ object.title }}" title="{{ object.title }}">
                     {% for document in object.documentfileupload_set.all %}
+
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" role="button"
                            class="btn w-100 btn-success btn-sm">Read: {{ document.file_name }}</a>
                     {% endfor %}
@@ -245,7 +246,7 @@
                                 <!-- TODO: implement pluralization in total page -->
                                 <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
                                 {% for education_level in object.education_levels.all %}
-                                    <span class="text-secondary"> {{ object.education_level }}</span>
+                                    <span class="text-secondary"> {{ education_level }}</span>
                                 {% endfor %}
 
 
@@ -269,7 +270,7 @@
                             <div class="pb-1 border-line">
                                 <!-- TODO pluralization -->
                                 <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
-                                {% for keyword in object.sponsors.all %}
+                                {% for sponsor in object.sponsors.all %}
                                     <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
                                 {% endfor %}
                             </div>
@@ -281,3 +282,4 @@
         </div>
     </div>
 {% endblock content %}
+

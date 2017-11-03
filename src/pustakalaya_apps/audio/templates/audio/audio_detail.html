@@ -51,14 +51,14 @@
                 <p style="background: #F3EDD7;" id="audio-title"
                    class="text-left p3 pl-3 text-dark description text-capitalize">{{ object.audiofileupload_set.first.file_name }}</p>
                 <div>
-                    <audio id="selectedAudio" preload="auto" tabindex="0" controls="" type="audio/mpeg"
+                    <audio id="selectedAudio" preload="auto" tabindex="0" controls type="audio/mpeg"
                            title="{{ object.title }}" about="{{ object.title }}"
                            src="{{ MEDIA_URL }}{{ object.audiofileupload_set.first.upload }}"
-                           type="audio/mp3">
+                           type="audio/mp3" controlsList="nodownload">
                     </audio>
                 </div>
                 <div id="audioList">
-                    <h6 class="text-primary text-uppercase mb-4 description">Audios of {{ object.title }}</h6>
+                    <h6 class="text-primary text-uppercase mb-4 mt-3 description">Audios of {{ object.title }}</h6>
                     {% for audio in object.audiofileupload_set.all %}
                         <div class="text-dark pt-1 pb-1 pl-3 text-capitalize  {% if forloop.counter == 1 %} bg-white {% endif %}">
                             <span style="cursor: pointer"
@@ -194,7 +194,9 @@
                     <div class="pb-1 border-line">
                         <!-- TODO: implement pluralization in total page -->
                         <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
-                        <span class="text-secondary"> {{ object.language }}</span>
+                         {% for language in object.languages.all %}
+                        <span class="text-secondary"> {{ language }}</span>
+                        {% endfor %}
                     </div>
 
                     <!-- Education level -->
@@ -202,7 +204,7 @@
                         <!-- TODO: implement pluralization in total page -->
                         <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
                         {% for education_level in object.education_levels.all %}
-                            <span class="text-secondary"> {{ object.education_level }}</span>
+                            <span class="text-secondary"> {{ education_level }}</span>
                         {% endfor %}
                     </div>
 

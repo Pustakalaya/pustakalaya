@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container">
         <div class="row mb-5">
-            <div class="col-md-12">
+            <div class="col-md-11 col-sm-12 col-xs-12">
                 {% for l in letters %}
                     <span class=""><a class="btn btn-sm btn-primary text-uppercase text-white" href=""
                              readonly>{{ l }}</a></span>
@@ -20,7 +20,7 @@
         <!-- author list -->
         {% for author in authors %}
             <div class="row mb-2">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                      <span class="text-dark">{{ forloop.counter }}.</span>
                     <a style="text-decoration: none" class="text-primary" href="/authors/{{ author.getname|slugify }}/{{ author.pk }}">
 
