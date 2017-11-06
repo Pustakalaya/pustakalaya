@@ -4,11 +4,8 @@ Utilities filters which can be used across all application.
 
 from django import template
 from django.template.defaultfilters import stringfilter
-<<<<<<< HEAD
 from pustakalaya_apps.core.constants import LANGUAGES_DICT as languages
-=======
 from django.utils.text import slugify
->>>>>>> 1d0ba3cb630add24da72be2af6095216a0307863
 
 register = template.Library()
 
@@ -78,4 +75,3 @@ def get_language(language_code):
 @register.filter(name='slugify_unicode')
 def slugify_unicode(value):
     return slugify(value, allow_unicode=True)
-
