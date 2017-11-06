@@ -4,6 +4,7 @@ Utilities filters which can be used across all application.
 
 from django import template
 from django.template.defaultfilters import stringfilter
+from pustakalaya_apps.core.constants import LANGUAGES_DICT as languages
 
 register = template.Library()
 
@@ -63,3 +64,7 @@ def split(value, type):
         return type(value)
     except ValueError:
         return value
+
+@register.filter(name='get_language')
+def get_language(language_code):
+    return languages.get(language_code)

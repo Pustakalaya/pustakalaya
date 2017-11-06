@@ -14,6 +14,7 @@ from .models import Document
 @transaction.atomic
 def index_or_update_document(sender, instance, **kwargs):
     # Save or update index
+    print("Working or not working")
     instance.index()
 
 

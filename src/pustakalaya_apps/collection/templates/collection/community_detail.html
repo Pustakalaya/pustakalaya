@@ -8,6 +8,7 @@
         <hr>
         {% for collection in collection_list %}
             <li style="list-style: none; list-style-type: none;">
+            {{ collection.collection_name | slugify }}
                 <a href="{% url "collection:collection_detail" collection.collection_name|slugify collection.pk %}">
                     <i
                             class="fa fa-book" aria-hidden="true"></i>
