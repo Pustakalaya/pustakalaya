@@ -19,12 +19,20 @@ class AuthorDetail(DetailView):
 def author_list(request):
     # hold some data.
     letters = string.ascii_lowercase
-    nepali_letters = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऋ', 'ए','क','ख','ग' ,'घ' ,'ङ', 'च', 'छ', 'ज', 'झ', 'ञ','ट', 'ठ', 'ड', 'ढ', 'ण','त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स', 'ष', 'ह']
+    nepali_letters = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऋ', 'ए', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ',
+                      'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'स',
+                      'ष', 'ह']
 
-    authors = Biography.objects.all()
-    context = {}
-    context["letters"] = letters
-    context["authors"] = authors
-    context["nepali_letter"] = nepali_letters
+    if request.method == "GET":
+        query_letter = request.GET.get('letter', None)
 
-    return render(request, "core/author_list.html", context)
+        if not query_letter:
+            authors = Biography.objects.all()
+        else:
+            authors = Biography.objects.filter(first_name__startswith=query_letter)
+
+    return render(request, "core/author_list.html", {
+        "letters": letters,
+        "authors": authors,
+        "nepali_letters": nepali_letters
+    })
