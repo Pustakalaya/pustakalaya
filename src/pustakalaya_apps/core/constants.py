@@ -91,3 +91,5 @@ LANGUAGES = [
     ('zh-hans', _('Simplified Chinese')),
     ('zh-hant', _('Traditional Chinese')),
 ]
+
+LANGUAGES_DICT = dict(LANGUAGES)

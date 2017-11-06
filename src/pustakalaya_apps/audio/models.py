@@ -124,7 +124,7 @@ class Audio(AbstractItem):
             education_levels=[education_level.level for education_level in self.education_levels.all()],
             communities=[collection.community_name for collection in self.collections.all()],
             collections=[collection.collection_name for collection in self.collections.all()],
-            languages=[language.language for language in self.languages.all()],
+            languages=[language.language.lower() for language in self.languages.all()],
             audio_running_time=self.audio_running_time,
             thumbnail=self.thumbnail.name,
             audio_read_by=self.audio_read_by.getname,
