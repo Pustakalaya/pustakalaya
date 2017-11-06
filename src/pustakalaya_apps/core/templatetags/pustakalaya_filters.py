@@ -4,6 +4,7 @@ Utilities filters which can be used across all application.
 
 from django import template
 from django.template.defaultfilters import stringfilter
+from django.utils.text import slugify
 
 register = template.Library()
 
@@ -63,3 +64,8 @@ def split(value, type):
         return type(value)
     except ValueError:
         return value
+
+
+@register.filter(name='slugify_unicode')
+def slugify_unicode(value):
+    return slugify(value, allow_unicode=True)
