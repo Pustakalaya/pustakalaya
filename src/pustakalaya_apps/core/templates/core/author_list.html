@@ -7,12 +7,12 @@
         <div class="row mb-5">
             <div class="col-md-11 col-sm-12 col-xs-12">
                 {% for l in letters %}
-                    <span class=""><a class="btn btn-sm btn-primary text-uppercase text-white" href=""
+                    <span class=""><a class="btn btn-sm btn-primary text-uppercase text-white" href="?letter={{ l }}"
                              readonly>{{ l }}</a></span>
                 {% endfor %}
 
-            {% for nepali in nepali_letter %}
-                <span><a class="btn text-uppercase btn-sm btn-primary text-white" href=""
+            {% for nepali in nepali_letters %}
+                <span><a class="btn text-uppercase btn-sm btn-primary text-white" href="?letter={{ nepali }}"
                              readonly>{{ nepali }}</a></span>
             {% endfor %}
             </div>
