@@ -2,11 +2,7 @@ from django.shortcuts import render
 
 from .models import Collection
 from elasticsearch import Elasticsearch
-from django.conf import settings
 from elasticsearch_dsl import Search
-from pustakalaya_apps.pustakalaya_search.search import PustakalayaSearch
-from pustakalaya_apps.document.search import DocumentDoc
-
 
 def collection_detail(request, name, pk):
     """
