@@ -187,7 +187,7 @@
                             <div class="pb-1 border-line" {% if not object.description %}
                                  style="display: none" {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
-                                <span class="text-secondary text-capitalize">{{ object.description }}</span>
+                                <span class="text-secondary text-capitalize" style="vertical-align: top;">{{ object.description }}</span>
 
                             </div>
 
@@ -195,7 +195,7 @@
                             <div class="pb-1 border-line">
                                 <!-- TODO pluralization -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
-                                <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
+                                <p class="text-secondary text-capitalize"> {{ object.license_type }}</p>
                             </div>
 
                             <!-- document series -->
@@ -262,8 +262,8 @@
 
                             <!-- Rights -->
                             <div class="pb-1 border-line" {% if not object.custom_license %} style="..." {% endif %}>
-                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
-                                <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</span>
+                                <span class="text-secondary text-capitalize" style="vertical-align: top;"> {{ object.custom_license }}</span>
                             </div>
 
                             <!-- sponsor -->
