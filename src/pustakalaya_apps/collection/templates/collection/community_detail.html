@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{%  load pustakalaya_filters %}
 {% block title %} {% endblock title %}
 {% block content %}
     <div class="container">
-        <h5 class="text-capitalize"><span class="text-info">{{ community_name }}</span></h5>
+        <h5 class="text-capitalize"><span class="text-info">{{ community_name | transtolocal }}</span></h5>
         <hr>
         {% for collection in collection_list %}
             <li style="list-style: none; list-style-type: none;">
                 <a href="{% url "collection:collection_detail" collection.collection_name|slugify collection.pk %}">
                     <i
                             class="fa fa-book" aria-hidden="true"></i>
-                    {{ collection.collection_name }}
+                    {{ collection.collection_name | transtolocal }}
                 </a>
                 <span class="badge badge-pill badge-default">{{ collection.total_count }}</span>
+             <span class="badge badge-pill badge-default">{{ es_count }}</span>
             </li>
         {% endfor %}
     </div>

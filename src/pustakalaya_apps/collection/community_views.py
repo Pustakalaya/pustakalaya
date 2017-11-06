@@ -1,9 +1,17 @@
 from django.shortcuts import render
 from .models import Collection
-
+from django.conf import settings
+from elasticsearch_dsl import Search
+from elasticsearch_dsl.connections import connections
 
 def community_detail(request, community_name):
     """Community detail page"""
+
+    client = connections.get_connection()
+
+    # s = Search(using=client, index=settings.ES_INDEX).query("match", )
+
+    es_count = Search(doc_type="document", index="pustakalaya").using(client).query("match", communities=community_name).count()
 
     # Context data
     context = {}
@@ -30,8 +38,11 @@ def community_detail(request, community_name):
         collection_list.append({
             "collection_name": collection.collection_name,
             "total_count": total_count,
+            "es_count": es_count,
             "pk": pk,
         })
+
+    # Implement total count
 
     # Sort list to display in alphabetical order.
     context["collection_list"] = collection_list
