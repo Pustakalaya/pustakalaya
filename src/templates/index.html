@@ -9,6 +9,7 @@
 {% block style %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static "base_assets/css/lightslider.min.css" %}">
+    <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
 {% endblock style %}
 
 {% block content %}
@@ -20,7 +21,7 @@
                 <!-- search -->
                 <form action="/search" method="GET">
                     <div class="input-group">
-                        <select class="custom-select" style="border-radius: 0px; border-right: 0px;">
+                        <select class="custom-select">
                             <option selected value=" ">All</option>
                             <option value="document">Documents</option>
                             <option value="audio">Audio</option>
@@ -51,12 +52,16 @@
                     <!--p class="description text-uppercase  text-dark text-uppercase mb-2"> {% url 'browse:browse'%}?browse_by=all&sort_order=asc {% trans "Browse Pustakalaya" %}</p-->
 
                     <p>
-                        <!--a href="#" class="text-capitalize"--><!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
-                          <p class="description text-uppercase text-dark text-dark mb-2"> {% trans "browse the library" %}</p>
+                        <!--a href="#" class="text-capitalize"-->
+                        <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
+                    <p class="description text-uppercase text-dark text-dark"> {% trans "browse the library" %}</p>
                     </p>
 
                     <p>
-                        <a href="{% url 'browse:browse'%}?browse_by=title&sort_order=asc" class="text-capitalize">Titles</a> | <a href="{% url 'browse:browse'%}?browse_by=all&sort_order=asc"><span>   Authors</span></a>
+                        <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
+                           class="text-capitalize text-primary">Titles</a>
+                        | <a href="{% url 'browse:browse' %}?browse_by=all&sort_order=asc"
+                             class="text-capitalize text-primary"><span>   Authors</span></a>
                     </p>
 
                     <!--p>
@@ -68,51 +73,57 @@
                 </div>
 
                 <!-- Browse by subjects -->
-                <div class="mt-4">
+                <div>
                     <!--pustakalaya browse by option-->
-                    <p class="description text-uppercase text-dark text-dark mb-2">{% trans "sections" %}</p>
+                    <p class="description text-uppercase text-dark text-dark">{% trans "sections" %}</p>
+
 
                     <p>
-                        <a href="{% url 'community:community_detail' 'literatures-and-arts' %}" class="text-capitalize">
-                            <i class="fa text-secondary fa-book mr-2"
+                        <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
+                           class="text-primary text-capitalize">
+                            <i class="fa fa-1x fa-book mr-2"
                                aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
                     </p>
                     <p>
-                        <a href="{% url 'community:community_detail' 'course-materials' %}" class="text-capitalize">
-                            <i class="fa text-secondary fa-desktop mr-2"
+                        <a href="{% url 'community:community_detail' 'course-materials' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-desktop mr-2"
                                aria-hidden="true"></i>{% trans "Course Materials" %}</a>
                     </p>
                     <p>
-                        <a href="{% url 'community:community_detail' 'teaching-materials' %}" class="text-capitalize">
-                            <i class="fa fa-graduation-cap text-secondary  mr-2"
+                        <a href="{% url 'community:community_detail' 'teaching-materials' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-graduation-cap mr-2"
                                aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
                     </p>
 
                     <p>
-                        <a href="{% url 'community:community_detail' 'reference-materials' %}" class="text-capitalize">
-                            <i class="fa fa-briefcase text-secondary mr-2"
+                        <a href="{% url 'community:community_detail' 'reference-materials' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-briefcase mr-2"
                                aria-hidden="true"></i>{% trans "reference Materials" %}</a>
                     </p>
 
                     <p>
                         <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
-                           class="text-capitalize">
-                            <i class="fa text-secondary fa-flask mr-2"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-flask mr-2"
                                aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
                     </p>
 
                     <p>
                         <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}"
-                           class="text-capitalize">
-                            <i class="fa text-secondary fa-newspaper-o mr-2"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-newspaper-o mr-2"
                                aria-hidden="true"></i>{% trans "Newspapers &  Magazines" %}</a>
                     </p>
 
                 </div>
 
+                <!--pustakalaya browse by option-->
                 <!-- Browse by subjects -->
-                <div class="mt-4">
-                    <!--pustakalaya browse by option-->
+                <!--div class="mt-4">
+
                     <p class="description text-uppercase text-dark text-dark mb-2">{% trans "Social Links" %}</p>
 
                     <p>
@@ -137,7 +148,7 @@
                                aria-hidden="true"></i>{% trans "epustakalaya in linkedin" %}</a>
                     </p>
 
-                </div>
+                </div-->
 
 
             </div>
@@ -147,16 +158,14 @@
             <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
                 <section>
                     <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
-                    <div class="row rounded pt-3 pb-2" style="background: #F3EDD7;" class="pt-5 pb-5 ">
+                    <div class="row" class="pt-5 pb-5 ">
                         {% for book in featured_books %}
                             <div class="col-md-2 col-sm-12 col-xs-12 pr-0" title="{{ book.title }}">
-                                <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img class="img-responsive rounded"
-                                                src="{{ MEDIA_URL }}{{ book.thumbnail }}"
-                                                width="130px"
-                                                height="195px"/></a>
-                                <a href="{% url 'document:detail' book.title|slugify book.pk %}" class="btn btn-sm
-                            btn-block
-                            btn-primary">Read</a>
+                                <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
+                                        class="img-responsive rounded"
+                                        src="{{ MEDIA_URL }}{{ book.thumbnail }}"
+                                        width="118px"
+                                        height="181px"/></a>
 
 
                             </div>
@@ -166,56 +175,46 @@
 
                 <section class="mt-3">
                     <p class="description text-dark text-uppercase mb-2">Featured audio books</p>
-                    <div class="row rounded pt-3 pb-2" style="background: #F3EDD7;" class="pt-5 pb-5 ">
+                    <div class="row" style="" class="">
                         <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
                             <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                                            width="130px"
-                                            height="195px"/></a>
-                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+                                            wwidth="118px"
+                                            height="181px"/></a>
 
 
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
                             <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                                            width="130px"
-                                            height="195px"/></a>
-
-                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+                                            width="118px"
+                                            height="181px"/></a>
 
 
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
                             <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
-                                             width="130px"
-                                             height="195px"/></a>
-
-                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+                                             width="118px"
+                                             height="181px"/></a>
 
 
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-12 pr-0">
 
                             <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/4.jpg' %}"
-                                             width="130px"
-                                             height="195px"/></a>
-
-                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+                                             width="118px"
+                                             height="181px"/></a>
 
 
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
                             <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                                            width="130px"
-                                            height="195px"/></a>
-                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
+                                            width="118px"
+                                            height="181px"/></a>
 
                         </div>
                         <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
                             <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
-                                             width="130px"
-                                             height="195px"/></a>
-                            <a href="#" class="btn btn-sm btn-block btn-primary">Read </a>
-
+                                             width="118px"
+                                             height="181px"/></a>
                         </div>
                     </div>
                 </section>
@@ -224,7 +223,7 @@
 
         <!-- Education section -->
         <div class="row mt-4 ">
-            <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 " style="background: #ecece0">
+            <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 ">
                 <p class="description text-uppercase rounded text-black text-uppercase mb-2">{% trans "Interactive educational software" %}</p>
                 <ul id="lightSlider">
                     <li class="mr-2">
@@ -276,8 +275,8 @@
 
         <!-- Footer description -->
         <div class="row mt-4">
-            <div class="p-4 rounded" style="background: #f3edd7;">
-                <p class="description text-uppercase rounded text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
+            <div class="p-4 rounded">
+                <p class="description text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
                 <p class="text-secondary">{% blocktrans %}
                     E-Pustakalaya is an education-focused digital library containing full-text documents, images,
                     videos and
@@ -289,7 +288,7 @@
                     English
                     languages. In the future, we will also add materials in other national languages of
                     Nepal. {% endblocktrans %}
-                    <a href="{% url "about" %}">{% trans "Read More" %}</a> ...
+                    <a href="{% url "about" %}" class="text-primary">{% trans "Read More" %}</a> ...
                 </p>
             </div>
         </div>
