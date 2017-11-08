@@ -106,7 +106,7 @@ urlpatterns += i18n_patterns(
         name="feedback"
     ),
 
-# Help page
+    # Help page
     # /help/
     url(
         r'^signup/$', TemplateView.as_view(template_name="static_pages/sign_up.html"),
@@ -117,6 +117,12 @@ urlpatterns += i18n_patterns(
     url(
         r'^help/$', TemplateView.as_view(template_name="static_pages/help.html"),
         name="help"
+    ),
+    # Forget password
+    # /forget-password/
+    url(
+        r'^forget-password/$', TemplateView.as_view(template_name="static_pages/forgetpassword.html"),
+        name="forget-password"
     ),
 )
 

@@ -1,6 +1,11 @@
 {% load static %}
 {% load i18n %}
 {% get_language_info_list for LANGUAGES as languages %}
+<style>
+    a:hover {
+        color: #005689;
+    }
+</style>
 <nav class="navbar navbar-expand-lg bg-white">
     <div class="container">
         <div class="navbar-translate">
@@ -21,34 +26,35 @@
         </div>
 
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-                <li class="nav-item text-black">
-                    <a class="nav-link" href="/">
+            <ul class="navbar-nav text-primary">
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="/">
                         <i class="fa fa-home"></i>
                         {% trans "Home" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">
+                    <a class="nav-link text-primary" href="{% url 'about' %}">
                         {% trans "About" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/authors">
+                    <a class="nav-link text-primary" href="/authors">
                         {% trans "Authors" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'help' %}">{% trans "Help" %}</a>
+                    <a class="nav-link text-primary" href="{% url 'help' %}">{% trans "Help" %}</a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link " href="{% url 'feedback' %}">{% trans "Feedback" %}</a>
+                    <a class="nav-link text-primary" href="{% url 'feedback' %}">{% trans "Feedback" %}</a>
                 </li>
 
 
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    <a href="#" class="nav-link dropdown-toggle text-primary" data-toggle="dropdown"
+                       aria-haspopup="true"
                        aria-expanded="false">
                         <span class="icon-password"></span> Log In
                     </a>
@@ -70,8 +76,8 @@
                         <i class="flag-icon flag-icon-{{ LANGUAGE_CODE }}"></i>
                     {% endif %}
                     <select name="language"
-                            class="text-secondary"
-                            style="border: none; background:none; outline:none;">
+                            class="text-primary"
+                            style="border: none; background:none; outline:none; ">
                         {% get_available_languages as LANGUAGES %}
                         {% for lang in LANGUAGES %}
                             <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}
