@@ -67,7 +67,7 @@
                         <!-- TODO pluralization -->
                         <!--strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong-->
                         {% for author in object.document_authors.all %}
-                            <a href="{% url "author:author_detail" author.getname|slugify author.pk %}"><span
+                            <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}"><span
                                     class="text-secondary text-capitalize text-primary">{{ author }}</span></a>
                         {% endfor %}
 
@@ -88,7 +88,7 @@
                     <!-- abstract of a document -->
                     <div>
 
-                        <p class="text-justify description text-dark">{{ object.abstract }}</p>
+                        <p class="text-justify description text-dark" {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</p>
                     </div>
 
                     <!-- Metadata section -->
@@ -175,7 +175,7 @@
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
                                 {% for keyword in object.keywords.all %}
                                     <span class="text-secondary text-capitalize"> <a
-                                            href="{% url "keyword:keyword_detail" keyword.keyword %}">{{ keyword.keyword| transtolocal }}</a></span>
+                                            href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword| transtolocal }}</a></span>
 
 
                                 {% endfor %}
@@ -219,7 +219,7 @@
 
                             <!-- isbn -->
                             <!-- document isb -->
-                            <div class="pb-1 border-line" {% if not object.documentidentifier.identifier_type %}
+                            <div class="pb-1 border-line" {% if not object.documentidentifier.identifier_id %}
                                  style="display: none" {% endif %}>
                                 <span class="capitalize text-dark text-capitalize">{{ object.documentidentifier.identifier_type }}:</span>
                                 <span class="text-secondary">{{ object.documentidentifier.identifier_id }}</span>

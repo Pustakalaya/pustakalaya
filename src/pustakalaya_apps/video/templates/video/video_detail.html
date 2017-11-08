@@ -86,7 +86,7 @@
         <div class="row">
             <!-- metadata section -->
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <p class="text-justify  tex-dark font-weight-normal">{{ object.abstract }}</p>
+                <p class="text-justify  tex-dark font-weight-normal" {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</p>
 
                 <!-- publisher section -->
                 <div class="pb-1 border-line">
@@ -97,7 +97,7 @@
                 </div>
 
                 <!-- place of publication -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line" {% if not object.place_of_publication %} style="..." {% endif %}>
 
                     <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
                     <span class="text-secondary text-capitalize"> {{ object.place_of_publication }}</span>
@@ -121,7 +121,7 @@
                 </div>
 
                 <!-- Keywords -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line" {% if not object.keywords.all %} style="..." {% endif %}>
 
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
@@ -137,7 +137,7 @@
 
                 <!-- Description -->
                 <div class="pb-1 border-line" {% if not object.description %} style="..." {% endif %}>
-                    <span class="text-capitalize font-weight-normal text-dark" style="vertical-align: top;">{% trans "description:" %}</span>
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
                     <span class="text-capitalize"> {{ object.description }}</span>
 
                 </div>
@@ -157,14 +157,15 @@
                 </div>
 
                 <!-- video running time -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                     {% if not object.video_running_time %} style="display: none" {% endif %}>
                     <!-- Add 2px right margin in each -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "running time" %}</span>
                     <span class="text-secondary text-capitalize">{{ object.video_running_time }}</span>
                 </div>
 
                 <!-- video certificate license -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line" {% if not object.video_certificate_license %} style="display: none" {% endif %}>
                     <!-- Add 2px right margin in each -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
                     <span class="text-capitalize">{{ object.video_certificate_license }}</span>
@@ -198,7 +199,7 @@
                 </div>
 
                 <!-- Rights -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line" {% if not object.custom_license %} style="display: none" {% endif %}>
                     <strong class="text-capitalize font-weight-normal text-dark" style="vertical-align: top;">{% trans "right:" %}</strong>
                     <span class="text-capitalize"> {{ object.custom_license }}</span>
                 </div>

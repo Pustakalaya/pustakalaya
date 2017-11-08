@@ -83,7 +83,7 @@
                     <!-- TODO pluralization -->
                     <span class="capitalize font-weight-normal text-dark">{% trans "Read by/Voice:" %}</span>
 
-                    <a href="{% url "author:author_detail" object.audio_read_by.getname|slugify object.audio_read_by.pk %}">
+                    <a href="{% url 'author:author_detail' object.audio_read_by.getname|slugify object.audio_read_by.pk %}">
                         <span class="text-secondary text-capitalize text-primary">{{ object.audio_read_by.getname }}</span></a>
                 </div>
 
@@ -168,7 +168,7 @@
                         <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
                         {% for keyword in object.keywords.all %}
                             <span class="text-secondary text-capitalize"><a
-                                    href="{% url "keyword:keyword_detail" keyword.keyword %}"> {{ keyword.keyword }}</a></span>
+                                    href="{% url 'keyword:keyword_detail' keyword.keyword %}"> {{ keyword.keyword }}</a></span>
 
                         {% endfor %}
 
