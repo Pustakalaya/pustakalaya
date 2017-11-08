@@ -35,7 +35,7 @@
 {% block content %}
     <div class="container">
     <!--video title-->
-    <h6 class="text-primary text-uppercase mb-4 description">Videos of {{ object.title }}</h6>
+    <h6 class="text-dark text-uppercase mb-4 description" id="video-title">Videos of {{ object.videofileupload_set.first.file_name }}</h6>
         <!-- video player -->
         <div class="row">
             <div class="col-md-7 col-sm-12 col-xs-12">
@@ -45,15 +45,16 @@
                        data-setup='{ "aspectRatio":"640:360", "playbackRates": [1, 1.5, 2] }'>
                 </video>
             </div>
-            <div class="col-md-5 col-sm-12 col-xs-12 p-5 ">
+            <div class="col-md-5 col-sm-12 col-xs-12 p-5 "  style="height: 360px; width:426px; overflow-y: scroll; margin-left: -15px;">
                 <div id="videoList" >
                     {% for video in object.videofileupload_set.all %}
-                        <div class="text-dark pt-1 pb-1 pl-3 text-capitalize  {% if forloop.counter == 1 %} bg-white {% endif %}">
+                        <div class="pt-1 pb-1 pl-3 text-capitalize">
                             <span style="cursor: pointer"
                                   data-src="{{ MEDIA_URL }}{{ video.upload }}"
                                   data-title="{{ video.file_name }}"
                                   onclick="playVideo(this)" class="
-                                  text-dark text-capitalize ">
+                                  {% if forloop.counter == 1 %} text-primary {% endif %}
+                                  text-capitalize">
                                  {{ forloop.counter }}&nbsp;.&nbsp;{{ video.file_name }}
 
                             </span>
@@ -125,8 +126,9 @@
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
                     {% for keyword in object.keywords.all %}
-                        <span class="text-secondary text-capitalize"> <a
-                                href="{% url "keyword:keyword_detail" keyword.keyword %}">{{ keyword.keyword }}</a></span>
+                        <span class="text-secondary text-capitalize">
+                            <a href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword }}</a>
+                        </span>
 
                     {% endfor %}
 
@@ -136,7 +138,7 @@
                 <!-- Description -->
                 <div class="pb-1 border-line" {% if not object.description %} style="..." {% endif %}>
                     <span class="text-capitalize font-weight-normal text-dark" style="vertical-align: top;">{% trans "description:" %}</span>
-                    <span class="text-secondary text-capitalize"> {{ object.description }}</span>
+                    <span class="text-capitalize"> {{ object.description }}</span>
 
                 </div>
 
@@ -144,14 +146,14 @@
                 <div class="pb-1 border-line">
                     <!-- TODO pluralization -->
                     <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
-                    <span class="text-secondary text-capitalize"> {{ object.license_type }}</span>
+                    <span class="text-capitalize"> {{ object.license_type }}</span>
                 </div>
 
                 <!-- video series -->
                 <div class="pb-1 border-line">
                     <!-- Add 2px right margin in each -->
                     <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
-                    <span class="text-secondary text-capitalize">{{ object.video_series }}</span>
+                    <span class="text-capitalize">{{ object.video_series }}</span>
                 </div>
 
                 <!-- video running time -->
@@ -165,21 +167,23 @@
                 <div class="pb-1 border-line">
                     <!-- Add 2px right margin in each -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
-                    <span class="text-secondary text-capitalize">{{ object.video_certificate_license }}</span>
+                    <span class="text-capitalize">{{ object.video_certificate_license }}</span>
                 </div>
 
                 <!-- video genre -->
                 <div class="pb-1 border-line">
                     <!-- Add 2px right margin in each -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "genre:" %}</span>
-                    <span class="text-secondary text-capitalize">{{ object.video_genre }}</span>
+                    <span class="text-capitalize">{{ object.video_genre }}</span>
                 </div>
 
                 <!-- Language -->
                 <div class="pb-1 border-line">
                     <!-- TODO: implement pluralization in total page -->
                     <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
-                    <span class="text-secondary"> {{ object.languages.all }}</span>
+                    {% for language in object.languages.all %}
+                        <a href=""><span class="text-capitalize"> {{ language }}</span></a>
+                    {% endfor %}
                 </div>
 
                 <!-- Education level -->
@@ -187,7 +191,7 @@
                     <!-- TODO: implement pluralization in total page -->
                     <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
                     {% for education_level in object.education_levels.all %}
-                        <span class="text-secondary"> {{ education_level }}</span>
+                        <span class="text-capitalize"> {{ education_level }}</span>
                     {% endfor %}
 
 
@@ -196,7 +200,7 @@
                 <!-- Rights -->
                 <div class="pb-1 border-line">
                     <strong class="text-capitalize font-weight-normal text-dark" style="vertical-align: top;">{% trans "right:" %}</strong>
-                    <span class="text-secondary text-capitalize"> {{ object.custom_license }}</span>
+                    <span class="text-capitalize"> {{ object.custom_license }}</span>
                 </div>
 
                 <!-- sponsor -->
@@ -204,7 +208,7 @@
                     <!-- TODO pluralization -->
                     <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
                     {% for sponsor in object.sponsors.all %}
-                        <span class="text-secondary text-capitalize"> {{ sponsor }}</span>
+                        <span class="text-capitalize"> {{ sponsor }}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -222,9 +226,9 @@
                 var selectedURL = event.getAttribute('data-src');
                 var title = event.getAttribute("data-title");
                 // Remove all active class and add the selected class.
-                $("#videoList").children("div").removeClass('bg-white');
+                $("#videoList").children("div").children("span").removeClass('text-primary');
                 // Add class to this video
-                $(event).parent().addClass('bg-white');
+                $(event).addClass('text-primary');
                 // Now change the video src
                 var videoPlayer = document.getElementById("selectedVideo");
                 videoPlayer.setAttribute("src", selectedURL);
@@ -233,4 +237,5 @@
                 videoPlayer.play();
             }
         })(window);
+        </script>
 {% endblock script %}

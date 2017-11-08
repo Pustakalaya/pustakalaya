@@ -8,7 +8,7 @@
 {% endblock title %}
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static "base_assets/css/lightslider.min.css" %}">
+    <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
     <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
 {% endblock style %}
 
@@ -30,7 +30,7 @@
 
 
                         <input class="form-control border-right-0" type="search" name="q" value=""
-                               placeholder="{% trans "Search pustakalaya" %}">
+                               placeholder="{% trans 'Search pustakalaya' %}">
                         <span class="input-group-addon bg-white border-left-0" style="border-radius: 0 !important;"><i
                                 class="mt-0 fa fa-search fa-pull-right"></i></span>
                     </div>
@@ -121,37 +121,6 @@
 
                 </div>
 
-                <!--pustakalaya browse by option-->
-                <!-- Browse by subjects -->
-                <!--div class="mt-4">
-
-                    <p class="description text-uppercase text-dark text-dark mb-2">{% trans "Social Links" %}</p>
-
-                    <p>
-                        <a href="" class="text-capitalize">
-                            <i class="fa text-secondary fa-facebook-official mr-2"
-                               aria-hidden="true"></i>{% trans "pustakalaya in facebook" %}</a>
-                    </p>
-                    <p>
-                        <a href="" class="text-capitalize">
-                            <i class="fa text-secondary fa-twitter mr-2"
-                               aria-hidden="true"></i>{% trans "pustakalaya in twitter" %}</a>
-                    </p>
-                    <p>
-                        <a href="" class="text-capitalize">
-                            <i class="fa text-secondary fa-rss mr-2"
-                               aria-hidden="true"></i>{% trans "rss feed of pustakalaya" %}</a>
-                    </p>
-
-                    <p>
-                        <a href="" class="text-capitalize">
-                            <i class="fa text-secondary fa-linkedin mr-2"
-                               aria-hidden="true"></i>{% trans "epustakalaya in linkedin" %}</a>
-                    </p>
-
-                </div-->
-
-
             </div>
 
 
@@ -224,8 +193,8 @@
 
         <!-- Education section -->
         <div class="row mt-4 ">
-            <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 ">
-                <p class="description text-uppercase rounded text-black text-uppercase mb-2">{% trans "Interactive educational software" %}</p>
+            <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 " id="education-section">
+                <p class="text-uppercase rounded text-black text-uppercase mb-2">{% trans "Interactive educational software" %}</p>
                 <ul id="lightSlider">
                     <li class="mr-2">
                         <a href="">
@@ -276,9 +245,9 @@
 
         <!-- Footer description -->
         <div class="row mt-4">
-            <div class="p-4 rounded">
-                <p class="description text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
-                <p class="text-secondary">{% blocktrans %}
+            <div class="p-4 rounded" id="about-section">
+                <p class="text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
+                <p>{% blocktrans %}
                     E-Pustakalaya is an education-focused digital library containing full-text documents, images,
                     videos and
                     audio files that can be accessed through an intranet or the internet. The user can either read
@@ -293,121 +262,7 @@
                 </p>
             </div>
         </div>
-      </section>
-
-      <section class="mt-3">
-        <p class="description text-dark text-uppercase mb-2">Featured audio books</p>
-        <div class="row rounded pt-3 pb-2" style="background: #F3EDD7;" class="pt-5 pb-5 ">
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                            width="118px"
-                            height="181px"/></a>
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                            width="118px"
-                            height="181px"/></a>
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
-                             width="118px"
-                             height="181px"/></a>
-          </div>
-          <div class="col-md-2 col-xs-12 col-sm-12 pr-0">
-
-            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/4.jpg' %}"
-                             width="118px"
-                             height="181px"/></a>
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                            width="118px"
-                            height="181px"/></a>
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
-                             width="118px"
-                             height="181px"/></a>
-          </div>
-        </div>
-      </section>
     </div>
-  </div>
-
-  <!-- Education section -->
-  <div class="row mt-4 ">
-    <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 " style="background: #ecece0">
-      <p class="description text-uppercase rounded text-black text-uppercase mb-2">{% trans "Interactive educational
-        software" %}</p>
-      <ul id="lightSlider">
-        <li class="mr-2">
-          <a href="">
-            <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
-                 width="130px"
-                 height="auto"
-                 alt="">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="">
-            <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
-                 width="130px"
-                 height="auto"
-                 alt="">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="">
-            <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
-                 width="130px"
-                 height="auto"
-                 alt="">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="">
-            <img class="rounded img img-responsive"
-                 src="{% static 'base_assets/img/nepal-dictionary.png' %}"
-                 alt="">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="">
-            <img class="rounded img img-responsive"
-                 src="{% static 'base_assets/img/audiable-text-book.png' %}"
-                 width="130px"
-                 height="auto"
-                 alt="">
-          </a>
-        </li>
-
-      </ul>
-
-
-    </div>
-  </div>
-
-  <!-- Footer description -->
-  <div class="row mt-4">
-    <div class="p-4 rounded" style="background: #f3edd7;">
-      <p class="description text-uppercase rounded text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
-      <p class="text-secondary">{% blocktrans %}
-        E-Pustakalaya is an education-focused digital library containing full-text documents, images,
-        videos and
-        audio files that can be accessed through an intranet or the internet. The user can either read
-        documents, view
-        videos, and listen to audio clips directly from the E-library server or she can download these
-        materials to
-        her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
-        English
-        languages. In the future, we will also add materials in other national languages of
-        Nepal. {% endblocktrans %}
-        <a href="{% url "about" %}">{% trans "Read More" %}</a> ...
-      </p>
-    </div>
-  </div>
-
-</div>
 {% endblock content %}
 
 {% block script %}

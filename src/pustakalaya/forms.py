@@ -33,14 +33,14 @@ class FeedBackForm(forms.Form):
 
         )
     )
-    location = forms.CharField(
-        label=_("Location"),
+    address = forms.CharField(
+        label=_("Address"),
         required=False,
         widget=forms.TextInput(
             attrs={
                 'autocomplete': 'off',
                 'class': 'form-control',
-                'placeholder': _("Your location")
+                'placeholder': _("Your Address")
             }
 
         )
@@ -65,8 +65,8 @@ class FeedBackForm(forms.Form):
         name = cleaned_data.get('name')
         email = cleaned_data.get('email')
         country = cleaned_data.get('country')
-        location = cleaned_data.get('location')
+        address = cleaned_data.get('address')
         suggestion = cleaned_data.get('suggestion')
 
-        if not name and not email and not country and not location and not suggestion:
+        if not name and not email and not country and not address and not suggestion:
             raise forms.ValidationError('You have to write something!')
