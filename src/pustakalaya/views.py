@@ -19,7 +19,7 @@ def feedback(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             country = form.cleaned_data['country']
-            location = form.cleaned_data['location']
+            location = form.cleaned_data['address']
             suggestion = form.cleaned_data['suggestion']
             html_message = """
                 <p>From: {0}</p>
