@@ -278,4 +278,10 @@ a, u {
 
  }*/
 
+ #education-section, #about-section{
+ border: 1px solid #EAEAEA;
+ border-radius: 4px;
+ background-color: #f8f8f8 !important;
+ }
+
 
