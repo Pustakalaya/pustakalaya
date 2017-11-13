@@ -1,28 +1,35 @@
 {% load static %}
 {% load i18n %}
 <form action="" id="sortingForm" style="display:inline-block">
-    <select class="default" name="sort_by">
-        <option class="text-capitalize" value="title.keyword" readonly
-                {% if  sort_by  == "title.keword" %} selected {% endif %}
-        >{% trans "Title" %}</option>
-        <option class="text-capitalize"
-                value="updated_date" readonly
-                {% if  sort_by  == "updated_date" %} selected {% endif %}
-        >{% trans "updated date" %}</option>
-        <option class="text-capitalize" value="rating" readonly
-                {% if  sort_by  == "rating" %} selected {% endif %}
-        >{% trans "Rating" %}</option>
+  <div class="row">
+    <div class="col-md-5 col-sm-12 col-xs-12 pr-1">
+          <select class="form-control form-control-sm" name="sort_by">
+              <option class="text-capitalize" value="title.keyword" readonly
+                      {% if sort_by == "title.keword" %} selected {% endif %}>{% trans "Title" %}
+              </option>
+              <option class="text-capitalize"
+                      value="updated_date" readonly
+                      {% if sort_by == "updated_date" %} selected {% endif %}>{% trans "updated date" %}
+              </option>
+              <option class="text-capitalize" value="rating" readonly
+                      {% if sort_by == "rating" %} selected {% endif %}>{% trans "Rating" %}
+              </option>
 
-    </select>
-    <!-- sort based on descendingascending -->
-    <select class="default" name="sort_order">
-        <option class="text-capitalize" value="asc" {% if  sort_order  == "asc" %} selected {% endif %} >
-            {% trans "Ascending" %}
-        </option>
-        <option class="text-capitalize" value="desc" {% if  sort_order  == "desc" %} selected {% endif %} >
+        </select>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 pr-4">
+        <select class="form-control form-control-sm form-control-xs" name="sort_order">
+            <option class="text-capitalize" value="asc"
+                    {% if sort_order == "asc" %} selected {% endif %} >{% trans "Ascending" %}
+            </option>
+            <option class="text-capitalize" value="desc" {% if sort_order == "desc" %} selected {% endif %} >
             {% trans "Descending" %}
-        </option>
-    </select>
+            </option>
+      </select>
+    </div>
+  </div>
+  <!-- sort based on descendingascending -->
+
 </form>
 
 
@@ -38,5 +45,6 @@
             sortForm.submit();
         }
     })();
+
 </script>
 

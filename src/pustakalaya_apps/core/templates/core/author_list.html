@@ -5,16 +5,23 @@
 {% block style%}
 {{block.super}}
 <style>
- a#alphabet_button{
+ a#alphabet-button{
  background-color:#fff;
  font-size:11pt;
+ min-width:25px !important;
+  min-height:30px !important;
  }
- a#alphabet_button:hover{
+ a#alphabet-button:hover{
  background-color:#ecf0f1;
  text-color:#2980b9;
+ min-width:25px !important;
+  min-height:30px !important;
  }
- a#alphabet_button:focus{
+ a#alphabet-button:focus{
  background-color:#ecf0f1;
+ min-width:25px !important;
+  min-height:30px !important;
+
  }
 
 </style>
@@ -25,7 +32,9 @@
     <div class="col-md-11 col-sm-12 col-xs-12">
       {% for l in letters %}
       <span>
-        <a id="alphabet_button" class="btn btn-xs btn-simple text-primary text-uppercase pb-1 pt-1 pr-1 pl-1"
+
+        <a id="alphabet-button" class="btn btn-xs btn-simple text-primary text-uppercase pb-1 pt-1 pr-1 pl-1"
+
            href="?letter={{ l }}"
            readonly>{{ l }}</a>
       </span>
@@ -33,7 +42,9 @@
       <br>
       {% for nepali in nepali_letters %}
       <span>
-        <a id="alphabet_button" class="btn btn-xs btn-simple text-primary text-uppercase pb-1 pt-1 pr-1 pl-1"
+
+        <a id="alphabet-button" class="btn btn-xs btn-simple text-primary text-uppercase pb-1 pt-1 pr-1 pl-1"
+
                     href="?letter={{ nepali }}"
                     readonly>{{ nepali }}</a>
       </span>
