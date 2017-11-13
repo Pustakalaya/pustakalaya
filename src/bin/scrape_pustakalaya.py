@@ -78,13 +78,12 @@ def get_book_thumbnail(book_thumbnail_url=None, save_dir=THUMBNAIL_DIR):
 
     # Create a random image name
     image_name = "".join(
-        random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(6))
+        random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(30))
     # Add extension to image name
     image_name = "{0}.jpg".format(image_name)
 
     # Create a random image name
-    print("Image name", book_thumbnail_url.split('/')[-1])
-    image_name = book_thumbnail_url.split('/')[-1]
+    print("Image name", image_name)
 
     # Request an image from web
     print("Requesting book thumbnail", book_thumbnail_url)
@@ -135,14 +134,16 @@ def get_book_metadata(book_url="http://pustakalaya.org/view.php?pid=Pustakalaya:
     if place_of_publication is not None and language is not None and publication_year is not None and pdf_url is \
         not None and book_thumbnail_url is not None and total_pages is not None and abstract is not None:
         # Make some clean up.
+
+
         place_of_publication = place_of_publication.strip() or " "
         language = language.strip() or " "
         publication_year = str(publication_year[0][0]).strip() or " "
         book_pdf_url = "{}{}".format(BASE_URL, "".join(pdf_url[0]).strip().lstrip('/')) or " "
         total_pages = total_pages[0].strip() or " "
         abstract = abstract.strip() or " "
-        book_thumbnail_url = "{}{}".format(BASE_URL, book_thumbnail_url[0]) or " "
-
+        book_thumbnail_url = BASE_URL + "/" + book_thumbnail_url
+        print(book_thumbnail_url)
         book_pdf_path = get_book_pdf(book_pdf_url) or " "
         book_thumbnail_path = get_book_thumbnail(book_thumbnail_url) or " "
 
@@ -156,13 +157,14 @@ def get_book_metadata(book_url="http://pustakalaya.org/view.php?pid=Pustakalaya:
             abstract
         )
 
-        print(place_of_publication, language, publication_year, book_pdf_path, book_thumbnail_path, total_pages, abstract)
+        print(place_of_publication, language, publication_year, book_pdf_path, book_thumbnail_path, total_pages,
+              abstract)
 
         return metadata
 
 
 def scrape():
-    for i in range(1, ENDPAGE + 1):
+    for i in range(0, ENDPAGE + 1):
         # Construct a url for each page
         url = "{0}&pager_row={1}".format(URL, i)
         print("Scarping Page {}".format(i))
@@ -187,19 +189,17 @@ def scrape():
             //*[@id="view_content"]/form/div[3]/li[2]/div/div/div[2]/a/b
             """
             title = "".join(
-                tree.xpath(' //*[@id="view_content"]/form/div[3]/li[' + str(book_no) + ']/div/div/div[2]/a/b/text()')) or None
+                tree.xpath(
+                    ' //*[@id="view_content"]/form/div[3]/li[' + str(book_no) + ']/div/div/div[2]/a/b/text()')) or None
             book_url = BASE_URL + "".join(
-                tree.xpath('//*[@id="view_content"]/form/div[3]/li[' + str(book_no) + ']/div/div/div[2]/a/@href')) or None
-
+                tree.xpath(
+                    '//*[@id="view_content"]/form/div[3]/li[' + str(book_no) + ']/div/div/div[2]/a/@href')) or None
 
             if book_url is None:
                 print("Book url is None")
                 exit()
 
-
-
             if title is not None and book_url is not None:
-
                 # parse metadata
                 print("Scraping metadata of book {}".format(book_no))
                 place_of_publication, \
@@ -271,11 +271,11 @@ class OleScrapper(object):
         """
         self.export_data()
 
-    # Create 301 scappers
-    # scrappers = [OleScrapper(page_no=page_no) for page_no in range(301)]
+        # Create 301 scappers
+        # scrappers = [OleScrapper(page_no=page_no) for page_no in range(301)]
 
-    # start scraping
-    # for scrapper in scrappers:
-    #   scrapper.start()
+        # start scraping
+        # for scrapper in scrappers:
+        #   scrapper.start()
 
 #

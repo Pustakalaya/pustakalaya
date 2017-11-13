@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from pustakalaya_apps.document.models import Document
 from django.shortcuts import (
-    HttpResponse,
     render,
 )
 
