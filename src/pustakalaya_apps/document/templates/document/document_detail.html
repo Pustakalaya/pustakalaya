@@ -37,7 +37,7 @@
                     {% for document in object.documentfileupload_set.all %}
 
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" role="button"
-                           class="btn w-100 btn-success btn-sm">Read: {{ document.file_name }}</a>
+                           class="btn w-100 btn-primary btn-sm">Read: {{ document.file_name }}</a>
                     {% endfor %}
 
                     <p>फाइल साइज : 11.69 MB</p>
