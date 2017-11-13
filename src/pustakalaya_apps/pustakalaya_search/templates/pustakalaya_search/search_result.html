@@ -101,7 +101,6 @@
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
                 <!-- Language facets -->
@@ -116,14 +115,13 @@
                                            type="checkbox"
                                            onclick="queryAndFilter()">
                                     <label class="text-capitalize" for="{{ language }}">
-                                        {{ language | get_language }}<span
+                                        {{ language | get_language }} <span
                                             class="badge badge-default">{{ count }}</span>
                                     </label>
                                 </div>
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
                 <!-- education languages -->
@@ -145,7 +143,6 @@
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
                 <!-- communities -->
@@ -161,13 +158,12 @@
                                            onclick="queryAndFilter()">
                                     <label class="text-capitalize" for="{{ type }}">
                                         {{ type|transtolocal }}
-                                        <span class="btn-circle bg-red  ">{{ count }}</span>
+                                        <span class="badge badge-default ">{{ count }}</span>
                                     </label>
                                 </div>
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
                 <!-- collections -->
@@ -189,7 +185,6 @@
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
                 <!-- keywords -->
@@ -212,7 +207,6 @@
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
                 <!-- license type -->
@@ -234,7 +228,6 @@
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
                 <!-- year of available -->
@@ -254,7 +247,6 @@
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
 
@@ -273,7 +265,6 @@
                             {% endfor %}
                         </div><!-- end col-sm-12 -->
                     </div>
-                    <br/>
                 {% endif %}
 
             </div>

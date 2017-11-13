@@ -89,9 +89,10 @@
                     <!-- abstract of a document -->
                     <div>
 
-                        <p class="text-justify description text-dark" {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</p>
+                        <span class="text-justify text-dark" {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</span>
                     </div>
 
+                  <br>
                     <!-- Metadata section -->
                     <div class="row">
                         <!-- Left half section -->
@@ -270,7 +271,7 @@
                             <!-- sponsor -->
                             <div class="pb-1 border-line">
                                 <!-- TODO pluralization -->
-                                <strong class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</strong>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</span>
                                 {% for sponsor in object.sponsors.all %}
                                     <span class="text-dark text-capitalize"> {{ sponsor }}</span>
                                 {% endfor %}
