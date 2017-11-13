@@ -70,6 +70,7 @@
                         {% for author in object.document_authors.all %}
                             <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}"><span
                                     class="text-dark text-capitalize text-primary">{{ author }}</span></a>
+
                         {% endfor %}
 
                     </div>
@@ -90,6 +91,7 @@
                     <div>
 
                         <span class="text-justify text-dark" {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</span>
+
                     </div>
 
                   <br>
@@ -176,7 +178,9 @@
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
                                 {% for keyword in object.keywords.all %}
+
                                     <span class="text-dark text-capitalize"> <a
+
                                             href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword| transtolocal }}</a></span>
 
 

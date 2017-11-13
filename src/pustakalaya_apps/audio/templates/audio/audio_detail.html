@@ -88,6 +88,7 @@
           <span class="text-dark text-capitalize text-primary">{{ object.audio_read_by.getname }}</span></a>
       </div>
 
+
       <div>
         <p class="text-justify  tex-dark font-weight-normal"
            {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</p>
@@ -165,12 +166,12 @@
         <!-- Keywords -->
         <div class="pb-1 border-line">
 
+
           <!-- TODO pluralization -->
           <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
           {% for keyword in object.keywords.all %}
           <span class="text-dark text-capitalize"><a
             href="{% url 'keyword:keyword_detail' keyword.keyword %}"> {{ keyword.keyword }}</a></span>
-
           {% endfor %}
 
 

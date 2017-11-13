@@ -15,6 +15,7 @@
   box-shadow: 0 0 25px #7f8c8d;
 }
 </style>
+
 <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
 <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
 {% endblock style %}
@@ -127,7 +128,6 @@
         </p>
 
       </div>
-
     </div>
 
 
@@ -148,7 +148,6 @@
             {% if forloop.counter|divisibleby:"6" %}
               <div class="mt-2"></div>
             {% endif %}
-
           </div>
           {% endfor %}
         </div>
@@ -174,7 +173,9 @@
         </li>
         <li class="mr-2">
           <a href="http://pustakalaya.org/elkids.php">
+
             <img class="rounded img img-responsive" src="{% static 'images/logos/e-learning-for-kids.png' %}"
+
                  width="180px"
                  height="118"
                  alt="E-Learning for Kids"
