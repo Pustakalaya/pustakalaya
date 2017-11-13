@@ -54,12 +54,13 @@ INSTALLED_APPS = [
 ]
 
 THIRDPARTY_APPS = [
+    'pustakalaya_apps.pustakalaya_account',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
-    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.twitter',
+    # 'allauth.socialaccount.providers.google',
 
 ]
 
@@ -72,7 +73,8 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.image',
     'pustakalaya_apps.other',
     'pustakalaya_apps.dashboard',
-    'pustakalaya_apps.pustakalaya_search'
+    'pustakalaya_apps.pustakalaya_search',
+
 
 ]
 INSTALLED_APPS += THIRDPARTY_APPS + PUSTAKALAYA_APPS
@@ -265,6 +267,16 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+# Redirect to dashboard when login is successfull.
+# Configuration of django all auth
+LOGIN_REDIRECT_URL = '/dashboard/'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_SIGNUP_FORM_CLASS = "pustakalaya_apps.pustakalaya_account.forms.SignupForm"
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ## Django logging settings
 LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')
 

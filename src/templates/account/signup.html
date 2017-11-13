@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{%  load pustakalaya_filters %}
+{% block title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <h4 class="text-dark">
+                    {% trans 'Create your Pustakalaya Account' %}
+                </h4>
+                <p class="text-muted font-sm">{% blocktrans %}Already have an account? Then please
+                    <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+                </p>
+
+
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    {%  for field in form %}
+                        <div class="form-group">
+                            {{ field.label }} {{ field | addclass:"form-control" }}
+                        </div>
+                    {%  endfor %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button class="btn btn-primary btn-sm" type="submit">{% trans "Sign Up" %} &raquo;</button>
+                </form>
+                <p class="text-center pt-1"><span>{% trans 'Log in with' %}:</span>
+                    <a href="/facebook/login/" class="no-uline" style="color: #2980b9 !important;">
+                        <span class="fa fa-2x fa-facebook-square mx-1"></span></a>
+                    <a href="/twitter/login/?method=oauth2" class="no-uline">
+                        <span class="fa fa-2x fa-twitter-square"></span></a>
+                    <a href="/google/login/?method=oauth2" class="no-uline" style="color:#c0392b !important;">
+                        <span class="fa fa-2x fa-google-plus-square"></span></a>
+                </p>
+                <p class="text-center">{% trans 'Already have Pustakalaya account' %}? <a
+                        href="/login/">{% trans 'Log in' %}</a></p>
+            </div>
+
+            <div class="col-md-7 p-4">
+                <div class="mt-4">
+                    <div class="media">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>#1 Pustakalaya Site of Nepal</h5>
+                            <span class="text-muted">Alexa Ranking, Google Analytics, Social Medias, Pustakalaya has always put us on top!</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>Most Trusted Pustakalaya in Nepal</h5>
+                            <span class="text-muted">Over 100 million + page views since the inception year 2009 over 1.5 million monthly visitors and it's growing everyday.</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>It's FREE and It will Always Be</h5>
+                            <span class="text-muted">At pustakalaya we don't put a price on opportunity, what you see is what you get! An average of 25,000 books, audio, video and reference materials to choose from. No registration fees. No hidden costs.</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>Your Confidentiality is Assured</h5>
+                            <span class="text-muted">We understand your professional goals are yours and yours only. So you can be confident that searching and applying for your next career opportunity is 100% confidential and secure.</span>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <div class="media-left mr-2">
+                            <span class="icon-circle-check mr-2 text-success icon-one-half-x"></span>
+                        </div>
+                        <div class="media-body">
+                            <h5>We Provide offline pustakalaya</h5>
+                            <span class="text-muted">We are proud to have partnered with more than 20,000 schools and   launched 1,000,000 offline pustakalaya all over Nepal.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
