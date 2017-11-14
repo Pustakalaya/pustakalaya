@@ -5,10 +5,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <span mr-5>Total {{ response.hits.total }}</span>
+                <span  class="mr-5 text-muted">Total {{ response.hits.total }}</span>
             </div>
             <div class="col-md-6">
-                 {% include "_partials/sorting_form.html" %}
+                   <div class="pull-right">
+                     {% include "_partials/sorting_form.html" %}
+                   </div>
             </div>
         </div>
         <div class="row">
