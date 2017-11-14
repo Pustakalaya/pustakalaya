@@ -32,9 +32,24 @@
 
     </div>
 
-    {% block content %}
-        {% include 'dashboard/_partials/main_content.html' %}
-    {% endblock content %}
+  <div class="main-panel">
+        {%  block navbar %}
+            {%  include 'dashboard/_partials/navbar.html' %}
+        {%  endblock navbar %}
+
+
+        {%  block content %}
+
+
+        {%  endblock content %}
+
+        {%  block footer %}
+            {%  include 'dashboard/_partials/footer.html' %}
+        {%  endblock footer %}
+
+
+    </div>
+
 
 
 </div>
