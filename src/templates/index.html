@@ -6,8 +6,16 @@
 {% block title %}
 {% trans "homepage" %}
 {% endblock title %}
+
 {% block style %}
 {{ block.super }}
+<style>
+
+.thumbnail-box-shadow:hover {
+  box-shadow: 0 0 25px #7f8c8d;
+}
+</style>
+
 <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
 <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
 {% endblock style %}
@@ -120,7 +128,6 @@
         </p>
 
       </div>
-
     </div>
 
 
@@ -130,62 +137,19 @@
         <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
         <div class="row" class="pt-5 pb-5 ">
           {% for book in featured_books %}
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0" title="{{ book.title }}">
+          <div class="col-md-2 col-sm-12 col-xs-12 pr-0" title="{{ book.title }}"  >
             <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
-              class="img-responsive rounded"
+              class="img-responsive rounded thumbnail-box-shadow"
               src="{{ MEDIA_URL }}{{ book.thumbnail }}"
               width="118px"
               height="181px"/></a>
 
 
+            {% if forloop.counter|divisibleby:"6" %}
+              <div class="mt-2"></div>
+            {% endif %}
           </div>
           {% endfor %}
-        </div>
-      </section>
-
-      <section class="mt-3">
-        <p class="description text-dark text-uppercase mb-2">Featured audio books</p>
-        <div class="row" style="" class="">
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                            wwidth="118px"
-                            height="181px"/></a>
-
-
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                            width="118px"
-                            height="181px"/></a>
-
-
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
-                             width="118px"
-                             height="181px"/></a>
-
-
-          </div>
-          <div class="col-md-2 col-xs-12 col-sm-12 pr-0">
-
-            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/4.jpg' %}"
-                             width="118px"
-                             height="181px"/></a>
-
-
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""><img class="img-responsive rounded" src="{% static 'base_assets/img/5.jpg' %}"
-                            width="118px"
-                            height="181px"/></a>
-
-          </div>
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0">
-            <a href=""> <img class="img-responsive rounded" src="{% static 'base_assets/img/3.jpg' %}"
-                             width="118px"
-                             height="181px"/></a>
-          </div>
         </div>
       </section>
     </div>
@@ -209,7 +173,9 @@
         </li>
         <li class="mr-2">
           <a href="http://pustakalaya.org/elkids.php">
-            <img class="rounded img img-responsive" src="{% static 'base_assets/img/e-learningforkids_logo.png' %}"
+
+            <img class="rounded img img-responsive" src="{% static 'images/logos/e-learning-for-kids.png' %}"
+
                  width="180px"
                  height="118"
                  alt="E-Learning for Kids"
