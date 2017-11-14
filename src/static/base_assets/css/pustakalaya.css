@@ -278,10 +278,40 @@ a, u {
 
  }*/
 
- #education-section, #about-section{
+ #education-section, #about-section, #author-detail,
+  #about-pustakalaya, #pustakalaya-address, #questions,
+   #question-1, #question-2,#question-3, #question-4,
+   #question-5, #question-6, #question-7,
+  #question-8, #question-9, #question-10
+ {
  border: 1px solid #EAEAEA;
  border-radius: 4px;
  background-color: #f8f8f8 !important;
  }
 
+ #search-icon{
+ color:#fff;
+ padding-left:4px;
+ background-color:#3498db;
+ border-radius:2px;
+ max-height:39px !important;
 
+ }
+
+#search-icon:hover{
+ cursor:pointer;
+ background-color:#2980b9;
+ }
+
+#search_input{
+padding-left:4px;
+
+}
+
+#search-result{
+font-size:80%;
+}
+
+a:hover, a:active, a:focus {
+  outline: 0;
+}

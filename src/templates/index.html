@@ -10,7 +10,6 @@
 {% block style %}
 {{ block.super }}
 <style>
-
 .thumbnail-box-shadow:hover {
   box-shadow: 0 0 25px #7f8c8d;
 }
@@ -26,26 +25,7 @@
   <!-- Search bar section -->
   <div class="row">
     <div class="col-md-12 col-xs-12 col-sm-12">
-      <!-- search -->
-      <form action="/search" method="GET">
-        <div class="input-group">
-          <select class="custom-select">
-            <option selected value=" ">All</option>
-            <option value="document">Documents</option>
-            <option value="audio">Audio</option>
-            <option value="video">Video</option>
-          </select>
 
-
-          <input class="form-control border-right-0" type="search" name="q" value=""
-                 placeholder="{% trans 'Search pustakalaya' %}">
-          <span class="input-group-addon bg-white border-left-0" style="border-radius: 0 !important;"><i
-            class="mt-0 fa fa-search fa-pull-right"></i></span>
-        </div>
-        <!--<div class="col">
-
-        </div>-->
-      </form>
     </div>
   </div>
   <!--<div class="col">
@@ -65,13 +45,13 @@
           <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
         <p class="description text-uppercase text-dark text-dark"> {% trans "browse the library" %}</p>
         </p>
-
-        <p>
+         <p>
           <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
              class="text-capitalize text-primary">Titles</a>
           | <a href="{% url 'browse:browse' %}?browse_by=all&sort_order=asc"
                class="text-capitalize text-primary"><span>   Authors</span></a>
         </p>
+
 
         <!--p>
             <a href="{% url 'browse:browse'%}?browse_by=author&sort_order=asc" class="text-capitalize">
@@ -83,11 +63,8 @@
 
       <!-- Browse by subjects -->
       <div>
-        <!--pustakalaya browse by option-->
         <p class="description text-uppercase text-dark text-dark">{% trans "sections" %}</p>
-
-
-        <p>
+         <p>
           <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
              class="text-primary text-capitalize">
             <i class="fa fa-1x fa-book mr-2"
@@ -105,21 +82,18 @@
             <i class="fa fa-1x fa-graduation-cap mr-2"
                aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
         </p>
-
         <p>
           <a href="{% url 'community:community_detail' 'reference-materials' %}"
              class="text-capitalize text-primary">
             <i class="fa fa-1x fa-briefcase mr-2"
                aria-hidden="true"></i>{% trans "reference Materials" %}</a>
         </p>
-
         <p>
           <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
              class="text-capitalize text-primary">
             <i class="fa fa-1x fa-flask mr-2"
                aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
         </p>
-
         <p>
           <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}"
              class="text-capitalize text-primary">
@@ -133,6 +107,27 @@
 
     <!-- Featured books -->
     <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
+      <div class="search">
+        <!-- search -->
+      <form action="/search" method="GET">
+        <div class="input-group">
+          <select class="custom-select">
+            <option selected value=" ">All</option>
+            <option value="document">Documents</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
+          </select>
+
+
+          <input class="form-control border-right-0" type="search" name="q" value=""
+                 placeholder="{% trans 'Search pustakalaya' %}">
+          <button class="input-group-addon pl-3 pr-3" id="search-icon">Search</button>
+        </div>
+        <!--<div class="col">
+
+        </div>-->
+      </form>
+      </div>
       <section>
         <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
         <div class="row" class="pt-5 pb-5 ">
