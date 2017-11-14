@@ -1,0 +1,54 @@
+{%  load i18n %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar bar1"></span>
+                <span class="icon-bar bar2"></span>
+                <span class="icon-bar bar3"></span>
+            </button>
+            <a class="navbar-brand text-capitalize">{%  trans "pustakalaya dashboard" %}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="ti-panel"></i>
+                        <p class="text-capitalize">{% trans "stat" %}</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="ti-bell"></i>
+                        <p class="notification">5</p>
+                        <p>Notifications</p>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Notification 1</a></li>
+                        <li><a href="#">Notification 2</a></li>
+                        <li><a href="#">Notification 3</a></li>
+                        <li><a href="#">Notification 4</a></li>
+                        <li><a href="#">Another notification</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="ti-settings"></i>
+                        <p>{% trans "settings" %}</p>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a  class="text-capitalize" href="{%  url "account_change_password" %}">{% trans "change password" %}</a></li>
+                        <li><a  class="text-capitalize" href="#">{% trans "edit profile" %}</a></li>
+                        <li><a  class="text-capitalize" href="{%  url "account_email" %}">{% trans "manage email" %}</a></li>
+                        <li><a  class="text-capitalize" href="{%  url "socialaccount_connections" %}">{% trans "Social accounts" %}</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
