@@ -75,7 +75,6 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.dashboard',
     'pustakalaya_apps.pustakalaya_search',
 
-
 ]
 INSTALLED_APPS += THIRDPARTY_APPS + PUSTAKALAYA_APPS
 
@@ -161,13 +160,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
 # Don't put static root in version control
-try:
-    STATIC_ROOT = config["STATIC_ROOT"]
-except KeyError:
-    raise ImproperlyConfigured("Set the {} config.json".format("STATIC_ROOT"))
-
+STATIC_ROOT = os.getenv("STATIC_ROOT")
 # Per application basic
 # static_dist files are dispatched automatically by webpack by reading static_src directory.
 STATICFILES_DIRS = (
@@ -176,19 +170,18 @@ STATICFILES_DIRS = (
 
 # Media Configuration
 MEDIA_URL = '/media/'
-try:
-    MEDIA_ROOT = config["MEDIA_ROOT"]
-except KeyError:
-    raise ImproperlyConfigured("Set the {} config.json".format("MEDIA_ROOT"))
+MEDIA_ROOT = os.getenv("MEDIA_ROOT")
 
 # Elastic search settings.
-
 ES_HOST = os.environ.get('ES_HOST', '127.0.0.1')
 
 ES_INDEX = os.environ.get('ES_INDEX', 'pustakalaya')
+# Override ES_INDEX
+ES_INDEX = 'pustakalaya'
+
 ES_INDEX_SETTINGS = {
-    'number_of_shards': 1,
-    'number_of_replicas': 0,
+    'number_of_shards': os.getenv("ES_NUMBER_OF_SHARDS", 1),
+    'number_of_replicas': os.getenv("ES_NUMBER_OF_REPLICAS", 0),
 }
 
 ES_CONNECTIONS = {
@@ -206,12 +199,8 @@ ES_CONNECTIONS = {
 }
 
 ## Cache server configuration.
-try:
-    REDIS_IP = config["REDIS_SERVER"]["IP"]
-    REDIS_PORT = config["REDIS_SERVER"]["PORT"]
-
-except KeyError:
-    raise ImproperlyConfigured("{} in config.json".format("REDIS_SERVER"))
+REDIS_IP = os.getenv("REDIS_SERVER_IP", "127.0.0.1")
+REDIS_PORT = os.getenv("REDIS_SERVER_PORT", "6379")
 
 # Cache time to live is 0 minutes.
 CACHE_TTL = 60 * 0  # 0 minutes
@@ -243,19 +232,22 @@ LOCALE_PATHS = (
 
 # Email settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-try:
-    FEEDBACK_EMAILS = config["FEEDBACK_EMAILS"]
-    EMAIL_PORT = config["EMAIL"]["EMAIL_PORT"]
-    EMAIL_HOST_USER = config["EMAIL"]["EMAIL_HOST_USER"]
-    EMAIL_HOST_PASSWORD = config["EMAIL"]["EMAIL_HOST_PASSWORD"]
-    EMAIL_USE_TLS = config["EMAIL"]["EMAIL_USE_TLS"]
-    EMAIL_USE_SSL = config["EMAIL"]["EMAIL_USE_SSL"]
-    ADMINS = config["EMAIL"]["ADMIN_EMAILS"]
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+# smtp settings
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = os.getenv("EMAIL_PORT", "587")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "info@olenepal.org")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", True)
 
-except KeyError:
-    raise ImproperlyConfigured("Email settings in config.json")
+# Admin email settings.
+ADMINS = [
+    os.getenv("ADMIN_EMAILS")
+]
+
+# Feedback message.
+EMAIL_FEEDBACK = os.getenv("EMAIL_FEEDBACK")
 
 ## Django allauth configuration
 SITE_ID = 1
@@ -277,6 +269,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SIGNUP_FORM_CLASS = "pustakalaya_apps.pustakalaya_account.forms.SignupForm"
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
 ## Django logging settings
 LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')
 

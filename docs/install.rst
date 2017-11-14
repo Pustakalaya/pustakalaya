@@ -55,38 +55,40 @@ Install project dependencies.
 
     $ pip install -r pustakalaya/src/requirements/requirements_dev.txt
 
-Configure the project settings
+Configure project settings
 -------------------------------
 Inside `src/config` directory, copy `config.example.json` to `config.json` and configure your project settings accordingly.
 Sample Configuration of `config.json` file.
 
 .. code-block:: javascript
 
-    {
-      "MEDIA_ROOT": "/var/www/example.com/media/",
-      "STATIC_ROOT": "/var/www/example.com/static/",
-      "REDIS_SERVER": {
-        "IP": "127.0.0.1",
-        "PORT": "6379"
-      },
-      "EMAIL": {
-        "ADMIN_EMAILS": [
-          "senderrortoadmin@example.org",
-          "senderrortodev@example.org"
-        ],
-        "EMAIL_PORT": 587,
-        "EMAIL_HOST_USER": "iwillsendemail@example.com",
-        "EMAIL_HOST_PASSWORD": "yourpassword",
-        "EMAIL_USE_TLS": "False",
-        "EMAIL_USE_SSL": "False"
-      },
-      "FEEDBACK_EMAILS": [
-        "feedbackemail@example.com",
-        "feedbackemail@example.org"
-      ]
-    }
+        {
+          "EMAIL": {
+            "ADMIN_EMAILS": [
+              "admin@example.org",
+              "admin1@example.org"
+            ]
+          },
+          "FEEDBACK_EMAILS": [
+            "admin@example.com",
+            "admin1@example.org"
+          ]
+        }
 
 
+
+
+
+Configure environment variables
+---------------------------------
+
+Sample configuration for environment variables are listed under `src/config/pustakalaya_env.example` file.
+Copy this file to `.env`  and change the environment variables value accordingly,  export all variables value as shown below
+in your shell.
+
+.. code-block::
+
+    source src/config/.env
 
 
 Run migrations and create super user
