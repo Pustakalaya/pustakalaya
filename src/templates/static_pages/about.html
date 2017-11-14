@@ -4,10 +4,11 @@
 
 
 {% block content %}
-    <div>
         <div class="container">
-            <h5 class=" text-uppercase">{% trans "About epustakalaya" %}</h5>
-            <p class="text-justify">
+          <div class="row">
+            <h6 class=" text-uppercase">{% trans "About epustakalaya" %}</h6>
+            <div class="col-md-12 col-sm-12 col-xs-12" id="about-pustakalaya">
+              <p class="text-justify">
                 {% blocktrans %}
 
                     E-Pustakalaya is an education-focused digital library containing full-text documents, books, images,
@@ -42,9 +43,17 @@
                     downloads.
                     <br/><br/>
 
-                    <address>
-                    <h5>E-Pustakalaya</h5>
-                    <hr/>
+
+                {% endblocktrans %}
+            </p>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <h6>E-Pustakalaya</h6>s
+            <div class="col-md-12 col-sm-12 col-xs-12" id="pustakalaya-address">
+                   <address>
+
                     Open Learning Exchange Nepal<br/>
                     Telephone: +977-1-554-4441, 552-0075<br/>
                     PO Box 8975, EPC 2394<br/>
@@ -52,10 +61,7 @@
                     pustakalaya@olenepal.org <br/><br/>
 
                     </address>
-
-
-                {% endblocktrans %}
-            </p>
+            </div>
+          </div>
         </div>
-    </div>
 {% endblock content %}

@@ -47,36 +47,15 @@
 
 
  -->
-<!-- css blocks -->
+
 {% block style %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'pustakalaya_search/pustakalaya_search.css' %}">
-{% endblock style %}
-
-
-
+{{block.super}}
+<link rel="stylesheet" href="{% static 'pustakalaya_search/pustakalaya.css' %}">
+{% endblock %}
 {% block content %}
     <div class="bg-white">
     <div class="container">
-        <p class="text-dark text-center">{{ response.hits.total }} {% trans "results found in " %}
-            {{ time }} {% trans "sec" %}</p>
-        <!-- include search form -->
-        <form method="GET" action="." id="searchForm">
-            <div class="input-group">
-                <input class="form-control" id="search_input"
-                       autocomplete="on"
-                       maxlength="200"
-                       value="{{ q }}"
-                       type="text" name="q" , placeholder="Search pustakalaya..">
-                <span class="input-group-addon bg-white border-left-0"><i
-                        class="mt-0 fa fa-search fa-pull-right"></i></span>
-                <input type="hidden" id="filterData"
-                       name="form-filter"/>
-                {#                    <input type="submit" class="btn btn-info btn-block" value="Submit">#}
-            </div>
-        </form>
-
-        <!-- Result container -->
+          <!-- Result container -->
         {% if hits %}
             <div class="row">
             <div class="col-md-3  col-sm-12" id="facet">
@@ -85,7 +64,7 @@
                 {% if type %}
                     <div class="row" id="type">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="text-capitalize  font-weight-bold text-dark">{% trans "Media type" %}</p>
+                            <p class="text-capitalize  font-weight-bold text-dark mb-1">{% trans "Media type" %}</p>
 
                             {% for type, count, selected in response.facets.type %}
                                 <div class="checkbox">
@@ -107,7 +86,7 @@
                 {% if languages %}
                     <div class="row" id="languages">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="text-capitalize text-dark font-weight-bold">{% trans "language" %}</p>
+                            <p class="text-capitalize text-dark font-weight-bold mb-1 mt-3">{% trans "language" %}</p>
                             {% for language, count, selected in languages %}
                                 <div class="checkbox">
                                     <input id="{{ language }}" value="{{ language }}"
@@ -128,7 +107,7 @@
                 {% if education_levels %}
                     <div class="row" id="education_levels">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="text-capitalize font-weight-bold text-dark">{% trans "education level" %}</p>
+                            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "education level" %}</p>
                             {% for type, count, selected in education_levels %}
                                 <div class="checkbox">
                                     <input id="{{ type }}" value="{{ type }}"
@@ -149,7 +128,7 @@
                 {% if communities %}
                     <div class="row" id="communities">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="text-capitalize font-weight-bold text-dark">{% trans "communities" %}</p>
+                            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "communities" %}</p>
                             {% for type, count, selected in communities %}
                                 <div class="checkbox">
                                     <input id="{{ type }}" type="checkbox"
@@ -170,7 +149,7 @@
                 {% if collections %}
                     <div class="row" id="collections">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="text-capitalize font-weight-bold text-dark">{% trans "collections" %}</p>
+                            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "collections" %}</p>
                             {% for type, count, selected in collections %}
                                 <div class="checkbox">
                                     <input id="{{ type }}" type="checkbox"
@@ -191,7 +170,7 @@
                 {% if keywords %}
                     <div class="row" id="keywords">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="text-capitalize font-weight-bold text-dark">{% trans "keywords" %}</p>
+                            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "keywords" %}</p>
                             {% for type, count, selected in keywords %}
                                 <div class="checkbox">
                                     <input id="{{ type }}" type="checkbox"
@@ -213,7 +192,7 @@
                 {% if license_type %}
                     <div class="row" id="license_type">
                         <div class="col-sm-12 col-lg-12">
-                            <p class="text-capitalize font-weight-bold text-dark">{% trans "license type" %}</p>
+                            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "license type" %}</p>
                             {% for type, count, selected in license_type %}
                                 <div class="checkbox">
                                     <input id="{{ type }}" type="checkbox"
@@ -232,7 +211,7 @@
 
                 <!-- year of available -->
 
-                {% if year_of_available %}
+                <!--{% if year_of_available %}
                     <div class="row" id="checkRadios">
                         <div class="col-sm-12 col-lg-12">
                             <p class="text-capitalize font-weight-bold text-dark">{% trans "year of available" %}</p>
@@ -245,12 +224,12 @@
                                     </label>
                                 </div>
                             {% endfor %}
-                        </div><!-- end col-sm-12 -->
+                        </div>&lt;!&ndash; end col-sm-12 &ndash;&gt;
                     </div>
                 {% endif %}
 
 
-                <!-- publication year -->
+                &lt;!&ndash; publication year &ndash;&gt;
                 {% if publication_year %}
                     <div class="row" id="checkRadios">
                         <div class="col-sm-12 col-lg-12">
@@ -263,22 +242,44 @@
                                     </label>
                                 </div>
                             {% endfor %}
-                        </div><!-- end col-sm-12 -->
+                        </div>&lt;!&ndash; end col-sm-12 &ndash;&gt;
                     </div>
-                {% endif %}
+                {% endif %}-->
 
             </div>
 
 
             <!-- Results -->
             <div class="col-md-9 col-sm-12">
+
+              <div>
+                  <!-- include search form -->
+                  <form method="GET" action="." id="searchForm">
+
+                               <div class="input-group">
+                                <input class="form-control" id="search_input"
+                                 autocomplete="on"
+                                 maxlength="200"
+                                 value="{{ q }}"
+                                 type="text" name="q" , placeholder="Search pustakalaya.."/>
+
+                                 <!-- hidden type is very important don't remove it -->
+                          <input type="hidden" id="filterData"
+                                 name="form-filter"/>
+
+                                  <input type="submit" value="Search" class="input-group-addon pr-1" id="search-icon"/>
+                             </div>
+                  </form>
+                            <p class="text-muted" id="search-result">{{ response.hits.total }} {% trans "results found in " %}
+                      {{ time }} {% trans "sec" %}</p>
+              </div>
                 <!-- Result container -->
                 <div class="row">
                     {% for hit in hits %}
                         <div class="col-md-3 col-sm-6">
                             <div class="card card-blog">
                                 <div class="card-image">
-                                    <a href="{{ hit.url }}"
+                                    <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
                                        style="text-decoration: none"
                                        class="text-capitalize"
                                     >

@@ -1,23 +1,11 @@
 {
-  "MEDIA_ROOT": "/var/www/html/media_root",
-  "STATIC_ROOT": "/var/www/html/static_root",
-  "REDIS_SERVER": {
-    "IP": "127.0.0.1",
-    "PORT": "6379"
-  },
   "EMAIL": {
-    "ADMIN_EMAILS": [
-      "admin@example.org",
-      "admin1@example.org"
-    ],
-    "EMAIL_PORT": 587,
-    "EMAIL_HOST_USER": "admin",
-    "EMAIL_HOST_PASSWORD": "slkjfa",
-    "EMAIL_USE_TLS": "False",
-    "EMAIL_USE_SSL": "False"
+    "ADMIN_EMAILS": {
+      "admin": "system@system.com",
+      "infra": "infra@systemc.com"
+    }
   },
   "FEEDBACK_EMAILS": [
-    "admin@example.com",
-    "admin1@example.org"
+    "manoj.gautam@olenepal.org"
   ]
 }
