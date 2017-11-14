@@ -79,7 +79,7 @@ urlpatterns += i18n_patterns(
 
     # Dashboard app
     # /dashboard/
-    url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls')),
+    url(r'^dashboard/', include('pustakalaya_apps.dashboard.urls', namespace="dashboard")),
 
     # Django Admin jet
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS

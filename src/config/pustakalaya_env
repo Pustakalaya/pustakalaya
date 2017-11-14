@@ -1,0 +1,28 @@
+# Media configuration
+export MEDIA_ROOT=/var/www/html/media_root
+export STATIC_ROOT=/var/www/html/static_root
+
+# Redis server configuration
+export REDIS_SERVER_IP=127.0.0.1
+export REDIS_SERVER_PORT=6379
+
+# Elastic search settings
+export ES_HOST=127.0.0.1
+export ES_NUMBER_OF_SHARDS=1
+export ES_NUMBER_OF_REPLICAS=0
+export ES_USE_SSL=False
+export ES_PORT=9200
+
+
+# Email setup
+export EMAIL_HOST=smtp.gmail.com
+export EMAIL_PORT=587
+export EMAIL_HOST_USER=youremail@example.com
+export EMAIL_HOST_PASSWORD=yourpassword
+export EMAIL_USE_TLS=True
+
+# Feedback emails
+export EMAIL_FEEDBACK=sendmefeedback@gmail.com
+
+# Admin emails
+#TODO:base
