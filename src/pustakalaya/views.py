@@ -1,4 +1,4 @@
-from . import forms
+import os
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -36,13 +36,23 @@ def feedback(request):
             print(name, location, email, country, suggestion)
 
             try:
+                # send_mail(
+                #     subject="Feedback Message",
+                #     message=html_message,
+                #     from_email=email,
+                #     recipient_list=os.getenv("FEEDBACK_EMAIL"),
+                #     fail_silently=False,
+                # )
+
                 send_mail(
-                    subject="Feedback Message",
-                    message=html_message,
-                    from_email=email,
-                    recipient_list=[settings.FEEDBACK_EMAILS],
-                    fail_silently=False,
-                )
+                    'Feedback message',
+                    """
+                    From: {}\n Email: {} \n Location: {} \n Country: {}\n Message: {}
+                    """.format(name, email, location, country, suggestion ),
+                    settings.EMAIL_HOST_USER,
+                    [settings.EMAIL_FEEDBACK])
+
+
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return HttpResponseRedirect("/")
