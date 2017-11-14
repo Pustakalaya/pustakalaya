@@ -1,5 +1,7 @@
 {% load static %}
 {% load i18n %}
+{%  load login_form %}
+{%  load pustakalaya_filters %}
 {% get_language_info_list for LANGUAGES as languages %}
 <style>
     a:hover {
@@ -27,6 +29,7 @@
 
         </div>
 
+        <!-- navigation menu -->
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav text-primary">
                 <li class="nav-item">
@@ -60,7 +63,8 @@
                        aria-expanded="false">
                         <span class="icon-password"></span> Log In
                     </a>
-                    {% include '_partials/login_form.html' %}
+                   {%login_form %}
+
                 </li>
 
 
