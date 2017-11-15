@@ -55,40 +55,16 @@ Install project dependencies.
 
     $ pip install -r pustakalaya/src/requirements/requirements_dev.txt
 
+
 Configure project settings
 -------------------------------
 Inside `src/config` directory, copy `config.example.json` to `config.json` and configure your project settings accordingly.
 Sample Configuration of `config.json` file.
 
-.. code-block:: javascript
 
-        {
-          "EMAIL": {
-            "ADMIN_EMAILS": [
-              "admin@example.org",
-              "admin1@example.org"
-            ]
-          },
-          "FEEDBACK_EMAILS": [
-            "admin@example.com",
-            "admin1@example.org"
-          ]
-        }
+.. literalinclude:: ../src/config/config.example.json
+   :language: json
 
-
-
-
-
-Configure environment variables
----------------------------------
-
-Sample configuration for environment variables are listed under `src/config/pustakalaya_env.example` file.
-Copy this file to `.env`  and change the environment variables value accordingly,  export all variables value as shown below
-in your shell.
-
-.. code-block:: bash
-
-    source src/config/.env
 
 
 Run migrations and create super user
