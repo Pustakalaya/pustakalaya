@@ -86,7 +86,7 @@ Sample configuration for environment variables are listed under `src/config/pust
 Copy this file to `.env`  and change the environment variables value accordingly,  export all variables value as shown below
 in your shell.
 
-.. code-block::
+.. code-block:: bash
 
     source src/config/.env
 
