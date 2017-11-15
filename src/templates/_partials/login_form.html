@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load account socialaccount %}
 {%  load pustakalaya_filters %}
+{% load crispy_forms_tags %}
 <style>
     /* Change the white to any color ;) */
     input:-webkit-autofill {
@@ -24,14 +25,8 @@
     <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
 
-        {% for field in form %}
-            <div class="form-group">
-                {{ field.label }}{{ field | addclass:"form-control" }}
+            {{ form|crispy }}
 
-
-            </div>
-
-        {% endfor %}
 
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>

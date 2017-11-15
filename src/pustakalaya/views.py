@@ -50,7 +50,9 @@ def feedback(request):
                     From: {}\n Email: {} \n Location: {} \n Country: {}\n Message: {}
                     """.format(name, email, location, country, suggestion ),
                     settings.EMAIL_HOST_USER,
-                    [settings.EMAIL_FEEDBACK])
+                    settings.FEEDBACK_MESSAGE_TO,
+                    fail_silently=False
+                )
 
 
             except BadHeaderError:
