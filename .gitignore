@@ -191,3 +191,6 @@ static/bundles/
 
 # base.css file
 src/static/base_assets/css/base.css
+
+# dummy data
+books.json

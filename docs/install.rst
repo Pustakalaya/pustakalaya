@@ -55,13 +55,16 @@ Install project dependencies.
 
     $ pip install -r pustakalaya/src/requirements/requirements_dev.txt
 
+
 Configure project settings
 -------------------------------
 Inside `src/config` directory, copy `config.example.json` to `config.json` and configure your project settings accordingly.
 Sample Configuration of `config.json` file.
 
+
 .. literalinclude:: ../src/config/config.example.json
    :language: json
+
 
 
 Run migrations and create super user

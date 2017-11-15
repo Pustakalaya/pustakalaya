@@ -2,6 +2,7 @@
 {% load static %}
 {% load pustakalaya_filters %}
 {% load i18n %}
+
 <!--
     Available attributes:
     total_found:
@@ -49,13 +50,20 @@
  -->
 
 {% block style %}
-{{block.super}}
-<link rel="stylesheet" href="{% static 'pustakalaya_search/pustakalaya.css' %}">
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'pustakalaya_search/pustakalaya.css' %}">
+    <style>
+
+
+        .facet-element {
+            cursor: pointer;
+        }
+    </style>
 {% endblock %}
 {% block content %}
     <div class="bg-white">
     <div class="container">
-          <!-- Result container -->
+        <!-- Result container -->
         {% if hits %}
             <div class="row">
             <div class="col-md-3  col-sm-12" id="facet">
@@ -72,9 +80,10 @@
                                             {% if selected %} checked {% endif %}
                                            type="checkbox"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}">
-                                        {% blocktrans %} {{ type }} {% endblocktrans %} <span
-                                            class="badge badge-default">{{ count }}</span>
+                                    <label class="text-capitalize" for="{{ type }}" id="facet-element">
+                                        {% blocktrans %} {{ type }} {% endblocktrans %}
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -93,9 +102,9 @@
                                             {% if selected %} checked {% endif %}
                                            type="checkbox"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ language }}">
+                                    <label class="text-capitalize text-center" for="{{ language }}" id="facet-element">
                                         {{ language | get_language }} <span
-                                            class="badge badge-default">{{ count }}</span>
+                                            class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -114,9 +123,9 @@
                                             {% if selected %} checked {% endif %}
                                            type="checkbox"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}">
-                                        {% blocktrans %} {{ type }} {% endblocktrans %} <span
-                                            class="badge badge-default">{{ count }}</span>
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
+                                        {% blocktrans %} {{ type }} {% endblocktrans %}  <span
+                                            class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -135,9 +144,10 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {{ type|transtolocal }}
-                                        <span class="badge badge-default ">{{ count }}</span>
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -156,9 +166,10 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {{ type | transtolocal }}
-                                        <span class="badge badge-default">{{ count }}</span>
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -177,10 +188,11 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}">
+                                    <label class="text-capitalize facet-element" for="{{ type }}" >
                                         {{ type|transtolocal }}
 
-                                        <span class="badge badge-default">{{ count }}</span>
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -199,9 +211,9 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}">
-                                        {% blocktrans %} {{ type }} {% endblocktrans %} <span
-                                            class="badge badge-default">{{ count }}</span>
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
+                                        {% blocktrans %} {{ type }} {% endblocktrans %}  <span
+                                            class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -252,27 +264,27 @@
             <!-- Results -->
             <div class="col-md-9 col-sm-12">
 
-              <div>
-                  <!-- include search form -->
-                  <form method="GET" action="." id="searchForm">
+                <div>
+                    <!-- include search form -->
+                    <form method="GET" action="." id="searchForm">
 
-                               <div class="input-group">
-                                <input class="form-control" id="search_input"
-                                 autocomplete="on"
-                                 maxlength="200"
-                                 value="{{ q }}"
-                                 type="text" name="q" , placeholder="Search pustakalaya.."/>
+                        <div class="input-group">
+                            <input class="form-control" id="search_input"
+                                   autocomplete="on"
+                                   maxlength="200"
+                                   value="{{ q }}"
+                                   type="text" name="q" , placeholder="Search pustakalaya.."/>
 
-                                 <!-- hidden type is very important don't remove it -->
-                          <input type="hidden" id="filterData"
-                                 name="form-filter"/>
+                            <!-- hidden type is very important don't remove it -->
+                            <input type="hidden" id="filterData"
+                                   name="form-filter"/>
 
-                                  <input type="submit" value="Search" class="input-group-addon pr-1" id="search-icon"/>
-                             </div>
-                  </form>
-                            <p class="text-muted" id="search-result">{{ response.hits.total }} {% trans "results found in " %}
-                      {{ time }} {% trans "sec" %}</p>
-              </div>
+                            <input type="submit" value="Search" class="input-group-addon pr-1" id="search-icon"/>
+                        </div>
+                    </form>
+                    <p class="text-muted" id="search-result">{{ response.hits.total }} {% trans "results found in " %}
+                        {{ time }} {% trans "sec" %}</p>
+                </div>
                 <!-- Result container -->
                 <div class="row">
                     {% for hit in hits %}
@@ -319,7 +331,7 @@
                     {% endfor %}
                 </div>
                 <!-- pagination -->
-                {%  include '_partials/pagination.html' %}
+                {% include '_partials/pagination.html' %}
             </div>
         {% else %}
             <h3 class="text-danger">
@@ -421,6 +433,4 @@
         }
     </script>
     <!-- some script abov here -->
-
-
 {% endblock script %}
