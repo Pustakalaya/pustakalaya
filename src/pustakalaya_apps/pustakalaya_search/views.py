@@ -23,10 +23,8 @@ def search(request):
         # Get data ajax request
         try:
             filters = json.loads(request.GET.get("form-filter", {}))
-            print("I got filters", filters)
         except (TypeError, JSONDecodeError):
             filters = {}
-            print("I can't get filters")
 
         # Search in elastic search
         search_obj = PustakalayaSearch(query=query_string, filters=filters)
@@ -59,8 +57,6 @@ def search(request):
         search_result["time"] = response.took / float(1000)  # Convert time in msec
         search_result["page_obj"] = page
         search_result["paginator"] = paginator
-        print(dir(page))
-        print("Coutn", page.count)
         #
         # for (type, count, selected) in response.facets.type:
         #     print(type, ' (SELECTED):' if selected else ':', count)

@@ -1,70 +1,95 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load static %}
-{%  load pustakalaya_filters %}
-{% block style%}
-{{block.super}}
-<style>
- a#alphabet-button{
- background-color:#fff;
- font-size:11pt;
- min-width:25px !important;
-  min-height:30px !important;
- }
- a#alphabet-button:hover{
- background-color:#ecf0f1;
- text-color:#2980b9;
- min-width:25px !important;
-  min-height:30px !important;
- }
- a#alphabet-button:focus{
- background-color:#ecf0f1;
- min-width:25px !important;
-  min-height:30px !important;
+{% load pustakalaya_filters %}
+{% block style %}
+    {{ block.super }}
+    <style>
+        a#alphabet-button {
+            background-color: #fff;
+            font-size: 11pt;
+            min-width: 25px !important;
+            min-height: 30px !important;
+        }
 
- }
+        a#alphabet-button:hover {
+            background-color: #ecf0f1;
+            text-color: #2980b9;
+            min-width: 25px !important;
+            min-height: 30px !important;
+        }
 
-</style>
-{% endblock style%}
+        a#alphabet-button:focus {
+            background-color: #ecf0f1;
+            min-width: 25px !important;
+            min-height: 30px !important;
+
+        }
+
+    </style>
+{% endblock style %}
 {% block content %}
-<div class="container">
-  <div class="row mb-5">
-    <div class="col-md-11 col-sm-12 col-xs-12">
-      {% for l in letters %}
-      <span>
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-11 col-sm-12 col-xs-12">
+                {% for l in letters %}
+                    <span>
 
         <a id="alphabet-button" class="btn btn-xs btn-simple text-primary text-uppercase pb-1 pt-1 pr-1 pl-1"
 
            href="?letter={{ l }}"
            readonly>{{ l }}</a>
       </span>
-      {% endfor %}
-      <br>
-      {% for nepali in nepali_letters %}
-      <span>
+                {% endfor %}
+                <br>
+                {% for nepali in nepali_letters %}
+                    <span>
 
         <a id="alphabet-button" class="btn btn-xs btn-simple text-primary text-uppercase pb-1 pt-1 pr-1 pl-1"
 
-                    href="?letter={{ nepali }}"
-                    readonly>{{ nepali }}</a>
+           href="?letter={{ nepali }}"
+           readonly>{{ nepali }}</a>
       </span>
 
-      {% endfor %}
-    </div>
-  </div>
+                {% endfor %}
+            </div>
+        </div>
 
-  <!-- author list -->
-  {% for author in authors %}
-  <div class="row mb-2">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <span class="text-dark">{{ forloop.counter }}.</span>
-      <a style="text-decoration: none" class="text-primary"
-         href="/authors/{{ author.getname|slugify_unicode}}/{{ author.pk }}">
-        {{ author.getname }}
-      </a>
+        <!-- author list -->
+        {% for author in authors %}
+            <div class="row mb-2">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <span class="text-dark">{{ forloop.counter }}.</span>
+                    <a style="text-decoration: none" class="text-primary"
+                       href="/authors/{{ author.getname|slugify_unicode }}/{{ author.pk }}">
+                        {{ author.getname }}
+                    </a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        <!-- include pagination -->
+        {% if authors.has_other_pages %}
+            <ul class="pagination">
+                {% if authors.has_previous %}
+                    <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in authors.paginator.page_range %}
+                    {% if users.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if authors.has_next %}
+                    <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
     </div>
-  </div>
-  <hr>
-  {% endfor %}
-</div>
+
 {% endblock content %}
