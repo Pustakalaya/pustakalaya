@@ -258,9 +258,6 @@ try:
 except KeyError:
     raise ImproperlyConfigured("{}".format("Email settings"))
 
-# Feedback message.
-EMAIL_FEEDBACK = os.environ.get("EMAIL_FEEDBACK").strip()
-
 ## Django allauth configuration
 SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
