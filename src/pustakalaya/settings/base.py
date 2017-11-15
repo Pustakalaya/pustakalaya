@@ -161,7 +161,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # Don't put static root in version control
-STATIC_ROOT = os.getenv("STATIC_ROOT")
+try:
+    STATIC_ROOT = config["STATIC_ROOT"]
+except KeyError:
+    ImproperlyConfigured("{} improperly configured".format("MEDIA_ROOT"))
 # Per application basic
 # static_dist files are dispatched automatically by webpack by reading static_src directory.
 STATICFILES_DIRS = (
@@ -170,7 +173,10 @@ STATICFILES_DIRS = (
 
 # Media Configuration
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.getenv("MEDIA_ROOT")
+try:
+    MEDIA_ROOT = config["MEDIA_ROOT"]
+except KeyError:
+    ImproperlyConfigured("{} improperly configured".format("MEDIA_ROOT"))
 
 # Elastic search settings.
 ES_HOST = os.environ.get('ES_HOST', '127.0.0.1')
@@ -199,8 +205,12 @@ ES_CONNECTIONS = {
 }
 
 ## Cache server configuration.
-REDIS_IP = os.getenv("REDIS_SERVER_IP", "127.0.0.1")
-REDIS_PORT = os.getenv("REDIS_SERVER_PORT", "6379")
+try:
+    REDIS_IP = config["REDIS"]["IP"]
+    REDIS_PORT = config["REDIS"]["PORT"]
+
+except KeyError:
+    raise ImproperlyConfigured("{} or {} Improperly configured in config.json".format("REDIS IP", "REDIS_PORT"))
 
 # Cache time to live is 0 minutes.
 CACHE_TTL = 60 * 0  # 0 minutes
@@ -235,19 +245,19 @@ LOCALE_PATHS = (
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # smtp settings
-EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
-EMAIL_PORT = os.getenv("EMAIL_PORT", "587")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "info@olenepal.org")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", True)
-
-# Admin email settings.
-ADMINS = [
-    os.getenv("ADMIN_EMAILS")
-]
+try:
+    EMAIL_HOST = config["EMAIL"]["EMAIL_HOST"]
+    EMAIL_PORT = config["EMAIL"]["EMAIL_PORT"]
+    EMAIL_HOST_USER = config["EMAIL"]["EMAIL_HOST_USER"]
+    EMAIL_HOST_PASSWORD = config["EMAIL"]["EMAIL_HOST_PASSWORD"]
+    EMAIL_USE_TLS = bool(config["EMAIL"]["EMAIL_USE_TLS"])
+    FEEDBACK_MESSAGE_TO = config["EMAIL"]["FEEDBACK_MESSAGE_TO"]
+    ADMINS = config["EMAIL"]["ADMIN_EMAILS"]
+except KeyError:
+    raise ImproperlyConfigured("{}".format("Email settings"))
 
 # Feedback message.
-EMAIL_FEEDBACK = os.getenv("EMAIL_FEEDBACK")
+EMAIL_FEEDBACK = os.environ.get("EMAIL_FEEDBACK").strip()
 
 ## Django allauth configuration
 SITE_ID = 1
