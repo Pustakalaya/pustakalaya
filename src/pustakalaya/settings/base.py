@@ -54,13 +54,13 @@ INSTALLED_APPS = [
 ]
 
 THIRDPARTY_APPS = [
-    'pustakalaya_apps.pustakalaya_account',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.twitter',
     # 'allauth.socialaccount.providers.google',
+    'crispy_forms',
 
 ]
 
@@ -74,6 +74,8 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.other',
     'pustakalaya_apps.dashboard',
     'pustakalaya_apps.pustakalaya_search',
+    'pustakalaya_apps.pustakalaya_account',
+
 
 ]
 INSTALLED_APPS += THIRDPARTY_APPS + PUSTAKALAYA_APPS
@@ -279,6 +281,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SIGNUP_FORM_CLASS = "pustakalaya_apps.pustakalaya_account.forms.SignupForm"
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+# Crispy forms settings.
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ## Django logging settings
 LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')

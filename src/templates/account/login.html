@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load pustakalaya_filters %}
 {% load i18n %}
 {% load account socialaccount %}
@@ -33,22 +34,9 @@
 
         <div class="row">
             <div class="col-md-6 ">
-                {% if form.non_field_errors %}
-                    <ul>
-                        {% for error in form.non_field_errors %}
-                            <p class="text-danger">{{ error }}</p>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
                 <form class="login" method="POST" action="{% url 'account_login' %}">
                     {% csrf_token %}
-                    {% for field in form %}
-                        <div class="form-group">
-                            <p class="text-danger"> {{ field.errors }}</p>
-                            {{ field.label }} {{ field | addclass:"form-control" }}
-                        </div>
-                    {% endfor %}
-
+                    {{ form | crispy }}
                     {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
