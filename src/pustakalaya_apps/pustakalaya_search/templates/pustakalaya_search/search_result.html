@@ -53,14 +53,11 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'pustakalaya_search/pustakalaya.css' %}">
     <style>
-       #facet-element {
-        padding:0;
-        margin:0;
-        cursor: pointer;
+
+
+        .facet-element {
+            cursor: pointer;
         }
-    facet-element{
-        cursor: pointer;
-    }
     </style>
 {% endblock %}
 {% block content %}
@@ -85,8 +82,8 @@
                                            onclick="queryAndFilter()">
                                     <label class="text-capitalize" for="{{ type }}" id="facet-element">
                                         {% blocktrans %} {{ type }} {% endblocktrans %}
-                                  <span
-                                            class="text-muted">&nbsp;[{{ count }}]</span>
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -126,7 +123,7 @@
                                             {% if selected %} checked {% endif %}
                                            type="checkbox"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}" id="facet-element">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {% blocktrans %} {{ type }} {% endblocktrans %}  <span
                                             class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
@@ -147,10 +144,10 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}" id="facet-element">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {{ type|transtolocal }}
-                                         <span
-                                            class="text-muted">&nbsp;[{{ count }}]</span>
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -169,10 +166,10 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}" id="facet-element">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {{ type | transtolocal }}
-                                         <span
-                                            class="text-muted">&nbsp;[{{ count }}]</span>
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -191,11 +188,11 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}" id="facet-element">
+                                    <label class="text-capitalize facet-element" for="{{ type }}" >
                                         {{ type|transtolocal }}
 
-                                         <span
-                                            class="text-muted">&nbsp;[{{ count }}]</span>
+                                        <span
+                                                class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -214,7 +211,7 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}" id="facet-element">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {% blocktrans %} {{ type }} {% endblocktrans %}  <span
                                             class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
@@ -334,36 +331,7 @@
                     {% endfor %}
                 </div>
                 <!-- pagination -->
-                <div class="row">
-                    <!-- pagination method 1 -->
-                    <ul class="pagination pagination-primary">
-                        <span class="step-links">
-                          {% if page_obj.has_previous %}
-                              <a href="?page=
-
-
-                                      {{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
-                                 class="next">&laquo; previous</a>
-                          {% endif %}
-
-                            {% for p in paginator.page_range %}
-                                <a href="?page=
-
-
-                                        {{ p }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
-                                        {% ifequal p page_obj.number %} class="current"{% endifequal %}>{{ p }}</a>
-                            {% endfor %}
-
-                            {% if page_obj.has_next %}
-                                <a href="?page=
-
-
-                                        {{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
-                                   class="next">next &raquo;</a>
-                            {% endif %}
-                        </span>
-                    </ul>
-                </div>
+                {% include '_partials/pagination.html' %}
             </div>
         {% else %}
             <h3 class="text-danger">
@@ -465,6 +433,4 @@
         }
     </script>
     <!-- some script abov here -->
-
-
 {% endblock script %}

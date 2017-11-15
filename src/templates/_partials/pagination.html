@@ -1,0 +1,20 @@
+<!-- pagination method 1 -->
+<ul class="pagination pagination-primary">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
+             class="next">&laquo; previous</a>
+      {% endif %}
+
+        {% for p in paginator.page_range %}
+            <a href="?page={{ p }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
+                    {% ifequal p page_obj.number %} class="current"{% endifequal %}>{{ p }}</a>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
+               class="next">next &raquo;</a>
+        {% endif %}
+    </span>
+</ul>
+
