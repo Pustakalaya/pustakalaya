@@ -33,6 +33,10 @@ class DocumentAdmin(admin.ModelAdmin):
         DocumentFileUploadInline,
     ]
 
+    search_fields = (
+        'title',
+    )
+
     fields = (
         "title",
         "abstract",
