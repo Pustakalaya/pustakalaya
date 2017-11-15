@@ -20,6 +20,7 @@
                     {% csrf_token %}
                     {%  for field in form %}
                         <div class="form-group">
+                            <p class="text-danger">{{ field.errors }}</p>
                             {{ field.label }} {{ field | addclass:"form-control" }}
                         </div>
                     {%  endfor %}

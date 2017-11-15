@@ -2,6 +2,7 @@ from pustakalaya_apps.document.models import Document
 from django.shortcuts import (
     render,
 )
+from django.conf import settings
 
 
 def home(request):
