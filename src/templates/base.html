@@ -8,22 +8,24 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{% static 'base_assets/img/apple-icon.png' %}">
     <link rel="icon" type="image/png" href="{% static 'base_assets/img/favicon.png' %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Pustakalaya | {% block title %} {% trans "homepage" %}{% endblock title %}</title>
+    <title>{%  trans "Pustakalaya" %} | {% block title %} {% trans "homepage" %}{% endblock title %}</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
 
     {% block style %}
-        <!--     Fonts and icons     -->
 
-        <link rel="stylesheet" href="{% static 'base_assets/css/font-awesome.min.css' %}"/>
+
+
         <!-- CSS Files -->
         {# {% include '_partials/css.html' %}#}
-        <link rel="stylesheet" href="{% static 'base_assets/css/base.css' %}">
+            <link rel="stylesheet" href="{% static 'base_assets/css/base.css' %}" type="text/css">
+           <!--     Fonts and icons     -->
+         <link rel="stylesheet" href="{% static 'base_assets/css/font-awesome.min.css' %}" type="text/css"/>
         <!-- load flag css -->
         <!-- TODO: Merge flag-icon.min.css in base.css -->
-        <link rel="stylesheet" href="{% static 'base_assets/css/flag-icon.min.css' %}">
+        <link rel="stylesheet" href="{% static 'base_assets/css/flag-icon.min.css' %}" type="text/css">
         <!-- TODO: CSS Just for demo purpose, don't include it in your project -->
-        <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
+        <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}" type="text/css">
 
     {% endblock style %}
 </head>

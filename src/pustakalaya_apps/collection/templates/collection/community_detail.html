@@ -13,8 +13,7 @@
                             class="fa fa-book" aria-hidden="true"></i>
                     {{ collection.collection_name | transtolocal }}
                 </a>
-                <span class="badge badge-pill badge-default">{{ collection.total_count }}</span>
-             <span class="badge badge-pill badge-default">{{ es_count }}</span>
+             <span class="text-muted">&nbsp;({{ collection.total_count }})</span>
             </li>
         {% endfor %}
     </div>

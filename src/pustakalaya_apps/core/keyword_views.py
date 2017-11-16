@@ -4,6 +4,7 @@ from elasticsearch_dsl import Search
 from pustakalaya_apps.core.utils import list_search_from_elastic
 
 
+
 def keyword_detail(request, keyword):
     search_string = " ".join(keyword.split("-"))
     # TODO: explicitly define the index name
@@ -18,6 +19,9 @@ def keyword_detail(request, keyword):
     #
     # context["response"] = response
     context["keyword"] = keyword
+
+    # Implement pagination
+
 
     return render(request, "core/keyword_detail.html", context)
 

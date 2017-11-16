@@ -5,6 +5,7 @@ Elastic search utils functions
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 from elasticsearch_dsl.connections import connections
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def list_search_from_elastic(request, query_type="match", **kwargs):
@@ -42,10 +43,27 @@ def list_search_from_elastic(request, query_type="match", **kwargs):
         sort_by: {"order": sort_order}
     })
 
-    response = s.execute()
+
+
+    # Pagination configuration before executing a query.
+    paginator = Paginator(s, 50)
+
+    page_no = request.GET.get('page')
+    try:
+        page = paginator.page(page_no)
+    except PageNotAnInteger:
+        page = paginator.page(1)
+    except EmptyPage:
+        page = paginator.page(paginator.num_pages)
+
+    response = page.object_list.execute()
+
+
 
     context["response"] = response
     context["sort_order"] = sort_order
     context["sort_by"] = sort_by
+    context["page_obj"] = page
+    context["paginator"] = paginator
 
     return context
