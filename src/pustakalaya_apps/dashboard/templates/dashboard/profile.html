@@ -1,3 +1,9 @@
-{%  extends 'dashboard/base.html' %}
+{% extends 'dashboard/base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>hel</h1>
+        {{ request.user.pk }}
+    </div>
+{% endblock %}
 
 
