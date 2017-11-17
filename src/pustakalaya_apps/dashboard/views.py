@@ -3,11 +3,6 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from pustakalaya_apps.pustakalaya_account.models import UserProfile
 from pustakalaya_apps.document.models import Document
 from django.core.urlresolvers import reverse
-<<<<<<< HEAD
-
-=======
->>>>>>> 549b18ffe3edbfefdce2e9d268f119628f76d070
-
 def dashboard(request):
     return render(request, "dashboard/dashboard_base.html")
 
