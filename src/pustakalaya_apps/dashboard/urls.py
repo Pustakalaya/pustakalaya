@@ -13,5 +13,4 @@ urlpatterns = [
     url(r'^collection/add/$', collection_views.AddCollection.as_view(), name="document_add"),
     #/dashboard/collections/
     url(r'^collection/add/$', collection_views.AddCollection.as_view(), name="collection_list"),
-
 ]
