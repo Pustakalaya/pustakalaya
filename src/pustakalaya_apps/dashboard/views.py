@@ -1,5 +1,6 @@
-from django.shortcuts import render
 from django.shortcuts import render;
+from django.views.generic.edit import UpdateView
+from pustakalaya_apps.pustakalaya_account.models import UserProfile
 
 
 def dashboard(request):
@@ -14,3 +15,17 @@ def profile(request):
     return render(request, 'dashboard/profile.html', {
         "user": request.user
     })
+
+
+def profile_edit(request):
+    pass
+
+
+class ProfileEdit(UpdateView):
+    model = UserProfile
+    fields =  (
+        "first_name",
+        "last_name",
+        "phone_no",
+    )
+    template_name = 'dashboard/profile/profile.html'

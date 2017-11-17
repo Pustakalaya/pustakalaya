@@ -80,7 +80,7 @@
                                             {% if selected %} checked {% endif %}
                                            type="checkbox"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize" for="{{ type }}" id="facet-element">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {% blocktrans %} {{ type }} {% endblocktrans %}
                                         <span
                                                 class="text-muted">&nbsp;[{{ count }}]</span>
@@ -102,7 +102,7 @@
                                             {% if selected %} checked {% endif %}
                                            type="checkbox"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize text-center" for="{{ language }}" id="facet-element">
+                                    <label class="text-capitalize facet-element text-center" for="{{ language }}"l>
                                         {{ language | get_language }} <span
                                             class="text-muted">&nbsp;[{{ count }}]</span>
                                     </label>
