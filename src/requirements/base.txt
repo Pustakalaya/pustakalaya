@@ -8,6 +8,7 @@ django-jet==1.0.6
 django-allauth==0.33.0
 django-crispy-forms==1.7.0
 django-star-ratings==0.5.6
+django-hitcount==1.2.3
 
 
 

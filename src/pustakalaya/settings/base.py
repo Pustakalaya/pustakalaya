@@ -62,6 +62,7 @@ THIRDPARTY_APPS = [
     # 'allauth.socialaccount.providers.google',
     'crispy_forms',
     'star_ratings',
+    'hitcount',
 
 ]
 
