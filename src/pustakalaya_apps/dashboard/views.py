@@ -4,7 +4,6 @@ from pustakalaya_apps.pustakalaya_account.models import UserProfile
 from pustakalaya_apps.document.models import Document
 from django.core.urlresolvers import reverse
 
-
 def dashboard(request):
     return render(request, "dashboard/dashboard_base.html")
 
@@ -31,11 +30,9 @@ class ProfileEdit(UpdateView):
     )
     template_name = 'dashboard/profile/profile.html'
 
+
 class AddDocument(CreateView):
     model = Document
     fields = '__all__'
     template_name = "dashboard/document/document_add.html/"
-
-
-
 
