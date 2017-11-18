@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django import forms
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 class UserProfile(models.Model):
@@ -23,6 +23,9 @@ class UserProfile(models.Model):
         max_length=10
 
     )
+
+    def get_absolute_url(self):
+        return reverse("dashboard:profile")
 
 
 

@@ -71,6 +71,9 @@ urlpatterns += i18n_patterns(
     # /keywords
     url(r'^keywords/', include('pustakalaya_apps.core.keyword_urls', namespace="keyword")),
 
+    # Ratings.
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+
     # Wikipedia app
     # TODO:
 
