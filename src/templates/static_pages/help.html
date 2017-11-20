@@ -4,10 +4,10 @@
 {% block content %}
 <!--pustakalaya help-->
 <div class="container">
-  <h6 class="text-uppercase">e-pustakalaya faqs</h6>
   <div class="row">
-
     <div class="col-md-12 col-sm-12 col-xs-12" id="questions">
+        <br>
+        <h6 class="text-uppercase">e-pustakalaya faqs</h6>
       <a href="#what">{% trans "What is E-Pustakalaya?" %}</a>
       <br>
       <a href="#who">{% trans "What are the major sections" %}</a>
@@ -27,11 +27,13 @@
       <a href="#feedback">{% trans "What is a feedback form? How do I use it?" %}</a>
       <br>
       <a href="#epaath">{% trans "What is E-Paath?" %}</a>
+        <br>
     </div>
   </div>
   <br>
   <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12" id="question-1">
+          <br>
         <b><a name="what">{% trans "What is E-Pustakalaya?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
           E-Pustakalaya is an education-focused digital library containing full-text documents, images,
@@ -47,7 +49,8 @@
   <br>
   <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12"  id="question-2" >
-        <b><a name="who">{% trans "What are the major sections" %}</a></b>
+          <br>
+        <b><a name="who">{% trans "What are the major sections?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
           There are seven major sections in E-Pustakalaya:
         <ol>
@@ -124,11 +127,12 @@
         </ol>
         {% endblocktrans %}
         </p>
-      </div class="text-justify">
+      </div>
     </div>
   <br>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-3">
+        <br>
         <b><a name="help">{% trans "What features does E-Pustakalaya have?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
         <ol type="a">
@@ -162,6 +166,7 @@
   </div>
   <br>
   <div class="row">
+      <br>
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-4">
         <b><a name="sections">{% trans "What are the different sections I see on the E-Pustakalaya home page?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
@@ -216,6 +221,7 @@
   <br>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-5">
+        <br>
         <b><a name="how">{% trans "How do I use the browse, link and search feature of the library?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
         <ol type="a">
@@ -310,6 +316,7 @@
   <br>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-6">
+        <br>
         <b><a name="return">{% trans "How do I return to the E-Pustakalaya home page from another page?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
           Whenever you are in another page, you can return to the home page by clicking on the “Home” icon
@@ -321,6 +328,7 @@
   <br>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-7">
+        <br>
         <b><a name="myself">{% trans "Why can't I set up a collection myself?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
           The permissions to create collections within Pustakalaya communities are currently quite
@@ -333,6 +341,7 @@
   <br>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-8">
+        <br>
         <b><a name="registered">{% trans "Why should I become a registered user?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
           Becoming a registered user will allow you to have your own My Pustakalaya page, which will
@@ -347,6 +356,7 @@
   <br>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-9">
+        <br>
         <b><a href="{% url 'feedback' %}"
               name="feedback">{% trans "What is a feedback form? How do I use it?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
@@ -361,6 +371,7 @@
   <br>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12"  id="question-10">
+        <br>
         <b> <a href="#epaath" name="epaath">{% trans "What is E-Paath?" %}</a></b>
         <p class="text-justify">{% blocktrans %}
           E-Paath is an educational software developed by OLE-Nepal that includes lesson plans, classroom
