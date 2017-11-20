@@ -51,10 +51,7 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'pustakalaya_search/pustakalaya.css' %}">
     <style>
-
-
         .facet-element {
             cursor: pointer;
         }
@@ -66,7 +63,7 @@
         <!-- Result container -->
         {% if hits %}
             <div class="row">
-            <div class="col-md-3  col-sm-12" id="facet">
+            <div class="col-md-3  col-sm-12 col-xs-12" id="facet">
                 <!-- Facets List -->
                 <!-- type facets -->
                 {% if type %}
@@ -83,7 +80,7 @@
                                     <label class="text-capitalize facet-element" for="{{ type }}">
                                         {% blocktrans %} {{ type }} {% endblocktrans %}
                                         <span
-                                                class="text-muted">&nbsp;[{{ count }}]</span>
+                                                class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -104,7 +101,7 @@
                                            onclick="queryAndFilter()">
                                     <label class="text-capitalize facet-element text-center" for="{{ language }}"l>
                                         {{ language | get_language }} <span
-                                            class="text-muted">&nbsp;[{{ count }}]</span>
+                                            class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -125,7 +122,7 @@
                                            onclick="queryAndFilter()">
                                     <label class="text-capitalize facet-element" for="{{ type }}">
                                         {% blocktrans %} {{ type }} {% endblocktrans %}  <span
-                                            class="text-muted">&nbsp;[{{ count }}]</span>
+                                            class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -147,7 +144,7 @@
                                     <label class="text-capitalize facet-element" for="{{ type }}">
                                         {{ type|transtolocal }}
                                         <span
-                                                class="text-muted">&nbsp;[{{ count }}]</span>
+                                                class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -169,7 +166,7 @@
                                     <label class="text-capitalize facet-element" for="{{ type }}">
                                         {{ type | transtolocal }}
                                         <span
-                                                class="text-muted">&nbsp;[{{ count }}]</span>
+                                                class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -188,11 +185,11 @@
                                             {% if selected %} checked {% endif %}
                                            value="{{ type }}"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize facet-element" for="{{ type }}" >
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
                                         {{ type|transtolocal }}
 
                                         <span
-                                                class="text-muted">&nbsp;[{{ count }}]</span>
+                                                class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -213,7 +210,7 @@
                                            onclick="queryAndFilter()">
                                     <label class="text-capitalize facet-element" for="{{ type }}">
                                         {% blocktrans %} {{ type }} {% endblocktrans %}  <span
-                                            class="text-muted">&nbsp;[{{ count }}]</span>
+                                            class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
                                 </div>
                             {% endfor %}
@@ -296,7 +293,7 @@
                                        class="text-capitalize"
                                     >
                                         <img class="img img-responsive"
-                                             width="186px"
+                                             width="100%"
                                              height="210px"
                                              src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
                                     </a>
@@ -307,7 +304,7 @@
                                            class="text-capitalize"
                                            style="text-decoration: none;"
                                         >
-                                            {{ hit.title | transtolocal | title }}
+                                            {{ hit.title | transtolocal | title | truncatechars:"25" }}
                                         </a>
 
                                     </p>
@@ -331,13 +328,33 @@
                     {% endfor %}
                 </div>
                 <!-- pagination -->
+            {# TODO: implement dotted pagination after specific page #}
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
                 {% include '_partials/pagination.html' %}
+                </div>
+            </div>
             </div>
         {% else %}
-            <h3 class="text-danger">
-                {% trans 'No result found' %}
-            </h3>
+            <div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class=" col-md-8 search">
+                        <p class="text-capitalize text-danger text-center">{% trans "result not found" %}</p>
+                        <form action="/search" method="GET">
+                            <div class="input-group">
+                                <input class="form-control border-right-0" type="search" name="q" value=""
+                                       placeholder="{% trans 'Search pustakalaya' %}">
+                                <button class="input-group-addon pl-3 pr-3"
+                                        id="search-icon">{% trans "Search" %}</button>
+                            </div>
+                        </form>
 
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+            </div>
 
         {% endif %}
         </div>
