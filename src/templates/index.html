@@ -4,261 +4,262 @@
 {% load pustakalaya_filters %}
 
 {% block title %}
-{% trans "homepage" %}
+    {% trans "homepage" %}
 {% endblock title %}
 
 {% block style %}
-{{ block.super }}
-<style>
-.thumbnail-box-shadow:hover {
-  box-shadow: 0 0 25px #7f8c8d;
-}
-</style>
+    {{ block.super }}
+    <style>
+        .thumbnail-box-shadow:hover {
+            box-shadow: 0 0 25px #7f8c8d;
+        }
+    </style>
 
-<link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
 {% endblock style %}
 
 {% block content %}
-<!--search-->
-<div class="container">
-  <!-- Search bar section -->
-  <div class="row">
-    <div class="col-md-12 col-xs-12 col-sm-12">
+    <!--search-->
+    <div class="container">
+        <!-- Search bar section -->
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
 
-    </div>
-  </div>
-  <!--<div class="col">
+            </div>
+        </div>
+        <!--<div class="col">
 
-  <!-- Browse by and books list section -->
-  <div class="row">
-    <!-- Browse by -->
-    <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
+        <!-- Browse by and books list section -->
+        <div class="row">
+            <!-- Browse by -->
+            <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
 
-      <!-- Browse Pustakalaya -->
-      <div class="mt-0">
-        <!--pustakalaya browse by option-->
-        <!--p class="description text-uppercase  text-dark text-uppercase mb-2"> {% url 'browse:browse'%}?browse_by=all&sort_order=asc {% trans "Browse Pustakalaya" %}</p-->
+                <!-- Browse Pustakalaya -->
+                <div class="mt-0">
+                    <!--pustakalaya browse by option-->
+                    <!--p class="description text-uppercase  text-dark text-uppercase mb-2"> {% url 'browse:browse'%}?browse_by=all&sort_order=asc {% trans "Browse Pustakalaya" %}</p-->
 
-        <p>
-          <!--a href="#" class="text-capitalize"-->
-          <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
-        <p class="description text-uppercase text-dark text-dark"> {% trans "browse the library" %}</p>
-        </p>
-         <p>
-          <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
-             class="text-capitalize text-primary">Titles</a>
-          | <a href="{% url 'browse:browse' %}?browse_by=all&sort_order=asc"
-               class="text-capitalize text-primary"><span>   Authors</span></a>
-        </p>
+                    <p>
+                        <!--a href="#" class="text-capitalize"-->
+                        <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
+                    <p class="description text-uppercase text-dark text-dark"> {% trans "browse the library" %}</p>
+                    </p>
+                    <p>
+                        <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
+                           class="text-capitalize text-primary">Titles</a>
+                        | <a href="{% url 'browse:browse' %}?browse_by=all&sort_order=asc"
+                             class="text-capitalize text-primary"><span>   Authors</span></a>
+                    </p>
 
 
-        <!--p>
+                    <!--p>
             <a href="{% url 'browse:browse'%}?browse_by=author&sort_order=asc" class="text-capitalize">
                 <i class="fa  text-secondary fa-file-video-o mr-2"
                    aria-hidden="true"></i>{% trans "author" %}</a>
         </p-->
 
-      </div>
+                </div>
 
-      <!-- Browse by subjects -->
-      <div>
-        <p class="description text-uppercase text-dark text-dark">{% trans "sections" %}</p>
-         <p>
-          <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
-             class="text-primary text-capitalize">
-            <i class="fa fa-1x fa-book mr-2"
-               aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
-        </p>
-        <p>
-          <a href="{% url 'community:community_detail' 'course-materials' %}"
-             class="text-capitalize text-primary">
-            <i class="fa fa-1x fa-desktop mr-2"
-               aria-hidden="true"></i>{% trans "Course Materials" %}</a>
-        </p>
-        <p>
-          <a href="{% url 'community:community_detail' 'teaching-materials' %}"
-             class="text-capitalize text-primary">
-            <i class="fa fa-1x fa-graduation-cap mr-2"
-               aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
-        </p>
-        <p>
-          <a href="{% url 'community:community_detail' 'reference-materials' %}"
-             class="text-capitalize text-primary">
-            <i class="fa fa-1x fa-briefcase mr-2"
-               aria-hidden="true"></i>{% trans "reference Materials" %}</a>
-        </p>
-        <p>
-          <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
-             class="text-capitalize text-primary">
-            <i class="fa fa-1x fa-flask mr-2"
-               aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
-        </p>
-        <p>
-          <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}"
-             class="text-capitalize text-primary">
-            <i class="fa fa-1x fa-newspaper-o mr-2"
-               aria-hidden="true"></i>{% trans "Newspapers & Magazines" %}</a>
-        </p>
+                <!-- Browse by subjects -->
+                <div>
+                    <p class="description text-uppercase text-dark text-dark">{% trans "sections" %}</p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
+                           class="text-primary text-capitalize">
+                            <i class="fa fa-1x fa-book mr-2"
+                               aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'course-materials' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-desktop mr-2"
+                               aria-hidden="true"></i>{% trans "Course Materials" %}</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'teaching-materials' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-graduation-cap mr-2"
+                               aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'reference-materials' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-briefcase mr-2"
+                               aria-hidden="true"></i>{% trans "reference Materials" %}</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-flask mr-2"
+                               aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
+                    </p>
+                    <p>
+                        <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}"
+                           class="text-capitalize text-primary">
+                            <i class="fa fa-1x fa-newspaper-o mr-2"
+                               aria-hidden="true"></i>{% trans "Newspapers & Magazines" %}</a>
+                    </p>
 
-      </div>
-    </div>
-
-
-    <!-- Featured books -->
-    <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
-      <div class="search">
-        <!-- search -->
-      <form action="/search" method="GET">
-        <div class="input-group">
-          <select class="custom-select">
-            <option selected value=" ">All</option>
-            <option value="document">Documents</option>
-            <option value="audio">Audio</option>
-            <option value="video">Video</option>
-          </select>
+                </div>
+            </div>
 
 
-          <input class="form-control border-right-0" type="search" name="q" value=""
-                 placeholder="{% trans 'Search pustakalaya' %}">
-          <button class="input-group-addon pl-3 pr-3" id="search-icon">Search</button>
+            <!-- Featured books -->
+            <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
+                <div class="search">
+                    <!-- search -->
+                    <form action="/search" method="GET">
+                        <div class="input-group">
+                            <select class="custom-select">
+                                <option selected value=" ">All</option>
+                                <option value="document">Documents</option>
+                                <option value="audio">Audio</option>
+                                <option value="video">Video</option>
+                            </select>
+
+
+                            <input class="form-control border-right-0" type="search" name="q" value=""
+                                   placeholder="{% trans 'Search pustakalaya' %}">
+                            <button class="input-group-addon pl-3 pr-3" id="search-icon">Search</button>
+                        </div>
+                        <!--<div class="col">
+
+                        </div>-->
+                    </form>
+                </div>
+                <section>
+                    <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
+                    <div class="row" class="pt-5 pb-5 ">
+                        {% for book in featured_books %}
+                            <div class="col-md-2 col-sm-12 pt-2 pr-1 pb-2 col-xs-12 pr-0" title="{{ book.title }}">
+                                <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
+                                        class="img-responsive rounded thumbnail-box-shadow"
+                                        src="{{ MEDIA_URL }}{{ book.thumbnail }}"
+                                        width="100%"
+                                        height="171px"/></a>
+
+
+                                {% if forloop.counter|divisibleby:"6" %}
+                                    <div class="mt-2"></div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
         </div>
-        <!--<div class="col">
 
-        </div>-->
-      </form>
-      </div>
-      <section>
-        <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
-        <div class="row" class="pt-5 pb-5 ">
-          {% for book in featured_books %}
-          <div class="col-md-2 col-sm-12 col-xs-12 pr-0" title="{{ book.title }}"  >
-            <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
-              class="img-responsive rounded thumbnail-box-shadow"
-              src="{{ MEDIA_URL }}{{ book.thumbnail }}"
-              width="118px"
-              height="181px"/></a>
+        <!-- Education section -->
+        <div class="row mt-4 ">
+            <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 " id="education-section">
+                <p class="text-uppercase rounded text-black text-uppercase mb-2">
+                    {% trans 'Interactive educational software' %}
+                </p>
+                <ul id="lightSlider">
+                    <li class="mr-2">
+                        <a href="http://pustakalaya.org/epaath/">
+                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
+                                 width="180px"
+                                 height="118px"
+                                 alt="E-Paath"
+                                 title="E-Paath">
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="http://pustakalaya.org/elkids.php">
+
+                            <img class="rounded img img-responsive"
+                                 src="{% static 'images/logos/e-learning-for-kids.png' %}"
+
+                                 width="180px"
+                                 height="118"
+                                 alt="E-Learning for Kids"
+                                 title="E-Learning for Kids">
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="">
+                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
+                                 width="180px"
+                                 height="118px"
+                                 alt="Simulations"
+                                 title="Simulations">
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="http://pustakalaya.org/sabdakosh.php">
+                            <img class="rounded img img-responsive"
+                                 src="{% static 'base_assets/img/nepal-dictionary.png' %}"
+                                 width="180px"
+                                 height="118px"
+                                 alt="Nepali Dictionary"
+                                 title="Nepali Dictionary">
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="http://pustakalaya.org/lekids.php">
+                            <img class="rounded img img-responsive"
+                                 src="{% static 'base_assets/img/learn-english-for-kids.png' %}"
+                                 width="180px"
+                                 height="118px"
+                                 alt="Learn English"
+                                 title="Learn English">
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="http://pustakalaya.org/external-content/static/environmental-activities/">
+                            <img class="rounded img img-responsive"
+                                 src="{% static 'base_assets/img/Environment.png' %}"
+                                 width="180px"
+                                 height="118px"
+                                 alt="Environmental Activity"
+                                 title="Environmental Activity">
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="http://pustakalaya.org/audible.php">
+                            <img class="rounded img img-responsive"
+                                 src="{% static 'base_assets/img/audiable-text-book.png' %}"
+                                 width="180px"
+                                 height="118px"
+                                 alt="Audible Text Books"
+                                 title="Audible Text Books">
+                        </a>
+                    </li>
+
+                </ul>
 
 
-            {% if forloop.counter|divisibleby:"6" %}
-              <div class="mt-2"></div>
-            {% endif %}
-          </div>
-          {% endfor %}
+            </div>
         </div>
-      </section>
+
+        <!-- Footer description -->
+        <div class="row mt-4">
+            <div class="p-4 rounded" id="about-section">
+                <p class="text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
+                <p>{% blocktrans %}
+                    E-Pustakalaya is an education-focused digital library containing full-text documents, images,
+                    videos and
+                    audio files that can be accessed through an intranet or the internet. The user can either read
+                    documents, view
+                    videos, and listen to audio clips directly from the E-library server or she can download these
+                    materials to
+                    her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
+                    English
+                    languages. In the future, we will also add materials in other national languages of
+                    Nepal. {% endblocktrans %}
+                    <a href="{% url 'about' %}" class="text-primary">{% trans "Read More" %}</a> ...
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <!-- Education section -->
-  <div class="row mt-4 ">
-    <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 " id="education-section">
-      <p class="text-uppercase rounded text-black text-uppercase mb-2">
-        {% trans 'Interactive educational software' %}
-      </p>
-      <ul id="lightSlider">
-        <li class="mr-2">
-          <a href="http://pustakalaya.org/epaath/">
-            <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
-                 width="180px"
-                 height="118px"
-                 alt="E-Paath"
-                 title="E-Paath">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="http://pustakalaya.org/elkids.php">
-
-            <img class="rounded img img-responsive" src="{% static 'images/logos/e-learning-for-kids.png' %}"
-
-                 width="180px"
-                 height="118"
-                 alt="E-Learning for Kids"
-                 title="E-Learning for Kids">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="">
-            <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
-                 width="180px"
-                 height="118px"
-                 alt="Simulations"
-                 title="Simulations">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="http://pustakalaya.org/sabdakosh.php">
-            <img class="rounded img img-responsive"
-                 src="{% static 'base_assets/img/nepal-dictionary.png' %}"
-                 width="180px"
-                 height="118px"
-                 alt="Nepali Dictionary"
-                 title="Nepali Dictionary">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="http://pustakalaya.org/lekids.php">
-            <img class="rounded img img-responsive"
-                 src="{% static 'base_assets/img/learn-english-for-kids.png' %}"
-                 width="180px"
-                 height="118px"
-                 alt="Learn English"
-                 title="Learn English">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="http://pustakalaya.org/external-content/static/environmental-activities/">
-            <img class="rounded img img-responsive"
-                 src="{% static 'base_assets/img/Environment.png' %}"
-                 width="180px"
-                 height="118px"
-                 alt="Environmental Activity"
-                 title="Environmental Activity">
-          </a>
-        </li>
-        <li class="mr-2">
-          <a href="http://pustakalaya.org/audible.php">
-            <img class="rounded img img-responsive"
-                 src="{% static 'base_assets/img/audiable-text-book.png' %}"
-                 width="180px"
-                 height="118px"
-                 alt="Audible Text Books"
-                 title="Audible Text Books">
-          </a>
-        </li>
-
-      </ul>
-
-
-    </div>
-  </div>
-
-  <!-- Footer description -->
-  <div class="row mt-4">
-    <div class="p-4 rounded" id="about-section">
-      <p class="text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
-      <p>{% blocktrans %}
-        E-Pustakalaya is an education-focused digital library containing full-text documents, images,
-        videos and
-        audio files that can be accessed through an intranet or the internet. The user can either read
-        documents, view
-        videos, and listen to audio clips directly from the E-library server or she can download these
-        materials to
-        her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
-        English
-        languages. In the future, we will also add materials in other national languages of
-        Nepal. {% endblocktrans %}
-        <a href="{% url 'about' %}" class="text-primary">{% trans "Read More" %}</a> ...
-      </p>
-    </div>
-  </div>
-</div>
 {% endblock content %}
 
 {% block script %}
-{{ block.super }}
-<!-- load lightslider js -->
-<script src="{% static 'base_assets/js/plugins/lightslider.min.js' %}"></script>
-<script type="text/javascript">
+    {{ block.super }}
+    <!-- load lightslider js -->
+    <script src="{% static 'base_assets/js/plugins/lightslider.min.js' %}"></script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $("#lightSlider").lightSlider({
                 item: 4,
@@ -319,6 +320,6 @@
             });
         });
 
-</script>
+    </script>
 
 {% endblock script %}

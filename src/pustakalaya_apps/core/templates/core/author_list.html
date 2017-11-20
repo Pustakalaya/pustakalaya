@@ -70,7 +70,7 @@
         {% endfor %}
         <!-- include pagination -->
         {% if authors.has_other_pages %}
-            <ul class="pagination">
+            <ul class="pagination pagination-primary">
                 {% if authors.has_previous %}
                     <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
                 {% else %}
