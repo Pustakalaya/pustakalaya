@@ -328,7 +328,12 @@
                     {% endfor %}
                 </div>
                 <!-- pagination -->
+            {# TODO: implement dotted pagination after specific page #}
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
                 {% include '_partials/pagination.html' %}
+                </div>
+            </div>
             </div>
         {% else %}
             <div>

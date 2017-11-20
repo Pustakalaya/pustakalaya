@@ -1,20 +1,24 @@
 <!-- pagination method 1 -->
+<nav>
 <ul class="pagination pagination-primary">
-    <span class="step-links">
       {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
-             class="next">&laquo; previous</a>
+         <li class="page-item"> <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
+             class="next disabled page-link">&laquo; previous</a>
+          </li>
       {% endif %}
 
         {% for p in paginator.page_range %}
+            <li class="page-item active">
             <a href="?page={{ p }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
-                    {% ifequal p page_obj.number %} class="current"{% endifequal %}>{{ p }}</a>
+                    {% ifequal p page_obj.number %} class="current page-link"{% endifequal %}>{{ p }}</a>
+            </li>
         {% endfor %}
 
         {% if page_obj.has_next %}
+            <li class="page-item">
             <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
-               class="next">next &raquo;</a>
+               class="next disabled page-link">next &raquo;</a>
+            </li>
         {% endif %}
-    </span>
 </ul>
-
+</nav>
