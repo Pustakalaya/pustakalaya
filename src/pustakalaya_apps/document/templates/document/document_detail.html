@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-{% load pustakalaya_filters %}
 {% load static %}
 {% load i18n %}
+{% load ratings %}
+{% load pustakalaya_filters %}
 
 <!-- override some css -->
 {% block style %}
@@ -41,6 +42,7 @@
                     {% endfor %}
                     {# TODO: Calculate the file size and display in frontend #}
                     <p class="text-muted text-center">फाइल साइज : 11.69 MB</p>
+{#                     {% ratings object %}#}
                     <!-- share buttons -->
 
                     <!--<div>
