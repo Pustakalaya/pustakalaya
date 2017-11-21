@@ -39,7 +39,7 @@
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" role="button"
                            class="btn w-100 btn-primary btn-sm">Read: {{ document.file_name }}</a>
                     {% endfor %}
-
+                    {# TODO: Calculate the file size and display in frontend #}
                     <p class="text-muted text-center">फाइल साइज : 11.69 MB</p>
                     <!-- share buttons -->
 
@@ -69,7 +69,10 @@
                         <!--strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong-->
                         {% for author in object.document_authors.all %}
                             <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}"><span
-                                    class="text-dark text-capitalize text-primary">{{ author }}</span></a>
+                                    class="text-dark text-capitalize text-primary">
+                                {{ author }}
+                                {%  if forloop.counter != object.document_authors.count %}|{%  endif %}
+                            </span></a>
 
                         {% endfor %}
 
@@ -90,7 +93,11 @@
                     <!-- abstract of a document -->
                     <div>
 
-                        <span class="text-justify text-dark" {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</span>
+                        <span class="text-justify text-dark"
+                                {% if not object.abstract %}
+                              style="display: none"
+                                {% endif %}>
+                            {{ object.abstract }}</span>
 
                     </div>
 
@@ -101,7 +108,10 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
 
                             <!-- author section -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {%  if not object.document_authors.all %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "Authors:" %}</span>
@@ -112,7 +122,10 @@
                             </div>
 
                             <!-- Illustrator section -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {%  if not object.document_illustrators.all %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
@@ -137,17 +150,20 @@
 
 
                             <!-- publisher section -->
-                            <div class="pb-1 border-line">
-
-
+                            <div class="pb-1 border-line"
+                            {%  if not object.publisher %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
 
                             </div>
 
                             <!-- place of publication -->
-                            <div class="pb-1 border-line">
-
+                            <div class="pb-1 border-line"
+                            {%  if not object.place_of_publication %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.place_of_publication }}</span>
 
@@ -155,9 +171,10 @@
 
 
                             <!-- Publication year -->
-                            <div class="pb-1 border-line">
-
-
+                            <div class="pb-1 border-line"
+                            {%  if not object.publication_year %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.publication_year }}</span>
 
@@ -165,7 +182,10 @@
                             </div>
 
                             <!-- Available year -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {%  if not object.created_date %}
+                                style="display: none;"
+                            {%  endif %}>
 
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.created_date }}</span>
@@ -190,8 +210,10 @@
                             </div>
 
                             <!-- Description -->
-                            <div class="pb-1 border-line" {% if not object.description %}
-                                 style="display: none" {% endif %}>
+                            <div class="pb-1 border-line"
+                                    {% if not object.description %}
+                                     style="display: none"
+                                    {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
                                 <span class="text-dark text-capitalize" style="vertical-align: top;">{{ object.description }}</span>
 
@@ -212,27 +234,40 @@
                             </div>
 
                             <!-- document edition -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {%  if not object.edition %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <span class="capitalize text-dark text-capitalize">{% trans "edition:" %}</span>
-                                <span class="text-dark">{{ object.edition }}</span>
+                                <span class="text-dark">
+                                    {{ object.edition }}
+                                </span>
                             </div>
 
                             <!-- document volume -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {%  if not object.volume %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <span class="capitalize text-dark text-capitalize">{% trans "volume:" %}</span>
                                 <span class="text-dark">{{ object.volume }}</span>
                             </div>
 
                             <!-- isbn -->
                             <!-- document isb -->
-                            <div class="pb-1 border-line" {% if not object.documentidentifier.identifier_id %}
-                                 style="display: none" {% endif %}>
+                            <div class="pb-1 border-line"
+                                    {% if not object.documentidentifier.identifier_id %}
+                                 style="display: none"
+                                    {% endif %}>
                                 <span class="capitalize text-dark text-capitalize">{{ object.documentidentifier.identifier_type }}:</span>
                                 <span class="text-dark">{{ object.documentidentifier.identifier_id }}</span>
                             </div>
 
                             <!-- total page -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {%  if not object.document_total_page %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <!-- TODO: implement pluralization in total page -->
                                 <span class="text-capitalize text-dark text-capitalize">{% trans "total pages" %}:</span>
                                 <span class="text-dark"> {{ object.document_total_page }}</span>
@@ -273,7 +308,10 @@
                             </div>
 
                             <!-- sponsor -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {%  if not object.sponsors.all %}
+                                style="display: none;"
+                            {%  endif %}>
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</span>
                                 {% for sponsor in object.sponsors.all %}

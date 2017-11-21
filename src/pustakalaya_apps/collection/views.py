@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Collection
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
+
 
 def collection_detail(request, name, pk):
     """
@@ -31,11 +33,22 @@ def collection_detail(request, name, pk):
     # Query to elastic search to grab all the items related to this collection name
     # And sort the result based on the sorting options.
     client = Elasticsearch()
-    s = Search(doc_type="document", index="pustakalaya").using(client).query("match", collections=name).sort({
+    s = Search(index="pustakalaya").using(client).query("match", collections=name).sort({
         sort_by: {"order": sort_order}
     })
 
-    response = s.execute()
+    # Pagination configuration before executing a query.
+    paginator = Paginator(s, 25)
+
+    page_no = request.GET.get('page')
+    try:
+        page = paginator.page(page_no)
+    except PageNotAnInteger:
+        page = paginator.page(1)
+    except EmptyPage:
+        page = paginator.page(paginator.num_pages)
+
+    response = page.object_list.execute()
 
     collection_name = " ".join(name.split("-"))
     collection = Collection.objects.get(pk=pk)
@@ -46,5 +59,7 @@ def collection_detail(request, name, pk):
     context["community_name"] = collection.community_name
     context["sort_order"] = sort_order
     context["sort_by"] = sort_by
+    context["page_obj"] = page
+    context["paginator"] = paginator
 
     return render(request, "collection/collection_detail.html", context)
