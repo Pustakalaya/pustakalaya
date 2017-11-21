@@ -13,6 +13,17 @@
         .thumbnail-box-shadow:hover {
             box-shadow: 0 0 25px #7f8c8d;
         }
+
+        .footer-logo {
+            width: 30px;
+            height: auto;
+        }
+
+        .section-padding {
+            padding: 20px 0px;
+        }
+
+
     </style>
 
     <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
@@ -157,7 +168,7 @@
                 </p>
                 <ul id="lightSlider">
                     <li class="mr-2">
-                        <a href="http://pustakalaya.org/epaath/">
+                        <a href="http://pustakalaya.org/epaath/" target="_blank">
                             <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
                                  width="170px"
                                  height="110px"
@@ -166,7 +177,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="http://pustakalaya.org/elkids.php">
+                        <a href="http://pustakalaya.org/elkids.php" target="_blank">
 
                             <img class="rounded img img-responsive"
                                  src="{% static 'images/logos/e-learning-for-kids.png' %}"
@@ -178,7 +189,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="">
+                        <a href="https://phet.colorado.edu/" target="_blank">
                             <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
                                  width="170px"
                                  height="110px"
@@ -187,7 +198,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="http://pustakalaya.org/sabdakosh.php">
+                        <a href="http://pustakalaya.org/sabdakosh.php" target="_blanks">
                             <img class="rounded img img-responsive"
                                  src="{% static 'base_assets/img/nepal-dictionary.png' %}"
                                  width="170px"
@@ -197,7 +208,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="http://pustakalaya.org/lekids.php">
+                        <a href="http://pustakalaya.org/lekids.php" target="_blank">
                             <img class="rounded img img-responsive"
                                  src="{% static 'base_assets/img/learn-english-for-kids.png' %}"
                                  width="170px"
@@ -207,7 +218,8 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="http://pustakalaya.org/external-content/static/environmental-activities/">
+                        <a href="http://pustakalaya.org/external-content/static/environmental-activities/"
+                           target="_blank">
                             <img class="rounded img img-responsive"
                                  src="{% static 'base_assets/img/Environment.png' %}"
                                  width="170px"
@@ -217,7 +229,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="http://pustakalaya.org/audible.php">
+                        <a href="http://pustakalaya.org/audible.php" target="_blank">
                             <img class="rounded img img-responsive"
                                  src="{% static 'base_assets/img/audiable-text-book.png' %}"
                                  width="170px"
@@ -250,6 +262,151 @@
                     Nepal. {% endblocktrans %}
                     <a href="{% url 'about' %}" class="text-primary">{% trans "Read More" %}</a> ...
                 </p>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col">
+            <!-- Major and past partners -->
+            <div class="section-padding" class="bg-light">
+                <div class="container">
+
+                    <div class="row">
+                        <!-- Major partners -->
+                        <div class="col-md-6 col-xs-12">
+                            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Major partners" %}</p>
+                            <hr/>
+
+                            <a class="nav-link active" href="https://idrf.com/" target="_blank" title="IDRF">
+                                <img src="{% static 'images/logos/logo_web.svg' %}"
+                                     width="150px"
+                                     height="50px"
+                                     alt="IRDF"/>
+                            </a>
+                        </div>
+                        <!-- Past partners -->
+                        <div class="col-md-6 col-xs-12">
+                            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Past partners" %}</p>
+
+                            <hr/>
+                            <!-- TODO: replace with sliding banner -->
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="https://www.maitritrust.org.uk/" target="_blank"
+                                       title="Maitri Trust">
+                                        <img class="img img-responsive"
+                                             src="{% static 'images/logos/maitri-trust.png' %}"
+                                             width="150px"
+                                             height="50px"
+                                             alt="Maitri Trust">
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="http://www.nepallibrary.org/" target="_blank"
+                                       title="Nepal Library Foundation">
+                                        <img class="img" src="{% static 'images/logos/nepal-library-foundation.png' %}"
+                                             width="150px"
+                                             height="50px"
+                                             alt="British council">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contributed partners -->
+            <div id="contributed-partner" class="section-padding">
+                <div class="container">
+                    <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Content contribution" %}</p>
+                    <hr/>
+                    <div class="text-center">
+                        <ul class="nav text-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="https://www.britishcouncil.org.np/" target="_blank"
+                                   title="British Council">
+                                    <img class="footer-logo" src="{% static 'images/logos/bc.png' %}"
+                                         alt="British council">
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="http://gorkhapatraonline.com/" target="_blank"
+                                   title="Gorkhapatra">
+                                    <img class="footer-logo" src="{% static 'images/logos/gorkhapatra.png' %}"
+                                         width="150px"
+                                         height="50px"
+                                         alt="Gorkhapatra">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="http://madanpuraskar.org/" target="_blank">
+                                    <img class="img img-responsive" src="{% static 'images/logos/madanpuraskar.gif' %}"
+                                         alt="Madanpuraskar" title="Madan Puraskar">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="nepalacademy.org.np" target="_blank"
+                                   title="Nepal Academy">
+                                    <img src="{% static 'images/logos/nepalacademy.png' %}"
+                                         alt="Nepal academy">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active"
+                                   href="http://onlinesahitya.com/content/nepalese-society-childrens-literature-neschil"
+                                   target="_blank" title="Neschil">
+                                    <img class="footer-logo" src="{% static 'images/logos/neschil.png' %}"
+                                         alt="Neschil">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" target="_blank">
+                                    <img class="footer-logo" src="{% static 'base_assets/img/partnerslogo/rtf.png' %}"
+                                         alt="RTF" title="RTF">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="https://www.roomtoread.org/" target="_blank"
+                                   title="Room To Read">
+                                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}"
+                                         alt="Room to Read">
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" target="_blank" title="Xworld">
+                                    <img class="footer-logo" src="{% static 'images/logos/xworld.png' %}"
+                                         alt="British council">
+                                </a>
+                            </li>
+
+                            <!--li class="nav-item">
+                <a class="nav-link active" href="#" target="_blank">
+                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
+                </a>
+            </li>
+                 <li class="nav-item">
+                <a class="nav-link active" href="#" target="_blank">
+                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
+                </a>
+            </li>
+                 <li class="nav-item">
+                <a class="nav-link active" href="#" target="_blank">
+                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
+                </a>
+            </li-->
+                            <li class="nav-item">
+                                <a class="nav-link active" href="http://www.digitalhimalaya.com/" target="_blank"
+                                   title="Digital Himalaya">
+                                    <img class="footer-logo" src="{% static 'images/logos/DH_logo_small.gif' %}"
+                                         alt="Digital Himalaya">
+                                </a>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -318,7 +475,12 @@
                 onBeforePrevSlide: function (el) {
                 }
             });
+            // jquery to add previous and next button in lightslider.
+            $("a.lSPrev").addClass(" fa fa-arrow-circle-o-left text-info fa-3x");
+            $("a.lSNext").addClass(" fa fa-arrow-circle-o-right text-info fa-3x");
+            console.log($(".lSNext"));
         });
+
 
     </script>
 
