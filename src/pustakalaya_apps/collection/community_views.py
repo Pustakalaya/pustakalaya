@@ -11,7 +11,7 @@ def community_detail(request, community_name):
 
     # s = Search(using=client, index=settings.ES_INDEX).query("match", )
 
-    es_count = Search(doc_type="document", index="pustakalaya").using(client).query("match", communities=community_name).count()
+    es_count = Search(index="pustakalaya").using(client).query("match", communities=community_name).count()
 
     # Context data
     context = {}
@@ -34,6 +34,7 @@ def community_detail(request, community_name):
         pk = collection.pk
         all_total += total_count
 
+
         # Create a list to that contain collection_name and total count
         collection_list.append({
             "collection_name": collection.collection_name,
@@ -47,5 +48,5 @@ def community_detail(request, community_name):
     # Sort list to display in alphabetical order.
     context["collection_list"] = collection_list
     context["community_name"] = community_name
-
+    print(total_video)
     return render(request, "collection/community_detail.html", context)

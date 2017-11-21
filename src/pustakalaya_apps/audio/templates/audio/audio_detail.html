@@ -50,6 +50,7 @@
     <div class="col-md-9 col-sm-12 col-xs-12">
       <!--Audio section -->
       <!-- audio player -->
+     <h4 class="text-capitalize h4 lead mt-0 pt-0 "><b>{{ object.title }}</b></h4>
       <p id="audio-title"
          class="text-left  pl-3 text-dark text-capitalize" hidden>{{ object.audiofileupload_set.first.file_name }}</p>
       <div>
@@ -91,98 +92,91 @@
 
       <div>
         <p class="text-justify  tex-dark font-weight-normal"
-           {% if not object.abstract %} style="..." {% endif %}>{{ object.abstract }}</p>
+           {% if not object.abstract %} style="display: none" {% endif %}>{{ object.abstract }}</p>
       </div>
 
       <!--Read by section-->
       <div class="read-section">
 
         <!-- publisher section -->
-        <div class="pb-1 border-line">
-
+        <div class="pb-1 border-line"
+        {% if not object.publisher %}
+        style="display: none"
+        {% endif %}>
           <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
-
         </div>
 
         <!-- place of publication -->
-        <div class="pb-1 border-line">
-
+        <div class="pb-1 border-line"
+        {% if not  object.place_of_publication %}
+        style="display: none"
+        {% endif %}>
           <span class="text-capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.place_of_publication }}</span>
-
         </div>
 
         <!-- Publication year -->
-        <div class="pb-1 border-line">
-
+        <div class="pb-1 border-line"
+        {% if not object.publication_year %}
+        style="display: none"
+        {% endif %}>
           <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.publication_year }}</span>
-
         </div>
 
         <!-- audio read by -->
         <div class="pb-1 border-line">
-
           <span class="text-capitalize font-weight-normal text-dark">{% trans "read by:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.audio_read_by.getname }}</span>
-
         </div>
 
         <!-- audio type -->
         <div class="pb-1 border-line">
-
           <span class="text-capitalize font-weight-normal text-dark">{% trans "type:" %}</span>
           {% for audio in object.audio_types.all %}
           <span class="text-dark text-capitalize"> {{ audio.name }}</span>
           {% endfor %}
-
         </div>
 
         <!-- audio genre -->
         <div class="pb-1 border-line">
-
           <span class="text-capitalize font-weight-normal text-dark">{% trans "genre:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.audio_genre.genre }}</span>
-
         </div>
 
         <!-- audio series -->
         <div class="pb-1 border-line">
-
           <span class="text-capitalize font-weight-normal text-dark">{% trans "series name:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.audio_series.series_name }}</span>
-
         </div>
 
         <!-- Available year -->
-        <div class="pb-1 border-line">
-
+        <div class="pb-1 border-line"
+        {% if not  object.created_date%}
+        style="display: none"
+        {% endif %}>
           <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.created_date }}</span>
-
         </div>
 
         <!-- Keywords -->
         <div class="pb-1 border-line">
-
-
           <!-- TODO pluralization -->
           <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
           {% for keyword in object.keywords.all %}
           <span class="text-dark text-capitalize"><a
             href="{% url 'keyword:keyword_detail' keyword.keyword %}"> {{ keyword.keyword }}</a></span>
           {% endfor %}
-
-
         </div>
 
         <!-- Description -->
-        <div class="pb-1 border-line" {% if not object.description %}
-             style="display: none" {% endif %}>
+        <div class="pb-1 border-line"
+                {% if not object.description %}
+             style="display: none"
+                {% endif %}>
           <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.description }}</span>
-
         </div>
 
         <!-- License type -->
@@ -211,13 +205,19 @@
         </div>
 
         <!-- Rights -->
-        <div class="pb-1 border-line" {% if not object.custom_license %} style="..." {% endif %}>
+        <div class="pb-1 border-line"
+                {% if not object.custom_license %}
+             style="display: none"
+                {% endif %}>
           <strong class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</strong>
           <span class="text-dark text-capitalize"> {{ object.custom_license }}</span>
         </div>
 
         <!-- sponsor -->
-        <div class="pb-1 border-line" {% if not object.sponsors %} style="..." {% endif %}>
+        <div class="pb-1 border-line"
+                {% if not object.sponsors %}
+             style="display: none"
+                {% endif %}>
           <!-- TODO pluralization -->
           <span class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</span>
           {% for sponsor in object.sponsors.all %}

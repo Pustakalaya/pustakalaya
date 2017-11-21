@@ -324,20 +324,20 @@
                                 <div class="card-image">
                                     <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
                                        style="text-decoration: none"
-                                       class="text-capitalize"
-                                    >
-                                        <img class="img img-responsive"
+                                       class="text-capitalize">
+                                        <img class="img img-responsive "
+                                             style="border: 1px solid rgba(52, 152, 219,0.25)"
                                              width="100%"
                                              height="210px"
                                              src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
                                     </a>
                                 </div>
+                                <br>
                                 <div class="card-body text-center">
                                     <p class=" text-capitalize text-primary">
                                         <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
                                            class="text-capitalize"
-                                           style="text-decoration: none;"
-                                        >
+                                           style="text-decoration: none;">
                                             {{ hit.title | transtolocal | title | truncatechars:"25" }}
                                         </a>
 
