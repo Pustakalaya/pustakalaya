@@ -61,7 +61,6 @@ THIRDPARTY_APPS = [
     # 'allauth.socialaccount.providers.twitter',
     # 'allauth.socialaccount.providers.google',
     'crispy_forms',
-    'star_ratings',
     'hitcount',
 
 ]
@@ -77,6 +76,7 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.dashboard',
     'pustakalaya_apps.pustakalaya_search',
     'pustakalaya_apps.pustakalaya_account',
+    'pustakalaya_apps.star_ratings',
 
 
 ]
@@ -345,3 +345,7 @@ LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')
 #         },
 #     }
 # }
+
+# STAR_RATINGS_RATING_MODEL = 'pustakalaya_rating.PustakalayaRating'
+
+
