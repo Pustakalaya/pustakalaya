@@ -57,7 +57,7 @@
                     <p>
                         <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
                            class="text-capitalize text-primary">Titles</a>
-                        | <a href="{% url 'browse:browse' %}?browse_by=all&sort_order=asc"
+                        | <a href="/authors"
                              class="text-capitalize text-primary"><span>   Authors</span></a>
                     </p>
 
@@ -110,6 +110,10 @@
                                aria-hidden="true"></i>{% trans "Newspapers & Magazines" %}</a>
                     </p>
 
+                </div>
+                <hr>
+                <div class="android app">
+                    <a href="https://play.google.com/store/apps/details?id=com.ole.epustakalaya&hl=en" target="_blank" title="E-Pustakalaya Android App"><img class="img img-responsive btn btn-md bg-white" src="{% static 'images/logos/googleplay.png' %}" alt="E-pustakalaya Android Application"/></a>
                 </div>
             </div>
 
@@ -285,8 +289,7 @@
                         </div>
                         <!-- Past partners -->
                         <div class="col-md-6 col-xs-12">
-                            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Past partners" %}</p>
-
+                            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Past supporter" %}</p>
                             <hr/>
                             <!-- TODO: replace with sliding banner -->
                             <ul class="nav">
@@ -326,82 +329,86 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="https://www.britishcouncil.org.np/" target="_blank"
                                    title="British Council">
-                                    <img class="footer-logo" src="{% static 'images/logos/bc.png' %}"
-                                         alt="British council">
+                                    <img class=" img img-responsive" src="{% static 'images/logos/bc.png' %}"
+                                         alt="British council"
+                                    width="70px" height="30px;">
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link active" href="http://gorkhapatraonline.com/" target="_blank"
-                                   title="Gorkhapatra">
-                                    <img class="footer-logo" src="{% static 'images/logos/gorkhapatra.png' %}"
-                                         width="150px"
-                                         height="50px"
-                                         alt="Gorkhapatra">
+                                   title="Gorkhapatra Sansthan">
+                                    <img class="img img-responsive" src="{% static 'images/logos/gorkhapatra.png' %}"
+                                         width="50px"
+                                         height="30px"
+                                         alt="Gorkhapatra Sansthan">
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="http://madanpuraskar.org/" target="_blank">
                                     <img class="img img-responsive" src="{% static 'images/logos/madanpuraskar.gif' %}"
-                                         alt="Madanpuraskar" title="Madan Puraskar">
+                                         alt="Madanpuraskar" title="Madan Puraskar" width="50px" height="30px;">
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="nepalacademy.org.np" target="_blank"
                                    title="Nepal Academy">
-                                    <img src="{% static 'images/logos/nepalacademy.png' %}"
-                                         alt="Nepal academy">
+                                    <img class="img img-responsive" src="{% static 'images/logos/nepalacademy.png' %}"
+                                         alt="Nepal academy" width="60px" height="30px;">
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active"
                                    href="http://onlinesahitya.com/content/nepalese-society-childrens-literature-neschil"
                                    target="_blank" title="Neschil">
-                                    <img class="footer-logo" src="{% static 'images/logos/neschil.png' %}"
-                                         alt="Neschil">
+                                    <img class="img img-responsive" src="{% static 'images/logos/neschil.png' %}"
+                                         alt="Neschil" width="50px" height="30px;">
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#" target="_blank">
-                                    <img class="footer-logo" src="{% static 'base_assets/img/partnerslogo/rtf.png' %}"
-                                         alt="RTF" title="RTF">
+                                <a class="nav-link active" href="http://www.e-learningforkids.org/" target="_blank" title="E-Learning For Kids">
+                                    <img class="img img-responsive" src="{% static 'images/logos/e-learning-for-kids.png' %}"
+                                         alt="E-Learning For Kids" width="80px" height="30px;">
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="https://www.roomtoread.org/" target="_blank"
                                    title="Room To Read">
-                                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}"
-                                         alt="Room to Read">
+                                    <img class="img img-responsive" src="{% static 'images/logos/roomtoread.png' %}"
+                                         alt="Room to Read" width="60px" height="30px;">
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="#" target="_blank" title="Xworld">
-                                    <img class="footer-logo" src="{% static 'images/logos/xworld.png' %}"
-                                         alt="British council">
+                                <a class="nav-link active" href="http://nepal.worlded.org/" target="_blank" title="World Education Nepal">
+                                    <img class="img img-responsive" src="{% static 'images/logos/xworld.png' %}"
+                                         alt="World Education Nepal" width="50px" height="30px;">
                                 </a>
                             </li>
 
-                            <!--li class="nav-item">
-                <a class="nav-link active" href="#" target="_blank">
-                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
-                </a>
-            </li>
-                 <li class="nav-item">
-                <a class="nav-link active" href="#" target="_blank">
-                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
-                </a>
-            </li>
-                 <li class="nav-item">
-                <a class="nav-link active" href="#" target="_blank">
-                    <img class="footer-logo" src="{% static 'images/logos/roomtoread.png' %}" alt="British council">
-                </a>
-            </li-->
+                            <li class="nav-item">
+                                <a class="nav-link active" href="http://rbf.org.np/" target="_blank" title="Rato Bangala Foundation">
+                                    <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/rtf.png' %}"
+                                         alt="Rato Bangla Foundation" width="50px" height="30px;">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="http://www.savethechildren.org" target="_blank" title="Save The Children">
+                                    <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/stc.gif' %}"
+                                         alt="Save The Children" width="50px" height="30px;">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="https://practicalaction.org/nepal" target="_blank" title="Practical Action">
+                                    <img class="img img-responsive" src="{% static 'images/logos/practical-action-logo-highres-300dpi.png' %}"
+                                         alt="Pritical Action" height="30px;" width="60px;">
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="http://www.digitalhimalaya.com/" target="_blank"
                                    title="Digital Himalaya">
-                                    <img class="footer-logo" src="{% static 'images/logos/DH_logo_small.gif' %}"
-                                         alt="Digital Himalaya">
+                                    <img class="img img-responsive" src="{% static 'images/logos/DH_logo_small.gif' %}"
+                                         alt="Digital Himalaya" width="60px" height="30px;">
                                 </a>
                         </ul>
                     </div>
