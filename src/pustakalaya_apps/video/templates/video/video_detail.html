@@ -30,12 +30,12 @@
     </style>
     <link rel="stylesheet" href="{% static 'base_assets/css/video-js.css' %}">
     <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
-
 {% endblock style %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" style="min-height: 430px">
         <!--video title-->
+    <h4 class="text-capitalize"><b>{{ object.title }}</b></h4>
         <h6 class="text-dark text-uppercase mb-4 description" id="video-title"
             hidden>{{ object.videofileupload_set.first.file_name }}</h6>
 
@@ -43,8 +43,10 @@
         <div class="row">
             <div class="col-md-7 col-sm-12 col-xs-12">
                 <video class="video-js vjs-default-skin" width="640px" height="360px"
-                       id="selectedVideo" controls controlsList="nodownload" preload="none"
+                       id="selectedVideo" controls="controls" loop controlsList="nodownload" preload="auto"
+                       style="border: 5px solid rgba(127,140,141,0.11)"
                        src="{{ MEDIA_URL }}{{ object.videofileupload_set.first.upload }}"
+                       type="video/mp4"
                        data-setup='{ "aspectRatio":"640:360", "playbackRates": [1, 1.5, 2] }'>
                 </video>
             </div>
@@ -91,28 +93,28 @@
         <div class="row">
             <!-- metadata section -->
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <p class="text-justify  tex-dark font-weight-normal" {% if not object.abstract %}
-                   style="..." {% endif %}>
+                <p class="text-justify  tex-dark font-weight-normal"
+                        {% if not object.abstract %}
+                            style="..."
+                        {% endif %}>
                     {{ object.abstract }}</p>
                 <!-- publisher section -->
                 <div class="pb-1 border-line">
-
                     <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
-
                 </div>
 
                 <!-- place of publication -->
-                <div class="pb-1 border-line" {% if not object.place_of_publication %} style="..." {% endif %}>
-
+                <div class="pb-1 border-line"
+                        {% if not object.place_of_publication %}
+                     style="display: none"
+                        {% endif %}>
                     <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.place_of_publication }}</span>
-
                 </div>
 
                 <!-- Publication year -->
                 <div class="pb-1 border-line">
-
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.publication_year }}</span>
 
@@ -120,14 +122,15 @@
 
                 <!-- Available year -->
                 <div class="pb-1 border-line">
-
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.created_date }}</span>
-
                 </div>
 
                 <!-- Keywords -->
-                <div class="pb-1 border-line" {% if not object.keywords.all %} style="..." {% endif %}>
+                <div class="pb-1 border-line"
+                        {% if not object.keywords.all %}
+                     style="display: none"
+                        {% endif %}>
 
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
@@ -135,14 +138,14 @@
                         <span class="text-dark text-capitalize">
                             <a href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword }}</a>
                         </span>
-
                     {% endfor %}
-
-
                 </div>
 
                 <!-- Description -->
-                <div class="pb-1 border-line" {% if not object.description %}  style="..."  {% endif %}>
+       <div class="pb-1 border-line"
+                        {% if not object.description %}
+                     style="display: none;"
+                        {% endif %}>
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
                     <span class="text-capitalize"> {{ object.description }}</span>
                 </div>
@@ -163,15 +166,19 @@
 
                 <!-- video running time -->
                 <div class="pb-1 border-line"
-                        {% if not object.video_running_time %} style="display: none" {% endif %}>
+                        {% if not object.video_running_time %}
+                     style="display: none"
+                        {% endif %}>
                     <!-- Add 2px right margin in each -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "running time" %}</span>
                     <span class="text-dark text-capitalize">{{ object.video_running_time }}</span>
                 </div>
 
                 <!-- video certificate license -->
-                <div class="pb-1 border-line" {% if not object.video_certificate_license %}
-                     style="display: none" {% endif %}>
+                <div class="pb-1 border-line"
+                        {% if not object.video_certificate_license %}
+                     style="display: none"
+                        {% endif %}>
                     <!-- Add 2px right margin in each -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "certificate license:" %}</span>
                     <span class="text-capitalize">{{ object.video_certificate_license }}</span>
@@ -205,14 +212,20 @@
                 </div>
 
                 <!-- Rights -->
-                <div class="pb-1 border-line" {% if not object.custom_license %} style="display: none" {% endif %}>
+                <div class="pb-1 border-line"
+                        {% if not object.custom_license %}
+                     style="display: none"
+                        {% endif %}>
         <span class="text-capitalize font-weight-normal text-dark"
               style="vertical-align: top;">{% trans "right:" %}</span>
                     <span class="text-capitalize"> {{ object.custom_license }}</span>
                 </div>
 
                 <!-- sponsor -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                {% if not object.sponsors.all %}
+                    style="display: none"
+                {% endif %}>
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</span>
                     {% for sponsor in object.sponsors.all %}
@@ -245,6 +258,9 @@
                 videoPlayer.play();
             }
         })(window);
-    </script>
 
+
+  <!-- If you'd like to support IE8 -->
+
+    </script>
 {% endblock script %}

@@ -59,7 +59,7 @@
 {% endblock %}
 {% block content %}
     <div class="bg-white">
-    <div class="container">
+    <div class="container" style="min-height: 430px">
         <!-- Result container -->
         {% if hits %}
             <div class="row">
@@ -99,7 +99,7 @@
                                             {% if selected %} checked {% endif %}
                                            type="checkbox"
                                            onclick="queryAndFilter()">
-                                    <label class="text-capitalize facet-element text-center" for="{{ language }}"l>
+                                    <label class="text-capitalize facet-element text-center" for="{{ language }}" l>
                                         {{ language | get_language }} <span
                                             class="text-muted">&nbsp;({{ count }})</span>
                                     </label>
@@ -179,20 +179,52 @@
                     <div class="row" id="keywords">
                         <div class="col-sm-12 col-lg-12">
                             <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "keywords" %}</p>
-                            {% for type, count, selected in keywords %}
-                                <div class="checkbox">
-                                    <input id="{{ type }}" type="checkbox"
-                                            {% if selected %} checked {% endif %}
-                                           value="{{ type }}"
-                                           onclick="queryAndFilter()">
-                                    <label class="text-capitalize facet-element" for="{{ type }}">
-                                        {{ type|transtolocal }}
+                            <!-- append list of keywords in window object to implement filter with vue.js -->
+                            <script>
+                                var keywords = "{{keywords_js|escapejs}}"
+                            </script>
 
-                                        <span
-                                                class="text-muted">&nbsp;({{ count }})</span>
-                                    </label>
+                            <!-- vue template to implement filters in vuejs -->
+                            <div id="keywords-filter">
+                                <input type="text" v-model="search"
+                                       placeholder="Filter keywords"
+                                       class="form-control mb-2"/>
+
+                                <div v-for="keyword in filteredKeywords">
+                                    <!-- vuejs syntax to render name -->
+                                    <span class="text-capitalize"></span>
+                                    <div class="checkbox">
+                                        <input type="checkbox"
+                                                {% if selected %} checked {% endif %}
+                                                v-model="keyword.selected"
+                                               :id="keyword.keyword"
+                                               :value="keyword.keyword"
+                                               onclick="queryAndFilter()">
+                                        <label class="text-capitalize facet-element" :for="keyword.keyword">
+                                            <%keyword.keyword %>
+
+                                            <span
+                                                    class="text-muted">&nbsp;(<%keyword.count %>)</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            {% endfor %}
+
+{#                            {% for type, count, selected in keywords %}#}
+{#                                <div class="checkbox">#}
+{#                                    <input id="{{ type }}" type="checkbox"#}
+{#                                            {% if selected %} checked {% endif %}#}
+{#                                           value="{{ type }}"#}
+{#                                           onclick="queryAndFilter()">#}
+{#                                    <label class="text-capitalize facet-element" for="{{ type }}">#}
+{#                                        {{ type|transtolocal }}#}
+{##}
+{#                                        <span#}
+{#                                                class="text-muted">&nbsp;({{ count }})</span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+                            </div>
+
                         </div><!-- end col-sm-12 -->
                     </div>
                 {% endif %}
@@ -202,6 +234,7 @@
                     <div class="row" id="license_type">
                         <div class="col-sm-12 col-lg-12">
                             <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "license type" %}</p>
+
                             {% for type, count, selected in license_type %}
                                 <div class="checkbox">
                                     <input id="{{ type }}" type="checkbox"
@@ -290,20 +323,20 @@
                                 <div class="card-image">
                                     <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
                                        style="text-decoration: none"
-                                       class="text-capitalize"
-                                    >
-                                        <img class="img img-responsive"
+                                       class="text-capitalize">
+                                        <img class="img img-responsive "
+                                             style="border: 1px solid rgba(52, 152, 219,0.25)"
                                              width="100%"
                                              height="210px"
                                              src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
                                     </a>
                                 </div>
+                                <br>
                                 <div class="card-body text-center">
                                     <p class=" text-capitalize text-primary">
                                         <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
                                            class="text-capitalize"
-                                           style="text-decoration: none;"
-                                        >
+                                           style="text-decoration: none;">
                                             {{ hit.title | transtolocal | title | truncatechars:"25" }}
                                         </a>
 
@@ -328,12 +361,12 @@
                     {% endfor %}
                 </div>
                 <!-- pagination -->
-            {# TODO: implement dotted pagination after specific page #}
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                {% include '_partials/pagination.html' %}
+                {# TODO: implement dotted pagination after specific page #}
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        {% include '_partials/pagination.html' %}
+                    </div>
                 </div>
-            </div>
             </div>
         {% else %}
             <div>
@@ -449,5 +482,29 @@
 
         }
     </script>
-    <!-- some script abov here -->
+    <!-- some script above here -->
+    <!-- vue js implement -->
+    <script src="{%  static 'base_assets/js/vue/vue.js' %}"></script>
+    <!-- vuejs app -->
+    <script>
+        var app = new Vue({
+            el: "#keywords-filter",
+            delimiters: ["<%", "%>"],
+            data: function () {
+                return {
+                    search: '',
+                    keywords: JSON.parse(keywords).keywords
+                };
+            },
+            computed: {
+                filteredKeywords: function () {
+                    var self = this;
+                    return this.keywords.filter(function (keyword) {
+                        return keyword.keyword.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+                    });
+                    //return this.customers;
+                },
+            }
+        });
+    </script>
 {% endblock script %}

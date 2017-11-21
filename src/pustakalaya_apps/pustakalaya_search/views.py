@@ -6,6 +6,7 @@ from elasticsearch_dsl import Search
 from django.conf import settings
 from elasticsearch_dsl.connections import connections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from pustakalaya_apps.core.templatetags.pustakalaya_filters import transtolocal
 
 
 def search(request):
@@ -57,6 +58,22 @@ def search(request):
         search_result["time"] = response.took / float(1000)  # Convert time in msec
         search_result["page_obj"] = page
         search_result["paginator"] = paginator
+
+        # Implement keywords filter.
+        keyword_list = []
+        for (keyword, count, selected) in response.facets.keywords:
+            keyword = dict(keyword=(keyword), count=count, selected=selected)
+            keyword_list.append(keyword)
+
+        # Pass the keyword_list as js_keyword to consume by frontend apps like jquery.
+        data = {
+            "keywords": keyword_list,
+        }
+
+        search_result["keywords_js"] = json.dumps(data)
+
+
+
         #
         # for (type, count, selected) in response.facets.type:
         #     print(type, ' (SELECTED):' if selected else ':', count)

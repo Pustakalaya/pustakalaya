@@ -9,7 +9,7 @@
 {% block content %}
     <!-- Breadcums -->
 
-    <div class="container">
+    <div class="container" style="min-height:430px">
         <div class="row">
             <div class="col-md-12">
                 <!-- breadcums -->
@@ -48,6 +48,11 @@
         <div class="row">
            {%  include '_partials/list_display.html' %}
         </div>
+     <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                {% include '_partials/pagination.html' %}
+                </div>
+            </div>
     </div>
 {% endblock content %}
 

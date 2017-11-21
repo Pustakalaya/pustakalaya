@@ -3,7 +3,7 @@
 {%  load pustakalaya_filters %}
 {% block title %} {% endblock title %}
 {% block content %}
-    <div class="container">
+    <div class="container" style="min-height: 480px;">
         <h5 class="text-capitalize"><span class="text-info">{{ community_name | transtolocal }}</span></h5>
         <hr>
         {% for collection in collection_list %}
