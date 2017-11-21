@@ -47,8 +47,6 @@
                        style="border: 5px solid rgba(127,140,141,0.11)"
                        src="{{ MEDIA_URL }}{{ object.videofileupload_set.first.upload }}"
                        type="video/mp4"
-                       type="video/mp4"
-                      type="video/webm"
                        data-setup='{ "aspectRatio":"640:360", "playbackRates": [1, 1.5, 2] }'>
                 </video>
             </div>
@@ -102,10 +100,8 @@
                     {{ object.abstract }}</p>
                 <!-- publisher section -->
                 <div class="pb-1 border-line">
-
                     <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
-
                 </div>
 
                 <!-- place of publication -->
@@ -113,10 +109,8 @@
                         {% if not object.place_of_publication %}
                      style="display: none"
                         {% endif %}>
-
                     <span class="capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.place_of_publication }}</span>
-
                 </div>
 
                 <!-- Publication year -->
@@ -130,7 +124,6 @@
                 <div class="pb-1 border-line">
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.created_date }}</span>
-
                 </div>
 
                 <!-- Keywords -->
@@ -145,14 +138,11 @@
                         <span class="text-dark text-capitalize">
                             <a href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword }}</a>
                         </span>
-
                     {% endfor %}
-
-
                 </div>
 
                 <!-- Description -->
-                <div class="pb-1 border-line"
+       <div class="pb-1 border-line"
                         {% if not object.description %}
                      style="display: none;"
                         {% endif %}>
