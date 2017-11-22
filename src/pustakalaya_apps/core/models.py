@@ -77,6 +77,7 @@ class Biography(AbstractBaseAuthor):
     class Meta:
         db_table = "biography"
         verbose_name = _("Author")
+        ordering = ['first_name']
 
 
 class Sponsor(AbstractTimeStampModel):

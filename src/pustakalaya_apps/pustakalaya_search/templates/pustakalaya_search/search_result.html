@@ -185,8 +185,6 @@
                             </script>
 
                             <!-- vue template to implement filters in vuejs -->
-
-
                             <div id="keywords-filter">
                                 <input type="text" v-model="search"
                                        placeholder="Filter keywords"
@@ -210,20 +208,21 @@
                                         </label>
                                     </div>
                                 </div>
-                            {% for type, count, selected in keywords %}
-                                <div class="checkbox">
-                                    <input id="{{ type }}" type="checkbox"
-                                            {% if selected %} checked {% endif %}
-                                           value="{{ type }}"
-                                           onclick="queryAndFilter()">
-                                    <label class="text-capitalize facet-element" for="{{ type }}">
-                                        {{ type|transtolocal }}
 
-                                        <span
-                                                class="text-muted">&nbsp;({{ count }})</span>
-                                    </label>
-                                </div>
-                            {% endfor %}
+{#                            {% for type, count, selected in keywords %}#}
+{#                                <div class="checkbox">#}
+{#                                    <input id="{{ type }}" type="checkbox"#}
+{#                                            {% if selected %} checked {% endif %}#}
+{#                                           value="{{ type }}"#}
+{#                                           onclick="queryAndFilter()">#}
+{#                                    <label class="text-capitalize facet-element" for="{{ type }}">#}
+{#                                        {{ type|transtolocal }}#}
+{##}
+{#                                        <span#}
+{#                                                class="text-muted">&nbsp;({{ count }})</span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
                             </div>
 
                         </div><!-- end col-sm-12 -->
