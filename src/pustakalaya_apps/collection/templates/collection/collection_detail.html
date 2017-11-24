@@ -9,7 +9,7 @@
 {% block content %}
     <!-- Breadcums -->
 
-    <div class="container" style="min-height:430px">
+    <div class="container min_height">
         <div class="row">
             <div class="col-md-12">
                 <!-- breadcums -->
@@ -17,7 +17,7 @@
                     {% trans "section" %}
                     <a style="text-decoration:none;"
                        class="text-capitalize"
-                       href="{% url "community:community_detail" community_name|slugify %}">
+                       href="{% url 'community:community_detail' community_name|slugify %}">
                         {{ community_name }} &gt;&gt;
 
                     </a>
