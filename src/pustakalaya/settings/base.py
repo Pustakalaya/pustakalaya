@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_user_agents',
+    'tracking_analyzer'
 ]
 
 THIRDPARTY_APPS = [
@@ -283,6 +285,12 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # Crispy forms settings.
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#default hitcount value
+HITCOUNT_KEEP_HIT_ACTIVE = {'minutes': 15}
+HITCOUNT_HITS_PER_IP_LIMIT = 0  # unlimited
+HITCOUNT_EXCLUDE_USER_GROUP = ()  # not used
+HITCOUNT_KEEP_HIT_IN_DATABASE = {'seconds': 10}
 
 ## Django logging settings
 LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')
