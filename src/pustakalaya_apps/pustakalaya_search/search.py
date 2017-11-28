@@ -18,11 +18,16 @@ class PustakalayaSearch(FacetedSearch):
     fields = [
         'title^10',
         'keywords',
-        'abstract',
+        'abstract^5',
         'description',
         'collections',
         'communities',
-        'author_list'
+        'author_list',
+        'education_levels',
+        'publisher',
+        'license_type',
+        'languages',
+        'type',
 
     ]
 
@@ -32,7 +37,7 @@ class PustakalayaSearch(FacetedSearch):
         'education_levels': TermsFacet(field='education_levels.keyword', size=10),
         'communities': TermsFacet(field='communities.keyword', size=10),
         'collections': TermsFacet(field='collections.keyword', size=10),
-        'keywords': TermsFacet(field='keywords.keyword', size=5),
+        'keywords': TermsFacet(field='keywords.keyword', size=30),
         'year_of_available': DateHistogramFacet(field='year_of_available', interval='month', min_doc_count=0),
         'license_type': TermsFacet(field='license_type.keyword', size=10),
         'publication_year': DateHistogramFacet(field='year_of_available', interval='month', min_doc_count=0),

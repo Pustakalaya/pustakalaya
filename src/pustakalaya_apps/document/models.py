@@ -1,8 +1,11 @@
 #  document/models.py
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from elasticsearch.exceptions import NotFoundError
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
 
 from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
@@ -32,7 +35,7 @@ class FeaturedItemManager(models.Manager):
     def get_queryset(self):
         return super(FeaturedItemManager, self).get_queryset().filter(featured="yes").order_by("-updated_date")[:12]
 
-class Document(AbstractItem):
+class Document(AbstractItem, HitCountMixin):
     """Book document type to store book type item
     Child class of AbstractItem
     """
@@ -169,6 +172,11 @@ class Document(AbstractItem):
     objects = models.Manager()
     featured_objects = FeaturedItemManager()
 
+    # View count properties.
+    hit_count_generic = GenericRelation(
+    HitCount, object_id_field='object_pk',
+    related_query_name='hit_count_generic_relation')
+
     class Meta:
         ordering = ('title',)
 
@@ -176,6 +184,10 @@ class Document(AbstractItem):
     def getauthors(self):
         author_list = [ (author.getname, author.pk) for author in self.document_authors.all()]
         return author_list or [None] # If emtpy, return something otherwise it will break elastic index while searching.
+
+    @property
+    def get_view_count(self):
+        return self.hit_count_generic.count() or 0
 
     def __str__(self):
         return self.title

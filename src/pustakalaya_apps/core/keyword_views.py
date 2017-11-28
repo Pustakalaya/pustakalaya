@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
+from elasticsearch_dsl.connections import connections
 from pustakalaya_apps.core.utils import list_search_from_elastic
+
 
 
 
