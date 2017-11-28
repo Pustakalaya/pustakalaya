@@ -10,9 +10,7 @@ django-crispy-forms==1.7.0
 # Star ratings swapable-rating-model
 git+https://github.com/wildfish/django-star-ratings.git@feature/swapable-rating-model
 # Django hit count
-git+https://github.com/choiRyan/django-hitcount
-
-django-hitcount==1.2.3
+git+https://github.com/Pustakalaya/django-hitcount
 
 
 
