@@ -6,8 +6,10 @@ from elasticsearch_dsl import Search
 from django.conf import settings
 from elasticsearch_dsl.connections import connections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import JsonResponse
-from elasticsearch import Elasticsearch
+from django.http import HttpResponse, JsonResponse
+from pustakalaya_apps.document.search import DocumentDoc
+
+
 
 
 def search(request):
@@ -111,25 +113,36 @@ def completion(request):
     :return:
     """
 
-    es = Elasticsearch()
+    client = connections.get_connection()
 
     if request.method == "POST":
         text = request.POST.get('suggest_text') or request.POST.get('suggest_text') or 'अल्छीको'
+        #s =es.search('name_suggestions', text, completion={'field': 'title_suggest'})
+        # suggestions = s.execute_suggest()
+        # for result in suggestions.name_suggestions:
+        #     print('Suggestions for %s:' % result.text)
+        #     for option in result.options:
+        #         print('  %s (%r)' % (option.name))
 
-        res = es.search(index="pustakalaya", body={
-            "suggest": {
-                "suggestions": {
-                    "text": "t",
-                    "term": {
-                        "field": "title_suggest"
-                    }
-                }
-            }
-        })
+        response = client.search(
+            index=settings.ES_INDEX,
+            body={"_source": "suggest",
+                  "suggest": {
+                      "title_suggest": {
+                          "prefix": text,
+                          "completion": {
+                              "field": "title_suggest"
+                          }
+                      }
+                  }
+                  })
 
-        print(res)
+    for text in response["suggest"]["title_suggest"][0]["options"]:
+        print(text["text"])
 
-        return JsonResponse(json.dumps(res), safe=False)
+    return JsonResponse(json.dumps(response), safe=False)
+
+
 
 
 def browse(request, browse_by="all"):
