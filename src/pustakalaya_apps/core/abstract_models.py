@@ -203,6 +203,7 @@ class AbstractItem(AbstractTimeStampModel):
             meta={'id': self.id},
             id=self.id,
             title=self.title,
+            title_suggest = self.title,
             abstract=self.abstract,
             license_type=self.license_type,
             description=self.description,
@@ -210,6 +211,7 @@ class AbstractItem(AbstractTimeStampModel):
             publication_year=self.publication_year,
             created_date=self.created_date,
             updated_date=self.updated_date,
+            view_count = self.get_view_count
         )
 
     @abc.abstractmethod
@@ -218,6 +220,10 @@ class AbstractItem(AbstractTimeStampModel):
         Call this method to index an instance to index server.
         """
         pass
+
+    @property
+    def get_view_count(self):
+        return 0
 
 
 class LinkInfo(AbstractTimeStampModel):
