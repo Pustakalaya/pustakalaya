@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load ratings %}
 {% load pustakalaya_filters %}
+{% load hitcount_tags %}
 
 <!-- override some css -->
 {% block style %}
@@ -28,7 +29,7 @@
 
 {% block content %}
     <div>
-        <div class="container">
+        <div class="container min_height">
             <div class="row">
 
                 <div class="col-md-3 col-sm-12  col-xs-12">
@@ -42,24 +43,38 @@
                     {% endfor %}
                     {# TODO: Calculate the file size and display in frontend #}
                     <p class="text-muted text-center">फाइल साइज : 11.69 MB</p>
-{#                     {% ratings object %}#}
-                    <!-- share buttons -->
 
-                    <!--<div>
-                        <a href="http://www.facebook.com/E-pustakalaya" class="btn btn-primary btn-icon btn-round">
-                            <i class="fa fa-facebook-square"></i>
+                    <!-- show count -->
+                    <p class="bg-blue text-dark text-center">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
+                    <!-- Rating -->
+{#                    {% ratings object %}#}
+                    <!-- share buttons section -->
+                    <section class="share-buttons text-center">
+                        <a class="share-facebook p-1 btn btn-md bg-white"
+                           href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
+                           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                            <span class="hidden"><i class="fa fa-3x fa-facebook-square"
+                                                    style="color: #2980b9 !important;"></i></span>
                         </a>
-                        <a href="http://www.twitter.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
-                            <i class="fa fa-twitter"></i>
+                        <a class="share-twitter p-1 btn btn-md bg-white text-primary"
+                           href="http://twitter.com/share?text={{ article.title }}&url={{ request.build_absolute_uri|urlencode }}"
+                           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                            <span class="hidden"> <i class="fa  fa-3x fa-twitter"></i></span>
                         </a>
-                        <a href="http://www.google.com/E-pustakalaya" class="btn btn-default btn-icon btn-round">
-                            <i class="fa fa-google-plus"></i>
+                        <a class="share-google-plus p-1 btn btn-md bg-white"
+                           href="https://plus.google.com/share?url={{ request.build_absolute_uri|urlencode }}"
+                           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                            <span class="hidden"> <i class="fa fa-3x fa-google-plus"
+                                                     style="color:#c0392b !important;"></i></span>
                         </a>
-                        <a href="http://www.linkedin.com/E-pustakalaya" class="btn btn-info btn-icon btn-round">
-                            <i class="fa fa-linkedin"></i>
+                        <a class="share-linkedin p-1 btn btn-md bg-white" style="color: #2980b9; !important;"
+                           href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.get_full_path|urlencode }}&title={{ object.title }}&summary={{ object.description }}&source={{ request.build_absolute_uri|urlencode }}"
+                           onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                            <span><i class="fa fa-3x fa-linkedin"></i></span>
                         </a>
-                    </div>-->
+                    </section>
                 </div>
+
 
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <!-- title of a document -->
@@ -73,7 +88,7 @@
                             <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}"><span
                                     class="text-dark text-capitalize text-primary">
                                 {{ author }}
-                                {%  if forloop.counter != object.document_authors.count %}|{%  endif %}
+                                {% if forloop.counter != object.document_authors.count %}|{% endif %}
                             </span></a>
 
                         {% endfor %}
@@ -103,7 +118,7 @@
 
                     </div>
 
-                  <br>
+                    <br>
                     <!-- Metadata section -->
                     <div class="row">
                         <!-- Left half section -->
@@ -111,9 +126,9 @@
 
                             <!-- author section -->
                             <div class="pb-1 border-line"
-                            {%  if not object.document_authors.all %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.document_authors.all %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "Authors:" %}</span>
@@ -125,9 +140,9 @@
 
                             <!-- Illustrator section -->
                             <div class="pb-1 border-line"
-                            {%  if not object.document_illustrators.all %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.document_illustrators.all %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
@@ -153,9 +168,9 @@
 
                             <!-- publisher section -->
                             <div class="pb-1 border-line"
-                            {%  if not object.publisher %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.publisher %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
 
@@ -163,9 +178,9 @@
 
                             <!-- place of publication -->
                             <div class="pb-1 border-line"
-                            {%  if not object.place_of_publication %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.place_of_publication %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Place of publication:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.place_of_publication }}</span>
 
@@ -174,9 +189,9 @@
 
                             <!-- Publication year -->
                             <div class="pb-1 border-line"
-                            {%  if not object.publication_year %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.publication_year %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.publication_year }}</span>
 
@@ -185,9 +200,9 @@
 
                             <!-- Available year -->
                             <div class="pb-1 border-line"
-                            {%  if not object.created_date %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.created_date %}
+                                 style="display: none;"
+                                    {% endif %}>
 
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.created_date }}</span>
@@ -214,10 +229,11 @@
                             <!-- Description -->
                             <div class="pb-1 border-line"
                                     {% if not object.description %}
-                                     style="display: none"
+                                 style="display: none"
                                     {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "description:" %}</span>
-                                <span class="text-dark text-capitalize" style="vertical-align: top;">{{ object.description }}</span>
+                                <span class="text-dark text-capitalize"
+                                      style="vertical-align: top;">{{ object.description }}</span>
 
                             </div>
 
@@ -237,9 +253,9 @@
 
                             <!-- document edition -->
                             <div class="pb-1 border-line"
-                            {%  if not object.edition %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.edition %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <span class="capitalize text-dark text-capitalize">{% trans "edition:" %}</span>
                                 <span class="text-dark">
                                     {{ object.edition }}
@@ -248,9 +264,9 @@
 
                             <!-- document volume -->
                             <div class="pb-1 border-line"
-                            {%  if not object.volume %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.volume %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <span class="capitalize text-dark text-capitalize">{% trans "volume:" %}</span>
                                 <span class="text-dark">{{ object.volume }}</span>
                             </div>
@@ -267,9 +283,9 @@
 
                             <!-- total page -->
                             <div class="pb-1 border-line"
-                            {%  if not object.document_total_page %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.document_total_page %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <!-- TODO: implement pluralization in total page -->
                                 <span class="text-capitalize text-dark text-capitalize">{% trans "total pages" %}:</span>
                                 <span class="text-dark"> {{ object.document_total_page }}</span>
@@ -306,14 +322,15 @@
                             <!-- Rights -->
                             <div class="pb-1 border-line" {% if not object.custom_license %} style="..." {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</span>
-                                <span class="text-dark text-capitalize" style="vertical-align: top;"> {{ object.custom_license }}</span>
+                                <span class="text-dark text-capitalize"
+                                      style="vertical-align: top;"> {{ object.custom_license }}</span>
                             </div>
 
                             <!-- sponsor -->
                             <div class="pb-1 border-line"
-                            {%  if not object.sponsors.all %}
-                                style="display: none;"
-                            {%  endif %}>
+                                    {% if not object.sponsors.all %}
+                                 style="display: none;"
+                                    {% endif %}>
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</span>
                                 {% for sponsor in object.sponsors.all %}
@@ -328,4 +345,3 @@
         </div>
     </div>
 {% endblock content %}
-

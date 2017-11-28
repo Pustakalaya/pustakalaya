@@ -1,4 +1,5 @@
-from elasticsearch_dsl import DocType, Date, Text, Keyword, Completion
+from elasticsearch_dsl import DocType, Date, Text, Keyword, Completion, Integer
+
 
 
 class ItemDoc(DocType):
@@ -22,3 +23,4 @@ class ItemDoc(DocType):
     updated_date = Date()
     author_list = Text(multi=True)
     url = Text()
+    view_count = Integer()

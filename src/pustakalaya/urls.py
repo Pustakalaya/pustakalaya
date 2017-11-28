@@ -31,6 +31,8 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 urlpatterns = [
     # Change language
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    # Hit count
+    url(r'^hitcount/', include('hitcount.urls', namespace='hitcount')),
 
 ]
 

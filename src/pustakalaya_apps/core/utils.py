@@ -38,7 +38,7 @@ def list_search_from_elastic(request, query_type="match", **kwargs):
 
     # Query to elastic search to grab all the items related to this collection name
     # And sort the result based on the sorting options.
-    client = Elasticsearch()
+    client = connections.get_connection()
     s = Search().using(client).query(query_type, **kwargs).sort({
         sort_by: {"order": sort_order}
     })
