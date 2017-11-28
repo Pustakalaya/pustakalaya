@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load pustakalaya_filters %}
 {% block title %}{% trans "Signup" %}{% endblock %}
-
 {% block content %}
     <div class="container">
         <div class="row">
@@ -33,7 +32,7 @@
                         <span class="fa fa-2x fa-google-plus-square"></span></a>
                 </p>
                 <p class="text-center">{% trans 'Already have Pustakalaya account' %}? <a
-                        href="/login/">{% trans 'Log in' %}</a></p>
+                        href="{{ login_url }}">{% trans 'Log in' %}</a></p>
             </div>
 
             <div class="col-md-7 p-4">
