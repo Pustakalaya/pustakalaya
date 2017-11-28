@@ -6,7 +6,8 @@ from elasticsearch_dsl import Search
 from django.conf import settings
 from elasticsearch_dsl.connections import connections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from pustakalaya_apps.core.templatetags.pustakalaya_filters import transtolocal
+from django.http import JsonResponse
+from elasticsearch import Elasticsearch
 
 
 def search(request):
@@ -72,8 +73,6 @@ def search(request):
 
         search_result["keywords_js"] = json.dumps(data)
 
-
-
         #
         # for (type, count, selected) in response.facets.type:
         #     print(type, ' (SELECTED):' if selected else ':', count)
@@ -103,6 +102,34 @@ def search(request):
         #     print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
 
         return render(request, "pustakalaya_search/search_result.html", search_result)
+
+
+def completion(request):
+    """
+    Method to query the completion result.
+    :param request:
+    :return:
+    """
+
+    es = Elasticsearch()
+
+    if request.method == "POST":
+        text = request.POST.get('suggest_text') or request.POST.get('suggest_text') or 'अल्छीको'
+
+        res = es.search(index="pustakalaya", body={
+            "suggest": {
+                "suggestions": {
+                    "text": "t",
+                    "term": {
+                        "field": "title_suggest"
+                    }
+                }
+            }
+        })
+
+        print(res)
+
+        return JsonResponse(json.dumps(res), safe=False)
 
 
 def browse(request, browse_by="all"):

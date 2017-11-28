@@ -203,6 +203,7 @@ class AbstractItem(AbstractTimeStampModel):
             meta={'id': self.id},
             id=self.id,
             title=self.title,
+            title_suggest = self.title,
             abstract=self.abstract,
             license_type=self.license_type,
             description=self.description,

@@ -122,24 +122,7 @@
             <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
                 <div class="search">
                     <!-- search -->
-                    <form action="/search" method="GET">
-                        <div class="input-group">
-                            <select class="custom-select">
-                                <option selected value=" ">All</option>
-                                <option value="document">Documents</option>
-                                <option value="audio">Audio</option>
-                                <option value="video">Video</option>
-                            </select>
-
-
-                            <input class="form-control border-right-0" type="search" name="q" value=""
-                                   placeholder="{% trans 'Search pustakalaya' %}">
-                            <button class="input-group-addon pl-3 pr-3" id="search-icon">Search</button>
-                        </div>
-                        <!--<div class="col">
-
-                        </div>-->
-                    </form>
+                    {%  include '_partials/search_form.html' %}
                 </div>
                 <section>
                     <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
