@@ -40,9 +40,9 @@
 
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" role="button"
                            class="btn w-100 btn-primary btn-sm">Read: {{ document.file_name }}</a>
+                         {# TODO: Calculate the file size and display in frontend #}
+                    <p class="text-muted text-center">{%  trans "File size:" %}{{ document.upload.size | file_size_format}}</p>
                     {% endfor %}
-                    {# TODO: Calculate the file size and display in frontend #}
-                    <p class="text-muted text-center">फाइल साइज : 11.69 MB</p>
 
                     <!-- show count -->
                     <p class="bg-blue text-dark text-center">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
