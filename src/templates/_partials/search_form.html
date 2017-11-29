@@ -1,6 +1,7 @@
 {% load i18n %}
 <form action="/search" method="GET">
     <div class="input-group">
+
         {#        <select class="custom-select">#}
         {#            <option selected value=" ">All</option>#}
         {#            <option value="document">Documents</option>#}
@@ -9,10 +10,12 @@
         {#        </select>#}
         <input class="form-control border-right-0"
                id="search_box_input"
+
                type="search" name="q" value=""
                onkeyup="suggest_text(event)"
                placeholder="{% trans 'Search pustakalaya' %}">
         <button class="input-group-addon pl-3 pr-3" id="search-icon">Search</button>
+
 
 
     </div>
@@ -39,6 +42,7 @@
                     suggest_text: $event.target.value
                 },
                 success: function (data) {
+
                     var suggest_data = JSON.parse(data);
                     var list_item = " ";
                     suggest_data.suggest.title_suggest[0].options.forEach(function (item) {
@@ -63,6 +67,7 @@
                     // console.log("No ")
                 }
             })
+
 
             // On hover mouse event to add active css class.
             window.onSuggestionSelect = function (event) {

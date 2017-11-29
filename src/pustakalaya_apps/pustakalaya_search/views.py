@@ -6,9 +6,7 @@ from elasticsearch_dsl import Search
 from django.conf import settings
 from elasticsearch_dsl.connections import connections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse, JsonResponse
-from pustakalaya_apps.document.search import DocumentDoc
-
+from django.http import JsonResponse
 
 
 
@@ -113,6 +111,7 @@ def completion(request):
     :return:
     """
 
+
     client = connections.get_connection()
 
     if request.method == "POST":
@@ -141,7 +140,6 @@ def completion(request):
         print(text["text"])
 
     return JsonResponse(json.dumps(response), safe=False)
-
 
 
 

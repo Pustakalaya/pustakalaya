@@ -202,6 +202,7 @@ class AbstractItem(AbstractTimeStampModel):
         return dict(
             meta={'id': self.id},
             id=self.id,
+
             title = self.title,
             title_suggest={"input": [self.title]},
             abstract=self.abstract,
