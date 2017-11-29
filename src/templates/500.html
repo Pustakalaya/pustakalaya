@@ -1,0 +1,8 @@
+{%  extends 'base.html' %}
+{% load  i18n %}
+{%  block content %}
+    <div class="container">
+        <p>{% trans "Some server error :(" %}</p>
+        {%  include '_partials/search_form.html' %}
+    </div>
+{%  endblock content %}
