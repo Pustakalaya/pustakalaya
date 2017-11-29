@@ -1,0 +1,53 @@
+{% load i18n %}
+<form action="/search" method="GET">
+    <div class="input-group">
+        <select class="custom-select">
+            <option selected value=" ">All</option>
+            <option value="document">Documents</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
+        </select>
+
+
+        <input class="form-control border-right-0"
+               type="search" name="q" value=""
+               onkeyup="suggest_text(event)"
+               placeholder="{% trans 'Search pustakalaya' %}">
+        <button class="input-group-addon pl-3 pr-3" id="search-icon">Search</button>
+    </div>
+    <!--<div class="col">
+
+    </div>-->
+</form>
+
+
+<script>
+    (function (window) {
+        window.suggest_text = function ($event) {
+            // Query to Elastic search
+            var suggest_url = "./search/completion/";
+            console.log($event.target.value)
+            $.post({
+                type: "post",
+                url: suggest_url,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                data: {
+                    suggest_text: $event.target.value
+                },
+                success: function (data) {
+                    var suggest_data = JSON.parse(data)
+                    console.log(suggest_data)
+
+                },
+                error: function () {
+                    // console.log("No ")
+                }
+            })
+
+        }
+    })(window);
+</script>
+
+

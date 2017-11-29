@@ -1,4 +1,4 @@
-from elasticsearch_dsl import DocType, Date, Text, Keyword, Integer
+from elasticsearch_dsl import DocType, Date, Text, Keyword, Completion, Integer
 
 
 class ItemDoc(DocType):
@@ -7,6 +7,7 @@ class ItemDoc(DocType):
     Don't get index in the index server."""
     id = Text()
     title = Text(fields={'keyword': Keyword()})
+    title_suggest = Completion()
     abstract = Text()
     type = Text(fields={'keyword': Keyword()})
     education_levels = Text(multi=True, fields={'keyword': Keyword()})
