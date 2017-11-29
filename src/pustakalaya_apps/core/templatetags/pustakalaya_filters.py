@@ -6,6 +6,8 @@ from django import template
 from django.template.defaultfilters import stringfilter
 from pustakalaya_apps.core.constants import LANGUAGES_DICT as languages
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
+import os
 
 register = template.Library()
 
@@ -75,3 +77,23 @@ def get_language(language_code):
 @register.filter(name='slugify_unicode')
 def slugify_unicode(value):
     return slugify(value, allow_unicode=True)
+
+@register.filter(name='file_size_format')
+def file_size_format(value):
+    """
+    Simple kb/mb/gb size snippet for templates:
+
+    {{ product.file.size|sizify }}
+    """
+    # value = ing(value)
+    if value < 512000:
+        value = value / 1024.0
+        ext = _("KB")
+    elif value < 4194304000:
+        value = value / 1048576.0
+        ext = _("MB")
+    else:
+        value = value / 1073741824.0
+        ext = _("GB")
+    return '%s %s' % (str(round(value, 2)), ext)
+

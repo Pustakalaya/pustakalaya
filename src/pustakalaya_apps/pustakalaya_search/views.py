@@ -115,7 +115,7 @@ def completion(request):
     client = connections.get_connection()
 
     if request.method == "POST":
-        text = request.POST.get('suggest_text') or request.POST.get('suggest_text') or 'अल्छीको'
+        text = request.POST.get('suggest_text') or " "
         #s =es.search('name_suggestions', text, completion={'field': 'title_suggest'})
         # suggestions = s.execute_suggest()
         # for result in suggestions.name_suggestions:
