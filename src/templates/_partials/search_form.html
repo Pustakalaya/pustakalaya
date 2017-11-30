@@ -1,23 +1,33 @@
 {% load i18n %}
-<form action="/search" method="GET">
+<form action="/search" method="GET" id="searchForm">
     <div class="input-group">
-        <select class="custom-select">
-            <option selected value=" ">All</option>
-            <option value="document">Documents</option>
-            <option value="audio">Audio</option>
-            <option value="video">Video</option>
-        </select>
 
-
+        {#        <select class="custom-select">#}
+        {#            <option selected value=" ">All</option>#}
+        {#            <option value="document">Documents</option>#}
+        {#            <option value="audio">Audio</option>#}
+        {#            <option value="video">Video</option>#}
+        {#        </select>#}
         <input class="form-control border-right-0"
+               id="searchFormInput"
+               value="{{ q }}"
                type="search" name="q" value=""
                onkeyup="suggest_text(event)"
                placeholder="{% trans 'Search pustakalaya' %}">
-        <button class="input-group-addon pl-3 pr-3" id="search-icon">Search</button>
-    </div>
-    <!--<div class="col">
+        <!-- hidden type is very important don't remove it -->
+                            <input type="hidden" id="filterData"
+                                   name="form-filter"/>
 
-    </div>-->
+
+         <input type="submit" value="Search" class="input-group-addon pr-1" id="search-icon"/>
+
+
+
+    </div>
+    <ul class="list-group" id="suggestions">
+
+    </ul>
+
 </form>
 
 
@@ -37,14 +47,51 @@
                     suggest_text: $event.target.value
                 },
                 success: function (data) {
-                    var suggest_data = JSON.parse(data)
-                    console.log(suggest_data)
+
+                    var suggest_data = JSON.parse(data);
+                    var list_item = " ";
+                    suggest_data.suggest.title_suggest[0].options.forEach(function (item) {
+                        var suggestionText = item.text;
+                        // Suitable to make search in type features.
+                        var doc_type = item._type;
+                        console.log(item.text)
+                        // TODO: remove duplicate items.
+                        // Bind the result to the suggestion box.
+                        if (suggestionText) {
+                            list_item += '<li onmouseover="onSuggestionSelect(this)"  onmouseleave="onSuggestionLeave(this)" class="list-group-item">' + suggestionText + '</li>';
+                        }
+                    });
+                    document.getElementById("suggestions").innerHTML = list_item
+                    console.log(list_item)
+
+
+                    //console.log(suggest_data.suggest.title_suggest[0].options)
 
                 },
                 error: function () {
                     // console.log("No ")
                 }
             })
+
+
+            // On hover mouse event to add active css class.
+            window.onSuggestionSelect = function (event) {
+
+                // Remove all the active class from children
+                $("#suggestions").children("li").removeClass("active");
+
+                // Add the selected class to the selected li element and set populate the search value.
+                $(event).addClass("active");
+
+                $("#searchFormInput").val($(event).text());
+
+
+            }
+
+            // Listen the event when the mouse leave
+
+
+            // On Click mouse event to populate the search text
 
         }
     })(window);

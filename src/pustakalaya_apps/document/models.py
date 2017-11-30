@@ -1,4 +1,5 @@
 #  document/models.py
+import os
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.template.defaultfilters import slugify
