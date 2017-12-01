@@ -1,6 +1,7 @@
 from elasticsearch_dsl import DocType, Date, Text, Keyword, Completion, Integer
 
 
+
 class ItemDoc(DocType):
     """
     Common superclass for Document, Audio, Video, Wiki, Maps, and Newspaper.
