@@ -192,8 +192,7 @@
 
                                 <div v-for="keyword in filteredKeywords">
                                     <!-- vuejs syntax to render name -->
-                                    <span class="text-capitalize"></span>
-                                    <div class="checkbox">
+                                    <div class="checkbox" id="myList">
                                         <input type="checkbox"
                                                 {% if selected %} checked {% endif %}
                                                 v-model="keyword.selected"
@@ -223,6 +222,10 @@
 {#                                    </label>#}
 {#                                </div>#}
 {#                            {% endfor %}#}
+                                <button class="btn btn-primary btn-sm" id="loadMore"> More</button>
+       <button class="btn btn-primary btn-sm" id="showLess">Less</button>
+
+
                             </div>
 
                         </div><!-- end col-sm-12 -->
@@ -501,5 +504,86 @@
             }
         });
     </script>
+
+<script>
+
+    /*Showing and hiding element*/
+
+    $(document).ready(function () {
+      var size_li = $('#keywords-filter #myList').length;
+        x=5;
+        console.log('x: '+x);
+         console.log('size: '+size_li);
+
+
+        /* assume two classes hideItem and showItem */
+          var i =0;
+          HideShow(x,i);
+
+        $('#loadMore').click(function () {
+            x= (x+5 <= size_li) ? x+5 : size_li;
+              i =0;
+            HideShowMoreLessClick(x,i);
+        });
+        $('#showLess').click(function () {
+            x=(x-5<=0) ? 3 : x-5;
+            i =0;
+            HideShowMoreLessClick(x,i);
+        });
+        function HideShow(x,i){
+            /* Initially hide item */
+          $('#keywords-filter #myList').each( function() {
+                  return $(this).addClass('hideItem')
+             })
+            console.log('x=' +x + ' , i = '+i);
+            $('#keywords-filter #myList').each( function() {
+                  if( i< x){
+                  i++;
+                  return $(this).removeClass('hideItem');
+                  }
+             })
+
+         $('#keywords-filter .showItem').show();
+         $('#keywords-filter .hideItem').hide();
+
+        }
+
+        function HideShowMoreLessClick(x,i){
+           /* Initially hide item */
+          $('#keywords-filter #myList').each( function() {
+                  return $(this).removeClass('hideItem')
+             })
+             $('#keywords-filter #myList').each( function() {
+                  return $(this).removeClass('showItem')
+             })
+                $('#keywords-filter #myList').each( function() {
+                  return $(this).addClass('hideItem')
+             })
+           /* remove some of the hide */
+           $('#keywords-filter #myList').each( function() {
+                  if( i< x){
+                  i++;
+                  return $(this).removeClass('hideItem');
+                  }
+             })
+            //add the show item form filter element
+            i=0;
+           $('#keywords-filter #myList').each( function() {
+                  if( i< x){
+                  i++;
+                  return $(this).addClass('showItem');
+                  }
+             })
+         $('#keywords-filter .showItem').show();
+         $('#keywords-filter .hideItem').hide();
+        }
+
+    });
+
+
+
+
+</script>
+
 
 {% endblock script %}
