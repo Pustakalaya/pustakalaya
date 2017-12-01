@@ -43,10 +43,6 @@
 
         for (month, count, selected) in response.facets.publication_year:
             print(month.strftime('%B %Y'), ' (SELECTED):' if selected else ':', count)
-
-
-
-
  -->
 
 {% block style %}
@@ -56,6 +52,7 @@
             cursor: pointer;
         }
     </style>
+    <link rel="stylesheet" href="{% static 'base_assets/css/gridlist.css' %}"/>
 {% endblock %}
 {% block content %}
     <div class="bg-white">
@@ -196,7 +193,7 @@
                                     <div class="checkbox">
                                         <input type="checkbox"
                                                 {% if selected %} checked {% endif %}
-                                                v-model="keyword.selected"
+                                               v-model="keyword.selected"
                                                :id="keyword.keyword"
                                                :value="keyword.keyword"
                                                onclick="queryAndFilter()">
@@ -208,21 +205,22 @@
                                         </label>
                                     </div>
                                 </div>
+                            {% comment %}
+                            {% for type, count, selected in keywords %}
+                                <div class="checkbox">
+                                    <input id="{{ type }}" type="checkbox"
+                                            {% if selected %} checked {% endif %}
+                                           value="{{ type }}"
+                                           onclick="queryAndFilter()">
+                                    <label class="text-capitalize facet-element" for="{{ type }}">
+                                        {{ type|transtolocal }}
 
-{#                            {% for type, count, selected in keywords %}#}
-{#                                <div class="checkbox">#}
-{#                                    <input id="{{ type }}" type="checkbox"#}
-{#                                            {% if selected %} checked {% endif %}#}
-{#                                           value="{{ type }}"#}
-{#                                           onclick="queryAndFilter()">#}
-{#                                    <label class="text-capitalize facet-element" for="{{ type }}">#}
-{#                                        {{ type|transtolocal }}#}
-{##}
-{#                                        <span#}
-{#                                                class="text-muted">&nbsp;({{ count }})</span>#}
-{#                                    </label>#}
-{#                                </div>#}
-{#                            {% endfor %}#}
+                                        <span
+                                                class="text-muted">&nbsp;({{ count }})</span>
+                                    </label>
+                                </div>
+                            {% endfor %}
+                            {% endcomment %}
                             </div>
 
                         </div><!-- end col-sm-12 -->
@@ -252,8 +250,8 @@
                 {% endif %}
 
                 <!-- year of available -->
-
-                <!--{% if year_of_available %}
+                {% comment %}
+                {% if year_of_available %}
                     <div class="row" id="checkRadios">
                         <div class="col-sm-12 col-lg-12">
                             <p class="text-capitalize font-weight-bold text-dark">{% trans "year of available" %}</p>
@@ -286,10 +284,10 @@
                             {% endfor %}
                         </div>&lt;!&ndash; end col-sm-12 &ndash;&gt;
                     </div>
-                {% endif %}-->
+                {% endif %}
+                {% endcomment %}
 
             </div>
-
 
             <!-- Results -->
             <div class="col-md-9 col-sm-12">
@@ -317,6 +315,59 @@
                 </div>
                 <!-- Result container -->
                 <div class="row">
+                    <div id="wrap">
+                        <p>
+                            <span class="list-style-buttons">
+                                <a href="#" id="gridview" class="switcher" id="fistbtn"><img
+                                        src="{% static 'images/grid-view.png' %}" alt="Grid"></a>
+                                <a href="#" id="listview" class="switcher active"><img
+                                        src="{% static 'images/list-view-active.png' %}" alt="List"></a>
+                            </span>
+                        </p>
+                        {% for hit in hits %}
+                            <ul id="books" class="list clearfix">
+                                <!-- row 1 -->
+                                <li class="clearfix">
+                                    <section class="left">
+                                        <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
+                                           style="text-decoration: none"
+                                           class="text-capitalize">
+                                            <img class="img img-responsive featured-banner"
+                                                 style="border: 1px solid rgba(52, 152, 219,0.25)"
+                                                 width="100%"
+                                                 height="210px"
+                                                 src="{{ MEDIA_URL }}{{ hit.thumbnail }}">
+                                        </a>
+                                    </section>
+
+                                    <section class="right">
+                                        <span class="darkview">
+                                            <p class="text-center">
+                                                <a href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}"
+                                                   class="text-capitalize  text-center"
+                                                   style="text-decoration: none;">
+                                                {{ hit.title | transtolocal | title | truncatechars:"25" }}
+                                                </a>
+                                            </p>
+                                            <p class="text-dark text-center">
+                                            {{ hit.abstract | transtolocal | truncatechars:40 }}
+                                            </p>
+                                        </span>
+
+
+                                    </section>
+                                </li>
+                            </ul>
+
+                            {% comment %}
+                            {% if forloop.counter|divisibleby:"4" %}
+                            <div class="w-100"></div>
+                            {% endif %}
+                            {% endcomment %}
+                        {% endfor %}
+                    </div>
+                <!--old grid view that that only supports grid view -->
+                {% comment %}
                     {% for hit in hits %}
                         <div class="col-md-3 col-sm-6">
                             <div class="card card-blog">
@@ -342,9 +393,9 @@
 
                                     </p>
 
-                                    {#                                            <p class="text-dark">#}
-                                    {#                                                {{ hit.abstract | transtolocal | truncatechars:20 }}#}
-                                    {#                                            </p>#}
+                                    <p class="text-dark">
+                                        {{ hit.abstract | transtolocal | truncatechars:20 }}
+                                    </p>
                                     <!--
                                     <div class="card-footer mb-0">
                                         <a href="#pablo" class="btn btn-block btn-round">View</a>
@@ -359,6 +410,8 @@
                             <div class="w-100"></div>
                         {% endif %}
                     {% endfor %}
+                {% endcomment %}
+
                 </div>
                 <!-- pagination -->
                 {# TODO: implement dotted pagination after specific page #}
@@ -478,7 +531,7 @@
     </script>
     <!-- some script above here -->
     <!-- vue js implement -->
-    <script src="{%  static 'base_assets/js/vue/vue.js' %}"></script>
+    <script src="{% static 'base_assets/js/vue/vue.js' %}"></script>
     <!-- vuejs app -->
     <script>
         var app = new Vue({
@@ -501,5 +554,63 @@
             }
         });
     </script>
+    <!--Grid view and list view-->
+    <script>
+        $(document).ready(function () {
 
+            $("a.switcher").bind("click", function (event) {
+                event.preventDefault();
+
+                var theid = $(this).attr("id");
+                var thebooks = $("ul#books");
+                var classNames = $(this).attr('class').split(' ');
+
+                var gridthumb = "{{ MEDIA_URL }}{{ hit.thumbnail }}";
+                var listthumb = "{{ MEDIA_URL }}{{ hit.thumbnail }}";
+
+                if ($(this).hasClass("active")) {
+                    // if currently clicked button has the active class
+                    // then we do nothing!
+                    return false;
+                } else {
+                    // otherwise we are clicking on the inactive button
+                    // and in the process of switching views!
+
+                    if (theid == "gridview") {
+                        $(this).addClass("active");
+                        $("#listview").removeClass("active");
+
+                        $("#listview").children("img").attr("src", "{% static 'images/list-view.png' %}");
+
+                        var theimg = $(this).children("img");
+                        theimg.attr("src", "{% static 'images/grid-view-active.png' %}");
+
+                        // remove the list class and change to grid
+                        thebooks.removeClass("list");
+                        thebooks.addClass("grid");
+
+                        // update all thumbnails to larger size
+                        $("img.thumb").attr("src", gridthumb);
+                    }
+
+                    else if (theid == "listview") {
+                        $(this).addClass("active");
+                        $("#gridview").removeClass("active");
+
+                        $("#gridview").children("img").attr("src", "{% static 'images/grid-view.png' %}");
+
+                        var theimg = $(this).children("img");
+                        theimg.attr("src", "{% static 'images/list-view-active.png' %}");
+
+                        // remove the grid view and change to list
+                        thebooks.removeClass("grid")
+                        thebooks.addClass("list");
+                        // update all thumbnails to smaller size
+                        $("img.thumb").attr("src", listthumb);
+                    }
+                }
+
+            });
+        });
+    </script><!--End grid view list view-->
 {% endblock script %}
