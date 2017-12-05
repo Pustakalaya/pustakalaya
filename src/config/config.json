@@ -32,7 +32,8 @@
   "REDIS": {
     "IP": "127.0.0.1",
     "PORT": "6379"
-  }
+  },
+  "GOOGLE_ANALYTICS_PROPERTY_ID": "UA-110685789-1"
 }
 
 

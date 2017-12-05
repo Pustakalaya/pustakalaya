@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
+{% load analytical %}
+{% load google_analytics %}
 <html lang="en">
 
 <head>
@@ -30,6 +32,7 @@
         <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
     {% endblock style %}
+{% google_analytics %}
 </head>
 
 <body>
