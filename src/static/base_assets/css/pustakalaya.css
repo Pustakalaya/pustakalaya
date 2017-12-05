@@ -16,18 +16,6 @@ a, u {
      border: 1px solid #e3e3e3;
 
  }*/
-
- #education-section, #about-section, #author-detail,
-  #about-pustakalaya, #pustakalaya-address, #questions,
-   #question-1, #question-2,#question-3, #question-4,
-   #question-5, #question-6, #question-7,
-  #question-8, #question-9, #question-10
- {
- border: 1px solid #EAEAEA;
- border-radius: 4px;
- background-color: #f8f8f8 !important;
- }
-
  #search-icon{
  color:#fff;
  padding-left:4px;
