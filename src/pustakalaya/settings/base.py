@@ -62,6 +62,7 @@ THIRDPARTY_APPS = [
     # 'allauth.socialaccount.providers.google',
     'crispy_forms',
     'hitcount',
+    'star_ratings'
 
 ]
 
@@ -76,7 +77,6 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.dashboard',
     'pustakalaya_apps.pustakalaya_search',
     'pustakalaya_apps.pustakalaya_account',
-    'pustakalaya_apps.star_ratings',
 
 
 ]

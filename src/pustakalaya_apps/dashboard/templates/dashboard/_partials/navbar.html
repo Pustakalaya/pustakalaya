@@ -42,7 +42,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a  class="text-capitalize" href="{%  url "account_change_password" %}">{% trans "change password" %}</a></li>
-                        <li><a  class="text-capitalize" href="{%  url "dashboard:profile_edit" request.user.pk %}">{% trans "edit profile"  %}</a></li>
+{#                        <li><a  class="text-capitalize" href="{%  url "dashboard:profile_edit" '{{ request.user.pk }}' %}">{% trans "edit profile"  %}</a></li>#}
                         <li><a  class="text-capitalize" href="{%  url "account_email" %}">{% trans "manage email" %}</a></li>
                         <li><a  class="text-capitalize" href="{%  url "socialaccount_connections" %}">{% trans "Social accounts" %}</a></li>
                     </ul>
