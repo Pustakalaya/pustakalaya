@@ -147,9 +147,11 @@
               {% endfor %}
               {% endcomment %}
             </div>
-            <button class="btn btn-primary btn-sm" id="loadMore"> More</button>
-            <button class="btn btn-primary btn-sm" id="showLess">Less</button>
+            {% if keywords|length > 4%}
 
+            <a class="text-primary text-capitalize" style="cursor:pointer" id="loadMore">{% trans "more" %}</a>
+            <a class="text-primary text-capitalize" style="cursor:pointer" id="showLess"> {% trans "less" %}</a>
+            {% endif %}
           </div><!-- end col-sm-12 -->
         </div>
         {% endif %}
@@ -524,8 +526,8 @@
     $(document).ready(function () {
       var size_li = $('#keywords-filter #myList').length;
         x=5;
-        console.log('x: '+x);
-         console.log('size: '+size_li);
+        //console.log('x: '+x);
+        //console.log('size: '+size_li);
 
 
         /* assume two classes hideItem and showItem */
@@ -535,15 +537,18 @@
         $('#loadMore').click(function () {
             x= (x+5 <= size_li) ? x+5 : size_li;
               i =0;
-            HideShowMoreLessClick(x,i);
+            HideShowMoreLessClick(x,i,size_li);
         });
         $('#showLess').click(function () {
             x=(x-5<=0) ? 3 : x-5;
             i =0;
-            HideShowMoreLessClick(x,i);
+            HideShowMoreLessClick(x,i,size_li);
         });
         function HideShow(x,i){
             /* Initially hide item */
+            if(x==3){
+            $('#showLess').hide();
+            }
           $('#keywords-filter #myList').each( function() {
                   return $(this).addClass('hideItem')
              })
@@ -560,7 +565,7 @@
 
         }
 
-        function HideShowMoreLessClick(x,i){
+        function HideShowMoreLessClick(x,i,actual_size){
            /* Initially hide item */
           $('#keywords-filter #myList').each( function() {
                   return $(this).removeClass('hideItem')
@@ -588,6 +593,21 @@
              })
          $('#keywords-filter .showItem').show();
          $('#keywords-filter .hideItem').hide();
+
+         //for show less
+         if(x <= 3){
+            $('#showLess').hide();
+          }else{
+            $('#showLess').show();
+          }
+
+          //for show more
+          if(x == actual_size){
+           $('#loadMore').hide();
+          }else{
+            $('#loadMore').show();
+          }
+
         }
 
     });
