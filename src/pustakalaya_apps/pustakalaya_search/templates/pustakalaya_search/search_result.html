@@ -114,7 +114,7 @@
               <div v-for="keyword in filteredKeywords">
                 <!-- vuejs syntax to render name -->
                 <span class="text-capitalize"></span>
-                <div class="checkbox">
+                <div class="checkbox" id="myList">
                   <input type="checkbox"
                          {% if selected %} checked {% endif %}
                          v-model="keyword.selected"
@@ -129,6 +129,7 @@
                   </label>
                 </div>
               </div>
+
               {% comment %}
               {% for type, count, selected in keywords %}
               <div class="checkbox">
@@ -146,6 +147,8 @@
               {% endfor %}
               {% endcomment %}
             </div>
+            <button class="btn btn-primary btn-sm" id="loadMore"> More</button>
+            <button class="btn btn-primary btn-sm" id="showLess">Less</button>
 
           </div><!-- end col-sm-12 -->
         </div>
@@ -339,7 +342,7 @@
         <div class="row">
           <div id="products" class="myId_row myId_list-group">
             {% for hit in hits %}
-            <a href="{% url hit.type|add:" :detail" hit.title|slugify hit.id %}"
+           <a href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"
             style="text-decoration:none;" class="text-dark">
             <div class="myId_item  myId_col-md-4 myId_col-xs-12">
               <div class="myId_thumbnail">

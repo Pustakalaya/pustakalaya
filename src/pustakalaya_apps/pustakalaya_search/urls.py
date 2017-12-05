@@ -6,6 +6,6 @@ urlpatterns = [
     url(r'^$', views.search, name="search"),
     # Completion urls
     #/search/completion
-    url(r'completion/', views.completion, name="completion")
+    url(r'^completion/', views.completion, name="completion")
 
 ]
