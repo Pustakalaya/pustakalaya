@@ -4,14 +4,17 @@
 {% load pustakalaya_filters %}
 
 {% block title %}
-    {% trans "homepage" %}
+{% trans "homepage" %}
 {% endblock title %}
 
 {% block style %}
-    {{ block.super }}
-    <style>
-        .thumbnail-box-shadow:hover {
-            box-shadow: 0 0 25px #7f8c8d;
+{{ block.super }}
+<style>
+        .thumbnail-box-shadow {
+            box-shadow: 0 0 17px #7f8c8d;
+      }
+      .thumbnail-box-shadow:hover {
+            box-shadow:0 0 25px #7f8c8d;
       }
 
         .footer-logo {
@@ -24,450 +27,468 @@
         }
 
 
-    </style>
 
-    <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
+
+
+</style>
+
+<link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
 {% endblock style %}
 
 {% block content %}
-    <!--search-->
-    <div class="container">
-        <!-- Search bar section -->
-        <div class="row">
-            <div class="col-md-12 col-xs-12 col-sm-12">
+<!--custom style backgound-color is in base.html body which includes for all-->
+<div class="for-bg-color-container ">
+  <!--search-->
+  <div class="container  pt-4">
+    <!-- Search bar section -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12 col-sm-12">
 
-            </div>
+      </div>
+    </div>
+
+    <!-- Browse by and books list section -->
+    <div class="row">
+      <!-- Browse by -->
+      <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
+
+        <!-- Browse Pustakalaya -->
+        <div class="mt-0">
+          <!--pustakalaya browse by option-->
+          <!--p class="description text-uppercase  text-dark text-uppercase mb-2"> {% url 'browse:browse'%}?browse_by=all&sort_order=asc {% trans "Browse Pustakalaya" %}</p-->
+
+          <p>
+            <!--a href="#" class="text-capitalize"-->
+            <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
+          <p class="description text-uppercase text-dark text-dark"> {% trans "browse the library" %}</p>
+          </p>
+          <p>
+            <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
+               class="text-capitalize text-primary">Titles</a>
+            | <a href="/authors"
+                 class="text-capitalize text-primary"><span>   Authors</span></a>
+          </p>
+
+
+          <!--p>
+  <a href="{% url 'browse:browse'%}?browse_by=author&sort_order=asc" class="text-capitalize">
+      <i class="fa  text-secondary fa-file-video-o mr-2"
+         aria-hidden="true"></i>{% trans "author" %}</a>
+</p-->
+
         </div>
 
-        <!-- Browse by and books list section -->
-        <div class="row">
-            <!-- Browse by -->
-            <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
+        <!-- Browse by subjects -->
+        <div>
+          <p class="description text-uppercase text-dark text-dark">{% trans "sections" %}</p>
+          <p>
+            <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
+               class="text-primary text-capitalize">
+              <i class="fa fa-1x fa-book mr-2"
+                 aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
+          </p>
+          <p>
+            <a href="{% url 'community:community_detail' 'course-materials' %}"
+               class="text-capitalize text-primary">
+              <i class="fa fa-1x fa-desktop mr-2"
+                 aria-hidden="true"></i>{% trans "Course Materials" %}</a>
+          </p>
+          <p>
+            <a href="{% url 'community:community_detail' 'teaching-materials' %}"
+               class="text-capitalize text-primary">
+              <i class="fa fa-1x fa-graduation-cap mr-2"
+                 aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
+          </p>
+          <p>
+            <a href="{% url 'community:community_detail' 'reference-materials' %}"
+               class="text-capitalize text-primary">
+              <i class="fa fa-1x fa-briefcase mr-2"
+                 aria-hidden="true"></i>{% trans "reference Materials" %}</a>
+          </p>
+          <p>
+            <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
+               class="text-capitalize text-primary">
+              <i class="fa fa-1x fa-flask mr-2"
+                 aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
+          </p>
+          <p>
+            <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}"
+               class="text-capitalize text-primary">
+              <i class="fa fa-1x fa-newspaper-o mr-2"
+                 aria-hidden="true"></i>{% trans "Newspapers & Magazines" %}</a>
+          </p>
 
-                <!-- Browse Pustakalaya -->
-                <div class="mt-0">
-                    <!--pustakalaya browse by option-->
-                    <!--p class="description text-uppercase  text-dark text-uppercase mb-2"> {% url 'browse:browse'%}?browse_by=all&sort_order=asc {% trans "Browse Pustakalaya" %}</p-->
-
-                    <p>
-                        <!--a href="#" class="text-capitalize"-->
-                        <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
-                    <p class="description text-uppercase text-dark text-dark"> {% trans "browse the library" %}</p>
-                    </p>
-                    <p>
-                        <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
-                           class="text-capitalize text-primary">Titles</a>
-                        | <a href="/authors"
-                             class="text-capitalize text-primary"><span>   Authors</span></a>
-                    </p>
-
-
-                    <!--p>
-            <a href="{% url 'browse:browse'%}?browse_by=author&sort_order=asc" class="text-capitalize">
-                <i class="fa  text-secondary fa-file-video-o mr-2"
-                   aria-hidden="true"></i>{% trans "author" %}</a>
-        </p-->
-
-                </div>
-
-                <!-- Browse by subjects -->
-                <div>
-                    <p class="description text-uppercase text-dark text-dark">{% trans "sections" %}</p>
-                    <p>
-                        <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
-                           class="text-primary text-capitalize">
-                            <i class="fa fa-1x fa-book mr-2"
-                               aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
-                    </p>
-                    <p>
-                        <a href="{% url 'community:community_detail' 'course-materials' %}"
-                           class="text-capitalize text-primary">
-                            <i class="fa fa-1x fa-desktop mr-2"
-                               aria-hidden="true"></i>{% trans "Course Materials" %}</a>
-                    </p>
-                    <p>
-                        <a href="{% url 'community:community_detail' 'teaching-materials' %}"
-                           class="text-capitalize text-primary">
-                            <i class="fa fa-1x fa-graduation-cap mr-2"
-                               aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
-                    </p>
-                    <p>
-                        <a href="{% url 'community:community_detail' 'reference-materials' %}"
-                           class="text-capitalize text-primary">
-                            <i class="fa fa-1x fa-briefcase mr-2"
-                               aria-hidden="true"></i>{% trans "reference Materials" %}</a>
-                    </p>
-                    <p>
-                        <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
-                           class="text-capitalize text-primary">
-                            <i class="fa fa-1x fa-flask mr-2"
-                               aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
-                    </p>
-                    <p>
-                        <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}"
-                           class="text-capitalize text-primary">
-                            <i class="fa fa-1x fa-newspaper-o mr-2"
-                               aria-hidden="true"></i>{% trans "Newspapers & Magazines" %}</a>
-                    </p>
-
-                </div>
-                <hr>
-                <div class="android app">
-                    <a href="https://play.google.com/store/apps/details?id=com.ole.epustakalaya&hl=en" target="_blank" title="E-Pustakalaya Android App"><img class="img img-responsive btn btn-md bg-white" src="{% static 'images/logos/googleplay.png' %}" alt="E-pustakalaya Android Application"/></a>
-                </div>
-            </div>
-
-
-            <!-- Featured books -->
-            <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
-                <div class="search">
-                    <!-- search -->
-                    {%  include '_partials/search_form.html' %}
-                </div>
-                <section>
-                    <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
-                    <div class="row" class="pt-5 pb-5 ">
-                        {% for book in featured_books %}
-                            <div class="col-md-2 col-sm-12 pt-2 pr-1 pb-2 col-xs-12 pr-0" title="{{ book.title }}">
-                                <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
-                                        class="img-responsive rounded thumbnail-box-shadow"
-                                        src="{{ MEDIA_URL }}{{ book.thumbnail }}"
-                                        width="100%"
-                                        height="171px"/></a>
-
-
-                                {% if forloop.counter|divisibleby:"6" %}
-                                    <div class="mt-2"></div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </section>
-            </div>
         </div>
+        <hr>
+        <div class="android app">
+          <a href="https://play.google.com/store/apps/details?id=com.ole.epustakalaya&hl=en" target="_blank"
+             title="E-Pustakalaya Android App"><img class="img img-responsive btn btn-sm bg-white android-app"
+                                                    src="{% static 'images/logos/android_store.png' %}"
+                                                    alt="E-pustakalaya Android Application"/></a>
+        </div>
+      </div>
 
-        <!-- Education section -->
-        <div class="row  ">
-            <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 mb-0  ">
-                <p class="text-uppercase rounded text-black text-uppercase mb-2">
-                    {% trans 'Interactive educational software' %}
-                </p>
-                <ul id="lightSlider">
-                    <li class="mr-2">
-                        <a href="http://pustakalaya.org/epaath/" target="_blank">
-                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
-                                 width="170px"
-                                 height="110px"
-                                 alt="E-Paath"
-                                 title="E-Paath">
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="http://pustakalaya.org/elkids.php" target="_blank">
 
-                            <img class="rounded img img-responsive"
-                                 src="{% static 'images/logos/e-learning-for-kids.png' %}"
+      <!-- Featured books -->
+      <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
+        <div class="search">
+          <!-- search -->
+          {% include '_partials/search_form.html' %}
+        </div>
+        <section>
+          <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
+          <div class="row" class="pt-5 pb-5 ">
+            {% for book in featured_books %}
+            <div class="col-md-2 col-sm-12 p-3 col-xs-12 m-3 jumbotron  thumbnail-box-shadow " title="{{ book.title }}">
+              <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
+                class="img-responsive rounded"
+                src="{{ MEDIA_URL }}{{ book.thumbnail }}"
+                width="100%"
+                height="171px">
+                <div class="text-black fa fa-book mt-4"><b>  {{ book }}</b></div>
+                <div class="text-black">
+                  <small>By {{book.document_authors.first}}</small>
+                </div>
+              </a>
 
-                                 width="170px"
-                                 height="110"
-                                 alt="E-Learning for Kids"
-                                 title="E-Learning for Kids">
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="https://phet.colorado.edu/" target="_blank">
-                            <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
-                                 width="170px"
-                                 height="110px"
-                                 alt="Simulations"
-                                 title="Simulations">
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="http://pustakalaya.org/sabdakosh.php" target="_blanks">
-                            <img class="rounded img img-responsive"
-                                 src="{% static 'base_assets/img/nepal-dictionary.png' %}"
-                                 width="170px"
-                                 height="110px"
-                                 alt="Nepali Dictionary"
-                                 title="Nepali Dictionary">
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="http://pustakalaya.org/lekids.php" target="_blank">
-                            <img class="rounded img img-responsive"
-                                 src="{% static 'base_assets/img/learn-english-for-kids.png' %}"
-                                 width="170px"
-                                 height="110px"
-                                 alt="Learn English"
-                                 title="Learn English">
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="http://pustakalaya.org/external-content/static/environmental-activities/"
-                           target="_blank">
-                            <img class="rounded img img-responsive"
-                                 src="{% static 'base_assets/img/Environment.png' %}"
-                                 width="170px"
-                                 height="110px"
-                                 alt="Environmental Activity"
-                                 title="Environmental Activity">
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="http://pustakalaya.org/audible.php" target="_blank">
-                            <img class="rounded img img-responsive"
-                                 src="{% static 'base_assets/img/audiable-text-book.png' %}"
-                                 width="170px"
-                                 height="110px"
-                                 alt="Audible Text Books"
-                                 title="Audible Text Books">
-                        </a>
-                    </li>
 
+              {% if forloop.counter|divisibleby:"6" %}
+              <div class="mt-2"></div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Education section -->
+    <div class="row m-0  ">
+      <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 mb-0">
+        <p class="text-uppercase rounded text-black    text-uppercase mb-2">
+          {% trans 'Interactive educational software' %}
+        </p>
+        <ul id="lightSlider">
+          <li class="mr-2 ">
+            <a href="http://pustakalaya.org/epaath/" target="_blank">
+              <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
+                   width="170px"
+                   height="110px"
+                   alt="E-Paath"
+                   title="E-Paath">
+            </a>
+          </li>
+          <li class="mr-2">
+            <a href="http://pustakalaya.org/elkids.php" target="_blank">
+
+              <img class="rounded img img-responsive"
+                   src="{% static 'images/logos/e-learning-for-kids.png' %}"
+
+                   width="170px"
+                   height="110"
+                   alt="E-Learning for Kids"
+                   title="E-Learning for Kids">
+            </a>
+          </li>
+          <li class="mr-2">
+            <a href="https://phet.colorado.edu/" target="_blank">
+              <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
+                   width="170px"
+                   height="110px"
+                   alt="Simulations"
+                   title="Simulations">
+            </a>
+          </li>
+          <li class="mr-2">
+            <a href="http://pustakalaya.org/sabdakosh.php" target="_blanks">
+              <img class="rounded img img-responsive"
+                   src="{% static 'base_assets/img/nepal-dictionary.png' %}"
+                   width="170px"
+                   height="110px"
+                   alt="Nepali Dictionary"
+                   title="Nepali Dictionary">
+            </a>
+          </li>
+          <li class="mr-2">
+            <a href="http://pustakalaya.org/lekids.php" target="_blank">
+              <img class="rounded img img-responsive"
+                   src="{% static 'base_assets/img/learn-english-for-kids.png' %}"
+                   width="170px"
+                   height="110px"
+                   alt="Learn English"
+                   title="Learn English">
+            </a>
+          </li>
+          <li class="mr-2">
+            <a href="http://pustakalaya.org/external-content/static/environmental-activities/"
+               target="_blank">
+              <img class="rounded img img-responsive"
+                   src="{% static 'base_assets/img/Environment.png' %}"
+                   width="170px"
+                   height="110px"
+                   alt="Environmental Activity"
+                   title="Environmental Activity">
+            </a>
+          </li>
+          <li class="mr-2">
+            <a href="http://pustakalaya.org/audible.php" target="_blank">
+              <img class="rounded img img-responsive"
+                   src="{% static 'base_assets/img/audiable-text-book.png' %}"
+                   width="170px"
+                   height="110px"
+                   alt="Audible Text Books"
+                   title="Audible Text Books">
+            </a>
+          </li>
+
+        </ul>
+
+
+      </div>
+    </div>
+
+    <!-- Footer description -->
+    <div class="row m-0">
+      <div class="p-4 rounded jumbotron pb-4 pt-4 mt-4 mb-0">
+        <p class="text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
+        <p>{% blocktrans %}
+          E-Pustakalaya is an education-focused digital library containing full-text documents, images,
+          videos and
+          audio files that can be accessed through an intranet or the internet. The user can either read
+          documents, view
+          videos, and listen to audio clips directly from the E-library server or she can download these
+          materials to
+          her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
+          English
+          languages. In the future, we will also add materials in other national languages of
+          Nepal. {% endblocktrans %}
+          <a href="{% url 'about' %}" class="text-primary">{% trans "Read More" %}</a> ...
+        </p>
+      </div>
+    </div>
+
+    <div class="row  ">
+      <div class="col">
+        <!-- Major and past partners -->
+        <div class="section-padding mb-0 bg-light">
+          <div class="container jumbotron pb-4 pt-4 mt-0 mb-0">
+
+            <div class="row">
+              <!-- Major partners -->
+              <div class="col-md-6 col-xs-12">
+                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Major partners" %}</p>
+                <hr/>
+
+                <a class="nav-link active" href="https://idrf.com/" target="_blank" title="IDRF">
+                  <img src="{% static 'images/logos/logo_web.svg' %}"
+                       width="150px"
+                       height="50px"
+                       alt="IRDF"/>
+                </a>
+              </div>
+              <!-- Past partners -->
+              <div class="col-md-6 col-xs-12">
+                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Past supporter" %}</p>
+                <hr/>
+                <!-- TODO: replace with sliding banner -->
+                <ul class="nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="https://www.maitritrust.org.uk/" target="_blank"
+                       title="Maitri Trust">
+                      <img class="img img-responsive"
+                           src="{% static 'images/logos/maitri-trust.png' %}"
+                           width="150px"
+                           height="50px"
+                           alt="Maitri Trust">
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link active" href="http://www.nepallibrary.org/" target="_blank"
+                       title="Nepal Library Foundation">
+                      <img class="img" src="{% static 'images/logos/nepal-library-foundation.png' %}"
+                           width="150px"
+                           height="50px"
+                           alt="British council">
+                    </a>
+                  </li>
                 </ul>
-
-
+              </div>
             </div>
+          </div>
         </div>
 
-        <!-- Footer description -->
-        <div class="row ">
-            <div class="p-4 rounded jumbotron pb-4 pt-4 mt-4 mb-0" >
-                <p class="text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
-                <p>{% blocktrans %}
-                    E-Pustakalaya is an education-focused digital library containing full-text documents, images,
-                    videos and
-                    audio files that can be accessed through an intranet or the internet. The user can either read
-                    documents, view
-                    videos, and listen to audio clips directly from the E-library server or she can download these
-                    materials to
-                    her personal computer and view them later. E-Pustakalaya holds collections in both Nepali and
-                    English
-                    languages. In the future, we will also add materials in other national languages of
-                    Nepal. {% endblocktrans %}
-                    <a href="{% url 'about' %}" class="text-primary">{% trans "Read More" %}</a> ...
-                </p>
+        <!-- Contributed partners -->
+        <div class="section-padding mt-0 pt-0">
+          <div class="container jumbotron pb-4 pt-4 mt-0 mb-0">
+            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Content contribution" %}</p>
+            <hr/>
+            <div class="text-center">
+              <ul class="nav text-center">
+                <li class="nav-item">
+                  <a class="nav-link active" href="https://www.britishcouncil.org.np/" target="_blank"
+                     title="British Council">
+                    <img class=" img img-responsive" src="{% static 'images/logos/bc.png' %}"
+                         alt="British council"
+                         width="70px" height="30px;">
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link active" href="http://gorkhapatraonline.com/" target="_blank"
+                     title="Gorkhapatra Sansthan">
+                    <img class="img img-responsive" src="{% static 'images/logos/gorkhapatra.png' %}"
+                         width="50px"
+                         height="30px"
+                         alt="Gorkhapatra Sansthan">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="http://madanpuraskar.org/" target="_blank">
+                    <img class="img img-responsive" src="{% static 'images/logos/madanpuraskar.gif' %}"
+                         alt="Madanpuraskar" title="Madan Puraskar" width="50px" height="30px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="nepalacademy.org.np" target="_blank"
+                     title="Nepal Academy">
+                    <img class="img img-responsive" src="{% static 'images/logos/nepalacademy.png' %}"
+                         alt="Nepal academy" width="60px" height="30px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active"
+                     href="http://onlinesahitya.com/content/nepalese-society-childrens-literature-neschil"
+                     target="_blank" title="Neschil">
+                    <img class="img img-responsive" src="{% static 'images/logos/neschil.png' %}"
+                         alt="Neschil" width="50px" height="30px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="http://www.e-learningforkids.org/" target="_blank"
+                     title="E-Learning For Kids">
+                    <img class="img img-responsive" src="{% static 'images/logos/e-learning-for-kids.png' %}"
+                         alt="E-Learning For Kids" width="80px" height="30px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="https://www.roomtoread.org/" target="_blank"
+                     title="Room To Read">
+                    <img class="img img-responsive" src="{% static 'images/logos/roomtoread.png' %}"
+                         alt="Room to Read" width="60px" height="30px;">
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link active" href="http://nepal.worlded.org/" target="_blank"
+                     title="World Education Nepal">
+                    <img class="img img-responsive" src="{% static 'images/logos/xworld.png' %}"
+                         alt="World Education Nepal" width="50px" height="30px;">
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link active" href="http://rbf.org.np/" target="_blank" title="Rato Bangala Foundation">
+                    <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/rtf.png' %}"
+                         alt="Rato Bangla Foundation" width="50px" height="30px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="http://www.savethechildren.org" target="_blank"
+                     title="Save The Children">
+                    <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/stc.gif' %}"
+                         alt="Save The Children" width="50px" height="30px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="https://practicalaction.org/nepal" target="_blank"
+                     title="Practical Action">
+                    <img class="img img-responsive"
+                         src="{% static 'images/logos/practical-action-logo-highres-300dpi.png' %}"
+                         alt="Pritical Action" height="30px;" width="60px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="http://www.digitalhimalaya.com/" target="_blank"
+                     title="Digital Himalaya">
+                    <img class="img img-responsive" src="{% static 'images/logos/DH_logo_small.gif' %}"
+                         alt="Digital Himalaya" width="60px" height="30px;">
+                  </a>
+              </ul>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="row ">
-        <div class="col">
-            <!-- Major and past partners -->
-            <div class="section-padding mb-0" class="bg-light">
-                <div class="container jumbotron pb-4 pt-4 mt-0 mb-0">
-
-                    <div class="row">
-                        <!-- Major partners -->
-                        <div class="col-md-6 col-xs-12">
-                            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Major partners" %}</p>
-                            <hr/>
-
-                            <a class="nav-link active" href="https://idrf.com/" target="_blank" title="IDRF">
-                                <img src="{% static 'images/logos/logo_web.svg' %}"
-                                     width="150px"
-                                     height="50px"
-                                     alt="IRDF"/>
-                            </a>
-                        </div>
-                        <!-- Past partners -->
-                        <div class="col-md-6 col-xs-12">
-                            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Past supporter" %}</p>
-                            <hr/>
-                            <!-- TODO: replace with sliding banner -->
-                            <ul class="nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="https://www.maitritrust.org.uk/" target="_blank"
-                                       title="Maitri Trust">
-                                        <img class="img img-responsive"
-                                             src="{% static 'images/logos/maitri-trust.png' %}"
-                                             width="150px"
-                                             height="50px"
-                                             alt="Maitri Trust">
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="http://www.nepallibrary.org/" target="_blank"
-                                       title="Nepal Library Foundation">
-                                        <img class="img" src="{% static 'images/logos/nepal-library-foundation.png' %}"
-                                             width="150px"
-                                             height="50px"
-                                             alt="British council">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contributed partners -->
-            <div  class="section-padding mt-0 pt-0">
-                <div class="container jumbotron pb-4 pt-4 mt-0 mb-0">
-                    <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Content contribution" %}</p>
-                    <hr/>
-                    <div class="text-center">
-                        <ul class="nav text-center">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="https://www.britishcouncil.org.np/" target="_blank"
-                                   title="British Council">
-                                    <img class=" img img-responsive" src="{% static 'images/logos/bc.png' %}"
-                                         alt="British council"
-                                    width="70px" height="30px;">
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="http://gorkhapatraonline.com/" target="_blank"
-                                   title="Gorkhapatra Sansthan">
-                                    <img class="img img-responsive" src="{% static 'images/logos/gorkhapatra.png' %}"
-                                         width="50px"
-                                         height="30px"
-                                         alt="Gorkhapatra Sansthan">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="http://madanpuraskar.org/" target="_blank">
-                                    <img class="img img-responsive" src="{% static 'images/logos/madanpuraskar.gif' %}"
-                                         alt="Madanpuraskar" title="Madan Puraskar" width="50px" height="30px;">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="nepalacademy.org.np" target="_blank"
-                                   title="Nepal Academy">
-                                    <img class="img img-responsive" src="{% static 'images/logos/nepalacademy.png' %}"
-                                         alt="Nepal academy" width="60px" height="30px;">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active"
-                                   href="http://onlinesahitya.com/content/nepalese-society-childrens-literature-neschil"
-                                   target="_blank" title="Neschil">
-                                    <img class="img img-responsive" src="{% static 'images/logos/neschil.png' %}"
-                                         alt="Neschil" width="50px" height="30px;">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="http://www.e-learningforkids.org/" target="_blank" title="E-Learning For Kids">
-                                    <img class="img img-responsive" src="{% static 'images/logos/e-learning-for-kids.png' %}"
-                                         alt="E-Learning For Kids" width="80px" height="30px;">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="https://www.roomtoread.org/" target="_blank"
-                                   title="Room To Read">
-                                    <img class="img img-responsive" src="{% static 'images/logos/roomtoread.png' %}"
-                                         alt="Room to Read" width="60px" height="30px;">
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="http://nepal.worlded.org/" target="_blank" title="World Education Nepal">
-                                    <img class="img img-responsive" src="{% static 'images/logos/xworld.png' %}"
-                                         alt="World Education Nepal" width="50px" height="30px;">
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="http://rbf.org.np/" target="_blank" title="Rato Bangala Foundation">
-                                    <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/rtf.png' %}"
-                                         alt="Rato Bangla Foundation" width="50px" height="30px;">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="http://www.savethechildren.org" target="_blank" title="Save The Children">
-                                    <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/stc.gif' %}"
-                                         alt="Save The Children" width="50px" height="30px;">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="https://practicalaction.org/nepal" target="_blank" title="Practical Action">
-                                    <img class="img img-responsive" src="{% static 'images/logos/practical-action-logo-highres-300dpi.png' %}"
-                                         alt="Pritical Action" height="30px;" width="60px;">
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="http://www.digitalhimalaya.com/" target="_blank"
-                                   title="Digital Himalaya">
-                                    <img class="img img-responsive" src="{% static 'images/logos/DH_logo_small.gif' %}"
-                                         alt="Digital Himalaya" width="60px" height="30px;">
-                                </a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
+</div>
 {% endblock content %}
 
 {% block script %}
-    {{ block.super }}
-    <!-- load lightslider js -->
-    <script src="{% static 'base_assets/js/plugins/lightslider.min.js' %}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#lightSlider").lightSlider({
-                item: 5,
-                autoWidth: false,
-                slideMove: 4, // slidemove will be 1 if loop is true
-                slideMargin: 10,
+{{ block.super }}
+<!-- load lightslider js -->
+<script src="{% static 'base_assets/js/plugins/lightslider.min.js' %}"></script>
+<script type="text/javascript">
 
-                addClass: '',
-                mode: "slide",
-                useCSS: true,
-                cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
-                easing: 'linear', //'for jquery animation',////
+</script>
 
-                speed: 400, //ms'
-                auto: false,
-                loop: false,
-                slideEndAnimation: true,
-                pause: 2000,
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#lightSlider").lightSlider({
+        item: 5,
+        autoWidth: false,
+        slideMove: 1, // slidemove will be 1 if loop is true
+        slideMargin: 10,
 
-                keyPress: false,
-                controls: true,
-                prevHtml: '',
-                nextHtml: '',
+        addClass: '',
+        mode: "slide",
+        useCSS: true,
+        cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
+        easing: 'linear', //'for jquery animation',////
 
-                rtl: false,
-                adaptiveHeight: false,
+        speed: 400, //ms'
+        auto: false,
+        loop: false,
+        slideEndAnimation: true,
+        pause: 2000,
 
-                vertical: false,
-                verticalHeight: 500,
-                vThumbWidth: 100,
+        keyPress: false,
+        controls: true,
+        prevHtml: '',
+        nextHtml: '',
 
-                thumbItem: 10,
-                pager: true,
-                gallery: false,
-                galleryMargin: 5,
-                thumbMargin: 5,
-                currentPagerPosition: 'middle',
+        rtl:false,
+        adaptiveHeight:false,
 
-                enableTouch: true,
-                enableDrag: true,
-                freeMove: true,
-                swipeThreshold: 40,
+        vertical:false,
+        verticalHeight:500,
+        vThumbWidth:100,
 
-                responsive: [true],
+        thumbItem:10,
+        pager: true,
+        gallery: false,
+        galleryMargin: 5,
+        thumbMargin: 5,
+        currentPagerPosition: 'middle',
 
-                onBeforeStart: function (el) {
-                },
-                onSliderLoad: function (el) {
-                },
-                onBeforeSlide: function (el) {
-                },
-                onAfterSlide: function (el) {
-                },
-                onBeforeNextSlide: function (el) {
-                },
-                onBeforePrevSlide: function (el) {
-                }
-            });
-            // jquery to add previous and next button in lightslider.
-            $("a.lSPrev").addClass(" fa fa-arrow-circle-o-left text-info fa-3x");
-            $("a.lSNext").addClass(" fa fa-arrow-circle-o-right text-info fa-3x");
-            console.log($(".lSNext"));
-        });
-    </script>
+        enableTouch:true,
+        enableDrag:true,
+        freeMove:true,
+        swipeThreshold: 40,
+
+        responsive : [],
+
+        onBeforeStart: function (el) {},
+        onSliderLoad: function (el) {},
+        onBeforeSlide: function (el) {},
+        onAfterSlide: function (el) {},
+        onBeforeNextSlide: function (el) {},
+        onBeforePrevSlide: function (el) {}
+    });
+     $("a.lSPrev").addClass(" fa fa-angle-left text-dark fa-4x");
+     $("a.lSNext").addClass(" fa fa-angle-right text-dark fa-4x");
+});
+
+</script>
 {% endblock script %}
+
