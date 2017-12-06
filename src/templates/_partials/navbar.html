@@ -8,9 +8,9 @@
         color: #005689;
     }
 </style>
-<nav class="navbar navbar-expand-lg navbar-toggleable-lg bg-white">
-    <div class="container-fluid">
-        <div class="navbar-translate">
+<nav class="navbar navbar-expand-lg navbar-toggleable-lg bg-white background-color p-0 m-0">
+    <div class="container-fluid background-color pr-5 pl-5 " >
+        <div class="navbar-translate pl-5 mr-5">
             <a class="navbar-brand" href="/">
                 <img src="{% static 'images/logos/ole-logo.png' %}"
                      height="60px" class="img-responsive"
@@ -27,13 +27,14 @@
         </div>
 
         <!-- navigation menu -->
-        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <div class="collapse navbar-collapse justify-content-end mr-5 pr-4" id="navigation">
             <ul class="navbar-nav text-primary">
                 <li class="nav-item">
-                    <a class="nav-link text-primary" href="/">
-                        <i class="fa fa-home"></i>
+                    <a class="nav-link text-primary pt-0" href="/">
                         {% trans "Home" %}
+                        <i class="fa fa-home"></i>
                     </a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-primary" href="{% url 'about' %}">

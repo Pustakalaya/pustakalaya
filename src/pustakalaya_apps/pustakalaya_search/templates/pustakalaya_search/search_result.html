@@ -63,7 +63,7 @@
 
 
 {% block content %}
-<div class="bg-white">
+<div class="for-bg-color-container pt-4">
   <div class="container" style="min-height: 430px">
     <!-- Result container -->
     {% if hits %}
@@ -77,7 +77,7 @@
             <p class="text-capitalize  font-weight-bold text-dark mb-1">{% trans "Media type" %}</p>
 
             {% for type, count, selected in response.facets.type %}
-            <div class="checkbox">
+            <div class="checkbox    ">
               <input id="{{ type }}" value="{{ type }}"
                      {% if selected %} checked {% endif %}
                      type="checkbox"
@@ -106,10 +106,10 @@
             </script>
 
             <!-- vue template to implement filters in vuejs -->
-            <div id="keywords-filter">
+            <div id="keywords-filter" class="mr-5">
               <input type="text" v-model="search"
                      placeholder="Filter keywords"
-                     class="form-control mb-2"/>
+                     class="form-control mb-2  bg-white"/>
 
               <div v-for="keyword in filteredKeywords">
                 <!-- vuejs syntax to render name -->
@@ -311,7 +311,7 @@
           <!-- include search form -->
           <form method="GET" action="/search" id="searchForm">
 
-            <div class="input-group">
+            <div class="input-group bg-white">
               <input class="form-control" id="search_input"
                      autocomplete="off"
                      maxlength="200"
@@ -322,7 +322,7 @@
               <input type="hidden" id="filterData"
                      name="form-filter"/>
 
-              <input type="submit" value="Search" class="input-group-addon pr-1" id="search-icon"/>
+              <input type="submit" value="Search" class="input-group-addon pr-3 pl-3" id="search-icon"/>
             </div>
           </form>
           <p class="text-muted"
@@ -546,7 +546,7 @@
         });
         function HideShow(x,i){
             /* Initially hide item */
-            if(x==3){
+            if(x==5){
             $('#showLess').hide();
             }
           $('#keywords-filter #myList').each( function() {

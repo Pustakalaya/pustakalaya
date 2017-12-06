@@ -29,6 +29,9 @@ a, u {
 min-height:440px;
 }
 
+.min_height_author_detail{
+min-height:510px;
+}
 #search-icon:hover{
  cursor:pointer;
  background-color:#2980b9;
@@ -6307,4 +6310,20 @@ button.myId_close {
 .myId_list-group-item-text
 {
     margin: 0 0 11px;
+}
+
+/* background color for whole container*/
+ .background-color{
+    background-color:#fafafa;/*rgba(244,241,234,0.5);*/
+}
+
+/*For android studio height and widht*/
+.android-app{
+height:80%;
+width:80%;
+}
+
+.for-bg-color-container{
+width:100%;
+height:100%
 }

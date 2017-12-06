@@ -11,8 +11,8 @@
                  title="{{ hit.title }}"
                  alt="{{ hit.title }}">
             <div class="media-body">
-                <p class="text-capitalizemt-0 mb-1">
-                    <a class="text-capitalize"
+                <p class="text-capitalize mt-0 mb-1">
+                    <a class="text-capitalize text-dark"
                        href="{% url hit.type|add:":detail" hit.title|slugify hit.id %}">{{ hit.title }}</a>
                 </p>
                 <div class="text-dark text-capitalize">

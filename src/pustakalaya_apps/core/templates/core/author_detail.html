@@ -2,8 +2,9 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-<div class="container min_height">
-  <div class="row">
+
+<div class="container min_height pt-4" style="min-height:510px;">
+  <div class="row ">
     <!-- Author Name -->
     <div class="col-md-2 col-xs-12 col-sm-12">
       <img src="{{ MEDIA_URL }}{{ object.thumbnail }}"
@@ -23,7 +24,7 @@
         {% endfor %}
       </p>
     </div>
-    <div class="col-md-10 col-xs-12 col-sm-12" id="author-detail">
+    <div class="col-md-10 col-xs-12 col-sm-12 min_height" id="author-detail">
       <div class="p-4 rounded">
                     <span class="description text-uppercase rounded text-black text-uppercase mb-2">
                         <span class="border border-top-0 border-right-0 border-left-0 border-secondary">{% trans "About" %} {{ object }}</span>
@@ -42,4 +43,5 @@
     </div>
   </div>
 </div>
+
 {% endblock content %}
