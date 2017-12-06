@@ -62,7 +62,8 @@ THIRDPARTY_APPS = [
     # 'allauth.socialaccount.providers.google',
     'crispy_forms',
     'hitcount',
-    'star_ratings'
+    'star_ratings',
+    'analytical',
 
 ]
 
@@ -290,7 +291,15 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0  # unlimited
 HITCOUNT_EXCLUDE_USER_GROUP = ()  # not used
 HITCOUNT_KEEP_HIT_IN_DATABASE = {'seconds': 10}
 
-## Django logging settings
+# Google analytics configuration
+GOOGLE_ANALYTICS_PROPERTY_ID = config["GOOGLE_ANALYTICS_PROPERTY_ID"] or 'UA-110685789-1'
+TRACK_SINGLE_DOMAIN = 1
+GOOGLE_ANALYTICS_SITE_SPEED = True
+GOOGLE_ANALYTICS_ANONYMIZE_IP = True
+GOOGLE_ANALYTICS_SESSION_COOKIE_TIMEOUT = 3600000
+GOOGLE_ANALYTICS_VISITOR_COOKIE_TIMEOUT = 3600000
+
+# Django logging settings
 LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')
 
 # LOGGING = {

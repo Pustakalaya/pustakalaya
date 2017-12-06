@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
+{% load analytical %}
+{% load google_analytics %}
+
 <html lang="en"  >
 
 <head >
-
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <link rel="apple-touch-icon" sizes="76x76" href="{% static 'base_assets/img/apple-icon.png' %}">
@@ -31,6 +33,7 @@
         <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
     {% endblock style %}
+{% google_analytics %}
 </head>
 
 <body class="background-color">
