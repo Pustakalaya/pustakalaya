@@ -10,8 +10,8 @@
 {% block style %}
 {{ block.super }}
 <style>
-        .thumbnail-box-shadow {
-            box-shadow: 0 0 17px #7f8c8d;
+     .thumbnail-box-shadow {
+            box-shadow: 0 0 7px #7f8c8d;
       }
       .thumbnail-box-shadow:hover {
             box-shadow:0 0 25px #7f8c8d;
@@ -39,7 +39,7 @@
 <!--custom style backgound-color is in base.html body which includes for all-->
 <div class="for-bg-color-container ">
   <!--search-->
-  <div class="container  pt-4">
+  <div class="container pt-4">
     <!-- Search bar section -->
     <div class="row">
       <div class="col-md-12 col-xs-12 col-sm-12">
@@ -139,14 +139,14 @@
           <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
           <div class="row" class="pt-5 pb-5 ">
             {% for book in featured_books %}
-            <div class="col-md-2 col-sm-12 p-3 col-xs-12 m-3 jumbotron  thumbnail-box-shadow " title="{{ book.title }}">
+            <div class="col-md-2 col-sm-12 p-1 pb-2 col-xs-12 m-3   thumbnail-box-shadow " title="{{ book.title }}">
               <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
                 class="img-responsive rounded"
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
                 height="171px">
-                <div class="text-black fa fa-book mt-4"><b>  {{ book }}</b></div>
-                <div class="text-black">
+                <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-secondary"></i> <span class="text-dark">{{ book }}</span></div>
+                <div class="text-dark pl-3 text-muted">
                   <small>By {{book.document_authors.first}}</small>
                 </div>
               </a>

@@ -34,7 +34,7 @@ def __file_upload_path(instance, filepath):
 
 class FeaturedItemManager(models.Manager):
     def get_queryset(self):
-        return super(FeaturedItemManager, self).get_queryset().filter(featured="yes").order_by("-updated_date")[:12]
+        return super(FeaturedItemManager, self).get_queryset().filter(featured="yes").order_by("-updated_date")[:10]
 
 class Document(AbstractItem, HitCountMixin):
     """Book document type to store book type item
