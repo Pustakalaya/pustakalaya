@@ -9,7 +9,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 
 
-
 def search(request):
     # Store search result in dict obj
     search_result = {}
@@ -111,18 +110,10 @@ def completion(request):
     :return:
     """
 
-
     client = connections.get_connection()
 
-    if request.method == "POST":
-        text = request.POST.get('suggest_text') or " "
-        #s =es.search('name_suggestions', text, completion={'field': 'title_suggest'})
-        # suggestions = s.execute_suggest()
-        # for result in suggestions.name_suggestions:
-        #     print('Suggestions for %s:' % result.text)
-        #     for option in result.options:
-        #         print('  %s (%r)' % (option.name))
-
+    if request.method == "GET":
+        text = request.GET.get('suggest_text') or " "
         response = client.search(
             index=settings.ES_INDEX,
             body={"_source": "suggest",
@@ -136,11 +127,12 @@ def completion(request):
                   }
                   })
 
-    for text in response["suggest"]["title_suggest"][0]["options"]:
-        print(text["text"])
+        suggested_items = []
 
-    return JsonResponse(json.dumps(response), safe=False)
+    for suggest_item in response["suggest"]["title_suggest"][0]["options"]:
+        suggested_items.append(suggest_item)
 
+    return JsonResponse(json.dumps(suggested_items), safe=False)
 
 
 def browse(request, browse_by="all"):

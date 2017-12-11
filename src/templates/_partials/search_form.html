@@ -1,32 +1,33 @@
 {% load i18n %}
+{% load static %}
 <form action="/search" method="GET" id="searchForm">
     <div class="input-group bg-white">
 
-        {#        <select class="custom-select">#}
-        {#            <option selected value=" ">All</option>#}
-        {#            <option value="document">Documents</option>#}
-        {#            <option value="audio">Audio</option>#}
-        {#            <option value="video">Video</option>#}
-        {#        </select>#}
         <input class="form-control border-right-0"
                id="searchFormInput"
+               list="browsers"
                value="{{ q }}"
                type="search" name="q" value=""
                onkeyup="suggest_text(event)"
                autocomplete="off"
                placeholder="{% trans 'Search pustakalaya' %}">
         <!-- hidden type is very important don't remove it -->
-                            <input type="hidden" id="filterData"
-                                   name="form-filter"/>
+        <input type="hidden" id="filterData"
+               name="form-filter"/>
 
-         <input type="submit" value="Search" class="input-group-addon pr-3 pl-3 " id="search-icon"/>
+        <input type="submit" value="Search" class="input-group-addon pr-3 pl-3 " id="search-icon"/>
 
     </div>
-    <ul class="list-group" id="suggestions">
 
-    </ul>
+
+
+
 
 </form>
+
+<datalist id="browsers">
+
+</datalist>
 
 
 <script>
@@ -36,7 +37,7 @@
             var suggest_url = "./search/completion/";
             console.log($event.target.value)
             $.post({
-                type: "post",
+                type: "get",
                 url: suggest_url,
                 headers: {
                     'X-CSRFToken': '{{ csrf_token }}'
@@ -48,7 +49,7 @@
 
                     var suggest_data = JSON.parse(data);
                     var list_item = " ";
-                    suggest_data.suggest.title_suggest[0].options.forEach(function (item) {
+                    suggest_data.forEach(function (item) {
                         var suggestionText = item.text;
                         // Suitable to make search in type features.
                         var doc_type = item._type;
@@ -56,10 +57,12 @@
                         // TODO: remove duplicate items.
                         // Bind the result to the suggestion box.
                         if (suggestionText) {
-                            list_item += '<li onmouseover="onSuggestionSelect(this)"  onmouseleave="onSuggestionLeave(this)" class="list-group-item">' + suggestionText + '</li>';
+                           // list_item += '<li onmouseover="onSuggestionSelect(this)"  onmouseleave="onSuggestionLeave(this)" class="list-group-item">' + suggestionText + '</li>';
+                            list_item += "<option value="+ "'" + suggestionText + "'" + ">"+suggestionText+"</option>";
+
                         }
                     });
-                    document.getElementById("suggestions").innerHTML = list_item
+                    document.getElementById("browsers").innerHTML = list_item
                     console.log(list_item)
 
 
@@ -94,5 +97,3 @@
         }
     })(window);
 </script>
-
-
