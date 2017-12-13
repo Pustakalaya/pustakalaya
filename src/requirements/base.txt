@@ -9,11 +9,11 @@ django-allauth==0.33.0
 django-crispy-forms==1.7.0
 django-analytical==2.3.0
 # Star ratings swapable-rating-model
-
 git+https://github.com/Pustakalaya/django-star-ratings@develop
-
 # Django hit count
 git+https://github.com/Pustakalaya/django-hitcount
+# Wand
+Wand-0.4.4
 
 
 

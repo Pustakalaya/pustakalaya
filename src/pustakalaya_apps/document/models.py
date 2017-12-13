@@ -1,4 +1,6 @@
 #  document/models.py
+import uuid
+import time
 import os
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
@@ -32,9 +34,11 @@ def __file_upload_path(instance, filepath):
     # return document/pdf/year/month/filename
     pass
 
+
 class FeaturedItemManager(models.Manager):
     def get_queryset(self):
         return super(FeaturedItemManager, self).get_queryset().filter(featured="yes").order_by("-updated_date")[:10]
+
 
 class Document(AbstractItem, HitCountMixin):
     """Book document type to store book type item
@@ -175,16 +179,17 @@ class Document(AbstractItem, HitCountMixin):
 
     # View count properties.
     hit_count_generic = GenericRelation(
-    HitCount, object_id_field='object_pk',
-    related_query_name='hit_count_generic_relation')
+        HitCount, object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation')
 
     class Meta:
         ordering = ('title',)
 
     @property
     def getauthors(self):
-        author_list = [ (author.getname, author.pk) for author in self.document_authors.all()]
-        return author_list or [None] # If emtpy, return something otherwise it will break elastic index while searching.
+        author_list = [(author.getname, author.pk) for author in self.document_authors.all()]
+        return author_list or [
+            None]  # If emtpy, return something otherwise it will break elastic index while searching.
 
     @property
     def get_view_count(self):
@@ -224,8 +229,8 @@ class Document(AbstractItem, HitCountMixin):
             # Document interactivity
             document_interactivity=self.document_interactivity,
             # author with name and id.
-            author_list = self.getauthors,
-            url = self.get_absolute_url()
+            author_list=self.getauthors,
+            url=self.get_absolute_url()
 
         )
 
@@ -252,8 +257,7 @@ class Document(AbstractItem, HitCountMixin):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse("document:detail", kwargs={"title": slugify(self.title), "pk":self.pk})
-
+        return reverse("document:detail", kwargs={"title": slugify(self.title), "pk": self.pk})
 
 
 class DocumentSeries(AbstractSeries):
@@ -261,6 +265,16 @@ class DocumentSeries(AbstractSeries):
 
     def __str__(self):
         return self.series_name
+
+
+def uploadpath(instance, filename):
+    directory_path = "uploads/documents/{}/{}_{}/{}".format(
+        time.strftime("%Y/%m/%d"),
+        "_".join(instance.file_name.split(" ")),
+        str(uuid.uuid4())[:8],
+        filename
+    )
+    return directory_path
 
 
 class DocumentFileUpload(AbstractTimeStampModel):
@@ -277,9 +291,20 @@ class DocumentFileUpload(AbstractTimeStampModel):
     )
 
     upload = models.FileField(
-        upload_to="uploads/documents/%Y/%m/",
+        upload_to=uploadpath,
         max_length=255
     )
+
+    total_pages = models.IntegerField(default=0, editable=False)
+
+    def get_files(self):
+        images = []
+        for i in range(self.total_pages):
+            path, file_name = os.path.split(self.upload.url)
+            images.append("{}/{}.png".format(path,i))
+
+        return  images
+
 
     def __str__(self):
         return self.file_name
