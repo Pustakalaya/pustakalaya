@@ -48,7 +48,6 @@
                 {% include "socialaccount/snippets/provider_list.html" with process="login" %}
             </ul>
 
-            <div class="login-or">{% trans 'or' %}</div>
 
         </div>
 
@@ -56,7 +55,7 @@
 
     {% else %}
         <p>{% blocktrans %}If you have not created an account yet, then please
-            <a href="/accounts/signup/">sign up</a> first.{% endblocktrans %}</p>
+            <a href="{{signup_url}}">sign up</a> first.{% endblocktrans %}</p>
     {% endif %}
 
 

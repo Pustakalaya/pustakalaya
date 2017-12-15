@@ -6,4 +6,6 @@ register = template.Library()
 
 @register.inclusion_tag('_partials/login_form.html')
 def login_form():
-    return {'form': LoginForm()}
+    return {'form': LoginForm(),
+            'signup_url': '/accounts/signup/'
+            }
