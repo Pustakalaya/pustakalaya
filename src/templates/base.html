@@ -32,7 +32,10 @@
         <!-- TODO: CSS Just for demo purpose, don't include it in your project -->
         <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
         <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-
+          <style>
+          .socialaccount_providers {list-style: none;}
+          .socialaccount_providers li{display: inline;margin-right:12px;}
+          </style>
 
     {% endblock style %}
 {% google_analytics %}
@@ -70,6 +73,20 @@
 
      <!-- jquery ui -->
          <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js" defer></script>
+
+<script>
+  $(".facebook").removeClass('fa text-primary fa-2x fa-facebook');
+  $(".facebook").addClass('fa text-primary fa-2x fa-facebook');
+  $(".facebook").text('');
+
+  $(".twitter").removeClass('fa text-info fa-2x fa-twitter');
+  $(".twitter").addClass('fa text-info fa-2x fa-twitter');
+  $(".twitter").text('');
+
+  $(".google").removeClass('fa text-danger fa-2x fa-google');
+  $(".google").addClass('fa text-danger fa-2x fa-google');
+  $(".google").text('');
+</script>
 {% endblock script %}
 
 

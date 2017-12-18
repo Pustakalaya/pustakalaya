@@ -21,15 +21,16 @@
                     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
                 </ul>
 
-                <div class="login-or">{% trans 'or' %}</div>
+
 
             </div>
 
             {% include "socialaccount/snippets/login_extra.html" %}
 
+
         {% else %}
-            <p class="description text-dark text-capitalize">{% blocktrans %}If you have not created an account yet, then please
-                <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+        <p class="description text-dark text-capitalize">{% blocktrans %}If you have not created an account yet, then please
+          <a href="/accounts/signup/">sign up</a> first.{% endblocktrans %}</p>
         {% endif %}
 
         <div class="row">

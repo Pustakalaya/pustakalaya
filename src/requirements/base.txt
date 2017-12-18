@@ -13,7 +13,7 @@ git+https://github.com/Pustakalaya/django-star-ratings@develop
 # Django hit count
 git+https://github.com/Pustakalaya/django-hitcount
 # Wand
-Wand-0.4.4
+Wand==0.4.4
 
 
 
