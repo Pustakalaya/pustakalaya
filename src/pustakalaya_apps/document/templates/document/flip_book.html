@@ -424,13 +424,13 @@
     </script>
 
     <script type="text/javascript" src="{% static 'base_assets/js/core/extras/jquery.min.1.7.js' %}"></script>
-    <script src="{% static 'base_assets/js/core/turnjs/turn.js' %}"></script>
+    <script src="{% static 'base_assets/js/core/turnjs/turn.js' %}" ></script>
     <script src="{% static 'base_assets/js/core/turnjs/turn.html4.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'base_assets/js/core/extras/modernizr.2.5.3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'base_assets/js/core/turnjs/hash.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base_assets/js/core/extras/modernizr.2.5.2.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'base_assets/js/core/extras/yepnope.1.5.0.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'base_assets/js/core/turnjs/hash.js' async %}" ></script>
+    <script src="{% static 'base_assets/js/core/turnjs/zoom.min.js' %}" async></script>
 
-    <script src="{% static 'base_assets/js/core/turnjs/zoom.min.js' %}"></script>
-    <script src="{% static 'base_assets/js/core/turnjs/magazine.js' %}"></script>
 
 
     <script type="text/javascript">
@@ -494,9 +494,8 @@
                         })
                             .done(function (data) {
                                 // Loop through the data and grab the page index
-                                // TODO: remove this http://192.168.5.67:9000/ in production.
-                                console.log(data)
-                                var imageSrc = data.page_urls[page - 1];
+                                var imageSrc = data.page_urls[page];
+
 
                                 var imageElement = $("<img></img>", {
                                     src: imageSrc,
@@ -883,8 +882,8 @@
 
                 }).done(function (data) {
                     // Loop through the data and grab the page index
-                    // TODO: remove this http://192.168.5.67:9000/ in production.
-                    console.log(data)
+
+
                     var imageSrc = data.page_urls[page - 1];
 
                     var imageElement = $("<img></img>", {
