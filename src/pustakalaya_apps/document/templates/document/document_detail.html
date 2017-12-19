@@ -39,28 +39,28 @@
                     <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
                          alt="{{ object.title }}" title="{{ object.title }}">
                     {% for document in object.documentfileupload_set.all %}
-
-                        <a href="{{ MEDIA_URL }}{{ document.upload }}" role="button"
-                           class="btn w-100 btn-primary btn-sm">Read: {{ document.file_name }}</a>
+                           <div class="text-center">
+                        <a href="{{ MEDIA_URL }}{{ document.upload }}"
+                           class="pull-left pr-5 pl-4 pt-2 pb-2 mt-2 mr-4 text-white bg-primary text-capitalize "><span class="fa fa-download"></span>&nbsp;{% trans 'download ' %}</a>
 
 
                         {% if document.total_pages >= 1 %}
-                        <a class="btn btn-primary" href="{% url 'document:flipbook' document.pk %}">Read</a>
+                        <a class="pull-left ml-2 pr-5 pl-5 pt-2 pb-2 mt-2 text-white bg-primary text-capitalize" href="{% url 'document:flipbook' document.pk %}#viewCenter"><span class="fa fa-book"></span>&nbsp;{% trans 'read' %}</a>
                         {% endif %}
+                          </div>
 
 
-                        {# TODO: Calculate the file size and display in frontend #}
-                        <p class="text-muted text-center">
-                            {% trans "File size:" %}{{ document.upload.size | file_size_format }}</p>
+                        <p class="pull-left text-dark text-center mr-4 mt-3 ">
+                            {% trans "File size: " %}{{ document.upload.size | file_size_format }}</p>
                     {% endfor %}
 
                     <!-- show count -->
-                    <p class="bg-blue text-dark text-center">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
+                    <p class="pull-left bg-blue text-dark text-center  mt-3">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
                     <!-- Rating -->
 
                     {% ratings object %}
                     <!-- share buttons section -->
-                    <section class="share-buttons text-center">
+                    <section class="pull-left share-buttons text-center">
                         <a class="share-facebook p-1 btn btn-md bg-white"
                            href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
                            onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
