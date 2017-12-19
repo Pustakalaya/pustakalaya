@@ -13,6 +13,12 @@ def documents(request):
     documents = 1 or Document.objects.all()
     return render(request, 'document/documents.html', {'documents': documents})
 
+def flipBook(request, pk):
+
+    return render(request, 'document/flip_book.html', {
+        "book_id":pk
+    })
+
 
 class DocumentDetailView(HitCountDetailView):  # Detail view is inherited from HitCountDetailView
     model = Document

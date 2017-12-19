@@ -194,6 +194,16 @@ class AbstractItem(AbstractTimeStampModel):
         )
     )
 
+    published = models.CharField(
+        verbose_name=_("published"),
+        max_length=3,
+        default="no",
+        choices=(
+            ("yes", _("Yes")),
+            ("no", _("No"))
+        )
+    )
+
 
     class Meta:
         abstract = True

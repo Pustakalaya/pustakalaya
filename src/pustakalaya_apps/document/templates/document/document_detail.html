@@ -25,11 +25,13 @@
         }
 
     </style>
+
+
 {% endblock style %}
 
 {% block content %}
     <div>
-        <div class="container min_height pt-4">
+        <div class="container  pt-4">
             <div class="row">
 
                 <div class="col-md-3 col-sm-12  col-xs-12">
@@ -40,8 +42,16 @@
 
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" role="button"
                            class="btn w-100 btn-primary btn-sm">Read: {{ document.file_name }}</a>
-                         {# TODO: Calculate the file size and display in frontend #}
-                    <p class="text-muted text-center">{%  trans "File size:" %}{{ document.upload.size | file_size_format}}</p>
+
+
+                        {% if document.total_pages >= 1 %}
+                        <a class="btn btn-primary" href="{% url 'document:flipbook' document.pk %}">Read</a>
+                        {% endif %}
+
+
+                        {# TODO: Calculate the file size and display in frontend #}
+                        <p class="text-muted text-center">
+                            {% trans "File size:" %}{{ document.upload.size | file_size_format }}</p>
                     {% endfor %}
 
                     <!-- show count -->
@@ -345,4 +355,26 @@
             </div>
         </div>
     </div>
+   </div>
+
 {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
