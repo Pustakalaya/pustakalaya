@@ -72,6 +72,22 @@ def search(request):
 
         search_result["keywords_js"] = json.dumps(data)
 
+        #For collection filtering
+        # #collection_list =
+        # # Implement collection filter.
+        # collection_list = []
+        # for (collection, count, selected) in response.facets.collections:
+        #     collection = dict(collection=(collection), count=count, selected=selected)
+        #     collection_list.append(collection)
+        #
+        # # Pass the collection_list as js_collection to consume by frontend apps like jquery.
+        # collection_data = {
+        #     "collections": collection_list,
+        # }
+        #
+        # search_result["collections_js"] = json.dumps(collection_data)
+
+
         #
         # for (type, count, selected) in response.facets.type:
         #     print(type, ' (SELECTED):' if selected else ':', count)
