@@ -45,7 +45,7 @@
 
 
                         {% if document.total_pages >= 1 %}
-                        <a class="pull-left ml-2 pr-5 pl-5 pt-2 pb-2 mt-2 text-white bg-primary text-capitalize" href="{% url 'document:flipbook' document.pk %}#viewCenter"><span class="fa fa-book"></span>&nbsp;{% trans 'read' %}</a>
+                        <a class="pull-left ml-1 pr-5 pl-5 pt-2 pb-2 mt-2 text-white bg-primary text-capitalize" href="{% url 'document:flipbook' document.pk %}#viewCenter"><span class="fa fa-book"></span>&nbsp;{% trans 'read' %}</a>
                         {% endif %}
                           </div>
 
