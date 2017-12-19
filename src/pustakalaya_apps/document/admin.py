@@ -44,6 +44,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "education_levels",
         "languages",
         "featured",
+        "published",
         "document_file_type",
         "document_interactivity",
         "document_authors",

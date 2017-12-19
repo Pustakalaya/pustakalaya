@@ -17,4 +17,8 @@ urlpatterns = [
     url(r'document_pages/(?P<pk>\b[0-9A-Fa-f]{8}\b(-\b[0-9A-Fa-f]{4}\b){3}-\b[0-9A-Fa-f]{12}\b)/',
         views.document_page_view, name="document_pages"),
 
+    #document flipbook
+    url(r'document_pages/flipbook/(?P<pk>\b[0-9A-Fa-f]{8}\b(-\b[0-9A-Fa-f]{4}\b){3}-\b[0-9A-Fa-f]{12}\b)/',
+        views.flipBook, name="flipbook")
+
 ]

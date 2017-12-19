@@ -183,7 +183,7 @@ venv/
 # Webpack compiled filed
 src/bundles/*.js
 
-# Configuration file 
+# Configuration file
 src/config/config.json
 
 # Webpack modules
@@ -194,3 +194,5 @@ src/static/base_assets/css/base.css
 
 # dummy data
 books.json
+# database backups
+ *.bak

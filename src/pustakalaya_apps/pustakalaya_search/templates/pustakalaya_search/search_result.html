@@ -47,8 +47,8 @@
 
 {% block style %}
 
-{{ block.super }}
-<style>
+    {{ block.super }}
+    <style>
         .facet-element {
             cursor: pointer;
         }
@@ -57,361 +57,475 @@
             font-weight: normal !important;
         }
 
-</style>
+    </style>
 
-{% endblock %}
+
+    <!-- css for grid view and list view-->
+    <style type="text/css">
+        #container ul {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #container .buttons {
+            margin-bottom: 20px;
+        }
+
+        .list li, .grid li {
+            margin: 0px 0px 5px 5px;
+            /* here I can control the spacing */
+            padding: 5px;
+        }
+
+        .grid li {
+            float: left;
+            width: 22%;
+            background-color: #ececec;
+            margin-bottom: 10px;
+            border-radius: 2px;
+        }
+
+        li img {
+            width: 100%;
+        }
+
+        div > ul.list > li {
+            height: 130px;
+            margin-bottom: 5px !important;
+            background: #fafafa; !important;
+            border: 1px dotted #999999;
+
+        }
+
+        .list > li > img {
+            height: 120px !important;
+            width: 120px;
+            border-radius: 5px;
+            padding-right: 15px;
+
+        }
+
+        .grid > li > img {
+            box-shadow: 4px 4px 4px #888;
+            height: 250px !important;
+            border-radius: 3px;
+
+        }
+
+        .grid > li > p {
+
+            padding-top: 5px;
+        }
+
+        .list > li > p {
+            display: inline-block !important;
+            vertical-align: top;
+
+        }
+
+        .grid > li > span.view-count {
+            display: none;
+        }
+
+        .list-abstract {
+            display: inline-block;
+            position: absolute;
+            top: 30px;
+            left: 130px;
+        }
+
+        .grid > li > div.list-abstract {
+            display: none;
+        }
+
+
+    </style>
+
+{% endblock style %}
 
 
 {% block content %}
-<div class="for-bg-color-container pt-4">
-  <div class="container" style="min-height: 430px">
-    <!-- Result container -->
-    {% if hits %}
-    <div class="row">
-      <div class="col-md-3  col-sm-12 col-xs-12" id="facet">
-        <!-- Facets List -->
-        <!-- type facets -->
-        {% if type %}
-        <div class="row" id="type">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize  font-weight-bold text-dark mb-1">{% trans "Media type" %}</p>
+    <div class="for-bg-color-container pt-4">
+        <div class="container" style="min-height: 430px">
+            <!-- Result container -->
+            {% if hits %}
+                <div class="row">
+                <div class="col-md-3  col-sm-12 col-xs-12" id="facet">
+                    <!-- Facets List -->
+                    <!-- type facets -->
+                    {% if type %}
+                        <div class="row" id="type">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="text-capitalize  font-weight-bold text-dark mb-1">{% trans "Media type" %}</p>
 
-            {% for type, count, selected in response.facets.type %}
-            <div class="checkbox    ">
-              <input id="{{ type }}" value="{{ type }}"
-                     {% if selected %} checked {% endif %}
-                     type="checkbox"
-                     onclick="queryAndFilter()">
-              <label class="text-capitalize facet-element" for="{{ type }}">
-                {% blocktrans %} {{ type }} {% endblocktrans %}
-                <span
-                  class="text-muted">&nbsp;({{ count }})</span>
-              </label>
-            </div>
-            {% endfor %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
+                                {% for type, count, selected in response.facets.type %}
+                                    <div class="checkbox    ">
+                                        <input id="{{ type }}" value="{{ type }}"
+                                                {% if selected %} checked {% endif %}
+                                               type="checkbox"
+                                               onclick="queryAndFilter()">
+                                        <label class="text-capitalize facet-element" for="{{ type }}">
+                                            {% blocktrans %} {{ type }} {% endblocktrans %}
+                                            <span
+                                                    class="text-muted">&nbsp;({{ count }})</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div><!-- end col-sm-12 -->
+                        </div>
+                    {% endif %}
 
 
-        <!-- keywords -->
-        {% if keywords %}
-        <div class="row" id="keywords">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "keywords" %}</p>
-            <!-- append list of keywords in window object to implement filter with vue.js -->
-            <script>
+                    <!-- keywords -->
+                    {% if keywords %}
+                        <div class="row" id="keywords">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "keywords" %}</p>
+                                <!-- append list of keywords in window object to implement filter with vue.js -->
+                                <script>
                                     var keywords = "{{keywords_js|escapejs}}"
 
-            </script>
+                                </script>
 
-            <!-- vue template to implement filters in vuejs -->
-            <div id="keywords-filter" class="mr-5">
-              <input type="text" v-model="search"
-                     placeholder="Filter keywords"
-                     class="form-control mb-2  bg-white"/>
+                                <!-- vue template to implement filters in vuejs -->
+                                <div id="keywords-filter" class="mr-5">
+                                    <input type="text" v-model="search"
+                                           placeholder="Filter keywords"
+                                           class="form-control mb-2  bg-white"/>
 
-              <div v-for="keyword in filteredKeywords">
-                <!-- vuejs syntax to render name -->
-                <span class="text-capitalize"></span>
-                <div class="checkbox" id="myList">
-                  <input type="checkbox"
-                         {% if selected %} checked {% endif %}
-                         v-model="keyword.selected"
-                         :id="keyword.keyword"
-                         :value="keyword.keyword"
-                         onclick="queryAndFilter()">
-                  <label class="text-capitalize facet-element" :for="keyword.keyword">
-                    <%keyword.keyword %>
+                                    <div v-for="keyword in filteredKeywords">
+                                        <!-- vuejs syntax to render name -->
+                                        <span class="text-capitalize"></span>
+                                        <div class="checkbox" id="myList">
+                                            <input type="checkbox"
+                                                    {% if selected %} checked {% endif %}
+                                                   v-model="keyword.selected"
+                                                   :id="keyword.keyword"
+                                                   :value="keyword.keyword"
+                                                   onclick="queryAndFilter()">
+                                            <label class="text-capitalize facet-element" :for="keyword.keyword">
+                                                <%keyword.keyword %>
 
-                    <span
-                      class="text-muted">&nbsp;(<%keyword.count %>)</span>
-                  </label>
+                                                <span
+                                                        class="text-muted">&nbsp;(<%keyword.count %>)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    {% comment %}
+                                        {% for type, count, selected in keywords %}
+                                            <div class="checkbox">
+                                                <input id="{{ type }}" type="checkbox"
+                                                        {% if selected %} checked {% endif %}
+                                                       value="{{ type }}"
+                                                       onclick="queryAndFilter()">
+                                                <label class="text-capitalize facet-element" for="{{ type }}">
+                                                    {{ type|transtolocal }}
+
+                                                    <span
+                                                            class="text-muted">&nbsp;({{ count }})</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    {% endcomment %}
+                                </div>
+                                {% if keywords|length > 4 %}
+
+                                    <a class="text-primary text-capitalize" style="cursor:pointer"
+                                       id="loadMore">{% trans "more" %}</a>
+                                    <a class="text-primary text-capitalize" style="cursor:pointer"
+                                       id="showLess"> {% trans "less" %}</a>
+                                {% endif %}
+                            </div><!-- end col-sm-12 -->
+                        </div>
+                    {% endif %}
+
+                    <!-- Language facets -->
+                    {% if languages %}
+                        <div class="row" id="languages">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="text-capitalize text-dark font-weight-bold mb-1 mt-3">{% trans "language" %}</p>
+                                {% for language, count, selected in languages %}
+                                    <div class="checkbox">
+                                        <input id="{{ language }}" value="{{ language }}"
+                                                {% if selected %} checked {% endif %}
+                                               type="checkbox"
+                                               onclick="queryAndFilter()">
+                                        <label class="text-capitalize facet-element text-center" for="{{ language }}" l>
+                                            {{ language | get_language }} <span
+                                                class="text-muted">&nbsp;({{ count }})</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div><!-- end col-sm-12 -->
+                        </div>
+                    {% endif %}
+
+                    <!-- education languages -->
+                    {% if education_levels %}
+                        <div class="row" id="education_levels">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "education level" %}</p>
+                                {% for type, count, selected in education_levels %}
+                                    <div class="checkbox">
+                                        <input id="{{ type }}" value="{{ type }}"
+                                                {% if selected %} checked {% endif %}
+                                               type="checkbox"
+                                               onclick="queryAndFilter()">
+                                        <label class="text-capitalize facet-element" for="{{ type }}">
+                                            {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                class="text-muted">&nbsp;({{ count }})</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div><!-- end col-sm-12 -->
+                        </div>
+                    {% endif %}
+
+                    <!-- communities -->
+                    {% if communities %}
+                        <div class="row" id="communities">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "communities" %}</p>
+                                {% for type, count, selected in communities %}
+                                    <div class="checkbox">
+                                        <input id="{{ type }}" type="checkbox"
+                                                {% if selected %} checked {% endif %}
+                                               value="{{ type }}"
+                                               onclick="queryAndFilter()">
+                                        <label class="text-capitalize facet-element" for="{{ type }}">
+                                            {{ type|transtolocal }}
+                                            <span
+                                                    class="text-muted">&nbsp;({{ count }})</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div><!-- end col-sm-12 -->
+                        </div>
+                    {% endif %}
+
+                    <!-- collections -->
+                    {% if collections %}
+                        <div class="row" id="collections">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "collections" %}</p>
+                                {% for type, count, selected in collections %}
+                                    <div class="checkbox">
+                                        <input id="{{ type }}" type="checkbox"
+                                                {% if selected %} checked {% endif %}
+                                               value="{{ type }}"
+                                               onclick="queryAndFilter()">
+                                        <label class="text-capitalize facet-element" for="{{ type }}">
+                                            {{ type | transtolocal }}
+                                            <span
+                                                    class="text-muted">&nbsp;({{ count }})</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div><!-- end col-sm-12 -->
+                        </div>
+                    {% endif %}
+
+                    <!-- license type -->
+                    {% if license_type %}
+                        <div class="row" id="license_type">
+                            <div class="col-sm-12 col-lg-12">
+                                <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "license type" %}</p>
+
+                                {% for type, count, selected in license_type %}
+                                    <div class="checkbox">
+                                        <input id="{{ type }}" type="checkbox"
+                                                {% if selected %} checked {% endif %}
+                                               value="{{ type }}"
+                                               onclick="queryAndFilter()">
+                                        <label class="text-capitalize facet-element" for="{{ type }}">
+                                            {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                class="text-muted">&nbsp;({{ count }})</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div><!-- end col-sm-12 -->
+                        </div>
+                    {% endif %}
+
+                    <!-- year of available -->
+                    {% comment %}
+                        {% if year_of_available %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize font-weight-bold text-dark">{% trans "year of available" %}</p>
+                                    {% for type, count, selected in year_of_available %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %} <span
+                                                    class="badge badge-default">{{ count }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div><!-- end col-sm-12 -->
+                            </div>
+                        {% endif %}
+
+
+                        <!-- publication year -->
+                        {% if publication_year %}
+                            <div class="row" id="checkRadios">
+                                <div class="col-sm-12 col-lg-12">
+                                    <p class="text-capitalize font-weight-bold text-dark">{% trans "publication year" %}</p>
+                                    {% for type, count, selected in publication_year %}
+                                        <div class="checkbox">
+                                            <input id="{{ type }}" type="checkbox">
+                                            <label class="text-capitalize" for="{{ type }}">
+                                                {% blocktrans %} {{ type }} {% endblocktrans %}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>&lt;!&ndash; end col-sm-12 &ndash;&gt;
+                            </div>
+                        {% endif %}
+                    {% endcomment %}
+
                 </div>
-              </div>
 
-              {% comment %}
-              {% for type, count, selected in keywords %}
-              <div class="checkbox">
-                <input id="{{ type }}" type="checkbox"
-                       {% if selected %} checked {% endif %}
-                       value="{{ type }}"
-                       onclick="queryAndFilter()">
-                <label class="text-capitalize facet-element" for="{{ type }}">
-                  {{ type|transtolocal }}
+                <!-- Results -->
+                <div class="col-md-9 col-sm-12">
 
-                  <span
-                    class="text-muted">&nbsp;({{ count }})</span>
-                </label>
-              </div>
-              {% endfor %}
-              {% endcomment %}
-            </div>
-            {% if keywords|length > 4%}
+                    <div>
+                        <!-- include search form -->
+                        <form method="GET" action="/search" id="searchForm">
 
-            <a class="text-primary text-capitalize" style="cursor:pointer" id="loadMore">{% trans "more" %}</a>
-            <a class="text-primary text-capitalize" style="cursor:pointer" id="showLess"> {% trans "less" %}</a>
+                            <div class="input-group bg-white">
+                                <input class="form-control" id="search_input"
+                                       autocomplete="off"
+                                       maxlength="200"
+                                       value="{{ q }}"
+                                       type="text" name="q" , placeholder="Search pustakalaya.."/>
+
+                                <!-- hidden type is very important don't remove it -->
+                                <input type="hidden" id="filterData"
+                                       name="form-filter"/>
+
+                                <input type="submit" value="Search" class="input-group-addon pr-3 pl-3"
+                                       id="search-icon"/>
+                            </div>
+                        </form>
+                        <p class="text-muted"
+                           id="search-result">{{ response.hits.total }} {% trans "results found in " %}
+                            {{ time }} {% trans "sec" %}</p>
+                    </div>
+
+
+                    <!--grid view list view section-->
+                    <div id="container">
+                        <div class="buttons">
+                            <button class="grid  fa fa-th text-primary"></button>
+                            <button class="list fa fa-list text-primary"></button>
+                        </div>
+                        <ul class="list clearfix">
+                            {% for hit in hits %}
+                                <li style="position: relative; cursor: pointer"
+                                    onclick='window.location.href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"'>
+                                    <img class="shadow" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"/>
+                                    <p class="text-primary description lead">
+                                        {{ hit.title }}
+                                    </p>
+
+                                    <div class="list-abstract text-dark ">{{ hit.abstract|truncatechars:232 }}
+                                        <br>
+                                        <strong class="text-black">{% trans "Views" %}:</strong>
+                                        &nbsp;{{ hit.view_count }}
+                                    </div>
+
+
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                {% include '_partials/pagination.html' %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result container -->
+                    {% comment %}
+                        <div class="row">
+                            <div class="col-md-9"></div>
+                            <div class="col-md-3 mb-3">
+                                <a href="#" id="list" class="myId_btn text-primary myId_btn-default myId_btn-sm">
+                                    <i class="fa fa-list text-primary">
+                                    </i>&nbsp;List</a>
+                                <a href="#" id="grid" class="myId_btn myId_btn-default text-primary myId_btn-sm">
+                                    <i class="fa fa-th text-primary"></i>&nbsp;Grid</a>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div id="products" class="myId_row myId_list-group">
+                                {% for hit in hits %}
+                                    <a href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"
+                                       style="text-decoration:none;" class="text-dark">
+                                        <div class="myId_item  myId_col-md-4 myId_col-xs-12">
+                                            <div class="myId_thumbnail">
+                                                <img class="myId_group myId_list-group-image"
+                                                     src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
+                                                     title="{{ hit.title }}"
+                                                     style="height:230px !important;"
+                                                     alt="{{ hit.title }}"/>
+                                                <div class="myId_caption">
+                                                    <h4 class="myId_group myId_inner  text-primary text-center">
+                                                        {{ hit.title }}</h4>
+                                                    <p class="myId_group myId_inner text-justify myId_list-group-item-text">
+                                                        {{ hit.abstract |truncatechars:"200" }}</p>
+                                                    <div class="myId_row">
+                                                        <div class="myId_col-xs-12 myId_col-md-6">
+
+                                                        </div>
+                                                        <div class="myId_col-xs-12 myId_col-md-6">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endcomment %}
+                </div>
+
+            {% else %}
+                <div>
+                    <div class="row min_height">
+                        <div class="col-md-2"></div>
+                        <div class=" col-md-8 search">
+                            <p class="text-capitalize text-danger text-center">{% trans "result not found" %}</p>
+                            {% include "_partials/search_form.html" %}
+
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+                </div>
+
             {% endif %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
-
-        <!-- Language facets -->
-        {% if languages %}
-        <div class="row" id="languages">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize text-dark font-weight-bold mb-1 mt-3">{% trans "language" %}</p>
-            {% for language, count, selected in languages %}
-            <div class="checkbox">
-              <input id="{{ language }}" value="{{ language }}"
-                     {% if selected %} checked {% endif %}
-                     type="checkbox"
-                     onclick="queryAndFilter()">
-              <label class="text-capitalize facet-element text-center" for="{{ language }}" l>
-                {{ language | get_language }} <span
-                class="text-muted">&nbsp;({{ count }})</span>
-              </label>
             </div>
-            {% endfor %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
-
-        <!-- education languages -->
-        {% if education_levels %}
-        <div class="row" id="education_levels">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "education level" %}</p>
-            {% for type, count, selected in education_levels %}
-            <div class="checkbox">
-              <input id="{{ type }}" value="{{ type }}"
-                     {% if selected %} checked {% endif %}
-                     type="checkbox"
-                     onclick="queryAndFilter()">
-              <label class="text-capitalize facet-element" for="{{ type }}">
-                {% blocktrans %} {{ type }} {% endblocktrans %} <span
-                class="text-muted">&nbsp;({{ count }})</span>
-              </label>
-            </div>
-            {% endfor %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
-
-        <!-- communities -->
-        {% if communities %}
-        <div class="row" id="communities">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "communities" %}</p>
-            {% for type, count, selected in communities %}
-            <div class="checkbox">
-              <input id="{{ type }}" type="checkbox"
-                     {% if selected %} checked {% endif %}
-                     value="{{ type }}"
-                     onclick="queryAndFilter()">
-              <label class="text-capitalize facet-element" for="{{ type }}">
-                {{ type|transtolocal }}
-                <span
-                  class="text-muted">&nbsp;({{ count }})</span>
-              </label>
-            </div>
-            {% endfor %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
-
-        <!-- collections -->
-        {% if collections %}
-        <div class="row" id="collections">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "collections" %}</p>
-            {% for type, count, selected in collections %}
-            <div class="checkbox">
-              <input id="{{ type }}" type="checkbox"
-                     {% if selected %} checked {% endif %}
-                     value="{{ type }}"
-                     onclick="queryAndFilter()">
-              <label class="text-capitalize facet-element" for="{{ type }}">
-                {{ type | transtolocal }}
-                <span
-                  class="text-muted">&nbsp;({{ count }})</span>
-              </label>
-            </div>
-            {% endfor %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
-
-        <!-- license type -->
-        {% if license_type %}
-        <div class="row" id="license_type">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize font-weight-bold text-dark mb-1 mt-3">{% trans "license type" %}</p>
-
-            {% for type, count, selected in license_type %}
-            <div class="checkbox">
-              <input id="{{ type }}" type="checkbox"
-                     {% if selected %} checked {% endif %}
-                     value="{{ type }}"
-                     onclick="queryAndFilter()">
-              <label class="text-capitalize facet-element" for="{{ type }}">
-                {% blocktrans %} {{ type }} {% endblocktrans %} <span
-                class="text-muted">&nbsp;({{ count }})</span>
-              </label>
-            </div>
-            {% endfor %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
-
-        <!-- year of available -->
-        {% comment %}
-        {% if year_of_available %}
-        <div class="row" id="checkRadios">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize font-weight-bold text-dark">{% trans "year of available" %}</p>
-            {% for type, count, selected in year_of_available %}
-            <div class="checkbox">
-              <input id="{{ type }}" type="checkbox">
-              <label class="text-capitalize" for="{{ type }}">
-                {% blocktrans %} {{ type }} {% endblocktrans %} <span
-                class="badge badge-default">{{ count }}</span>
-              </label>
-            </div>
-            {% endfor %}
-          </div><!-- end col-sm-12 -->
-        </div>
-        {% endif %}
-
-
-        <!-- publication year -->
-        {% if publication_year %}
-        <div class="row" id="checkRadios">
-          <div class="col-sm-12 col-lg-12">
-            <p class="text-capitalize font-weight-bold text-dark">{% trans "publication year" %}</p>
-            {% for type, count, selected in publication_year %}
-            <div class="checkbox">
-              <input id="{{ type }}" type="checkbox">
-              <label class="text-capitalize" for="{{ type }}">
-                {% blocktrans %} {{ type }} {% endblocktrans %}
-              </label>
-            </div>
-            {% endfor %}
-          </div>&lt;!&ndash; end col-sm-12 &ndash;&gt;
-        </div>
-        {% endif %}
-        {% endcomment %}
-
-      </div>
-
-      <!-- Results -->
-      <div class="col-md-9 col-sm-12">
-
-        <div>
-          <!-- include search form -->
-          <form method="GET" action="/search" id="searchForm">
-
-            <div class="input-group bg-white">
-              <input class="form-control" id="search_input"
-                     autocomplete="off"
-                     maxlength="200"
-                     value="{{ q }}"
-                     type="text" name="q" , placeholder="Search pustakalaya.."/>
-
-              <!-- hidden type is very important don't remove it -->
-              <input type="hidden" id="filterData"
-                     name="form-filter"/>
-
-              <input type="submit" value="Search" class="input-group-addon pr-3 pl-3" id="search-icon"/>
-            </div>
-          </form>
-          <p class="text-muted"
-             id="search-result">{{ response.hits.total }} {% trans "results found in " %}
-            {{ time }} {% trans "sec" %}</p>
-        </div>
-        <!-- Result container -->
-        <div class="row">
-          <div class="col-md-9"></div>
-          <div class="col-md-3 mb-3">
-            <a href="#" id="list" class="myId_btn text-primary myId_btn-default myId_btn-sm">
-              <i class="fa fa-list text-primary">
-              </i>&nbsp;List</a>
-            <a href="#" id="grid" class="myId_btn myId_btn-default text-primary myId_btn-sm">
-              <i class="fa fa-th text-primary"></i>&nbsp;Grid</a>
-          </div>
 
         </div>
-        <div class="row">
-          <div id="products" class="myId_row myId_list-group">
-            {% for hit in hits %}
-           <a href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"
-            style="text-decoration:none;" class="text-dark">
-            <div class="myId_item  myId_col-md-4 myId_col-xs-12">
-              <div class="myId_thumbnail">
-                <img class="myId_group myId_list-group-image"
-                     src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
-                     title="{{ hit.title }}"
-                     style="height:230px !important;"
-                     alt="{{ hit.title }}"/>
-                <div class="myId_caption">
-                  <h4 class="myId_group myId_inner  text-primary">
-                    {{ hit.title }}</h4>
-                  <p class="myId_group myId_inner text-justify myId_list-group-item-text">
-                    {{ hit.abstract |truncatechars:"230" }}</p>
-                  <div class="myId_row">
-                    <div class="myId_col-xs-12 myId_col-md-6">
-
-
-                    </div>
-                    <div class="myId_col-xs-12 myId_col-md-6">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </a>
-            {% endfor %}
-          </div>
-
-        </div>
-        <!-- pagination -->
-        {# TODO: implement dotted pagination after specific page #}
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            {% include '_partials/pagination.html' %}
-          </div>
-        </div>
-      </div>
-      {% else %}
-      <div>
-        <div class="row min_height">
-          <div class="col-md-2"></div>
-          <div class=" col-md-8 search">
-            <p class="text-capitalize text-danger text-center">{% trans "result not found" %}</p>
-            {% include "_partials/search_form.html" %}
-
-          </div>
-          <div class="col-md-2"></div>
-        </div>
-
-      </div>
-
-      {% endif %}
     </div>
-
-  </div>
-</div>
 
 {% endblock content %}
 
 
 <!-- script blocks -->
 {% block script %}
-<!-- Inherit base scripts -->
-{{ block.super }}
-<!-- inject custom script for this page -->
-<script>
+    <!-- Inherit base scripts -->
+    {{ block.super }}
+    <!-- inject custom script for this page -->
+    <script>
         function queryAndFilter() {
 
             // Grab the input field
@@ -491,12 +605,12 @@
 
         }
 
-</script>
-<!-- some script above here -->
-<!-- vue js implement -->
-<script src="{% static 'base_assets/js/vue/vue.js' %}"></script>
-<!-- vuejs app -->
-<script>
+    </script>
+    <!-- some script above here -->
+    <!-- vue js implement -->
+    <script src="{% static 'base_assets/js/vue/vue.js' %}"></script>
+    <!-- vuejs app -->
+    <script>
         var app = new Vue({
             el: "#keywords-filter",
             delimiters: ["<%", "%>"],
@@ -517,123 +631,114 @@
             }
         });
 
-</script>
+    </script>
 
-<script>
+    <script>
 
-    /*Showing and hiding element*/
+        /*Showing and hiding element*/
 
-    $(document).ready(function () {
-      var size_li = $('#keywords-filter #myList').length;
-        x=5;
-        //console.log('x: '+x);
-        //console.log('size: '+size_li);
-
-
-        /* assume two classes hideItem and showItem */
-          var i =0;
-          HideShow(x,i);
-
-        $('#loadMore').click(function () {
-            x= (x+5 <= size_li) ? x+5 : size_li;
-              i =0;
-            HideShowMoreLessClick(x,i,size_li);
-        });
-        $('#showLess').click(function () {
-            x=(x-5<=0) ? 3 : x-5;
-            i =0;
-            HideShowMoreLessClick(x,i,size_li);
-        });
-        function HideShow(x,i){
-            /* Initially hide item */
-            if(x==5){
-            $('#showLess').hide();
-            }
-          $('#keywords-filter #myList').each( function() {
-                  return $(this).addClass('hideItem')
-             })
-            console.log('x=' +x + ' , i = '+i);
-            $('#keywords-filter #myList').each( function() {
-                  if( i< x){
-                  i++;
-                  return $(this).removeClass('hideItem');
-                  }
-             })
-
-         $('#keywords-filter .showItem').show();
-         $('#keywords-filter .hideItem').hide();
-
-        }
-
-        function HideShowMoreLessClick(x,i,actual_size){
-           /* Initially hide item */
-          $('#keywords-filter #myList').each( function() {
-                  return $(this).removeClass('hideItem')
-             })
-             $('#keywords-filter #myList').each( function() {
-                  return $(this).removeClass('showItem')
-             })
-                $('#keywords-filter #myList').each( function() {
-                  return $(this).addClass('hideItem')
-             })
-           /* remove some of the hide */
-           $('#keywords-filter #myList').each( function() {
-                  if( i< x){
-                  i++;
-                  return $(this).removeClass('hideItem');
-                  }
-             })
-            //add the show item form filter element
-            i=0;
-           $('#keywords-filter #myList').each( function() {
-                  if( i< x){
-                  i++;
-                  return $(this).addClass('showItem');
-                  }
-             })
-         $('#keywords-filter .showItem').show();
-         $('#keywords-filter .hideItem').hide();
-
-         //for show less
-         if(x <= 3){
-            $('#showLess').hide();
-          }else{
-            $('#showLess').show();
-          }
-
-          //for show more
-          if(x == actual_size){
-           $('#loadMore').hide();
-          }else{
-            $('#loadMore').show();
-          }
-
-        }
-
-    });
-
-
-
-
-
-</script>
-
-<!-- script bootstrap3 gridview list view -->
-<script>
         $(document).ready(function () {
-            $('#list').click(function (event) {
-                event.preventDefault();
-                $('#products .myId_item').addClass('myId_list-group-item');
+            var size_li = $('#keywords-filter #myList').length;
+            x = 5;
+            //console.log('x: '+x);
+            //console.log('size: '+size_li);
+
+
+            /* assume two classes hideItem and showItem */
+            var i = 0;
+            HideShow(x, i);
+
+            $('#loadMore').click(function () {
+                x = (x + 5 <= size_li) ? x + 5 : size_li;
+                i = 0;
+                HideShowMoreLessClick(x, i, size_li);
             });
-            $('#grid').click(function (event) {
-                event.preventDefault();
-                $('#products .myId_item').removeClass('myId_list-group-item');
-                $('#products .myId_item').addClass('grid-group-item');
-                // truncate the description.
-                $.trim(".myId_caption p").trim(30);
+            $('#showLess').click(function () {
+                x = (x - 5 <= 0) ? 3 : x - 5;
+                i = 0;
+                HideShowMoreLessClick(x, i, size_li);
             });
+
+            function HideShow(x, i) {
+                /* Initially hide item */
+                if (x == 5) {
+                    $('#showLess').hide();
+                }
+                $('#keywords-filter #myList').each(function () {
+                    return $(this).addClass('hideItem')
+                })
+                console.log('x=' + x + ' , i = ' + i);
+                $('#keywords-filter #myList').each(function () {
+                    if (i < x) {
+                        i++;
+                        return $(this).removeClass('hideItem');
+                    }
+                })
+
+                $('#keywords-filter .showItem').show();
+                $('#keywords-filter .hideItem').hide();
+
+            }
+
+            function HideShowMoreLessClick(x, i, actual_size) {
+                /* Initially hide item */
+                $('#keywords-filter #myList').each(function () {
+                    return $(this).removeClass('hideItem')
+                })
+                $('#keywords-filter #myList').each(function () {
+                    return $(this).removeClass('showItem')
+                })
+                $('#keywords-filter #myList').each(function () {
+                    return $(this).addClass('hideItem')
+                })
+                /* remove some of the hide */
+                $('#keywords-filter #myList').each(function () {
+                    if (i < x) {
+                        i++;
+                        return $(this).removeClass('hideItem');
+                    }
+                })
+                //add the show item form filter element
+                i = 0;
+                $('#keywords-filter #myList').each(function () {
+                    if (i < x) {
+                        i++;
+                        return $(this).addClass('showItem');
+                    }
+                })
+                $('#keywords-filter .showItem').show();
+                $('#keywords-filter .hideItem').hide();
+
+                //for show less
+                if (x <= 3) {
+                    $('#showLess').hide();
+                } else {
+                    $('#showLess').show();
+                }
+
+                //for show more
+                if (x == actual_size) {
+                    $('#loadMore').hide();
+                } else {
+                    $('#loadMore').show();
+                }
+
+            }
+
         });
 
-</script>
+
+    </script>
+
+    <!--Script for list view and grid view-->
+    <script type="text/javascript">
+        $('button').on('click', function (e) {
+            if ($(this).hasClass('grid')) {
+                $('#container ul').removeClass('list').addClass('grid');
+            } else if ($(this).hasClass('list')) {
+                $('#container ul').removeClass('grid').addClass('list');
+                            }
+        });
+    </script>
 
 {% endblock script %}

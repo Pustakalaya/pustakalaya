@@ -1,8 +1,8 @@
-  <form method="POST" action=".">
-                    {%  csrf_token %}
-                    <div class="form-group">
-                        <input class="form-control"  id="search_input" type="text" name="q" , placeholder="Search">
-                        <input type="submit" class="btn btn-info btn-block" value="Submit">
-                        <input type="hidden"  name="filter"/>
-                    </div>
-                </form>
+<form method="POST" action=".">
+    {% csrf_token %}
+    <div class="form-group">
+        <input class="form-control" id="search_input" type="text" name="q" , placeholder="Search">
+        <input type="submit" class="btn btn-info btn-block" value="Submit">
+        <input type="hidden" name="filter"/>
+    </div>
+</form>
