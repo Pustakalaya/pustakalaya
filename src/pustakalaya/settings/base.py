@@ -57,9 +57,9 @@ THIRDPARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
-    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.twitter',
+    # 'allauth.socialaccount.providers.google',
     'crispy_forms',
     'hitcount',
     'star_ratings',
@@ -298,6 +298,14 @@ GOOGLE_ANALYTICS_SITE_SPEED = True
 GOOGLE_ANALYTICS_ANONYMIZE_IP = True
 GOOGLE_ANALYTICS_SESSION_COOKIE_TIMEOUT = 3600000
 GOOGLE_ANALYTICS_VISITOR_COOKIE_TIMEOUT = 3600000
+
+# Celery configuration
+BROKER_URL = 'redis://{}:{}'.format(REDIS_IP, REDIS_PORT)
+CELERY_RESULT_BACKEND = 'redis://{}:{}'.format(REDIS_IP, REDIS_PORT)
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kathmandu'
 
 # Django logging settings
 LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), 'logs')
