@@ -17,6 +17,24 @@
 </head>
 <body>
 
+
+<!--success message notification-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center  mt-4 ">
+            {% if messages %}
+            <div class="alert alert-info alert-with-icon" data-notify="container">
+                {% for message in messages %}
+                    <button aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">×</button>
+                    <span data-notify="message notify">{% if message.tags %} {{ message.tags }}{% endif %}>{{ message }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+
 <div class="wrapper">
     <div class="sidebar" data-background-color="white" data-active-color="danger">
 

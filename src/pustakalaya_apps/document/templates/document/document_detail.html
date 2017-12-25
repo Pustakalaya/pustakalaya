@@ -40,7 +40,7 @@
                          alt="{{ object.title }}" title="{{ object.title }}">
                     {% for document in object.documentfileupload_set.all %}
                            <div class="text-center">
-                        <a href="{{ MEDIA_URL }}{{ document.upload }}"
+                        <a href="{{ MEDIA_URL }}{{ document.upload }}" target="_blank"
                            class="pull-left pr-5 pl-4 pt-2 pb-2 mt-2 mr-4 text-white bg-primary text-capitalize "><span class="fa fa-download"></span>&nbsp;{% trans 'download ' %}</a>
 
 

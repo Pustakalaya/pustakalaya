@@ -6,9 +6,9 @@
             <form action="." method="post">
              {% csrf_token %}
             {{ form  | crispy }}
-             <!-- fileupload form -->
-                {{ document_file_upload_form | crispy }}
-              <input type="submit" value="Create Document" class="btn btn-primary">
+                <!-- fileupload form -->
+                {{ audio_file_upload_form | crispy }}
+              <input type="submit" value="Create Audio" class="btn btn-primary">
             </form>
         </div>
     </div>
