@@ -16,14 +16,14 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 922px;
-            height: 600px;
+            width: 1000px;
+            height: 800px;
             margin: auto;
         }
 
         .magazine-viewport .magazine {
-            width: 922px;
-            height: 600px;
+            width: 1000px;
+            height: 800px;
             left: -461px;
             top: -300px;
         }
@@ -422,43 +422,57 @@
 {% block script %}
     {{ block.super }}
     <script>
-        var flipBookURL = "/documents/document_pages/{{ book_id }}/"
+        var flipBookURL = "/documents/document_pages/{{ book_id }}/";
     </script>
 
     <script type="text/javascript" src="{% static 'base_assets/js/core/extras/jquery.min.1.7.js' %}"></script>
     <script src="{% static 'base_assets/js/core/turnjs/turn.js' %}" ></script>
-    <script src="{% static 'base_assets/js/core/turnjs/turn.html4.min.js' %}"></script>
+    <script src="{% static 'base_assets/js/core/extras/turn.html4.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'base_assets/js/core/extras/modernizr.2.5.2.min.js' %}" ></script>
     <script type="text/javascript" src="{% static 'base_assets/js/core/extras/yepnope.1.5.0.min.js' %}" ></script>
     <script type="text/javascript" src="{% static 'base_assets/js/core/turnjs/hash.js' async %}" ></script>
-    <script src="{% static 'base_assets/js/core/turnjs/zoom.min.js' %}" async></script>
+    <script src="{% static 'base_assets/js/core/extras/zoom.min.js' %}" async></script>
 
 
 
     <script type="text/javascript">
-        function loadApp() {
+     // set the total page length
+        (function (window) {
+            // Set initial value
+             window.flipBookPageLength = 300;
+            $.ajax({
+                url: flipBookURL,
+                success: function (data) {
+                    window.flipBookPageLength =  data.page_urls.length || 300;
 
-            $('#canvas').fadeIn(1000);
+                },
+                error: function (error) {
+                    window.flipBookPageLength = 0;
 
+                }
+            })
+
+        })(window);
+
+
+
+       $(document).ready(function () {
+           function loadApp() {
             var flipbook = $('.magazine');
 
             // Check if the CSS was already loaded
-
             if (flipbook.width() == 0 || flipbook.height() == 0) {
                 setTimeout(loadApp, 10);
                 return;
             }
 
             // Create the flipbook
-
             flipbook.turn({
 
                 // Magazine width
-
                 width: 922,
 
                 // Magazine height
-
                 height: 600,
 
                 // Duration in millisecond
@@ -486,10 +500,8 @@
                 pages: window.flipBookPageLength,
 
                 // Events
-
                 when: {
                     turning: function (event, page, view) {
-
 
                         $.ajax({
                             url: flipBookURL
@@ -506,7 +518,7 @@
                                 })
 
 
-                                element.attr("style", "background-image:url(" + imageSrc + ")")
+                               // element.attr("style", "background-image:url(" + imageSrc + ")")
 
 
                                 var book = $(this),
@@ -830,35 +842,15 @@
 
         yepnope({
             test: Modernizr.csstransforms,
-            yep: ['lib/turn.js'],
-            nope: ['lib/turn.html4.min.js'],
-            both: ['lib/zoom.min.js', 'js/magazine.js', 'css/magazine.css'],
+            yep: ['{% static 'base_assets/js/core/turnjs/turn.js' %}'],
+            nope: ['base_assets/js/core/extras/turn.html4.min.js'],
+            both: ['{% static 'base_assets/js/core/extras/zoom.min.js' %}'],
             complete: loadApp
         });
-
-        // set the total page length
-        (function (window) {
-            $.ajax({
-                url: flipBookURL,
-                success: function (data) {
-                    window.flipBookPageLength = data.page_urls.length;
-
-                },
-                error: function (error) {
-                    window.flipBookPageLength = 0;
-
-                }
-            })
-
-        })(window);
-
+     })
     </script>
 
     <script type="text/javascript">
-        /*
- * Magazine sample
-*/
-
         function addPage(page, book) {
 
             var id, pages = book.turn('pages');
@@ -873,7 +865,7 @@
                 // It will contain a loader indicator and a gradient
                 element.html('<div class="gradient"></div><div class="loader"></div>');
 
-                // Load the page
+                // Load the pageg
                 loadPage(page, element);
 
                 // Get the data for this page
@@ -886,7 +878,7 @@
                     // Loop through the data and grab the page index
 
 
-                    var imageSrc = data.page_urls[page - 1];
+                    var imageSrc = data.page_urls[page];
 
                     var imageElement = $("<img></img>", {
                         src: imageSrc,
@@ -894,8 +886,7 @@
                         class: "img img-responsive"
                     })
 
-
-                    element.attr("style", "background-image:url(" + imageSrc + ")")
+                    // element.attr("style", "background-image:url(" + imageSrc + ")")
                 });
 
             }
@@ -931,10 +922,8 @@
                 url: flipBookURL,
 
             }).done(function (data) {
-                // Loop through the data and grab the page index
-                // TODO: remove this http://192.168.5.67:9000/ in production.
-                console.log(data)
-                var imageSrc = data.page_urls[page - 1];
+
+                var imageSrc = data.page_urls[page];
 
                 img.attr('src', imageSrc);
 
@@ -946,7 +935,6 @@
         }
 
         // Zoom in / Zoom out
-
         function zoomTo(event) {
 
             setTimeout(function () {
@@ -963,10 +951,8 @@
 
         }
 
-
         // Load regions
-
-        function loadRegions(page, element, imageSrc) {
+        function loadRegions(page, pageElement, imageSrc) {
 
             $.getJSON('pages/' + page + '-regions.json').done(function (data) {
 
@@ -977,7 +963,6 @@
         }
 
         // Add region
-
         function addRegion(region, pageElement) {
 
             var reg = $('<div />', {'class': 'region  ' + region['class']}),
@@ -997,7 +982,6 @@
         }
 
         // Process click on a region
-
         function regionClick(event) {
 
             var region = $(event.target);
@@ -1019,7 +1003,6 @@
         }
 
         // Process the data of every region
-
         function processRegion(region, regionType) {
 
             data = decodeParams(region.attr('region-data'));
@@ -1052,7 +1035,6 @@
         }
 
         // Load large page
-
         function loadLargePage(page, pageElement, imageSrc) {
 
             var img = $('<img />');
@@ -1078,7 +1060,6 @@
         }
 
         // Load small page
-
         function loadSmallPage(page, pageElement, imageSrc) {
 
             var img = pageElement.find('img');
@@ -1093,7 +1074,6 @@
         }
 
         // http://code.google.com/p/chromium/issues/detail?id=128488
-
         function isChrome() {
 
             return navigator.userAgent.indexOf('Chrome') != -1;
@@ -1113,7 +1093,6 @@
         }
 
         // Set the width and height for the viewport
-
         function resizeViewport() {
 
             var width = $(window).width(),
@@ -1285,6 +1264,7 @@
             return bound;
         }
     </script>
+
 
 
 {% endblock script %}
