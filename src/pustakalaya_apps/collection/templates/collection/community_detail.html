@@ -4,17 +4,18 @@
 {% block title %} {% endblock title %}
 {% block content %}
     <div class="container min_height_author_detail">
-        <h5 class="text-capitalize"><span class="text-info">{{ community_name | transtolocal }}</span></h5>
+        <h5 class="text-capitalize title-font"><span class="text-info">{{ community_name | transtolocal }}</span></h5>
         <hr>
         {% for collection in collection_list %}
             <li style="list-style: none; list-style-type: none;">
-                <a href="{% url "collection:collection_detail" collection.collection_name|slugify collection.pk %}">
-                    <i
-                            class="fa fa-book" aria-hidden="true"></i>
+               <i class="fa fa-book text-primary" aria-hidden="true"></i>
+                <a class="paragraph-font" href="{% url "collection:collection_detail" collection.collection_name|slugify collection.pk %}">
+
                     {{ collection.collection_name | transtolocal }}
                 </a>
              <span class="text-muted">&nbsp;({{ collection.total_count }})</span>
             </li>
+          <div class="mb-3"></div>
         {% endfor %}
     </div>
 {% endblock content %}

@@ -34,7 +34,7 @@
         <div class="container min_height_document_detail pt-4">
             <div class="row">
 
-                <div class="col-md-3 col-sm-12  col-xs-12">
+                <div class="col-md-3 col-sm-12  col-xs-12 ">
                     <!-- Logo -->
                     <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
                          alt="{{ object.title }}" title="{{ object.title }}">
@@ -50,12 +50,12 @@
                           </div>
 
 
-                        <p class="pull-left text-dark text-center mr-4 mt-3 ">
+                        <p class="pull-left text-dark text-center mr-4 mt-3 paragraph-font">
                             {% trans "File size: " %}{{ document.upload.size | file_size_format }}</p>
                     {% endfor %}
 
                     <!-- show count -->
-                    <p class="pull-left bg-blue text-dark text-center  mt-3">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
+                    <p class="pull-left bg-blue text-dark text-center paragraph-font mt-3">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
                     <!-- Rating -->
 
                     {% ratings object %}
@@ -89,9 +89,9 @@
 
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <!-- title of a document -->
-                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark title-font">{{ object.title }}</h4>
                     <!-- author section -->
-                    <div class="pb-1">
+                    <div class="pb-1 ">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
                         <!--strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong-->
@@ -121,7 +121,7 @@
                     <!-- abstract of a document -->
                     <div>
 
-                        <span class="text-justify text-dark"
+                        <span class="text-justify text-dark paragraph-font"
                                 {% if not object.abstract %}
                               style="display: none"
                                 {% endif %}>
@@ -131,7 +131,7 @@
 
                     <br>
                     <!-- Metadata section -->
-                    <div class="row">
+                    <div class="row paragraph-font">
                         <!-- Left half section -->
                         <div class="col-md-12 col-sm-12 col-xs-12">
 

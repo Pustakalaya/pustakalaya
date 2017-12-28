@@ -9,19 +9,19 @@
 {% block content %}
     <!-- Breadcums -->
 
-    <div class="container min_height">
+    <div class="container min_height_document_detail mt-3">
         <div class="row">
             <div class="col-md-12">
                 <!-- breadcums -->
-                <p class="text-capitalize">
+                <p class="text-capitalize ">
                     {% trans "section" %}
                     <a style="text-decoration:none;"
-                       class="text-capitalize"
+                       class="text-capitalize title-font"
                        href="{% url 'community:community_detail' community_name|slugify %}">
                         {{ community_name }} &gt;&gt;
 
                     </a>
-                    <a class="text-capitalize text-primary" href=""
+                    <a class="text-capitalize title-font" href=""
                        style="text-decoration:none;"
                     >{{ collection_name }}
                     </a>
@@ -29,7 +29,7 @@
 
                 <div class="text-capitalize">
                     <div class="row">
-                        <div class="col-md-8">{% trans "total available" %}: {{ response.hits.total }}</div>
+                        <div class="col-md-8 description">{% trans "total available" %}: {{ response.hits.total }}</div>
                         <div class="col-md-4">
                             <span>{% trans "Sort by" %}&nbsp;</span>
                             <!-- sorting form -->
