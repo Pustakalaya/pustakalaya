@@ -7,9 +7,16 @@
     a:hover {
         color: #005689;
     }
+
+      .index_tpyo{
+        font-size:17px!important;
+        text-weight:bold;
+
+        }
+
 </style>
-<nav class="navbar navbar-expand-lg navbar-toggleable-lg bg-white background-color p-0 m-0">
-    <div class="container-fluid background-color pr-5 pl-5 " >
+<nav class="navbar navbar-expand-lg navbar-toggleable-lg bg-white  p-0 m-0">
+    <div class="container-fluid pr-5 pl-5 " >
         <div class="navbar-translate pl-5 mr-5">
             <a class="navbar-brand" href="/">
                 <img src="{% static 'images/logos/ep_logo.png' %}"
@@ -28,16 +35,16 @@
 
         <!-- navigation menu -->
         <div class="collapse navbar-collapse justify-content-end mr-5 pr-4" id="navigation">
-            <ul class="navbar-nav text-primary">
+            <ul class="navbar-nav text-primary index_tpyo">
                 <li class="nav-item">
-                    <a class="nav-link text-primary pt-0" href="/">
+                    <a class="nav-link text-primary" href="/">
                         {% trans "Home" %}
                         <i class="fa fa-home"></i>
                     </a>
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-primary" href="{% url 'about' %}">
+                    <a class="nav-link text-black text-primary" href="{% url 'about' %}">
                         {% trans "About" %}
                     </a>
                 </li>
@@ -47,25 +54,15 @@
                     </a>
                 </li-->
                 <li class="nav-item">
-                    <a class="nav-link text-primary" href="{% url 'help' %}">{% trans "Help" %}</a>
+                    <a class="nav-link text-primary " href="{% url 'help' %}">{% trans "Help" %}</a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link text-primary" href="{% url 'feedback' %}">{% trans "Feedback" %}</a>
+                    <a class="nav-link text-primary " href="{% url 'feedback' %}">{% trans "Feedback" %}</a>
                 </li>
 
 
-                {% if not  user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle text-primary" data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            <span class="icon-password"></span> Log In
-                        </a>
-                        {% login_form %}
 
-                    </li>
-                {% endif %}
 
 
 
@@ -121,6 +118,19 @@
                             <a class="dropdown-item text-primary text-capitalize"
                                href="/dashboard/settings/">{% trans "settings" %}</a>
                         </div>
+                    </li>
+                {% endif %}
+
+
+               {% if not  user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle text-primary" data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <span class="icon-password"></span> Log In
+                        </a>
+                        {% login_form %}
+
                     </li>
                 {% endif %}
             </ul>

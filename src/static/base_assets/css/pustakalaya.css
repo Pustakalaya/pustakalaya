@@ -24,13 +24,21 @@ a, u {
  max-height:39px !important;
 
  }
+/*added by bhoj*/
+/*//////////////////////////////
+/////////Added by Bhoj////////
+/////////////////////////////
+*/
 
 .min_height{
 min-height:440px;
 }
 
 .min_height_author_detail{
-min-height:510px;
+min-height:550px;
+}
+.min_height_document_detail{
+min-height:550px;
 }
 
 .min_height_document_detail{
@@ -45,6 +53,108 @@ min-height:550px;
 padding-left:4px;
 
 }
+
+
+  .box-model{
+    border: 1px solid #3498db;
+    border-radius: 5px;
+  }
+
+  .box-model-head {
+   background-color:  #3498db;
+   border-bottom : 1px solid  #3498db;
+  }
+  .box-model-head>p{
+  color: white;
+  font-weight:bold;
+  padding-left:5px;
+  }
+  .box-model-body {
+  padding-top:2px;
+  padding-left:5px;
+  font-size:15px;
+  }
+  .paragraph-font,.paragraph-font>a{
+  font-size:15px;
+  }
+
+  .title-font{
+  font-size:16px;
+  font-weight:bold;
+  }
+  .bold{
+  font-weight:bold;
+  }
+  .author-name-size{
+  font-size: 12px;
+  }
+
+  /*Media query and other stuffs*/
+
+     .thumbnail-box-shadow {
+            box-shadow: 0 0 7px #7f8c8d;
+      }
+      .thumbnail-box-shadow:hover {
+            box-shadow:0 0 25px #7f8c8d;
+      }
+
+      .android-box-shadow:hover {
+            box-shadow:0 0 25px #7f8c8d;
+      }
+      .android-box-shadow{
+       border-radius:7px;
+       }
+
+        .footer-logo {
+            width: 30px;
+            height: auto;
+        }
+
+        .section-padding {
+            padding: 20px 0px;
+        }
+@media screen and (max-width: 1500px) and (min-width: 1020px)
+ {
+    /*large device(lg)*/
+    .ld-padding-right-zero {
+       padding-right:0px
+        }
+        .lg-padding-left-zero{
+        padding-left:0px;
+        }
+     }
+
+     @media screen and (max-width: 765px) and (min-width: 50px)
+ {   /*small device (sd)*/
+     .sd-break-small-screen{
+        margin-top:20px;
+     }
+     .sd-padding-left-right-zero{
+     padding-left:0px;
+     padding-right:0px;
+
+     }
+     .sd-margin-botton{
+     margin-bottom:20px;
+     }
+     }
+
+       @media screen and (max-width: 1019px) and (min-width: 766px)
+ {
+     /*mid device(md)*/
+      .md-height-same-as-container{
+      height:auto;
+
+      }
+      .ipad-padding-left{
+       padding-left:0px;
+      }
+      .ipad-padding-right{
+       padding-right:0px;
+      }
+     }
+
+/*end of added by bhoj*/
 
 #search-result{
 font-size:80%;

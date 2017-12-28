@@ -10,26 +10,6 @@
 {% block style %}
 {{ block.super }}
 <style>
-     .thumbnail-box-shadow {
-            box-shadow: 0 0 7px #7f8c8d;
-      }
-      .thumbnail-box-shadow:hover {
-            box-shadow:0 0 25px #7f8c8d;
-      }
-
-        .footer-logo {
-            width: 30px;
-            height: auto;
-        }
-
-        .section-padding {
-            padding: 20px 0px;
-        }
-
-
-
-
-
 </style>
 
 <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
@@ -37,7 +17,7 @@
 
 {% block content %}
 <!--custom style backgound-color is in base.html body which includes for all-->
-<div class="for-bg-color-container ">
+<div class="for-bg-color-container background-color ">
   <!--search-->
   <div class="container pt-4">
     <!-- Search bar section -->
@@ -60,15 +40,23 @@
           <p>
             <!--a href="#" class="text-capitalize"-->
             <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
-          <p class="description text-uppercase text-dark text-dark"> {% trans "browse the library" %}</p>
-          </p>
-          <p>
-            <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
-               class="text-capitalize text-primary">Titles</a>
-            | <a href="/authors"
-                 class="text-capitalize text-primary"><span>   Authors</span></a>
-          </p>
 
+          <div class="box-model container">
+            <div class="row box-model-head">
+               <p class="description text-uppercase "> {% trans "browse the library" %}</p>
+          </p>
+            </div>
+            <div class="row box-model-body">
+                <p>
+                  <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
+                     class="text-capitalize text-primary ">Titles</a>
+                | <a href="/authors"
+                     class="text-capitalize text-primary "><span>   Authors</span></a>
+                </p>
+            </div>
+          </div>
+
+      <br>
 
           <!--p>
   <a href="{% url 'browse:browse'%}?browse_by=author&sort_order=asc" class="text-capitalize">
@@ -79,50 +67,59 @@
         </div>
 
         <!-- Browse by subjects -->
-        <div>
-          <p class="description text-uppercase text-dark text-dark">{% trans "sections" %}</p>
-          <p>
+        <div class="box-model container">
+          <div class="row box-model-head">
+             <p class="description  text-uppercase ">{% trans "sections" %}</p>
+          </div>
+        <div class="row box-model-body">
+          <div class="container">
+            <div class="row"><p>
             <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
-               class="text-primary text-capitalize">
+               class="  text-capitalize ">
               <i class="fa fa-1x fa-book mr-2"
                  aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
-          </p>
-          <p>
+          </p></div>
+            <div class="row"><p>
             <a href="{% url 'community:community_detail' 'course-materials' %}"
-               class="text-capitalize text-primary">
+               class="text-capitalize  ">
               <i class="fa fa-1x fa-desktop mr-2"
                  aria-hidden="true"></i>{% trans "Course Materials" %}</a>
-          </p>
-          <p>
+          </p></div>
+            <div class="row"><p>
             <a href="{% url 'community:community_detail' 'teaching-materials' %}"
-               class="text-capitalize text-primary">
+               class="text-capitalize  ">
               <i class="fa fa-1x fa-graduation-cap mr-2"
                  aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
-          </p>
-          <p>
+          </p></div>
+            <div class="row"><p>
             <a href="{% url 'community:community_detail' 'reference-materials' %}"
-               class="text-capitalize text-primary">
+               class="text-capitalize  ">
               <i class="fa fa-1x fa-briefcase mr-2"
                  aria-hidden="true"></i>{% trans "reference Materials" %}</a>
-          </p>
-          <p>
+          </p></div>
+            <div class="row"><p>
             <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
-               class="text-capitalize text-primary">
+               class="text-capitalize  ">
               <i class="fa fa-1x fa-flask mr-2"
                  aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
-          </p>
-          <p>
+          </p></div>
+            <div class="row"><p>
             <a href="{% url 'community:community_detail' 'newspapers-and-magazines' %}"
-               class="text-capitalize text-primary">
+               class="text-capitalize  ">
               <i class="fa fa-1x fa-newspaper-o mr-2"
                  aria-hidden="true"></i>{% trans "Newspapers & Magazines" %}</a>
-          </p>
+          </p></div>
+          </div>
+
 
         </div>
+
+           </div>
+
         <hr>
-        <div class="android app">
+        <div class="android app sd-margin-botton ">
           <a href="https://play.google.com/store/apps/details?id=com.ole.epustakalaya&hl=en" target="_blank"
-             title="E-Pustakalaya Android App"><img class="img img-responsive btn btn-sm bg-white android-app"
+             title="E-Pustakalaya Android App"><img class="img img-responsive android-box-shadow  android-app"
                                                     src="{% static 'images/logos/android_store.png' %}"
                                                     alt="E-pustakalaya Android Application" style="height:50px; width:170px;"/></a>
         </div>
@@ -136,7 +133,7 @@
           {% include '_partials/search_form.html' %}
         </div>
         <section>
-          <p class="description  text-uppercase text-dark  mb-2">Books we love</p>
+          <p class="description bold text-uppercase text-dark  mb-2">Books we love</p>
           <div class="row" class="pt-5 pb-5 ">
             {% for book in featured_books %}
             <div class="col-md-2 col-sm-12 p-1 pb-2 col-xs-12 m-3   thumbnail-box-shadow " title="{{ book.title }}">
@@ -145,9 +142,9 @@
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
                 height="171px">
-                <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-secondary"></i> <span class="text-dark">{{ book }}</span></div>
-                <div class="text-dark pl-3 text-muted">
-                  <small>By {{book.document_authors.first}}</small>
+                <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-secondary"></i> <span class="text-dark bold">{{ book }}</span></div>
+                <div class=" pl-3 text-secondary">
+                <p class="author-name-size">By {{book.document_authors.first}}</p>
                 </div>
               </a>
 
@@ -161,11 +158,11 @@
         </section>
       </div>
     </div>
-
+<br>
     <!-- Education section -->
     <div class="row m-0  ">
       <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 mb-0">
-        <p class="text-uppercase rounded text-black    text-uppercase mb-2">
+        <p class="description text-uppercase rounded bold text-black    text-uppercase mb-2">
           {% trans 'Interactive educational software' %}
         </p>
         <ul id="lightSlider">
@@ -250,8 +247,8 @@
     <!-- Footer description -->
     <div class="row m-0">
       <div class="p-4 rounded jumbotron pb-4 pt-4 mt-4 mb-0">
-        <p class="text-uppercase text-black text-uppercase mb-2">{% trans "About epustakalaya" %}</p>
-        <p>{% blocktrans %}
+        <p class="description text-uppercase text-black text-uppercase bold mb-2">{% trans "About epustakalaya" %}</p>
+        <p class="paragraph-font">{% blocktrans %}
           E-Pustakalaya is an education-focused digital library containing full-text documents, images,
           videos and
           audio files that can be accessed through an intranet or the internet. The user can either read
@@ -262,7 +259,7 @@
           English
           languages. In the future, we will also add materials in other national languages of
           Nepal. {% endblocktrans %}
-          <a href="{% url 'about' %}" class="text-primary">{% trans "Read More" %}</a> ...
+          <a href="{% url 'about' %}" class="text-primary ">{% trans "Read More" %}</a> ...
         </p>
       </div>
     </div>
@@ -270,14 +267,13 @@
     <div class="row  ">
       <div class="col">
         <!-- Major and past partners -->
-        <div class="section-padding mb-0 bg-light">
-          <div class="container jumbotron pb-4 pt-4 mt-0 mb-0">
-
-            <div class="row">
+        <div class="section-padding bg-light">
+          <div class="container ">
+            <div class="row  ">
               <!-- Major partners -->
-              <div class="col-md-6 col-xs-12">
-                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Major partners" %}</p>
-                <hr/>
+              <div class=" col-md-6 col-xs-12  md-height-same-as-container ipad-padding-left  sd-padding-left-right-zero lg-padding-left-zero">
+                <div class="container jumbotron mb-0 pt-3 ">
+                  <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Major partners" %}</p>
 
                 <a class="nav-link active" href="https://idrf.com/" target="_blank" title="IDRF">
                   <img src="{% static 'images/logos/logo_web.svg' %}"
@@ -285,11 +281,14 @@
                        height="50px"
                        alt="IRDF"/>
                 </a>
+                </div>
+
               </div>
               <!-- Past partners -->
-              <div class="col-md-6 col-xs-12">
-                <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Past supporter" %}</p>
-                <hr/>
+              <div class=" col-md-6 col-xs-12  ipad-padding-right sd-padding-left-right-zero ld-padding-right-zero">
+                <div class="container jumbotron mb-0 pt-3   sd-break-small-screen ">
+                  <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Past supporter" %}</p>
+
                 <!-- TODO: replace with sliding banner -->
                 <ul class="nav">
                   <li class="nav-item">
@@ -313,6 +312,8 @@
                     </a>
                   </li>
                 </ul>
+                </div>
+
               </div>
             </div>
           </div>
@@ -321,8 +322,8 @@
         <!-- Contributed partners -->
         <div class="section-padding mt-0 pt-0">
           <div class="container jumbotron pb-4 pt-4 mt-0 mb-0">
-            <p class="description text-uppercase  text-dark text-uppercase mb-2">{% trans "Content contribution" %}</p>
-            <hr/>
+            <p class="description text-uppercase  bold text-dark text-uppercase mb-2">{% trans "Content contribution" %}</p>
+
             <div class="text-center">
               <ul class="nav text-center">
                 <li class="nav-item">
@@ -452,7 +453,7 @@ $("#lightSlider").lightSlider({
         slideEndAnimation: true,
         pause: 2000,
 
-        keyPress: false,
+        keyPress: true,
         controls: true,
         prevHtml: '',
         nextHtml: '',

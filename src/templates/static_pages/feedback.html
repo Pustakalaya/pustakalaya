@@ -7,8 +7,8 @@
 {% block content %}
     <div class="pt-4">
         <div class="container  jumbotron pt-3 pb-3 mb-0">
-            <h6 class=" text-uppercase">{% trans "Feedback" %}</h6>
-            <p class="" text-justify>{% blocktrans %}
+            <h6 class=" text-uppercase title-font">{% trans "Feedback" %}</h6>
+            <p class="paragraph-font" text-justify>{% blocktrans %}
                 Please use the form below to give details about what you liked in our website or about what can be
                 improved.
 
@@ -28,7 +28,7 @@
                             {% csrf_token %}
                                 {{ form | crispy }}
 
-                            <input class="btn btn-primary" type="submit" value="{% trans 'Send Feedback' %}">
+                            <input class="btn btn-primary paragraph-font" type="submit" value="{% trans 'Send Feedback' %}">
                         </form>
 
                     </div>
