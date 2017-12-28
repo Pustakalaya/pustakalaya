@@ -32,6 +32,10 @@ min-height:440px;
 .min_height_author_detail{
 min-height:510px;
 }
+
+.min_height_document_detail{
+min-height:550px;
+}
 #search-icon:hover{
  cursor:pointer;
  background-color:#2980b9;

@@ -1,8 +1,6 @@
 from django.shortcuts import render
-from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.views.generic.edit import UpdateView
 from pustakalaya_apps.pustakalaya_account.models import UserProfile
-from django.contrib.messages.views import SuccessMessageMixin
-from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
 
 

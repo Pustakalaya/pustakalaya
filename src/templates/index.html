@@ -434,8 +434,8 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#lightSlider").lightSlider({
-        item: 5,
+$("#lightSlider").lightSlider({
+        item: 3,
         autoWidth: false,
         slideMove: 1, // slidemove will be 1 if loop is true
         slideMargin: 10,
@@ -484,10 +484,14 @@ $(document).ready(function() {
         onAfterSlide: function (el) {},
         onBeforeNextSlide: function (el) {},
         onBeforePrevSlide: function (el) {}
+
+
+
+
     });
-     $("a.lSPrev").addClass(" fa fa-angle-left text-dark fa-4x");
-     $("a.lSNext").addClass(" fa fa-angle-right text-dark fa-4x");
+
 });
+
 
 </script>
 {% endblock script %}
