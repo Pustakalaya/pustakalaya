@@ -1,6 +1,8 @@
 {%  extends 'dashboard/base.html' %}
 {%  load crispy_forms_tags %}
 {%  block content %}
+
+    {% comment %}
     <div class="container">
         <div class="col-md-8">
             <form action="." method="post">
@@ -12,4 +14,14 @@
             </form>
         </div>
     </div>
+    {% endcomment %}
+
+
+
+    <form action="." method="post">
+    {%  csrf_token %}
+    {{ form | crispy  }}
+    {{ document_file_upload_formset | crispy }}
+    <input type="submit" value="Create Document" class="btn btn-primary">
+    </form>
 {%  endblock content %}
