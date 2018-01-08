@@ -16,5 +16,8 @@ git+https://github.com/Pustakalaya/django-hitcount
 Wand==0.4.4
 # Celery
 celery==4.1.0
+# Postgresql db python client.
+psycopg2==2.7.3.2
+
 
 
