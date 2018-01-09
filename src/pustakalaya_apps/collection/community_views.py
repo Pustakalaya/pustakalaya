@@ -16,11 +16,7 @@ def community_detail(request, community_name):
     # Context data
     context = {}
 
-
-    print(community_name, "prev")
-    community_name =  " ".join(community_name.split("-"))
-
-    print(community_name)
+    community_name = " ".join(community_name.split("-"))
 
     # Query all the collection that contains this community_name from ORM
     collections = Collection.objects.filter(community_name=community_name)

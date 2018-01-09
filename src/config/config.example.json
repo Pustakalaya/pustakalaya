@@ -1,6 +1,14 @@
 {
   "MEDIA_ROOT": "/var/www/html/media_root/",
   "STATIC_ROOT": "/var/www/html/static_root/",
+  "DATABASE":{
+    "NAME": "your_db_name",
+    "USER": "your_db_user",
+    "PASSWORD":"your_db_password",
+    "HOST": "127.0.0.1",
+    "PORT": "xxxx"
+
+  },
   "ELASTIC": {
     "ES_HOST": "127.0.0.1",
     "ES_NUMBER_OF_SHARDS": "1",
@@ -11,12 +19,12 @@
   "EMAIL": {
     "EMAIL_HOST": "smtp.gmail.com",
     "EMAIL_PORT": "587",
-    "EMAIL_HOST_USER": "manoj.example@olenepal.org",
-    "EMAIL_HOST_PASSWORD": "yourpassword",
+    "EMAIL_HOST_USER": "manoj.gautam@olenepal.org",
+    "EMAIL_HOST_PASSWORD": "Colleges123",
     "EMAIL_USE_TLS": "True",
     "FEEDBACK_MESSAGE_TO": [
-      "youremail.gautam@gmail.com",
-      "manoj.gautamexample@olenepal.org"
+      "manojit.gautam@gmail.com",
+      "manoj.gautam@olenepal.org"
     ],
     "ADMIN_EMAILS": [
       [
@@ -33,7 +41,7 @@
     "IP": "127.0.0.1",
     "PORT": "6379"
   },
-  "GOOGLE_ANALYTICS_PROPERTY_ID": "UA-110685789-1"
+  "GOOGLE_ANALYTICS_PROPERTY_ID": "UA-1106XXXXX-1"
 }
 
 
