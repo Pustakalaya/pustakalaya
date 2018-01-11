@@ -197,3 +197,6 @@ src/static/base_assets/css/base.css
 books.json
 # database backups
  *.bak
+
+#ignore config.json file
+config.json
