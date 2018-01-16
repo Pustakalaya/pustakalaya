@@ -1,11 +1,27 @@
 #!/usr/bin/env bash
-# Install pdf and image manipulation apps.
-sudo apt-get install libmagickwand-dev
-sudo apt-get install libmagickcore5-extra
 
-# Install redis server
-sudo apt-get install redis-server
+# Install nginx
+source ./provision_scripts/nginx.sh
 
-# Run celery
-celery -A pustakalaya  worker -l info
+# Install postgresql
+source ./provision_scripts/postgresql.sh
+
+
+# Install Redis
+source ./provision_scripts/redis.sh
+
+
+# Install elastic search
+source ./provision_scripts/elasticsearch.sh
+
+
+# Install supervisor
+source ./provision_scripts/supervisor.sh
+
+# Install utilities packages
+source ./provision_scripts/utils.sh
+
+
+
+
 
