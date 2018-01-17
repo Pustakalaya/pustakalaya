@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block content %}
 
-<div class="container min_height pt-4" style="min-height:510px;">
+<div class="container min_height pt-4 min_height_author_detail" >
   <div class="row ">
     <!-- Author Name -->
     <div class="col-md-2 col-xs-12 col-sm-12">
@@ -12,11 +12,11 @@
            height="230px"
            title="{{ object }}"
            alt="{{ object }}" class="rounded img img-responsive">
-      <p class="text-capitalize  text-dark description h5 mt-2 ">{{ object }}</p>
-      <p><strong class="text-capitalize"><a href="{%  url "author:books" object.getname|slugify %}">{% trans "View author's book" %}</a></strong></p>
+      <p class="text-capitalize  text-dark description h5 mt-2 title-font ">{{ object }}</p>
+      <p><strong class="text-capitalize paragraph-font"><a href="{%  url "author:books" object.getname|slugify %}">{% trans "View author's book" %}</a></strong></p>
       <hr>
       <p>
-        <strong class="text-capitalize">{% trans "keywords" %}:</strong>
+        <strong class="text-capitalize paragraph-font">{% trans "keywords" %}:</strong>
         {% for keyword in object.keywords.all %}
         <span><a href="{% url 'keyword:keyword_detail' keyword.keyword %}"
                  style="text-decoration: none;">{{ keyword }}</a>,</span>
@@ -24,10 +24,10 @@
         {% endfor %}
       </p>
     </div>
-    <div class="col-md-10 col-xs-12 col-sm-12 min_height" id="author-detail">
+    <div class="col-md-10 col-xs-12 col-sm-12 paragraph-font" id="author-detail">
       <div class="p-4 rounded">
                     <span class="description text-uppercase rounded text-black text-uppercase mb-2">
-                        <span class="border border-top-0 border-right-0 border-left-0 border-secondary">{% trans "About" %} {{ object }}</span>
+                        <span class="border border-top-0 border-right-0 border-left-0 border-secondary title-font">{% trans "About" %} {{ object }}</span>
                     </span><br><br>
         <span class="text-dark">
                         {{ object.description }}

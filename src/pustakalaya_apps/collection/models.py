@@ -20,7 +20,7 @@ class Collection(AbstractTimeStampModel):
         ("teaching materials", _("Teaching materials")),
         ("reference materials", _("Reference materials")),
         ("other educational materials", _("Other educational materials")),
-        ("newspaper and  magazines", _("newspaper and magazines")),
+        ("newspaper and magazines", _("newspaper and magazines")),
     )
 
     community_name = models.CharField(

@@ -56,6 +56,7 @@
 
                     <!-- show count -->
                     <p class="pull-left bg-blue text-dark text-center paragraph-font mt-3">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
+                  <br><br><br><br>
                     <!-- Rating -->
 
                     {% ratings object %}
@@ -225,14 +226,15 @@
 
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
-                                {% for keyword in object.keywords.all %}
 
-                                    <span class="text-dark text-capitalize"> <a
+                              <span class="text-dark text-capitalize">
+                               {% for keyword in object.keywords.all %}
 
-                                            href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword| transtolocal }}</a></span>
-
+                                      <a href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword| transtolocal }}</a>
 
                                 {% endfor %}
+                              </span>
+
 
 
                             </div>
