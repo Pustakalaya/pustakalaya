@@ -13,7 +13,7 @@
     "communities":
     "collection":
     "keywords":
-    "year_of_available":
+    "year_of_available":ok_
     "license_type":
     "publication_year":
 
@@ -430,7 +430,7 @@
                                     onclick='window.location.href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"'>
                                     <img class="shadow" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"/>
                                     <p class="text-primary description lead">
-                                        {{ hit.title }}
+                                        {{ hit.title | truncatechars:15 }}
                                     </p>
 
                                     <div class="list-abstract text-dark ">{{ hit.abstract|truncatechars:232 }}
