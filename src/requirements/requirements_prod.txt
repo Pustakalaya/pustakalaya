@@ -1,2 +1,3 @@
 -r base.txt
-
+# Install wsgi server.
+gunicorn

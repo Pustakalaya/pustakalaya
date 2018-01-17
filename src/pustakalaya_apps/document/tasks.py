@@ -36,7 +36,7 @@ def convert_pdf(file_path, instance_id=None):
 
     file_dir, file_name = os.path.split(file_path)
 
-    print("Destinatin DIr:", file_dir)
+    print("Destinatin Dir:", file_dir)
     print("FileNmae:", file_name)
     print("COnverstion started")
     # Start to convert pdf to jpej
