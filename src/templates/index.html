@@ -116,12 +116,18 @@
 
            </div>
 
-        <hr>
-        <div class="android app sd-margin-botton ">
+        <div class="android app sd-margin-botton mt-4 ">
           <a href="https://play.google.com/store/apps/details?id=com.ole.epustakalaya&hl=en" target="_blank"
-             title="E-Pustakalaya Android App"><img class="img img-responsive android-box-shadow  android-app"
-                                                    src="{% static 'images/logos/android_store.png' %}"
-                                                    alt="E-pustakalaya Android Application" style="height:50px; width:170px;"/></a>
+             title="E-Pustakalaya Android App"><img class="img img-responsive   android-app"
+                                                    src="{% static 'images/logos/google-store.png' %}"
+                                                    alt="E-pustakalaya Android Application" style="height:65px; width:auto;"/></a>
+          <br><br>
+           <a href="#" target="_blank"
+             title="E-Pustakalaya apple App"><img class="img img-responsive   android-app"
+                                                    src="{% static 'images/logos/apple-store.png' %}"
+                                                    alt="E-pustakalaya Android Application" style="height:67px; width:auto;"/></a>
+
+
         </div>
       </div>
 
@@ -143,7 +149,7 @@
                 width="100%"
                 height="171px">
 
-                <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-dark"></i> <span class="text-dark">{{ book |truncatechars:15}} </span></div>
+                <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span></div>
                 {% if  book.document_authors.first %}
                 <div class=" pl-3 author-name-size text-dark">By
                 <span class="text-secondary"> {{book.document_authors.first}}</span>
