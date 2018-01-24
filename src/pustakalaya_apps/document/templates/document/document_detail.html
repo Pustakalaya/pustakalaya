@@ -100,6 +100,7 @@
                         <!--strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong-->
                         {% for author in object.document_authors.all %}
                             <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}"><span
+                                    style="font-size: 20px;"
                                     class="text-dark text-capitalize text-primary">
                                 {{ author }}
                                 {% if forloop.counter != object.document_authors.count %}|{% endif %}
