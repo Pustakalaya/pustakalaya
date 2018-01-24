@@ -429,8 +429,8 @@
                                 <li style="position: relative; cursor: pointer"
                                     onclick='window.location.href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"'>
                                     <img class="shadow" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"/>
-                                    <p class="text-primary description lead">
-                                        {{ hit.title | truncatechars:15 }}
+                                    <p class="text-primary description lead" id="_itemTitle">
+                                        {{ hit.title}}
                                     </p>
 
                                     <div class="list-abstract text-dark ">{{ hit.abstract|truncatechars:232 }}
@@ -734,11 +734,20 @@
     <!--Script for list view and grid view-->
     <script type="text/javascript">
         $('button').on('click', function (e) {
+            // Text of an item title
+            var itemTitle = $("#_itemTitle").text()
+
             if ($(this).hasClass('grid')) {
                 $('#container ul').removeClass('list').addClass('grid');
+                // In case of grid view. Trim the title
+                $("#_itemTitle").text().slice(0, 13)
+
             } else if ($(this).hasClass('list')) {
                 $('#container ul').removeClass('grid').addClass('list');
-                            }
+                // In case of list view restore the title text.
+                $("#_itemTitle").text(itemTitle)
+
+            }
         });
     </script>
 
