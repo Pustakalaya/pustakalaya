@@ -117,6 +117,12 @@
         .grid > li > p {
 
             padding-top: 5px;
+            text-overflow: ellipsis;
+            width: 10px;
+            width: 170px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .list > li > p {
@@ -734,13 +740,10 @@
     <!--Script for list view and grid view-->
     <script type="text/javascript">
         $('button').on('click', function (e) {
-            // Text of an item title
-            var itemTitle = $("#_itemTitle").text()
-
             if ($(this).hasClass('grid')) {
-                $('#container ul').removeClass('list').addClass('grid');
                 // In case of grid view. Trim the title
-                $("#_itemTitle").text().slice(0, 13)
+                $('#container ul').removeClass('list').addClass('grid');
+
 
             } else if ($(this).hasClass('list')) {
                 $('#container ul').removeClass('grid').addClass('list');
