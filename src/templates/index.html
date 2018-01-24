@@ -139,7 +139,7 @@
           {% include '_partials/search_form.html' %}
         </div>
         <section>
-          <p class="description bold text-uppercase text-dark  mb-2">Books we love</p>
+          <p class="description bold text-uppercase  mb-2" style="color:#006596">{%  trans "recommended books" %}</p>
           <div class="row">
             {% for book in featured_books %}
             <div class="col-md-2 col-sm-12 p-0  pb-2 col-xs-12 m-3   thumbnail-box-shadow " title="{{ book.title }}">
