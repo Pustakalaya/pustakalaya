@@ -111,7 +111,7 @@
 
         .grid > li > img {
             box-shadow: 4px 4px 4px #888;
-            height: 250px !important;
+            height: 224px !important;
             border-radius: 3px;
 
         }
@@ -119,6 +119,7 @@
         .grid > li > p {
 
             padding: 5px;
+            padding-top:15px;
             text-overflow: ellipsis;
             width: 10px;
             width: 170px;
@@ -135,6 +136,7 @@
         .list > li > p {
             display: inline-block !important;
             vertical-align: top;
+            color: #006596 !important;
 
         }
 
@@ -434,8 +436,8 @@
                     <!--grid view list view section-->
                     <div id="container">
                         <div class="buttons">
-                            <button class="grid  fa fa-th text-primary"></button>
-                            <button class="list fa fa-list text-primary"></button>
+                            <button class="grid btn btn-dark btn-sm fa fa-th text-white" role="link"></button>
+                            <button class="list fa fa-list text-white btn btn-dark btn-sm"></button>
                         </div>
                         <ul class="list clearfix">
                             {% for hit in hits %}
