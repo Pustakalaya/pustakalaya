@@ -41,11 +41,13 @@
                     {% for document in object.documentfileupload_set.all %}
                            <div class="text-center">
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" target="_blank"
-                           class="pull-left pr-5 pl-4 pt-2 pb-2 mt-2 mr-4 text-white bg-primary text-capitalize "><span class="fa fa-download"></span>&nbsp;{% trans 'download ' %}</a>
+                           class="pull-left pr-5 pl-4 pt-2 pb-2 mt-2 mr-4 text-white bg-primary text-capitalize "
+                        style="border-radius: 3px;"><span class="fa fa-download"></span>&nbsp;{% trans 'download ' %}</a>
 
 
                         {% if document.total_pages >= 1 %}
-                        <a class="pull-left ml-1 pr-5 pl-5 pt-2 pb-2 mt-2 text-white bg-primary text-capitalize" href="{% url 'document:flipbook' document.pk %}#viewCenter"><span class="fa fa-book"></span>&nbsp;{% trans 'read' %}</a>
+                        <a style="border-radius: 3px;" class="pull-left ml-1 pr-5 pl-5 pt-2 pb-2 mt-2 text-white bg-primary text-capitalize"
+                           href="{% url 'document:flipbook' document.pk %}#viewCenter"><span class="fa fa-book"></span>&nbsp;{% trans 'read' %}</a>
                         {% endif %}
                           </div>
 
@@ -179,6 +181,7 @@
 
 
                             <!-- publisher section -->
+                            {%  if not object.publisher or object.publisher == "_" %}
                             <div class="pb-1 border-line"
                                     {% if not object.publisher %}
                                  style="display: none;"
@@ -187,6 +190,7 @@
                                 <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
 
                             </div>
+                        {%  endif %}
 
                             <!-- place of publication -->
                             <div class="pb-1 border-line"
@@ -257,12 +261,15 @@
                                 <span class="text-dark text-capitalize"> {{ object.license_type }}</span>
                             </div>
 
+                            {%  if not object.document_series or object.document_series == "_" %}
                             <!-- document series -->
                             <div class="pb-1 border-line">
                                 <!-- Add 2px right margin in each -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "Series:" %}</span>
                                 <span class="text-dark text-capitalize">{{ object.document_series }}</span>
                             </div>
+
+                            {%  endif %}
 
                             <!-- document edition -->
                             <div class="pb-1 border-line"
@@ -334,7 +341,7 @@
 
                             <!-- Rights -->
                             <div class="pb-1 border-line" {% if not object.custom_license %} style="..." {% endif %}>
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</span>
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "rights:" %}</span>
                                 <span class="text-dark text-capitalize"
                                       style="vertical-align: top;"> {{ object.custom_license }}</span>
                             </div>
