@@ -276,7 +276,7 @@
                                     {% if not object.edition %}
                                  style="display: none;"
                                     {% endif %}>
-                                <span class="capitalize text-dark text-capitalize">{% trans "edition:" %}</span>
+                                <span class="capitalize text-dark font-weight-normal text-capitalize">{% trans "edition:" %}</span>
                                 <span class="text-dark">
                                     {{ object.edition }}
                                 </span>
@@ -287,7 +287,7 @@
                                     {% if not object.volume %}
                                  style="display: none;"
                                     {% endif %}>
-                                <span class="capitalize text-dark text-capitalize">{% trans "volume:" %}</span>
+                                <span class="capitalize font-weight-normal text-dark text-capitalize">{% trans "volume:" %}</span>
                                 <span class="text-dark">{{ object.volume }}</span>
                             </div>
 
@@ -297,7 +297,7 @@
                                     {% if not object.documentidentifier.identifier_id %}
                                  style="display: none"
                                     {% endif %}>
-                                <span class="capitalize text-dark text-capitalize">{{ object.documentidentifier.identifier_type }}:</span>
+                                <span class="capitalize text-dark font-weight-normal text-capitalize">{{ object.documentidentifier.identifier_type }}:</span>
                                 <span class="text-dark">{{ object.documentidentifier.identifier_id }}</span>
                             </div>
 
@@ -307,23 +307,23 @@
                                  style="display: none;"
                                     {% endif %}>
                                 <!-- TODO: implement pluralization in total page -->
-                                <span class="text-capitalize text-dark text-capitalize">{% trans "total pages" %}:</span>
+                                <span class="text-capitalize text-dark font-weight-normal text-capitalize">{% trans "total pages" %}:</span>
                                 <span class="text-dark"> {{ object.document_total_page }}</span>
                             </div>
 
                             <!-- Language -->
                             <div class="pb-1 border-line">
                                 <!-- TODO: implement pluralization in total page -->
-                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
+                                <span class="text-capitalize font-weight-normal hidden text-dark text-capitalize">{% trans "languages" %}:</span>
                                 {% for language in object.languages.all %}
-                                    <span class="text-dark"> {{ language }}</span>
+                                    <span class="text-dark "> {{ language }}</span>
                                 {% endfor %}
                             </div>
 
                             <!-- Education level -->
                             <div class="pb-1 border-line">
                                 <!-- TODO: implement pluralization in total page -->
-                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
+                                <span class="text-capitalize font-weight-normal hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
                                 {% for education_level in object.education_levels.all %}
                                     <span class="text-dark"> {{ education_level }}</span>
                                 {% endfor %}
@@ -334,7 +334,7 @@
                             <!-- Interactivity -->
                             <div class="pb-1 border-line">
                                 <!-- TODO: implement pluralization in total page -->
-                                <span class="text-capitalize hidden text-dark text-capitalize">{% trans "interactivity" %}:</span>
+                                <span class="text-capitalize font-weight-normal hidden text-dark text-capitalize">{% trans "interactivity" %}:</span>
                                 <span class="text-dark"> {{ object.document_interactivity }}</span>
                             </div>
 
