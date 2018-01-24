@@ -229,12 +229,13 @@
                             <div class="pb-1 border-line">
 
                                 <!-- TODO pluralization -->
-                                <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
+                                <span class="text-capitalize font-weight-normal text-dark" style="vertical-align: top;">{% trans "keywords:" %}</span>
 
                               <span class="text-dark text-capitalize">
                                {% for keyword in object.keywords.all %}
 
-                                      <a href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword| transtolocal }}</a>
+                                      <a href="{% url 'keyword:keyword_detail' keyword.keyword %}" class="mr-2">{{ keyword.keyword| transtolocal }}&nbsp;,</a>
+
 
                                 {% endfor %}
                               </span>
