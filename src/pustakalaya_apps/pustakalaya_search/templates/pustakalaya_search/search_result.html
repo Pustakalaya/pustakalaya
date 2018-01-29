@@ -13,7 +13,7 @@
     "communities":
     "collection":
     "keywords":
-    "year_of_available":
+    "year_of_available":ok_
     "license_type":
     "publication_year":
 
@@ -76,6 +76,7 @@
             margin: 0px 0px 5px 5px;
             /* here I can control the spacing */
             padding: 5px;
+            color: #006596 !important;
         }
 
         .grid li {
@@ -84,6 +85,7 @@
             background-color: #ececec;
             margin-bottom: 10px;
             border-radius: 2px;
+            margin-right: 19px;
         }
 
         li img {
@@ -109,19 +111,32 @@
 
         .grid > li > img {
             box-shadow: 4px 4px 4px #888;
-            height: 250px !important;
+            height: 224px !important;
             border-radius: 3px;
 
         }
 
         .grid > li > p {
 
-            padding-top: 5px;
+            padding: 5px;
+            padding-top:15px;
+            text-overflow: ellipsis;
+            width: 10px;
+            width: 170px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #006596 !important;
+        }
+
+        .grid > li > p:hover {
+            text-decoration: underline;
         }
 
         .list > li > p {
             display: inline-block !important;
             vertical-align: top;
+            color: #006596 !important;
 
         }
 
@@ -420,17 +435,17 @@
 
                     <!--grid view list view section-->
                     <div id="container">
-                        <div class="buttons">
-                            <button class="grid  fa fa-th text-primary"></button>
-                            <button class="list fa fa-list text-primary"></button>
+                        <div class="ml-3 mb-3 buttons">
+                            <button class="grid btn btn-dark btn-sm fa fa-th text-white" role="link" style="background:#006596 !important"></button>
+                            <button class="list fa fa-list text-white btn btn-dark btn-sm" style="background:#006596 !important"></button>
                         </div>
                         <ul class="list clearfix">
                             {% for hit in hits %}
                                 <li style="position: relative; cursor: pointer"
                                     onclick='window.location.href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"'>
                                     <img class="shadow" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"/>
-                                    <p class="text-primary description lead">
-                                        {{ hit.title }}
+                                    <p class="text-primary description lead" id="_itemTitle">
+                                        {{ hit.title}}
                                     </p>
 
                                     <div class="list-abstract text-dark ">{{ hit.abstract|truncatechars:232 }}
@@ -735,10 +750,16 @@
     <script type="text/javascript">
         $('button').on('click', function (e) {
             if ($(this).hasClass('grid')) {
+                // In case of grid view. Trim the title
                 $('#container ul').removeClass('list').addClass('grid');
+
+
             } else if ($(this).hasClass('list')) {
                 $('#container ul').removeClass('grid').addClass('list');
-                            }
+                // In case of list view restore the title text.
+                $("#_itemTitle").text(itemTitle)
+
+            }
         });
     </script>
 
