@@ -3,7 +3,9 @@
 <div class="col-md-12">
     {% for hit in response %}
         <ul class="list-unstyled">
-        <li class="media mb-3">
+        <li class="media mb-3"
+            onclick="window.location.href='{% url hit.type|add:":detail" hit.title|slugify hit.id %}'"
+             style="cursor:pointer;">
             <span class="mr-2">{{ forloop.counter }}.</span>
             <img class="mr-3 rounded" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
                  width="64px"

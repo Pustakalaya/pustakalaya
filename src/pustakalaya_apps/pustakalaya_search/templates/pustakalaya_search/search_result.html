@@ -518,7 +518,7 @@
                     <div class="row min_height">
                         <div class="col-md-2"></div>
                         <div class=" col-md-8 search">
-                            <p class="text-capitalize text-danger text-center">{% trans "result not found" %}</p>
+                            <p class="text-capitalize text-danger text-center">{% trans "result not found for" %}&nbsp; <span class="text-primary">{{q}}<span></span></p>
                             {% include "_partials/search_form.html" %}
 
                         </div>
@@ -683,7 +683,6 @@
                 $('#keywords-filter #myList').each(function () {
                     return $(this).addClass('hideItem')
                 })
-                console.log('x=' + x + ' , i = ' + i);
                 $('#keywords-filter #myList').each(function () {
                     if (i < x) {
                         i++;

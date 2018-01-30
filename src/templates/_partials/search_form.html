@@ -1,33 +1,51 @@
 {% load i18n %}
 {% load static %}
-<form action="/search" method="GET" id="searchForm">
-    <div class="input-group bg-white">
-
-        <input class="form-control border-right-0"
-               id="searchFormInput"
-               list="browsers"
-               value="{{ q }}"
-               type="search" name="q" value=""
-               onkeyup="suggest_text(event)"
-               autocomplete="off"
-               placeholder="{% trans 'Search pustakalaya' %}">
-        <!-- hidden type is very important don't remove it -->
-        <input type="hidden" id="filterData"
-               name="form-filter"/>
-
-        <input type="submit" value="Search" class="input-group-addon pr-3 pl-3 paragraph-font" id="search-icon"/>
-
-    </div>
 
 
+<div class="container">
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-instant@0.0.12/dist/vue-instant.browser.js"></script>
+  <div id="home-page-search-bar">
+    <label>{{selectedEvent}}</label>
+    <form action="/search" method="GET" id="searchForm">
+      <div class="input-group bg-white">
 
+        <!--<input class="form-control border-right-0"-->
+        <!--id="searchFormInput"-->
+        <!--list="browsers"-->
+        <!--type="search" name="q"-->
+        <!--onkeyup="suggest_text(event)"-->
+        <!--autocomplete="off"-->
+        <!--placeholder="{% trans 'Search pustakalaya' %}">-->
 
+        <input type="hidden" id="filterData" name="form-filter"/>
+        <!--<input type="submit" class="input-group-addon pr-3 pl-3 paragraph-font" id="search-icon"/>-->
+        <!-- input field to send query data -->
+        <input type="hidden" value="" name="q" id="queryData"/>
 
-</form>
+      </div>
+
+      <vue-instant :suggestion-attribute="suggestionAttribute"
+                   v-model="value" :disabled="false"
+                   name="qar"
+                   @input="changed" @click-input="clickInput"
+                   @click-button="clickButton" @selected="selected"
+                   @enter="enter" @key-up="keyUp" @key-down="keyDown"
+                   @key-right="keyRight" @clear="clear"
+                   @escape="escape" :show-autocomplete="true"
+                   :autofocus="false" :suggestions="suggestions"
+                   name="customName" placeholder="Search pustakalaya"
+                   type="google"></vue-instant>
+    </form>
+
+  </div>
+
+</div>
 
 <datalist id="browsers">
 
 </datalist>
+
 
 
 <script>
@@ -92,8 +110,110 @@
             // Listen the event when the mouse leave
 
 
-            // On Click mouse event to populate the search text
+
+
 
         }
     })(window);
+
+ //Vue js code added
+    new Vue({
+        el: '#home-page-search-bar',
+        data: {
+            value: '',
+            suggestionAttribute: 'original_title',
+            suggestions: [],
+            selectedEvent: ""
+        },
+        methods: {
+
+            clickInput: function() {
+                this.selectedEvent = 'click input'
+            },
+            clickButton: function() {
+                this.selectedEvent = 'click button'
+                // add value.
+                 $("#queryData").val($('.sbx-google__input').val());
+                 $("#searchForm").submit();
+            },
+            selected: function($event) {
+                this.selectedEvent = 'selection changed'
+
+            },
+            enter: function() {
+                this.selectedEvent = 'enter'
+
+
+            },
+            keyUp: function() {
+               this.selectedEvent = 'keyup pressed'
+
+
+            },
+            keyDown: function() {
+                this.selectedEvent = 'keyDown pressed'
+
+
+            },
+            keyRight: function() {
+                this.selectedEvent = 'keyRight pressed'
+
+
+
+            },
+            clear: function() {
+                this.selectedEvent = 'clear input'
+
+
+            },
+            escape: function() {
+                this.selectedEvent = 'escape'
+            },
+            changed: function() {
+                var that = this;
+                this.suggestions = [];
+
+
+
+               axios.get('./search/completion/?suggest_text=' + this.value)
+                    .then(function(response) {
+                        var response1 = JSON.parse(response.data)
+                        response1.forEach(function(a, i) {
+                            a =  {
+                            "title":a.text,
+                             "original_title":a.text,
+                             }
+                            that.suggestions.push(a);
+                        })
+                    })
+
+
+
+
+
+
+
+            }
+        },
+        components: {
+            'vue-instant': VueInstant.VueInstant
+        }
+    })
+
 </script>
+<script src="https://unpkg.com/vue-instant@0.0.12/dist/vue-instant.browser.js" defer></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-instant@0.0.10/dist/vue-instant.css">
+<script src="https://unpkg.com/axios@0.17.1/dist/axios.min.js" defer></script>
+<style>
+  .main {
+  background-color: inherit;
+  margin-left: -20px;
+      margin-top: -18px;
+  }
+
+  .sbx-google{
+  width: 100% !important;
+  margin-right:-20px;
+  }
+</style>
+
