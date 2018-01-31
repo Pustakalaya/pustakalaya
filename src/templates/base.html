@@ -20,11 +20,6 @@
         <!-- CSS Files -->
         {# {% include '_partials/css.html' %}#}
         <link rel="stylesheet" href="{% static 'base_assets/css/base.css' %}" type="text/css">
-        <!--     Fonts and icons     -->
-        <link rel="stylesheet" href="{% static 'base_assets/css/font-awesome.min.css' %}" type="text/css"/>
-        <!-- load flag css -->
-        <!-- TODO: Merge flag-icon.min.css in base.css -->
-        <link rel="stylesheet" href="{% static 'base_assets/css/flag-icon.min.css' %}" type="text/css">
         <!-- TODO: CSS Just for demo purpose, don't include it in your project -->
         <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
 
@@ -54,26 +49,32 @@
 
 <!-- Footer -->
 {% include '_partials/footer.html' %}
+<!-- lazy loading css -->
+<!--     Fonts and icons     -->
+<link rel="stylesheet" href="{% static 'base_assets/css/font-awesome.min.css' %}" type="text/css"/>
+<!-- load flag css -->
+<!-- TODO: Merge flag-icon.min.css in base.css -->
+<link rel="stylesheet" href="{% static 'base_assets/css/flag-icon.min.css' %}" type="text/css">
 </body>
 {% block script %}
     {% include '_partials/js.html' %}
-     <!-- jquery ui -->
+    <!-- jquery ui -->
 
-<script>
-  $(".facebook").removeClass('fa text-primary fa-2x fa-facebook');
-  $(".facebook").addClass('fa text-primary fa-2x fa-facebook');
-  $(".facebook").text('');
+    <script>
+        $(".facebook").removeClass('fa text-primary fa-2x fa-facebook');
+        $(".facebook").addClass('fa text-primary fa-2x fa-facebook');
+        $(".facebook").text('');
 
-  $(".twitter").removeClass('fa text-info fa-2x fa-twitter');
-  $(".twitter").addClass('fa text-info fa-2x fa-twitter');
-  $(".twitter").text('');
+        $(".twitter").removeClass('fa text-info fa-2x fa-twitter');
+        $(".twitter").addClass('fa text-info fa-2x fa-twitter');
+        $(".twitter").text('');
 
-  $(".google").removeClass('fa text-danger fa-2x fa-google');
-  $(".google").addClass('fa text-danger fa-2x fa-google');
-  $(".google").text('');
-</script>
+        $(".google").removeClass('fa text-danger fa-2x fa-google');
+        $(".google").addClass('fa text-danger fa-2x fa-google');
+        $(".google").text('');
+    </script>
 {% endblock script %}
- <!-- Robot fonts -->
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<!-- Robot fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" lazyload>
 
 </html>
