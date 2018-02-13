@@ -10,16 +10,25 @@
 {% block style %}
 {{ block.super }}
 <style>
-</style>
+      @media screen and (max-width: 765px) and (min-width: 50px){
+       .thumbnail-box-shadow{
+        margin-right: 40px !important;
+           margin-left:40px !important;
 
+       }
+        }
+</style>
 <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
+
 {% endblock style %}
+
 
 {% block content %}
 <!--custom style backgound-color is in base.html body which includes for all-->
 <div class="for-bg-color-container background-color ">
   <!--search-->
   <div class="container pt-4">
+
     <!-- Search bar section -->
     <div class="row">
       <div class="col-md-12 col-xs-12 col-sm-12">
@@ -134,18 +143,18 @@
 
       <!-- Featured books -->
       <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
-        <div class="search">
+        <div class="search larger-device-search">
           <!-- search -->
           {% include '_partials/search_form.html' %}
         </div>
         <br/>
         <section>
-          <p class="description text-uppercase  mb-2" style="color:#006596">{%  trans "recommended books" %}</p>
-          <div class="row">
+          <p class="description text-uppercase mb-2" style="color:#006596">{%  trans "recommended books" %}</p>
+          <div class="row ">
             {% for book in featured_books %}
-            <div class="col-md-2 col-sm-12 p-0  pb-2 col-xs-12 m-3   thumbnail-box-shadow " title="{{ book.title }}">
+            <div class="col-md-2 col-sm-12  p-0  pb-2 col-xs-12 m-3 sd-css  thumbnail-box-shadow " title="{{ book.title }}">
               <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
-                class="img-responsive rounded" style="border-bottom:1px solid #ccc"
+                class="img-responsive rounded " style="border-bottom:1px solid #ccc"
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
                 height="171px">
@@ -437,6 +446,7 @@
 </div>
 {% endblock content %}
 
+
 {% block script %}
 {{ block.super }}
 <!-- load lightslider js -->
@@ -506,4 +516,6 @@ $("#lightSlider").lightSlider({
 
 </script>
 {% endblock script %}
+
+
 
