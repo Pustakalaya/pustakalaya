@@ -7,7 +7,7 @@ from hitcount.views import HitCountMixin
 from hitcount.views import HitCountDetailView
 from .models import DocumentFileUpload
 from django.core.exceptions import ValidationError
-from pustakalaya_apps.review_system.forms import ReviewForm
+#from pustakalaya_apps.review_system.forms import ReviewForm
 from pustakalaya_apps.review_system.models import Review
 
 

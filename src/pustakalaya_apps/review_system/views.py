@@ -8,29 +8,23 @@ import datetime
 
 
 def review_system_view(request):
-    # 1. Send the ajax request. not sumbit request.
+    # 1. Send the ajax request. not submit request.
     # 2. grab the data here.
-    #3. set the review for the requested doc with respelksjflsjf user
-    #4. return the ajax resposne.
+    # 3. set the review for the requested doc with respective user
+    # 4. return the ajax response.
     if request.method == "POST":
         data = request.POST["input"]
         content_id = request.POST["content_id"]
         content_type = request.POST["content_type"]
 
-        #if User.is_authenticated:
         if request.user.is_authenticated:
-            print("inside user is_authenticated")
             if data is not None and content_type is not None and content_id is not None:
-                print("Inside the save option! \n\n ")
-                #p = Review(post=data,content_type = content_type,content_id = content_id)
                 p = Review()
                 p.post = data
                 p.content_type = content_type
                 p.content_id = content_id
                 p.user = request.user
                 p.save()
-
-                print("save success!")
                 return JsonResponse({'response': data, "content_id": content_id, "content_type": content_type,"pk_value":p.pk })
             else:
                 return JsonResponse({'response':data,"content_id":content_id,"content_type":content_type})
@@ -38,11 +32,8 @@ def review_system_view(request):
             return JsonResponse({'response':"user_not_logged_in","content_id":content_id,"content_type":content_type})
 
         return JsonResponse({'response': data,"content_id":content_id,"content_type":content_type})
-
-
     else:
         form = ReviewForm()
-    #return HttpResponse( 'Hellow world')
     return JsonResponse({'response':'Review system'})
 
 
@@ -86,3 +77,5 @@ def edit(request):
         form = ReviewForm()
     #return HttpResponse( 'Hellow world')
     return JsonResponse({'response':'Review system'})
+
+
