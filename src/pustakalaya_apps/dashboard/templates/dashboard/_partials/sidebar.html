@@ -1,24 +1,26 @@
 
 <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    {{ request.user }}
+                <a href="/dashboard" class="simple-text">
+                   Welcome {{ request.user }}
                 </a>
             </div>
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboard.html">
+                    <a href="/dashboard">
                         <i class="ti-panel"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
-                    <a href="{% url 'dashboard:profile' %}">
-                        <i class="ti-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
+
+                <!--<li>-->
+                    <!--<a href="#"-->
+                        <!--<i class="ti-user"></i>-->
+                        <!--<p>User Profile</p>-->
+                    <!--</a>-->
+                <!--</li>-->
+
                 <li>
                     <a href="{% url 'dashboard:document_add' %}">
                         <i class="fa fa-file fa-3x"></i>
@@ -37,14 +39,14 @@
                         <p>Add Video</p>
                     </a>
                 </li>
+                <!--<li>-->
+                    <!--<a href="maps.html">-->
+                        <!--<i class="ti-map"></i>-->
+                        <!--<p>My Favorite Book</p>-->
+                    <!--</a>-->
+                <!--</li>-->
                 <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>My Favorite Book</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
+                    <a href="#">
                         <i class="ti-bell"></i>
                         <p>My Submissions</p>
                     </a>
