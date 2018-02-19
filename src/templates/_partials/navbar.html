@@ -9,8 +9,8 @@
     }
 
       .index_tpyo{
-        font-size:18px!important;
-       /* font-weight:bold;*/
+        font-size:17px!important;
+        text-weight:bold;
 
 </style>
 <nav class="navbar navbar-expand-lg navbar-toggleable-lg   p-0 m-0">
@@ -42,7 +42,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-black text-primary" href="{% url 'about' %}" style="margin-top:2px;">
+                    <a class="nav-link text-black text-primary" href="{% url 'about' %}">
                         {% trans "About" %}
                     </a>
                 </li>
@@ -52,11 +52,11 @@
                     </a>
                 </li-->
                 <li class="nav-item">
-                    <a class="nav-link text-primary " style="margin-top:2px;" href="{% url 'help' %}">{% trans "Help" %}</a>
+                    <a class="nav-link text-primary " href="{% url 'help' %}">{% trans "Help" %}</a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link text-primary " style="margin-top:2px;" href="{% url 'feedback' %}">{% trans "Feedback" %}</a>
+                    <a class="nav-link text-primary " href="{% url 'feedback' %}">{% trans "Feedback" %}</a>
                 </li>
 
 
@@ -121,7 +121,7 @@
 
 
                {% if not  user.is_authenticated %}
-                    <li class="nav-item dropdown" style="margin-top:3px;">
+                    <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle text-primary" data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false">

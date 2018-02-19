@@ -34,15 +34,6 @@ urlpatterns = [
     # Hit count
     url(r'^hitcount/', include('hitcount.urls', namespace='hitcount')),
 
-    # /review_input
-    url(r'^review_system/', include('pustakalaya_apps.review_system.urls', namespace="review_system")),
-
-    # /review_delete
-    url(r'^review_system/delete/', include('pustakalaya_apps.review_system.urls', namespace="review_system")),
-
-    # /review_edi
-    url(r'^review_edit/edit/', include('pustakalaya_apps.review_system.urls', namespace="review_system")),
-
 ]
 
 # Enable i18n based urls
@@ -84,7 +75,6 @@ urlpatterns += i18n_patterns(
 
     # Ratings.
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
-
 
     # Wikipedia app
     # TODO:
