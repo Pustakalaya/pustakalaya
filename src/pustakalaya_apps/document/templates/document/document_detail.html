@@ -4,7 +4,7 @@
 {% load ratings %}
 {% load pustakalaya_filters %}
 {% load hitcount_tags %}
-{%  load crispy_forms_tags %}
+{% load crispy_forms_tags %}
 
 <!-- override some css -->
 {% block style %}
@@ -406,8 +406,8 @@
                                {% if user == v.user %}
                                 <!--<p>Welcome, {{ user.get_username }}. Thanks for logging <in class=""></in></p>-->
 
-                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-primary font-weight-bold EditComment">Edit</button>
-                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-warning font-weight-bold DeleteComment">Delete</button>
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>
 
                                   {% else %}
                                     <p>Welcome,  user. Please log in.</p>
@@ -436,6 +436,8 @@
 
 <br><br><br>
 
+<!-- css scripts for book rating -->
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 {% endblock content %}
 
 
@@ -499,8 +501,8 @@
                             '<p>' +
                             '<small> by:' +  user_name +'</small>'+
                             '</p>'+
-                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-primary font-weight-bold EditComment">Edit</button>'+
-                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-warning font-weight-bold DeleteComment">Delete</button>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>'+
                             '</div>'+
                             '</li>');
 
@@ -534,8 +536,8 @@
       $(idval).append('<div id="editSection">'+
         '<p>Edited Message is: {{ message }}</p>'+
         '<textarea type="text" name="editedContent" placeholder="'+ $.trim(editText) +'" value="'+$.trim(editText)+'" class="form-control bg-white">'+$.trim(editText)+'</textarea>'+
-        '<button type="submit"  class="btn btn-primary editButtonGo" value="'+ pk_value +'" style="color:white;background:blue;">Go</button>'+
-        '<button type="submit"  class="btn btn-primary editButtonCancel" style="color:white;background:blue;">Cancel</button>'+
+        '<button type="submit"  class="btn btn-sm btn-primary editButtonGo" value="'+ pk_value +'" style="color:white;background:blue;">Go</button>'+
+        '<button type="submit"  class="btn btn-sm btn-primary editButtonCancel" style="color:white;background:blue;">Cancel</button>'+
         '</div>'
       );
       //alert("hi");
@@ -644,8 +646,8 @@
                             '<p>' +
                             '<small> by:' +  user_name +'</small>'+
                             '</p>'+
-                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-primary font-weight-bold EditComment">Edit</button>'+
-                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-warning font-weight-bold DeleteComment">Delete</button>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>'+
                             '</div>'+
                             '');
 

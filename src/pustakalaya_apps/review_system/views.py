@@ -56,10 +56,8 @@ def delete(request):
     else:
         return HttpResponse("Error when deleting!")
 
-def edit(request):
-    #query = Review.objects.get(pk=id)
-    #query.delete()
 
+def edit(request):
 
     if request.method == "POST":
         data = request.POST["input"]
@@ -67,26 +65,15 @@ def edit(request):
         content_type = request.POST["content_type"]
         pk_val = request.POST["pk_val"]
 
-        #if User.is_authenticated:
         if request.user.is_authenticated:
-            #print("inside user is_authenticated")
+
             if data is not None and content_type is not None and content_id is not None:
-                #print("Inside the save option! \n\n ")
-                #p = Review(post=data,content_type = content_type,content_id = content_id)
-                # p = Review()
-                # p.post = data
-                # p.content_type = content_type
-                # p.content_id = content_id
-                # p.user = request.user
-                # p.save()
 
                 p = Review.objects.get(pk=pk_val,content_type=content_type,content_id=content_id)
-                #print("p == ",p)
                 p.post = data
                 p.updated = datetime.datetime.now()
                 p.save()
 
-                #print("update save success!")
                 return JsonResponse({'response': data, "content_id": content_id, "content_type": content_type,"pk_value":p.pk })
             else:
                 return JsonResponse({'response':data,"content_id":content_id,"content_type":content_type})
