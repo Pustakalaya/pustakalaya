@@ -39,6 +39,76 @@
 
 
         {%  block content %}
+    <div class="container">
+      <h3>Popular books</h3>
+
+      <div class="row">
+        {% for doc in popular_documents %}
+        <div class="col-lg-2 col-md-3 col-sm-6">
+          <div class="card">
+            <div class="content">
+                <img  src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
+                          style="border-bottom:1px solid #ccc"
+                          width="120px"
+                          height="170px"
+                          alt="{{doc.title}}">
+                    <p>{{doc.title}}</p>
+
+              <div class="footer">
+                <hr>
+                <div class="stats">
+                  {% if doc.document_authors.first %}
+                  <i class="ti-user"></i>
+                    By: {{doc.document_authors.first}}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <ul>
+
+      </ul>
+    </div>
+
+      <div class="container">
+      <h3>Your favourites Collection</h3>
+
+      <div class="row">
+        {% for doc in popular_documents %}
+        <div class="col-lg-2 col-md-3 col-sm-6">
+          <div class="card">
+            <div class="content">
+                <img  src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
+                          style="border-bottom:1px solid #ccc"
+                          width="120px"
+                          height="170px"
+                          alt="{{doc.title}}">
+                    <p>{{doc.title}}</p>
+
+              <div class="footer">
+                <hr>
+
+                <div class="stats">
+                  {% if doc.document_authors.first %}
+                  <i class="ti-user"></i>
+                    By: {{doc.document_authors.first}}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <ul>
+
+      </ul>
+    </div>
 
 
         {%  endblock content %}

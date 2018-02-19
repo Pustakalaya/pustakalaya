@@ -2,11 +2,16 @@ from django.shortcuts import render
 from django.views.generic.edit import UpdateView
 from pustakalaya_apps.pustakalaya_account.models import UserProfile
 from django.contrib.auth.decorators import login_required
+from pustakalaya_apps.document.models import Document
+
 
 
 @login_required()
 def dashboard(request):
-    return render(request, "dashboard/dashboard_base.html")
+    popular_documents = Document.objects.order_by('-updated_date')[:5]
+    return render(request, "dashboard/dashboard_base.html", {
+        'popular_documents': popular_documents
+    })
 
 
 def profile(request):
