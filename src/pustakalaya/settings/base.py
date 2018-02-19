@@ -78,6 +78,7 @@ PUSTAKALAYA_APPS = [
     'pustakalaya_apps.dashboard',
     'pustakalaya_apps.pustakalaya_search',
     'pustakalaya_apps.pustakalaya_account',
+    'pustakalaya_apps.review_system',
 
 
 ]
