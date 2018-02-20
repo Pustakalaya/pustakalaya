@@ -7,6 +7,8 @@ from hitcount.views import HitCountMixin
 from hitcount.views import HitCountDetailView
 from .models import DocumentFileUpload
 from django.core.exceptions import ValidationError
+#from pustakalaya_apps.review_system.forms import ReviewForm
+from pustakalaya_apps.review_system.models import Review
 
 
 def documents(request):
@@ -28,11 +30,21 @@ class DocumentDetailView(HitCountDetailView):  # Detail view is inherited from H
         self.object = self.get_object()
         hit_count = HitCount.objects.get_for_object(self.object)
 
+
         # next, you can attempt to count a hit and get the response
         # you need to pass it the request object as well
         hit_count_response = HitCountMixin.hit_count(request, hit_count)
         context = self.get_context_data(object=self.object)
-        print("hit count is", hit_count_response)
+
+        # review system data extractions
+        data_review = Review.objects.filter(content_id= self.object.pk,content_type='document')
+
+        #print("context= ",context['hitcount']['pk'])
+        #print("context= ", context)
+        #pkvalue = Document.collections.attname
+        #print("pk value = ",pkvalue)
+        context["data_review"]= data_review
+        print("review data=",context["data_review"])
         return self.render_to_response(context)
 
     template_name = "document/document_detail.html"

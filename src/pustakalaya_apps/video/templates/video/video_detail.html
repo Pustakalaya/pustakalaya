@@ -30,6 +30,12 @@
     </style>
     <link rel="stylesheet" href="{% static 'base_assets/css/video-js.css' %}">
     <link rel="stylesheet" href="{% static 'base_assets/css/pustakalaya.css' %}">
+<style>
+  .jumbotron{
+    padding:5px 15px!important;
+  }
+</style>
+
 {% endblock style %}
 
 {% block content %}
@@ -234,6 +240,70 @@
                 </div>
             </div>
         </div>
+       <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+      <br><br>
+            <!--Review system added-->
+                   <div class="container" style="margin-left:-27px;">
+
+                     <div class="form-group">
+                       <div class="container" >
+
+                         <input type="hidden" name="content_type" value="video"/>
+                         <input type="hidden" name="content_id" value="{{ object.pk }}">
+
+                         <label>Your review message:</label>
+                         <textarea type="text" name="input" class="form-control bg-white" placeholder="Your review message"></textarea>
+                         <button type="button" value="Submit" id="submitButton" class ="btn btn-primary" >Add your review</button>
+
+                       </div>
+                     </div>
+
+                     <div class="container"  style="margin-left:-40px !important;" id="commentContainer">
+                       <!--comment system views -->
+                       <ul>
+                       {% if user %}
+                       <input type="hidden" name="user" value="{{ user }}">
+                       {% endif %}
+
+                       {% if data_review %}
+
+                         {% for v in data_review %}
+                         <li style="list-style: none" id ="comment_{{ v.pk }}">
+
+                           <div class="jumbotron" id="div_comment_{{ v.pk }}">
+                              <p class="font-weight-bold input_post" style="word-wrap: break-word;">
+                                {{ v.post }}
+                                </p>
+                              <p>
+                                <small class="text-capitalize"> by: {{  v.user }}</small>
+                              </p>
+
+                               {% if user == v.user %}
+                                <!--<p>Welcome, {{ user.get_username }}. Thanks for logging <in class=""></in></p>-->
+
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>
+
+                                  {% else %}
+                                    <!--<p>Welcome,  user. Please log in.</p>-->
+                              {% endif %}
+                           </div>
+                         </li>
+                         {% endfor %}
+
+
+                        {% endif %}
+                        </ul>
+                     </div>
+                    <!--model for login message -->
+                   </div>
+
+
+    </div>
+  </div>
+
     </div>
     <!-- script to set the default video -->
 {% endblock content %}
@@ -263,4 +333,160 @@
   <!-- If you'd like to support IE8 -->
 
     </script>
+
+<script>
+
+    $("#submitButton").click(function (e){
+      e.preventDefault();
+      var user_input = $("textarea[type='text'][name='input']").val().trim();
+      var content_type = $("input[type='hidden'][name='content_type']").val().trim();
+      var content_id = $("input[type='hidden'][name='content_id']").val().trim();
+      var user_name = $("input[type='hidden'][name='user']").val().trim();
+      if(user_name == "" || user_name == "AnonymousUser" ){
+        alert("Login to post you message");
+        return;
+      }else if(user_input == "" ){
+        alert("Please enter you message first");
+        return;
+      }
+       $.ajax({
+        type:'post',
+        url: '/review_system/',
+         headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+        data: {
+          "input": user_input,
+          "content_type" : content_type,
+          "content_id" : content_id,
+        },
+        success: function (data) {
+          $("textarea[type='text'][name='input']").val('');
+          var pk_value = data.pk_value;
+          //when success we need to append the data to the comment section
+      $("#commentContainer ul").append(''+
+                          '<li style="list-style: none" id ="comment_'+ pk_value +'">'+
+                          ' <div class="jumbotron" id="div_comment_'+ pk_value +'"> '+
+                          ' <p class="font-weight-bold input_post" style="word-wrap: break-word;"> '+
+                            user_input +
+                            '</p>'+
+                            '<p>' +
+                            '<small class="text-capitalize"> by:' +  user_name +'</small>'+
+                            '</p>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>'+
+                            '</div>'+
+                            '</li>');
+        },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+      });
+    });
+    $("#commentContainer ul").delegate("button.EditComment","click",function (e){
+      if($("#editSection").length){
+        return;
+      }
+      var pk_value = $(this).val();
+      //lets grab the editing values first
+      var idval= "#comment_"+pk_value +"  .jumbotron .input_post";
+      var editText =  $(idval).text();
+      $(idval).append('<div id="editSection">'+
+        '<p>Edited Message is: </p>'+
+        '<textarea type="text" name="editedContent" placeholder="'+ $.trim(editText) +'" value="'+$.trim(editText)+'" class="form-control bg-white">'+$.trim(editText)+'</textarea>'+
+        '<button type="submit"  class="btn btn-sm btn-primary editButtonGo" value="'+ pk_value +'" style="color:white;background:blue;">Go</button>'+
+        '<button type="submit"  class="btn btn-sm btn-primary editButtonCancel" style="color:white;background:blue;">Cancel</button>'+
+        '</div>'
+      );
+    });
+
+    //this one is for delete
+  $("#commentContainer ul").delegate("button.DeleteComment","click",function (e){
+      var pk_value = $(this).val();
+      console.log(pk_value);
+       $.ajax({
+        type:'post',
+        url: '/review_system/delete/',
+         headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+        data: {
+          "input_pk": pk_value,
+        },
+        success: function (data) {
+          //if (data.is_taken) {
+          //alert('SUCCESS');
+            //alert("data = "+ data);
+          //}
+          var id = "#comment_"+pk_value
+          $(id).remove();
+        },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+      });
+    });
+
+  //cancel button click
+  $("#commentContainer ul").delegate("button.editButtonCancel","click",function (e){
+    $("#editSection").remove();
+  });
+
+  //button go
+  $("#commentContainer ul").delegate("button.editButtonGo","click",function (e){
+
+   //data capture
+      var user_input = $("textarea[type='text'][name='editedContent']").val().trim();
+      var content_type = $("input[type='hidden'][name='content_type']").val().trim();
+      var content_id = $("input[type='hidden'][name='content_id']").val().trim();
+      var user_name = $("input[type='hidden'][name='user']").val().trim();
+      var pk_value = $(".editButtonGo").val();
+      //alert("pk="+pk_value);
+      //return;
+      if(user_name == "" || user_input == "" ){
+        return;
+      }
+       $.ajax({
+        type:'post',
+        url: '/review_system/edit/',
+         headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+        data: {
+          "input": user_input,
+          "content_type" : content_type,
+          "content_id" : content_id,
+          "pk_val":pk_value,
+        },
+        success: function (data) {
+          $("textarea[type='text'][name='input']").val('');
+
+          var pk_value = data.pk_value;
+          var id_div = "div_comment_"+pk_value ;
+          $("#"+id_div).remove();
+          //when success we need to append the data to the comment section
+         var id_list = "#comment_"+pk_value;
+        $("#commentContainer ul li"+ id_list).append(''+
+                          ' <div class="jumbotron " id="'+id_div+'" > '+
+                          ' <p class="font-weight-bold input_post" style="word-wrap: break-word;"> '+
+                            user_input +
+                            '</p>'+
+                            '<p>' +
+                            '<small class="text-capitalize"> by:' +  user_name +'</small>'+
+                            '</p>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>'+
+                            '<button type="button" value="'+ pk_value +'"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>'+
+                            '</div>'+
+                            '');
+        },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+      });
+  });
+  </script>
+
 {% endblock script %}

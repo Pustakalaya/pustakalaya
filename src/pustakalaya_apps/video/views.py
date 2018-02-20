@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from .models import Video
 from django.views.generic import DetailView
+from pustakalaya_apps.review_system.models import Review
 
 from .search import VideoSearch
 
@@ -44,4 +45,11 @@ def videos(request):
 
 class VideoDetailView(DetailView):
     model = Video
+    def get(self, request, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        # review system data extractions
+        data_review = Review.objects.filter(content_id= self.object.pk,content_type='video')
+        context["data_review"]= data_review
+        return self.render_to_response(context)
     template_name = "video/video_detail.html"
