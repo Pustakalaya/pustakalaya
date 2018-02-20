@@ -13,7 +13,8 @@
                         <h4 class="title">Item submitted by you</h4>
                     </div>
                     <div class="content">
-                        <ul class="list-unstyled team-members">
+                        {%  if items %}
+                            <ul class="list-unstyled team-members">
                             <li>
                                 <div class="row">
                                     <div class="col-xs-3">
@@ -28,12 +29,12 @@
                                         <span class="text-muted"><small>{{ item.type }}</small></span>
                                     </div>
                                     <div class="col-xs-3">
-                                       <h5 class="text-primary text-bold"> Edit</h5>
+                                        <h5 class="text-primary text-bold"> Edit</h5>
                                         <br>
 
                                     </div>
                                     <div class="col-xs-3">
-                                       <h5 class="text-primary text-bold"> Delete</h5>
+                                        <h5 class="text-primary text-bold"> Delete</h5>
                                         <br>
 
                                     </div>
@@ -67,14 +68,15 @@
                                             <br>
 
                                         </div>
-
-
                                     </div>
                                 </li>
 
                             {% endfor %}
 
                         </ul>
+                            {%  else %}
+                            <p class="text-primary">{%  trans "You haven't submitted any item" %}</p>
+                        {%  endif %}
                     </div>
                 </div>
             </div>
