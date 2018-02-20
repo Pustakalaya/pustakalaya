@@ -62,9 +62,10 @@ class AddDocumentView(SuccessMessageMixin, CreateView):
 
 def user_submission(request):
     # Grab all the list in pagination format.
-    document = Document.objects.all()
+    user = request.user
+    documents = Document.objects.filter(submitted_by=user)
     return render(request, 'dashboard/document/user_submitted_books.html', {
-        'items': document
+        'items': documents
     })
 
 
