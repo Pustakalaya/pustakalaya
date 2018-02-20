@@ -19,39 +19,39 @@ class ProfileForm(forms.ModelForm):
     #     model = UserProfile
     #     fields = ["first_name", "last_name", "phone_no", "user.username"]
 
+
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = [
+        fields = (
             'title',
             'collections',
             'document_file_type',
             'languages',
             'document_interactivity',
-            'publisher',
-            'keywords',
-            'document_series',
             'document_type',
-            'license_type'
-        ]
-
-# Document child forms.
-DocumentFileUploadFormSet = inlineformset_factory(
-    Document,
-    DocumentFileUpload,
-    fields=(
-        "file_name",
-        "upload",
-    ),
-    can_delete = False,
-    extra = 1
-)
+            'license_type',
+        )
 
 
 class DocumentFileUploadForm(forms.ModelForm):
     class Meta:
         model = DocumentFileUpload
-        fields = ["file_name", "upload"]
+        fields = (
+            'file_name',
+            'upload',
+        )
+
+
+# Document child forms.
+DocumentFileUploadFormSet = inlineformset_factory(
+    Document,
+    DocumentFileUpload,
+    form=DocumentFileUploadForm,
+    extra=2,
+    can_delete=False,
+    can_order=False
+)
 
 
 class AudioFileUploadForm(forms.ModelForm):
@@ -62,6 +62,7 @@ class AudioFileUploadForm(forms.ModelForm):
 
 class VideoFileUploadForm(forms.ModelForm):
     pass
+
     class Meta:
         model = VideoFileUpload
         fields = ["file_name", "upload"]

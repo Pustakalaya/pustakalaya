@@ -39,8 +39,10 @@
 
 
         {%  block content %}
-    <div class="container">
-      <h3>Popular books</h3>
+            <div style="padding:300px;">
+
+                   <div class="container">
+      <h3>Trending books</h3>
 
       <div class="row">
         {% for doc in popular_documents %}
@@ -109,6 +111,8 @@
 
       </ul>
     </div>
+
+            </div>
 
 
         {%  endblock content %}

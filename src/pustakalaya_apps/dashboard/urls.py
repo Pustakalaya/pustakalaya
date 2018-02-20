@@ -16,6 +16,9 @@ urlpatterns = [
     # /dashboard/document/delete/
     url(r'^document/delete/(?P<pk>\b[0-9A-Fa-f]{8}\b(-\b[0-9A-Fa-f]{4}\b){3}-\b[0-9A-Fa-f]{12}\b)/', document_views.DeleteDocumentView.as_view(), name="document_delete"),
 
+    # user submitted items
+    url(r'^submission/list/$', document_views.user_submission, name="user_submission"),
+
     # /dashboard/audio/add/
     url(r'^audio/add/$', audio_views.AddAudioView.as_view(), name="audio_add"),
     # /dashboard/audio/update/

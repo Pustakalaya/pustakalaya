@@ -18,10 +18,16 @@
 
 
 
-    <form action="." method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+              <form action="." method="post" enctype="multipart/form-data">
     {%  csrf_token %}
     {{ form | crispy  }}
-    {{ document_file_upload_formset | crispy }}
+    {{ inlines | crispy }}
     <input type="submit" value="Create Document" class="btn btn-primary">
     </form>
+            </div>
+        </div>
+    </div>
 {%  endblock content %}

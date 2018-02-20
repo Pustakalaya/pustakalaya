@@ -3,6 +3,7 @@ import uuid
 import time
 import os
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
@@ -93,7 +94,8 @@ class Document(AbstractItem, HitCountMixin):
         "DocumentSeries",
         verbose_name=_("Series"),
         on_delete=models.CASCADE,
-        blank=True
+        blank=True,
+        null=True
     )
 
     education_levels = models.ManyToManyField(
@@ -154,7 +156,8 @@ class Document(AbstractItem, HitCountMixin):
     publisher = models.ForeignKey(
         Publisher,
         verbose_name=_("Publisher name"),
-        blank=True
+        blank=True,
+        null=True
     )
     # Better to have plural name
     keywords = models.ManyToManyField(
@@ -172,6 +175,12 @@ class Document(AbstractItem, HitCountMixin):
         verbose_name=_("Sponsor"),
         blank=True,
 
+    )
+
+    submitted_by = models.ForeignKey(
+        User,
+        editable=False,
+        null=True
     )
 
     # Manager to return the featured objects.
