@@ -53,7 +53,9 @@ class Keyword(AbstractTimeStampModel):
     )
 
     keyword_description = models.TextField(
-        verbose_name=_("Keyword description")
+        verbose_name=_("Keyword description"),
+        blank=True,
+        default=""
     )
 
     def __str__(self):

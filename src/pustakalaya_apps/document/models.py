@@ -92,7 +92,8 @@ class Document(AbstractItem, HitCountMixin):
     document_series = models.ForeignKey(
         "DocumentSeries",
         verbose_name=_("Series"),
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True
     )
 
     education_levels = models.ManyToManyField(
@@ -152,7 +153,8 @@ class Document(AbstractItem, HitCountMixin):
 
     publisher = models.ForeignKey(
         Publisher,
-        verbose_name=_("Publisher name")
+        verbose_name=_("Publisher name"),
+        blank=True
     )
     # Better to have plural name
     keywords = models.ManyToManyField(
