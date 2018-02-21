@@ -31,16 +31,34 @@ class DocumentForm(forms.ModelForm):
             'document_interactivity',
             'document_type',
             'license_type',
+            'thumbnail',
         )
+
+    def __init__(self, *args, **kwargs):
+        super(DocumentForm, self).__init__(*args, **kwargs)
+
+        self.fields['thumbnail'].widget.attrs = {
+            'class': 'btn btn-small btn-primary btn-block',
+            'name': 'myCustomName',
+            'placeholder': 'Item thumbnail'
+        }
 
 
 class DocumentFileUploadForm(forms.ModelForm):
     class Meta:
         model = DocumentFileUpload
         fields = (
-            'file_name',
             'upload',
         )
+
+    def __init__(self, *args, **kwargs):
+        super(DocumentFileUploadForm, self).__init__(*args, **kwargs)
+
+        self.fields['upload'].widget.attrs = {
+            'class': 'btn btn-small btn-primary btn-block',
+            'name': 'myCustomName',
+            'placeholder': 'Upload file'
+        }
 
 
 # Document child forms.
@@ -48,7 +66,7 @@ DocumentFileUploadFormSet = inlineformset_factory(
     Document,
     DocumentFileUpload,
     form=DocumentFileUploadForm,
-    extra=2,
+    extra=1 ,
     can_delete=False,
     can_order=False
 )
