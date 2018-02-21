@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import (
     Document,
+    UnpublishedDocument,
     DocumentSeries,
     DocumentFileUpload,
     DocumentLinkInfo,
@@ -24,6 +25,10 @@ class DocumentIdentifierAdmin(admin.StackedInline):
     extra = 1
     max_num = 1
 
+@admin.register(UnpublishedDocument)
+class UnpublishedDocumentAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        return  self.model.objects.filter(published="no")
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):

@@ -288,6 +288,14 @@ class Document(AbstractItem, HitCountMixin):
         return reverse("document:detail", kwargs={"title": slugify(self.title), "pk": self.pk})
 
 
+class UnpublishedDocument(Document):
+    """
+    This is the proxy model of Document,
+    Used in admin.py to display the list of unpublished document.
+    """
+    class Meta:
+        proxy = True
+
 class DocumentSeries(AbstractSeries):
     """BookSeries table inherited from AbstractSeries"""
 
