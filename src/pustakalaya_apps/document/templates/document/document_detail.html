@@ -26,7 +26,12 @@
     .jumbotron{
       padding:5px 15px!important;
     }
-
+      .add_to_favourite:hover{
+        background-color: #d63031 !important;
+      }
+    #added_to_favourite{
+      background-color: #d63031 ;
+    }
     </style>
 
 
@@ -65,6 +70,26 @@
                     <!-- Rating -->
 
                     {% ratings object %}
+
+
+                  <!--For favourite collection-->
+                  <span id="favourite_hanging_place">
+                    {% if  request.user.is_authenticated %}
+                     {% if favourite_data.first.user != "" %}
+
+                      {% if request.user == favourite_data.first.user %}
+                       <button type="button" class="btn btn-sm" value="{{object.pk }}" id="added_to_favourite">Added to favourite <i class="fa fa-check-circle"></i></button>
+
+                      {% else %}
+                      <button type="button" value="{{ object.pk  }}" class="btn  bg-dark btn-sm add_to_favourite" >Add to favourite <i class="fa fa-heart"></i></button>
+
+                      {% endif %}
+                  {% else %}
+                  <button type="button" value="{{ object.pk  }}" class="btn  bg-dark btn-sm add_to_favourite" >Add to favourite <i class="fa fa-heart"></i></button>
+
+                  {% endif %}
+                    {% endif %}
+                </span>
                     <!-- share buttons section -->
                     <section class="pull-left share-buttons text-center">
                         <a class="share-facebook p-1 btn btn-md bg-white"
@@ -409,7 +434,7 @@
                                  <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>
 
                                   {% else %}
-                                    <p>Welcome,  user. Please log in.</p>
+                                    <!--<p>Welcome,  user. Please log in.</p>-->
                               {% endif %}
                            </div>
                          </li>
@@ -443,6 +468,7 @@
 {{ block.super }}
 <script>
 
+    //--for the review system
     $("#submitButton").click(function (e){
       e.preventDefault();
       var user_input = $("textarea[type='text'][name='input']").val().trim();
@@ -594,7 +620,88 @@
             },
       });
   });
-  </script>
+
+
+  //for favourite likes #favourite_hanging_place
+  $("#favourite_hanging_place").delegate("button.add_to_favourite","click",function (e){
+      e.preventDefault();
+      var user_input = "checked";
+
+      var content_type = $("input[type='hidden'][name='content_type']").val().trim();
+      var content_id = $("input[type='hidden'][name='content_id']").val().trim();
+      var user_name = $("input[type='hidden'][name='user']").val().trim();
+      //alert("some value");
+      //return;
+      if(user_name == "" || user_name == "AnonymousUser" ){
+        alert("Login to add to your favourite");
+        return;
+      }
+       $.ajax({
+        type:'post',
+        url: '/favourite_collection/',
+         headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+        data: {
+          "input": user_input,
+          "content_type" : content_type,
+          "content_id" : content_id,
+        },
+        success: function (data) {
+          $('.add_to_favourite').remove();
+           $("#favourite_hanging_place").append(''+
+                           '<button type="button" class="btn btn-sm" value="'+ content_id +'" id="added_to_favourite">Added to favourite <i class="fa fa-check-circle"></i></button>'
+                      +'');
+
+        },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+      });
+    });
+
+  //Added_favourite , remove form favourite now
+   $("#favourite_hanging_place").delegate(" #added_to_favourite","click",function (e){
+      e.preventDefault();
+      var user_input = "unchecked";
+
+      var content_type = $("input[type='hidden'][name='content_type']").val().trim();
+      var content_id = $("input[type='hidden'][name='content_id']").val().trim();
+      var user_name = $("input[type='hidden'][name='user']").val().trim();
+      if(user_name == "" || user_name == "AnonymousUser" ){
+        alert("Login to add to your favourite");
+        return;
+      }
+       $.ajax({
+        type:'post',
+        url: '/favourite_collection/favourite_remove/',
+         headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+        data: {
+          "input": user_input,
+          "content_type" : content_type,
+          "content_id" : content_id,
+        },
+        success: function (data) {
+          $("#added_to_favourite").remove();
+          $("#favourite_hanging_place")
+
+           $("#favourite_hanging_place").append(''+
+                           '<button type="button" value="'+ content_id +'" class="btn  bg-dark btn-sm add_to_favourite" >Add to favourite <i class="fa fa-heart"></i></button>'
+               +'');
+
+        },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+      });
+    });
+
+
+</script>
 
 
 {% endblock script %}
