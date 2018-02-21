@@ -48,14 +48,16 @@
                     <div class="row">
                         {% for doc in popular_documents %}
                             <div class="col-lg-2 col-md-3 col-sm-6">
-                                <div class="card">
+                                <div class="card"
+                                     style="cursor: pointer;"
+                                     onclick="window.location.href='{% url doc.type|add:':detail' doc.title|slugify doc.id %}'">
                                     <div class="content">
                                         <img src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
                                              style="border-bottom:1px solid #ccc"
                                              width="120px"
                                              height="170px"
-                                             alt="{{ doc.title }}">
-                                        <p>{{ doc.title }}</p>
+                                             alt="{{ doc.title|truncatechars:20}}">
+                                        <p class="text-capitalize text-primary">{{ doc.title|truncatechars:20 }}</p>
 
                                         <div class="footer">
                                             <hr>
@@ -83,18 +85,20 @@
                     <div class="row">
                         {% for doc in favourite_documents %}
                             <div class="col-lg-2 col-md-3 col-sm-6">
-                                <div class="card">
+
+                               <div class="card"
+                                     style="cursor: pointer;"
+                                     onclick="window.location.href='{% url doc.type|add:':detail' doc.title|slugify doc.id %}'">
                                     <div class="content">
                                         <img src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
                                              style="border-bottom:1px solid #ccc"
                                              width="120px"
                                              height="170px"
-                                             alt="{{ doc.title }}">
-                                        <p>{{ doc.title }}</p>
+                                             alt="{{ doc.title|truncatechars:20}}">
+                                        <p class="text-capitalize text-primary">{{ doc.title|truncatechars:20 }}</p>
 
                                         <div class="footer">
                                             <hr>
-
                                             <div class="stats">
                                                 {% if doc.document_authors.first %}
                                                     <i class="ti-user"></i>
