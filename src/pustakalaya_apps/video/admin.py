@@ -58,3 +58,5 @@ class VideoAdmin(admin.ModelAdmin):
 class VideoSeriesAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         return {}
+
+

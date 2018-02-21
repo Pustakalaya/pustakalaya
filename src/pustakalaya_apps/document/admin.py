@@ -68,6 +68,18 @@ class DocumentAdmin(admin.ModelAdmin):
         "thumbnail",
     )
 
+    list_display = ['title', 'published', 'updated_date', 'submitted_by']
+
+    list_filter = ['published', 'title']
+
+    def save_model(self, request, obj, form, change):
+        """Override the submitted_by field to admin user
+        save_model is only called when the user is logged as an admin user.
+        """
+        if obj.submitted_by is None:
+            obj.submitted_by = request.user
+        super().save_model(request, obj, form, change)
+
 
 @admin.register(DocumentSeries)
 class DocumentSeriesAdmin(admin.ModelAdmin):
