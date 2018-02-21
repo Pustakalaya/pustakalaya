@@ -72,6 +72,30 @@ DocumentFileUploadFormSet = inlineformset_factory(
 )
 
 
+
+class AudioForm(forms.ModelForm):
+    class Meta:
+        model = Audio
+        fields = (
+            "title",
+            "abstract",
+            "collections",
+            "education_levels",
+            "languages",
+            "year_of_available",
+            "audio_types",
+            "audio_running_time",
+            "published",
+            "audio_genre",
+            "keywords",
+            "license_type",
+            "custom_license",
+            "publication_year",
+            "sponsors",
+            "thumbnail"
+        )
+
+
 class AudioFileUploadForm(forms.ModelForm):
     class Meta:
         model = AudioFileUpload

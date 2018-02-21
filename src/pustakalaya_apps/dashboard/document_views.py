@@ -45,9 +45,8 @@ class AddDocumentView(SuccessMessageMixin, CreateView):
             # Make published to no, as admin will review and set to yes.
             self.object.published = "no"
             self.object.submitted_by = self.request.user
-            print(self.request.user)
-
             self.object.save()
+            form.save_m2m() # Save other m2m fields.
             # Here instance is Document.
             inlines.instance = self.object
             inlines.save()
