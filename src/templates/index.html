@@ -10,7 +10,98 @@
 {% block style %}
 {{ block.super }}
 <style>
+
+.box-model-new{
+    width: 255px;
+  }
+
+  .box-model-head-new {
+   background-color:  #3742fa;;
+   border-bottom : 1px solid  #3742fa;
+   width: 270px;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+    box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
+  }
+  .box-model-head-new>p{
+  color: white;
+  font-weight:bold;
+  padding-left:5px;
+  padding-left:25px;
+
+  }
+
+
+.format-dd[data-v-03b85949] {
+    width: 270px;
+    /*position: fixed;*/
+    background: #fff;
+    z-index: 100;
+    display: block;
+    padding-left:0px;
+    margin-top: 5px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+    box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
+    }
+    ol, ul {
+    list-style: none;
+
+}
+
+.format-dd li[data-v-03b85949]:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.format-dd li[data-v-03b85949] {
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    border-bottom: 1px solid #ecf0f1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    letter-spacing: 1px;
+}
+.format-dd li[data-v-03b85949]:hover{
+    background:#3742fa;
+    color:#fff
+
+}
+.format-dd li[data-v-03b85949] a:hover{
+ text-decoration: none;
+
+}
+.format-dd li[data-v-03b85949]:hover a{
+    background:#3742fa;
+    color:#fff
+
+}
+.format-dd li[data-v-03b85949] a{
+   display: block;
+}
+
+.format-dd li[data-v-1] {
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    cursor: pointer;
+    border-bottom: 1px solid #ecf0f1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    letter-spacing: 1px;
+}
+
+
+
 </style>
+
 
 <link rel="stylesheet" href="{% static 'base_assets/css/lightslider.min.css' %}">
 {% endblock style %}
@@ -37,26 +128,32 @@
           <!--pustakalaya browse by option-->
           <!--p class="description text-uppercase  text-dark text-uppercase mb-2"> {% url 'browse:browse'%}?browse_by=all&sort_order=asc {% trans "Browse Pustakalaya" %}</p-->
 
-          <p>
+          <p></p>
             <!--a href="#" class="text-capitalize"-->
             <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
 
-          <div class="box-model container">
-            <div class="row box-model-head">
-               <p class="description text-uppercase "> {% trans "browse the library" %}</p>
-          </p>
-            </div>
-            <div class="row box-model-body">
-                <p>
-                  <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
-                     class="text-capitalize text-primary ">Titles</a>
-                | <a href="/authors"
-                     class="text-capitalize text-primary "><span>   Authors</span></a>
-                </p>
-            </div>
-          </div>
 
-      <br>
+<div class="box-model-new">
+        <div class="row box-model-head-new">
+           <p class="description text-uppercase "> {% trans "browse the library" %}</p>
+            </p>
+        </div>
+        <div class="row box-model-body-new">
+        <ul   data-v-03b85949="" class="format-dd">
+            <li data-v-1="" class="format-option">
+              <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
+                 class="text-capitalize text-primary ">Titles</a>
+            |
+            </li>
+            <li data-v-1="" class="format-option">
+                    <a href="/authors"
+                    class="text-capitalize text-primary "><span>   Authors</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+      <!--<br>-->
 
           <!--p>
   <a href="{% url 'browse:browse'%}?browse_by=author&sort_order=asc" class="text-capitalize">
@@ -67,55 +164,57 @@
         </div>
 
         <!-- Browse by subjects -->
-        <div class="box-model container">
-          <div class="row box-model-head">
-             <p class="description  text-uppercase ">{% trans "sections" %}</p>
-          </div>
-        <div class="row box-model-body">
-          <div class="container">
-            <div class="row"><p>
-            <a href="{% url 'community:community_detail' 'literatures-and-arts' %}"
-               class="  text-capitalize ">
-              <i class="fa fa-1x fa-book mr-2"
-                 aria-hidden="true"></i>{% trans "literatures and Arts" %}</a>
-          </p></div>
-            <div class="row"><p>
-            <a href="{% url 'community:community_detail' 'course-materials' %}"
-               class="text-capitalize  ">
-              <i class="fa fa-1x fa-desktop mr-2"
-                 aria-hidden="true"></i>{% trans "Course Materials" %}</a>
-          </p></div>
-            <div class="row"><p>
-            <a href="{% url 'community:community_detail' 'teaching-materials' %}"
-               class="text-capitalize  ">
-              <i class="fa fa-1x fa-graduation-cap mr-2"
-                 aria-hidden="true"></i>{% trans "Teaching Materials" %}</a>
-          </p></div>
-            <div class="row"><p>
-            <a href="{% url 'community:community_detail' 'reference-materials' %}"
-               class="text-capitalize  ">
-              <i class="fa fa-1x fa-briefcase mr-2"
-                 aria-hidden="true"></i>{% trans "reference Materials" %}</a>
-          </p></div>
-            <div class="row"><p>
-            <a href="{% url 'community:community_detail' 'other-educational-materials' %}"
-               class="text-capitalize  ">
-              <i class="fa fa-1x fa-flask mr-2"
-                 aria-hidden="true"></i>{% trans "other educational Materials" %}</a>
-          </p></div>
-            <div class="row"><p>
-            <a href="{% url 'community:community_detail' 'newspaper-and-magazines' %}"
-               class="text-capitalize  ">
-              <i class="fa fa-1x fa-newspaper-o mr-2"
-                 aria-hidden="true"></i>{% trans "Newspapers & Magazines" %}</a>
-          </p></div>
-          </div>
-
+<!--<div class="container">-->
+<div class="box-model-new " >
+        <div class="row box-model-head-new">
+           <p class="description  text-uppercase ">sections</p>
+        </div>
+      <div class="row box-model-body-new">
+          <ul data-v-03b85949="" class="format-dd">
+               <li data-v-03b85949="" class="format-option"><a href="/en/community/literatures-and-arts/" class="text-capitalize">
+                <i class="fa fa-1x fa-book mr-2" aria-hidden="true"></i>literatures and Arts</a></li>
+               <li data-v-03b85949="" class="format-option"> <a href="/en/community/course-materials/" class="text-capitalize">
+                <i class="fa fa-1x fa-desktop mr-2" aria-hidden="true"></i>Course Materials</a></li>
+               <li data-v-03b85949="" class="format-option"> <a href="/en/community/teaching-materials/" class="text-capitalize">
+                <i class="fa fa-1x fa-graduation-cap mr-2" aria-hidden="true"></i>Teaching Materials</a></li>
+                <li data-v-03b85949="" class="format-option"><a href="/en/community/reference-materials/" class="text-capitalize">
+                    <i class="fa fa-1x fa-briefcase mr-2" aria-hidden="true"></i>reference Materials</a></li>
+                <li data-v-03b85949="" class="format-option"> <a href="/en/community/other-educational-materials/" class="text-capitalize">
+                    <i class="fa fa-1x fa-flask mr-2" aria-hidden="true"></i>other educational Materials</a></li>
+                <li data-v-03b85949="" class="more-colors"> <a href="/en/community/newspaper-and-magazines/" class="text-capitalize">
+                <i class="fa fa-1x fa-newspaper-o mr-2" aria-hidden="true"></i>Newspapers &amp; Magazines</a>
+                </li>
+        </ul>
 
         </div>
 
-           </div>
 
+    </div>
+
+<!--</div>-->
+
+
+    <!--<br>-->
+    <!-- Browse by level -->
+        <div class="box-model-new " >
+        <div class="row box-model-head-new">
+           <p class="description  text-uppercase ">Education Level</p>
+        </div>
+      <div class="row box-model-body-new">
+          <ul data-v-03b85949="" class="format-dd">
+               <li data-v-03b85949="" class="format-option"><a href="#" class="text-capitalize">
+                <i class="fa fa-1x fa-book mr-2" aria-hidden="true"></i>Basic Level</a></li>
+               <li data-v-03b85949="" class="format-option"> <a href="#" class="text-capitalize">
+                <i class="fa fa-1x fa-book mr-2" aria-hidden="true"></i>Secondary Level</a></li>
+        </ul>
+
+        </div>
+
+
+    </div>
+
+
+       <!--
         <div class="android app sd-margin-botton mt-4 ">
           <a href="https://play.google.com/store/apps/details?id=com.ole.epustakalaya&hl=en" target="_blank"
              title="E-Pustakalaya Android App"><img class="img img-responsive   android-app"
@@ -127,11 +226,10 @@
                                                     src="{% static 'images/logos/apple-store.png' %}"
                                                     alt="E-pustakalaya Android Application" style="height:67px; width:auto;"/></a>
 
-
         </div>
+       -->
+
       </div>
-
-
       <!-- Featured books -->
       <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
         <div class="search">
@@ -142,12 +240,12 @@
           <p class="description bold text-uppercase text-dark  mb-2">Books we love</p>
           <div class="row">
             {% for book in featured_books %}
-            <div class="col-md-2 col-sm-12 p-0  pb-2 col-xs-12 m-3   thumbnail-box-shadow " title="{{ book.title }}">
+            <div class="col-md-2 col-sm-12  col-xs-12  p-0  pb-2 m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
               <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
-                height="171px">
+                height="150px">
 
                 <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span></div>
                 {% if  book.document_authors.first %}
@@ -165,17 +263,15 @@
             {% endfor %}
           </div>
         </section>
-      </div>
-    </div>
-<br>
-    <!-- Education section -->
-    <div class="row m-0  ">
+
+        <!-- Education section -->
+    <div class="row m-0  " style="margin-left:-10px !important;">
       <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 mb-0">
         <p class="description text-uppercase rounded bold text-black    text-uppercase mb-2">
           {% trans 'Interactive educational software' %}
         </p>
         <ul id="lightSlider">
-          <li class="mr-2 ">
+          <li class="mr-2 " style="border:2px solid #2980b9;border-radius:5px">
             <a href="http://pustakalaya.org/epaath/" target="_blank">
               <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
                    width="auto"
@@ -184,7 +280,7 @@
                    title="E-Paath">
             </a>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
             <a href="http://pustakalaya.org/elkids.php" target="_blank">
 
               <img class="rounded img img-responsive"
@@ -196,7 +292,7 @@
                    title="E-Learning for Kids">
             </a>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
             <a href="https://phet.colorado.edu/" target="_blank">
               <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
                    width="auto"
@@ -205,7 +301,7 @@
                    title="Simulations">
             </a>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
             <a href="http://pustakalaya.org/sabdakosh.php" target="_blanks">
               <img class="rounded img img-responsive"
                    src="{% static 'base_assets/img/nepal-dictionary.png' %}"
@@ -215,7 +311,7 @@
                    title="Nepali Dictionary">
             </a>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
             <a href="http://pustakalaya.org/lekids.php" target="_blank">
               <img class="rounded img img-responsive"
                    src="{% static 'base_assets/img/learn-english-for-kids.png' %}"
@@ -225,7 +321,7 @@
                    title="Learn English">
             </a>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
             <a href="http://pustakalaya.org/external-content/static/environmental-activities/"
                target="_blank">
               <img class="rounded img img-responsive"
@@ -236,7 +332,7 @@
                    title="Environmental Activity">
             </a>
           </li>
-          <li class="mr-2">
+          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
             <a href="http://pustakalaya.org/audible.php" target="_blank">
               <img class="rounded img img-responsive"
                    src="{% static 'base_assets/img/audiable-text-book.png' %}"
@@ -252,6 +348,11 @@
 
       </div>
     </div>
+
+
+      </div>
+    </div>
+<br>
 
     <!-- Footer description -->
     <div class="row m-0">
@@ -444,7 +545,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 $("#lightSlider").lightSlider({
-        item: 3,
+        item: 4,
         autoWidth: false,
         slideMove: 1, // slidemove will be 1 if loop is true
         slideMargin: 10,
