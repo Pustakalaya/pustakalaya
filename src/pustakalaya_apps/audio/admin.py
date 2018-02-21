@@ -38,6 +38,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "audio_types",
         "audio_running_time",
         "audio_read_by",
+        "published",
         "audio_genre",
         "keywords",
         "audio_series",

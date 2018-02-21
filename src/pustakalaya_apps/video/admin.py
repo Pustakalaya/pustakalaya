@@ -43,6 +43,7 @@ class VideoAdmin(admin.ModelAdmin):
         "video_series",
         "volume",
         "edition",
+        "published",
         "additional_note",
         "description",
         "license_type",

@@ -40,6 +40,7 @@ class FeaturedItemManager(models.Manager):
     def get_queryset(self):
         return super(FeaturedItemManager, self).get_queryset().filter(featured="yes").order_by("-updated_date")[:10]
 
+
 class Document(AbstractItem, HitCountMixin):
     """Book document type to store book type item
     Child class of AbstractItem
@@ -210,6 +211,7 @@ class Document(AbstractItem, HitCountMixin):
 
     def doc(self):
         """Create and return document object"""
+
         item_attr = super(Document, self).doc()
         document_attr = dict(
             **item_attr,
@@ -218,7 +220,7 @@ class Document(AbstractItem, HitCountMixin):
             communities=[collection.community_name for collection in self.collections.all()],
             collections=[collection.collection_name for collection in self.collections.all()],
             languages=[language.language.lower() for language in self.languages.all()],
-            publisher=self.publisher.publisher_name,
+            publisher=self.get_publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             # Document type specific
@@ -251,11 +253,27 @@ class Document(AbstractItem, HitCountMixin):
 
         return obj
 
+    @property
+    def get_publisher_name(self):
+        """
+        Method that return publisher name to index in elastic search server
+        If publisher name is None return empty string
+        :return:
+        """
+
+        if self.publisher is None:
+            return " "
+
+        return self.publisher.publisher_name
+
     def index(self):
         """index or update a document instance to elastic search index server"""
-        self.doc().save()
+        # Index to index server if any doc is not empty and published status is "yes"
+        if self.published == "yes":
+            self.doc().save()
 
     def bulk_index(self):
+        # Do bulk index if doc item is not empty.
         return self.doc().to_dict(include_meta=True)
 
     def delete_index(self):
@@ -311,10 +329,9 @@ class DocumentFileUpload(AbstractTimeStampModel):
         images = []
         for i in range(self.total_pages):
             path, file_name = os.path.split(self.upload.url)
-            images.append("{}/{}.png".format(path,i))
+            images.append("{}/{}.png".format(path, i))
 
-        return  images
-
+        return images
 
     def __str__(self):
         return self.file_name
