@@ -77,10 +77,11 @@
                     </ul>
                 </div>
                 <div class="container">
+                  {% if favourite_documents %}
                     <h3>Your favourites Collection</h3>
 
                     <div class="row">
-                        {% for doc in popular_documents %}
+                        {% for doc in favourite_documents %}
                             <div class="col-lg-2 col-md-3 col-sm-6">
                                 <div class="card">
                                     <div class="content">
@@ -106,7 +107,7 @@
                             </div>
                         {% endfor %}
                     </div>
-
+                    {% endif %}
                     <ul>
 
                     </ul>
