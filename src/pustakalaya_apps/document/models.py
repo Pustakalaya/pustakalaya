@@ -319,6 +319,8 @@ class DocumentFileUpload(AbstractTimeStampModel):
     file_name = models.CharField(
         _("File name"),
         max_length=255,
+        blank=True,
+        default=""
     )
 
     document = models.ForeignKey(
