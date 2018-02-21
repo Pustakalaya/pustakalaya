@@ -43,6 +43,7 @@ class VideoAdmin(admin.ModelAdmin):
         "video_series",
         "volume",
         "edition",
+        "published",
         "additional_note",
         "description",
         "license_type",
@@ -57,3 +58,5 @@ class VideoAdmin(admin.ModelAdmin):
 class VideoSeriesAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
         return {}
+
+

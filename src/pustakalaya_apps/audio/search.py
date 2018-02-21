@@ -29,4 +29,4 @@ def index_audio():
     es = connections.get_connection()
     # Index all community with nested collection
     print("Indexing Audios...")
-    bulk(client=es, actions=(b.bulk_index() for b in Audio.objects.all().iterator()))
+    bulk(client=es, actions=(b.bulk_index() for b in Audio.objects.all().iterator() if b.published == "yes"))

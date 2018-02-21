@@ -1,5 +1,6 @@
 {%  extends 'dashboard/base.html' %}
 {%  load crispy_forms_tags %}
+{%  load i18n %}
 {%  block content %}
 
     {% comment %}
@@ -18,10 +19,17 @@
 
 
 
-    <form action="." method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+              <form action="." method="post" enctype="multipart/form-data">
     {%  csrf_token %}
     {{ form | crispy  }}
-    {{ document_file_upload_formset | crispy }}
-    <input type="submit" value="Create Document" class="btn btn-primary">
+     <h3>{%  trans "upload file" %}</h3>
+    {{ inlines | crispy }}
+    <input type="submit" value="Upload document" class="btn btn-primary">
     </form>
+            </div>
+        </div>
+    </div>
 {%  endblock content %}

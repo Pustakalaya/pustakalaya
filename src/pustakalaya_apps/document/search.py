@@ -40,7 +40,7 @@ def index_document():
     es = connections.get_connection()
     # Index all community with nested collection
     print("Indexing Document data type...")
-    bulk(client=es, actions=(b.bulk_index() for b in Document.objects.all().iterator()))
+    bulk(client=es, actions=(b.bulk_index() for b in Document.objects.all().iterator() if b.published == "yes"))
 
 
 class DocumentSearch(FacetedSearch):

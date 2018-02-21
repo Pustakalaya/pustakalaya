@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import (
     Document,
+    UnpublishedDocument,
     DocumentSeries,
     DocumentFileUpload,
     DocumentLinkInfo,
@@ -24,6 +25,10 @@ class DocumentIdentifierAdmin(admin.StackedInline):
     extra = 1
     max_num = 1
 
+@admin.register(UnpublishedDocument)
+class UnpublishedDocumentAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        return  self.model.objects.filter(published="no")
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
@@ -67,6 +72,18 @@ class DocumentAdmin(admin.ModelAdmin):
         "sponsors",
         "thumbnail",
     )
+
+    list_display = ['title', 'published', 'updated_date', 'submitted_by']
+
+    list_filter = ['published', 'title']
+
+    def save_model(self, request, obj, form, change):
+        """Override the submitted_by field to admin user
+        save_model is only called when the user is logged as an admin user.
+        """
+        if obj.submitted_by is None:
+            obj.submitted_by = request.user
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(DocumentSeries)

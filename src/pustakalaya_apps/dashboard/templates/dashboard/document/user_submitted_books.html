@@ -1,0 +1,87 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+{
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Item submitted by you</h4>
+                    </div>
+                    <div class="content">
+                        {%  if items %}
+                            <ul class="list-unstyled team-members">
+                            <li>
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <div class="avatar">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <h5 class="text-primary text-bold"> Title</h5>
+                                        <br>
+                                        <span class="text-muted"><small>{{ item.type }}</small></span>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <h5 class="text-primary text-bold"> Edit</h5>
+                                        <br>
+
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <h5 class="text-primary text-bold"> Delete</h5>
+                                        <br>
+
+                                    </div>
+
+
+                                </div>
+                            </li>
+                            {% for item in items %}
+                                <li>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div class="avatar">
+                                                <img src="{{ MEDIA_URL }}{{ item.thumbnail }}" alt="{{ item.title }}"
+                                                >
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-3">
+                                            {{ item.title }}
+                                            <br>
+                                            <span class="text-muted"><small>{{ item.type }}</small></span>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <i class="ti-new-window"></i>
+                                            <br>
+
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <i class="ti-trash"></i>
+                                            <br>
+
+                                        </div>
+                                    </div>
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+                            {%  else %}
+                            <p class="text-primary">{%  trans "You haven't submitted any item" %}</p>
+                        {%  endif %}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock content %}

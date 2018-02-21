@@ -3,6 +3,7 @@ import uuid
 import time
 import os
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
@@ -38,6 +39,7 @@ def __file_upload_path(instance, filepath):
 class FeaturedItemManager(models.Manager):
     def get_queryset(self):
         return super(FeaturedItemManager, self).get_queryset().filter(featured="yes").order_by("-updated_date")[:5]
+
 
 class Document(AbstractItem, HitCountMixin):
     """Book document type to store book type item
@@ -92,7 +94,9 @@ class Document(AbstractItem, HitCountMixin):
     document_series = models.ForeignKey(
         "DocumentSeries",
         verbose_name=_("Series"),
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
 
     education_levels = models.ManyToManyField(
@@ -152,7 +156,9 @@ class Document(AbstractItem, HitCountMixin):
 
     publisher = models.ForeignKey(
         Publisher,
-        verbose_name=_("Publisher name")
+        verbose_name=_("Publisher name"),
+        blank=True,
+        null=True
     )
     # Better to have plural name
     keywords = models.ManyToManyField(
@@ -170,6 +176,12 @@ class Document(AbstractItem, HitCountMixin):
         verbose_name=_("Sponsor"),
         blank=True,
 
+    )
+
+    submitted_by = models.ForeignKey(
+        User,
+        editable=False,
+        null=True
     )
 
     # Manager to return the featured objects.
@@ -199,6 +211,7 @@ class Document(AbstractItem, HitCountMixin):
 
     def doc(self):
         """Create and return document object"""
+
         item_attr = super(Document, self).doc()
         document_attr = dict(
             **item_attr,
@@ -207,7 +220,7 @@ class Document(AbstractItem, HitCountMixin):
             communities=[collection.community_name for collection in self.collections.all()],
             collections=[collection.collection_name for collection in self.collections.all()],
             languages=[language.language.lower() for language in self.languages.all()],
-            publisher=self.publisher.publisher_name,
+            publisher=self.get_publisher_name,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             # Document type specific
@@ -240,11 +253,27 @@ class Document(AbstractItem, HitCountMixin):
 
         return obj
 
+    @property
+    def get_publisher_name(self):
+        """
+        Method that return publisher name to index in elastic search server
+        If publisher name is None return empty string
+        :return:
+        """
+
+        if self.publisher is None:
+            return " "
+
+        return self.publisher.publisher_name
+
     def index(self):
         """index or update a document instance to elastic search index server"""
-        self.doc().save()
+        # Index to index server if any doc is not empty and published status is "yes"
+        if self.published == "yes":
+            self.doc().save()
 
     def bulk_index(self):
+        # Do bulk index if doc item is not empty.
         return self.doc().to_dict(include_meta=True)
 
     def delete_index(self):
@@ -258,6 +287,14 @@ class Document(AbstractItem, HitCountMixin):
         from django.urls import reverse
         return reverse("document:detail", kwargs={"title": slugify(self.title), "pk": self.pk})
 
+
+class UnpublishedDocument(Document):
+    """
+    This is the proxy model of Document,
+    Used in admin.py to display the list of unpublished document.
+    """
+    class Meta:
+        proxy = True
 
 class DocumentSeries(AbstractSeries):
     """BookSeries table inherited from AbstractSeries"""
@@ -300,10 +337,9 @@ class DocumentFileUpload(AbstractTimeStampModel):
         images = []
         for i in range(self.total_pages):
             path, file_name = os.path.split(self.upload.url)
-            images.append("{}/{}.png".format(path,i))
+            images.append("{}/{}.png".format(path, i))
 
-        return  images
-
+        return images
 
     def __str__(self):
         return self.file_name

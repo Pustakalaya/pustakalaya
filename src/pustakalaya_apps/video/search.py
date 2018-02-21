@@ -40,7 +40,7 @@ def index_video():
     es = connections.get_connection()
     # Index all community with nested collection
     print("Indexing videos...")
-    bulk(client=es, actions=(b.bulk_index() for b in Video.objects.all().iterator()))
+    bulk(client=es, actions=(b.bulk_index() for b in Video.objects.all().iterator() if b.published == "yes"))
 
 
 class VideoSearch(FacetedSearch):

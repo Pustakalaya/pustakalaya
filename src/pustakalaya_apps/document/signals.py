@@ -15,21 +15,20 @@ from .tasks import convert_pdf
 @receiver(m2m_changed, sender=Document.document_illustrators.through)
 @receiver(m2m_changed, sender=Document.document_editors.through)
 @receiver(m2m_changed, sender=Document)
+@receiver(post_save, sender=Document)
 @transaction.atomic
 def index_or_update_document(sender, instance, **kwargs):
     # Save or update index
-    print("Working or not working")
     instance.index()
 
 
 @receiver(pre_delete, sender=Document)
 @transaction.atomic
 def delete_document(sender, instance, **kwargs):
-    # Delete an index
+    # Delete an index first before instance in db.
     instance.delete_index()
 
 
-# TODO: run this signal in celery.
 @receiver(post_save, sender=DocumentFileUpload)
 def pdfto_image(sender, instance, **kwargs):
     """

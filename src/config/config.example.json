@@ -20,20 +20,20 @@
     "EMAIL_HOST": "smtp.gmail.com",
     "EMAIL_PORT": "587",
     "EMAIL_HOST_USER": "manoj.gautam@olenepal.org",
-    "EMAIL_HOST_PASSWORD": "Colleges123",
+    "EMAIL_HOST_PASSWORD": "yourpassword",
     "EMAIL_USE_TLS": "True",
     "FEEDBACK_MESSAGE_TO": [
-      "manojit.gautam@gmail.com",
-      "manoj.gautam@olenepal.org"
+      "youremail@gmail.com",
+      "youremail@outlook.com"
     ],
     "ADMIN_EMAILS": [
       [
         "Sys admin 1",
-        "manoj.gautam@olenepal.org"
+        "hari@hotmail.com"
       ],
       [
         "system admin 2",
-        "manojit.gautam@olenepal.org"
+        "sameer@yourcompany.com"
       ]
     ]
   },

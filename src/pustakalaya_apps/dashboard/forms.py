@@ -19,39 +19,57 @@ class ProfileForm(forms.ModelForm):
     #     model = UserProfile
     #     fields = ["first_name", "last_name", "phone_no", "user.username"]
 
+
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = [
+        fields = (
             'title',
             'collections',
             'document_file_type',
             'languages',
             'document_interactivity',
-            'publisher',
-            'keywords',
-            'document_series',
             'document_type',
-            'license_type'
-        ]
+            'license_type',
+            'thumbnail',
+        )
 
-# Document child forms.
-DocumentFileUploadFormSet = inlineformset_factory(
-    Document,
-    DocumentFileUpload,
-    fields=(
-        "file_name",
-        "upload",
-    ),
-    can_delete = False,
-    extra = 1
-)
+    def __init__(self, *args, **kwargs):
+        super(DocumentForm, self).__init__(*args, **kwargs)
+
+        self.fields['thumbnail'].widget.attrs = {
+            'class': 'btn btn-small btn-primary btn-block',
+            'name': 'myCustomName',
+            'placeholder': 'Item thumbnail'
+        }
 
 
 class DocumentFileUploadForm(forms.ModelForm):
     class Meta:
         model = DocumentFileUpload
-        fields = ["file_name", "upload"]
+        fields = (
+            'upload',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(DocumentFileUploadForm, self).__init__(*args, **kwargs)
+
+        self.fields['upload'].widget.attrs = {
+            'class': 'btn btn-small btn-primary btn-block',
+            'name': 'myCustomName',
+            'placeholder': 'Upload file'
+        }
+
+
+# Document child forms.
+DocumentFileUploadFormSet = inlineformset_factory(
+    Document,
+    DocumentFileUpload,
+    form=DocumentFileUploadForm,
+    extra=1 ,
+    can_delete=False,
+    can_order=False
+)
 
 
 class AudioFileUploadForm(forms.ModelForm):
@@ -62,6 +80,7 @@ class AudioFileUploadForm(forms.ModelForm):
 
 class VideoFileUploadForm(forms.ModelForm):
     pass
+
     class Meta:
         model = VideoFileUpload
         fields = ["file_name", "upload"]
