@@ -45,6 +45,7 @@
                 this.selectedEvent = 'click button'
                 // add value.
                  $("#queryData").val($('.sbx-google__input').val());
+                  if($('.sbx-google__input').val()==""){return;}
                  $("#searchForm").submit();
             },
             selected: function($event) {
