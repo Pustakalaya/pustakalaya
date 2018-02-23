@@ -25,6 +25,7 @@ class Review(models.Model):
 
     class Meta:
         ordering = ('created',)
+        #proxy = True
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.user, self.post)

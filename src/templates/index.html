@@ -18,10 +18,11 @@
   .box-model-head-new {
    background-color:  #3742fa;;
    border-bottom : 1px solid  #3742fa;
-   width: 270px;
+   width: 260px;
    border-top-left-radius: 5px;
    border-top-right-radius: 5px;
     box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
+    margin-left:5px;
   }
   .box-model-head-new>p{
   color: white;
@@ -33,7 +34,8 @@
 
 
 .format-dd[data-v-03b85949] {
-    width: 270px;
+    width: 260px;
+    margin-left:20px;
     /*position: fixed;*/
     background: #fff;
     z-index: 100;
@@ -102,7 +104,25 @@
     padding-left:10px;
 }
 
+  .content-box-shadow {
+    box-shadow: 0 0 7px #7f8c8d;
+}
 
+   .main-container-box-shadow {
+    box-shadow: 0 2px 2px 2px #7f8c8d;
+}
+.list-hover-style-slider{
+  border:2px solid #7f8c8d;
+  border-radius:5px;
+}
+.list-hover-style-slider:hover{
+  border:2px solid #3742fa;
+  border-radius:5px;
+}
+
+/*.content-box-shadow:hover {*/
+    /*box-shadow:0 0 25px #7f8c8d;*/
+/*}*/
 
 </style>
 
@@ -114,7 +134,7 @@
 <!--custom style backgound-color is in base.html body which includes for all-->
 <div class="for-bg-color-container background-color ">
   <!--search-->
-  <div class="container pt-4">
+  <div class="container pt-4 main-container-box-shadow mt-1 ">
     <!-- Search bar section -->
     <div class="row">
       <div class="col-md-12 col-xs-12 col-sm-12">
@@ -240,8 +260,8 @@
           <!-- search -->
           {% include '_partials/search_form.html' %}
         </div>
-        <section>
-          <p class="description bold text-uppercase text-dark  mb-2">Books we love</p>
+        <!--<section>-->
+          <p class="description bold text-uppercase text-dark  mb-0">Books we love</p>
           <div class="row">
             {% for book in featured_books %}
             <div class="col-md-2 col-sm-12  col-xs-12  p-0  pb-2 m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
@@ -249,7 +269,7 @@
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
-                height="150px">
+                height="165px">
 
                 <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span></div>
                 {% if  book.document_authors.first %}
@@ -266,16 +286,16 @@
             </div>
             {% endfor %}
           </div>
-        </section>
+        <!--</section>-->
 
         <!-- Education section -->
-    <div class="row m-0  " style="margin-left:-10px !important;">
-      <div class="rounded p-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 mb-0">
+    <div class="row m-0 " style="margin-left:-10px !important;">
+      <div class="rounded pt-3 pb-3 pl-4 pr-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 content-box-shadow ">
         <p class="description text-uppercase rounded bold text-black    text-uppercase mb-2">
           {% trans 'Interactive educational software' %}
         </p>
         <ul id="lightSlider">
-          <li class="mr-2 " style="border:2px solid #2980b9;border-radius:5px">
+          <li class="mr-2 list-hover-style-slider" >
             <a href="http://pustakalaya.org/epaath/" target="_blank">
               <img class="rounded img img-responsive" src="{% static 'base_assets/img/epaath.png' %}"
                    width="auto"
@@ -284,7 +304,7 @@
                    title="E-Paath">
             </a>
           </li>
-          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
+          <li class="mr-2 list-hover-style-slider" >
             <a href="http://pustakalaya.org/elkids.php" target="_blank">
 
               <img class="rounded img img-responsive"
@@ -296,7 +316,7 @@
                    title="E-Learning for Kids">
             </a>
           </li>
-          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
+          <li class="mr-2 list-hover-style-slider" >
             <a href="https://phet.colorado.edu/" target="_blank">
               <img class="rounded img img-responsive" src="{% static 'base_assets/img/simulations.png' %}"
                    width="auto"
@@ -305,7 +325,7 @@
                    title="Simulations">
             </a>
           </li>
-          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
+          <li class="mr-2 list-hover-style-slider" >
             <a href="http://pustakalaya.org/sabdakosh.php" target="_blanks">
               <img class="rounded img img-responsive"
                    src="{% static 'base_assets/img/nepal-dictionary.png' %}"
@@ -315,7 +335,7 @@
                    title="Nepali Dictionary">
             </a>
           </li>
-          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
+          <li class="mr-2 list-hover-style-slider" >
             <a href="http://pustakalaya.org/lekids.php" target="_blank">
               <img class="rounded img img-responsive"
                    src="{% static 'base_assets/img/learn-english-for-kids.png' %}"
@@ -325,7 +345,7 @@
                    title="Learn English">
             </a>
           </li>
-          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
+          <li class="mr-2 list-hover-style-slider" >
             <a href="http://pustakalaya.org/external-content/static/environmental-activities/"
                target="_blank">
               <img class="rounded img img-responsive"
@@ -336,7 +356,7 @@
                    title="Environmental Activity">
             </a>
           </li>
-          <li class="mr-2" style="border:2px solid #2980b9;border-radius:5px">
+          <li class="mr-2 list-hover-style-slider">
             <a href="http://pustakalaya.org/audible.php" target="_blank">
               <img class="rounded img img-responsive"
                    src="{% static 'base_assets/img/audiable-text-book.png' %}"
@@ -356,11 +376,11 @@
 
       </div>
     </div>
-<br>
+<!--<br>-->
 
     <!-- Footer description -->
     <div class="row m-0">
-      <div class="p-4 rounded jumbotron pb-4 pt-4 mt-4 mb-0">
+      <div class="p-4 rounded jumbotron pb-4 pt-4 mt-4 mb-1 content-box-shadow">
         <p class="description text-uppercase text-black text-uppercase bold mb-2">{% trans "About epustakalaya" %}</p>
         <p class="paragraph-font">{% blocktrans %}
           E-Pustakalaya is an education-focused digital library containing full-text documents, images,
@@ -386,7 +406,7 @@
             <div class="row  ">
               <!-- Major partners -->
               <div class=" col-md-6 col-xs-12  md-height-same-as-container ipad-padding-left  sd-padding-left-right-zero lg-padding-left-zero">
-                <div class="container jumbotron mb-0 pt-3 ">
+                <div class="container jumbotron mb-0 pt-3 content-box-shadow">
                   <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Major partners" %}</p>
 
                 <a class="nav-link active" href="https://idrf.com/" target="_blank" title="IDRF">
@@ -400,7 +420,7 @@
               </div>
               <!-- Past partners -->
               <div class=" col-md-6 col-xs-12  ipad-padding-right sd-padding-left-right-zero ld-padding-right-zero">
-                <div class="container jumbotron mb-0 pt-3   sd-break-small-screen ">
+                <div class="container jumbotron mb-0 pt-3   sd-break-small-screen content-box-shadow">
                   <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Past supporter" %}</p>
 
                 <!-- TODO: replace with sliding banner -->
@@ -435,7 +455,7 @@
 
         <!-- Contributed partners -->
         <div class="section-padding mt-0 pt-0">
-          <div class="container jumbotron pb-4 pt-4 mt-0 mb-0">
+          <div class="container jumbotron pb-4 pt-4 mt-0 mb-0 content-box-shadow">
             <p class="description text-uppercase  bold text-dark text-uppercase mb-2">{% trans "Content contribution" %}</p>
 
             <div class="text-center">

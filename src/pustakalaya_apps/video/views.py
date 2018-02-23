@@ -49,7 +49,7 @@ class VideoDetailView(DetailView):
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
         # review system data extractions
-        data_review = Review.objects.filter(content_id= self.object.pk,content_type='video')
+        data_review = Review.objects.filter(content_id= self.object.pk,content_type='video',published=True)
         context["data_review"]= data_review
         return self.render_to_response(context)
     template_name = "video/video_detail.html"
