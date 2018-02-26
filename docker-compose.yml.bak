@@ -1,0 +1,101 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    hostname: nginx
+    container_name: nginx_01
+    networks:
+      - pustakalaya-network
+    ports:
+     - "8000:8000"
+    volumes:
+     - ./src:/src
+     - ./conf/nginx:/etc/nginx/conf.d
+     - /media/bikram/pustakalaya/olen-lib-project/src/media_root:/library/media_root
+     - /media/bikram/pustakalaya/olen-lib-project/src/static_root:/library/static_root
+    depends_on:
+     - web
+  web:
+    build:
+      context: .
+      dockerfile: ./dockerfile-django-web/Dockerfile
+    hostname: web
+    container_name: django_web_01
+    # command: bash -c 'python manage.py makemigrations && python manage.py migrate --settings=pustakalaya.settings.production && gunicorn pustakalaya.wsgi -b 0.0.0.0:8001 && python manage.py --settings=pustakalaya.settings.production'
+    command: ./run_web.sh
+    depends_on:
+      - db
+      - elastic
+    volumes:
+      - ./src:/src
+      - /media/bikram/pustakalaya/olen-lib-project/src/media_root:/library/media_root
+      - /media/bikram/pustakalaya/olen-lib-project/src/static_root:/library/static_root
+    networks:
+      - pustakalaya-network
+    ports:
+      - "8001:8001"
+    # expose:
+    #   - "8001"
+    links:
+      - redis
+
+  db:
+    image: postgres:9.6
+      
+
+    hostname: db
+    container_name: postgres_01
+    networks:
+      - pustakalaya-network
+    # command: ./run_db.sh
+    volumes:
+      - ./src:/src
+    expose:
+      -  "5432"
+
+  elastic:
+    build:
+      context: .
+      dockerfile: ./dockerfile-elastic/Dockerfile
+    hostname: elastic
+    container_name: elasticsearch_01
+    volumes:
+      - ./conf:/conf
+    networks:
+      - pustakalaya-network
+    # command: ./run_db.sh
+    depends_on:
+      - db
+    expose:
+      -  "9200"
+      -  "9300"
+    ports:
+      -  '9200:9200'
+
+
+  redis:
+    image: redis:latest
+    hostname: redis
+    container_name: redis_01
+    networks:
+      - pustakalaya-network
+    ports:
+     - '6379:6379'
+
+  celery:
+    build:
+      context: .
+      dockerfile: ./dockerfile-celery/Dockerfile
+    hostname: celery
+    container_name: celery_01
+    command: ./run_celery.sh
+    networks:
+      - pustakalaya-network
+    volumes:
+      - ./src:/src
+    links:
+      - db
+      - redis
+networks:
+  pustakalaya-network:
+    driver: bridge
