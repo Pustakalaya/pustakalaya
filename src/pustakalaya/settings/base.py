@@ -65,7 +65,7 @@ THIRDPARTY_APPS = [
     'star_ratings',
     'analytical',
     'bootstrap_pagination',
-
+    'admin_reorder',
 ]
 
 PUSTAKALAYA_APPS = [
@@ -99,6 +99,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'pustakalaya.urls'
@@ -187,16 +188,19 @@ except KeyError:
     ImproperlyConfigured("{} improperly configured".format("MEDIA_ROOT"))
 
 # Elastic search settings.
-ES_HOST = os.environ.get('ES_HOST', '127.0.0.1')
+try:
+    ES_HOST = config["ELASTIC"]["ES_HOST"]
+    ES_INDEX_SETTINGS = {
+        'number_of_shards': config["ELASTIC"]["ES_NUMBER_OF_SHARDS"],
+        'number_of_replicas': config["ELASTIC"]["ES_NUMBER_OF_REPLICAS"] or os.getenv("ES_NUMBER_OF_REPLICAS", 0),
+    }
+    ES_INDEX = "pustakalaya"
+    ES_SSL =  config["ELASTIC"]["ES_USE_SSL"] or False
+    ES_PORT = config["ELASTIC"]["ES_PORT"]  or 9200
+except KeyError:
+    ImproperlyConfigured("{} improperly configured".format("ELASTIC SETTINGS"))
 
-ES_INDEX = os.environ.get('ES_INDEX', 'pustakalaya')
-# Override ES_INDEX
-ES_INDEX = 'pustakalaya'
 
-ES_INDEX_SETTINGS = {
-    'number_of_shards': os.getenv("ES_NUMBER_OF_SHARDS", 1),
-    'number_of_replicas': os.getenv("ES_NUMBER_OF_REPLICAS", 0),
-}
 
 ES_CONNECTIONS = {
     'default': {
@@ -205,8 +209,8 @@ ES_CONNECTIONS = {
             'index': ES_INDEX,
             **ES_INDEX_SETTINGS,
             'verify_certs': False,
-            'use_ssl': os.environ.get('ES_USE_SSL', False) == 'True',
-            'port': os.environ.get('ES_PORT', '9200'),
+            'use_ssl': ES_SSL == 'True',
+            'port': ES_PORT or os.environ.get('ES_PORT', '9200'),
             'timeout': 10
         }]
     }
@@ -236,6 +240,56 @@ CACHES = {
 # Django jet configuration
 JET_DEFAULT_THEME = 'default'
 JET_SIDE_MENU_COMPACT = True
+
+# Django admin reorder.
+ADMIN_REORDER = (
+    # # Keep original label and models
+    {
+        'app': 'document',
+        'label': 'Manage Pustakalaya Documents',
+        'models': (
+            'document.Document',
+            'document.UnpublishedDocument',
+            'document.DocumentSeries'
+        )
+    },
+    {
+        'app': 'video',
+        'label': 'Manage Pustakalaya Videos',
+    },
+    {
+        'app': 'audio',
+        'label': 'Manage Pustakalaya Audios',
+    },
+    {
+        'app': 'collection',
+        'label': 'Manage Categories, Collection',
+    },
+    {
+        'app': 'core',
+        'label': 'Manage Miscellaneous items',
+    },
+    {
+        'app': 'review_system',
+        'label': 'Manage Moderate reviews',
+    },
+    {
+        'app': 'auth',
+        'label': 'Manage Staff, users and group',
+    },
+    {
+        'app': 'account',
+        'label': 'Manage registered user accounts',
+    },
+    {
+        'app': 'hitcount',
+        'label': 'Manage views count'
+    },
+    {
+        'app': 'star_ratings',
+        'label': 'Manage star ratings on item'
+    },
+)
 
 ## Translation settings.
 LANGUAGES = (

@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 from elasticsearch.exceptions import NotFoundError
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
-
+from django.core import urlresolvers
 from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
@@ -286,6 +286,9 @@ class Document(AbstractItem, HitCountMixin):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse("document:detail", kwargs={"title": slugify(self.title), "pk": self.pk})
+
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
 
 
 class UnpublishedDocument(Document):

@@ -26,6 +26,8 @@ class DocumentAdmin(admin.ModelAdmin):
         AudioFileUploadInline,
     ]
 
+    list_per_page = 10
+
     fields = (
         "title",
         "abstract",

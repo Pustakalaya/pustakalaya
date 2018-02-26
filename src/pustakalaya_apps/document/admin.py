@@ -75,8 +75,10 @@ class DocumentAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'published','featured', 'updated_date', 'submitted_by']
 
+
     list_filter = ['published', 'title','featured']
 
+    list_per_page = 10
 
     def save_model(self, request, obj, form, change):
         """Override the submitted_by field to admin user
@@ -87,7 +89,3 @@ class DocumentAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-@admin.register(DocumentSeries)
-class DocumentSeriesAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}

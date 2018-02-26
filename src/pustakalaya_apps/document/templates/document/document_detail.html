@@ -43,6 +43,7 @@
             <div class="row">
 
                 <div class="col-md-3 col-sm-12  col-xs-12 ">
+
                     <!-- Logo -->
                     <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
                          alt="{{ object.title }}" title="{{ object.title }}">
@@ -51,6 +52,7 @@
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" target="_blank"
                            class="pull-left pr-5 pl-4 pt-2 pb-2 mt-2 mr-4 text-white bg-primary text-capitalize "
                         style="border-radius: 3px;"><span class="fa fa-download"></span>&nbsp;{% trans 'download ' %}</a>
+
 
 
                         {% if document.total_pages >= 1 %}
@@ -64,10 +66,20 @@
                             {% trans "File size: " %}{{ document.upload.size | file_size_format }}</p>
                     {% endfor %}
 
+
+
                     <!-- show count -->
                     <p class="pull-left bg-blue text-dark text-center paragraph-font mt-3">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
                   <br><br><br><br>
                     <!-- Rating -->
+                 {%  if request.user.is_superuser %}
+
+                     <p class="text-primary description">
+                      <a href="{{ object.get_admin_url }}">{%  trans "Edit" %}</a>
+                     </p>
+
+                    {%  endif %}
+
 
                     {% ratings object %}
 
@@ -120,7 +132,11 @@
 
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <!-- title of a document -->
-                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">{{ object.title }}</h4>
+
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">
+
+                        {{ object.title }}
+                    </h4>
                     <!-- author section -->
                     <div class="pb-1 ">
                         <!-- Authors -->
@@ -390,7 +406,7 @@
                         </div>
 
                     </div>
-
+                    <br>
                   <!--Review system added-->
                    <div class="container" style="margin-left:-27px;">
 
