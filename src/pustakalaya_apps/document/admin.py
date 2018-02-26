@@ -87,7 +87,3 @@ class DocumentAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-@admin.register(DocumentSeries)
-class DocumentSeriesAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}

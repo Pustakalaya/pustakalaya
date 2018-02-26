@@ -64,6 +64,7 @@ THIRDPARTY_APPS = [
     'hitcount',
     'star_ratings',
     'analytical',
+    'admin_reorder',
 
 ]
 
@@ -98,6 +99,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'pustakalaya.urls'
@@ -235,6 +237,56 @@ CACHES = {
 # Django jet configuration
 JET_DEFAULT_THEME = 'default'
 JET_SIDE_MENU_COMPACT = True
+
+# Django admin reorder.
+ADMIN_REORDER = (
+    # # Keep original label and models
+    {
+        'app': 'document',
+        'label': 'Manage Pustakalaya Documents',
+        'models': (
+            'document.Document',
+            'document.UnpublishedDocument',
+            'document.DocumentSeries'
+        )
+    },
+    {
+        'app': 'video',
+        'label': 'Manage Pustakalaya Videos',
+    },
+    {
+        'app': 'audio',
+        'label': 'Manage Pustakalaya Audios',
+    },
+    {
+        'app': 'collection',
+        'label': 'Manage Categories, Collection',
+    },
+    {
+        'app': 'core',
+        'label': 'Manage Miscellaneous items',
+    },
+    {
+        'app': 'review_system',
+        'label': 'Manage Moderate reviews',
+    },
+    {
+        'app': 'auth',
+        'label': 'Manage Staff, users and group',
+    },
+    {
+        'app': 'account',
+        'label': 'Manage registered user accounts',
+    },
+    {
+        'app': 'hitcount',
+        'label': 'Manage views count'
+    },
+    {
+        'app': 'star_ratings',
+        'label': 'Manage star ratings on item'
+    },
+)
 
 ## Translation settings.
 LANGUAGES = (
