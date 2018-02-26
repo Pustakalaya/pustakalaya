@@ -8,9 +8,9 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display = ('content_id', 'user', 'post', 'created', 'published')
 
     search_fields = ('user','post','published')
-
-    def get_queryset(self, request):
-        return self.model.objects.filter(published="False")
+    list_filter = ('published',)
+    # def get_queryset(self, request):
+    #     return self.model.objects.filter(published="False")
 
 
 admin.site.register(Review,ReviewAdmin)

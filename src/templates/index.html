@@ -12,25 +12,24 @@
 <style>
 
 .box-model-new{
-    width: 255px;
+    min-width: 255px;
   }
 
-  .box-model-head-new {
+.box-model-head-new {
    background-color:  #3742fa;;
    border-bottom : 1px solid  #3742fa;
    width: 260px;
    border-top-left-radius: 5px;
    border-top-right-radius: 5px;
-    box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
-    margin-left:5px;
-  }
-  .box-model-head-new>p{
-  color: white;
-  font-weight:bold;
-  padding-left:5px;
-  padding-left:25px;
+   box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
+   margin-left:5px;
 
-  }
+}
+.box-model-head-new>p{
+  color: white;
+  font-weight:500;
+  padding-left:5px;
+}
 
 
 .format-dd[data-v-03b85949] {
@@ -43,10 +42,9 @@
     padding-left:0px;
     margin-top: 5px;
     border-radius: 5px;
-    /*padding-left:10px;*/
     text-align: left;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 550;
     color: #000;
     box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
     }
@@ -76,9 +74,11 @@
     background:#3742fa;
     color:#fff
 
+
 }
 .format-dd li[data-v-03b85949] a:hover{
  text-decoration: none;
+  font-weight: 550;
 
 }
 .format-dd li[data-v-03b85949]:hover a{
@@ -114,14 +114,37 @@
     box-shadow: 0 2px 2px 2px #7f8c8d;
 }
 .list-hover-style-slider{
-  border:2px solid #7f8c8d;
+  border:1px solid #7f8c8d;
   border-radius:5px;
+  /*box-shadow: 0 0 7px #7f8c8d;*/
 }
 .list-hover-style-slider:hover{
-  border:2px solid #3742fa;
+  border:1px solid #3742fa;
   border-radius:5px;
+  /*box-shadow: 0 0 7px #7f8c8d;*/
 }
 
+@media screen and (max-width: 1198px) and (min-width: 770px)
+ {
+    /*large device(lg)*/
+    .row-first-width {
+       /*padding-right:0px*/
+      width: 20%!important;
+      min-width: 20%;
+    }
+  .row-second-width {
+        width: 80%!important;
+    min-width: 80%;
+  }
+
+  .maximize-width-for-ipad{
+    width: 130%;
+    padding-left:2%;
+    /*padding-right:-20%;*/
+   padding-right:3%;
+    overflow: auto;
+  }
+}
 </style>
 
 
@@ -130,20 +153,21 @@
 
 {% block content %}
 <!--custom style backgound-color is in base.html body which includes for all-->
-<div class="for-bg-color-container background-color ">
+<div class="for-bg-color-container background-color mt-1">
   <!--search-->
-  <div class="container pt-4 main-container-box-shadow mt-1 ">
+  <div class="container pt-4 main-container-box-shadow ">
     <!-- Search bar section -->
-    <div class="row">
-      <div class="col-md-12 col-xs-12 col-sm-12">
+    <!--<div class="row">-->
+      <!--<div class="col-md-12 col-xs-12 col-sm-12">-->
 
-      </div>
-    </div>
+      <!--</div>-->
+    <!--</div>-->
 
     <!-- Browse by and books list section -->
     <div class="row">
       <!-- Browse by -->
-      <div class="col-md-3 col-xs-12 col-sm-12" id="browse">
+
+      <div class="col-md-3 col-xs-12 col-sm-12 row-first-width" id="browse">
 
         <!-- Browse Pustakalaya -->
         <div class="mt-0">
@@ -187,7 +211,7 @@
 
         <!-- Browse by subjects -->
 <!--<div class="container">-->
-<div class="box-model-new " >
+    <div class="box-model-new " >
         <div class="row box-model-head-new">
            <p class="description  text-uppercase ">sections</p>
         </div>
@@ -252,15 +276,16 @@
        -->
 
       </div>
+
       <!-- Featured books -->
-      <div class="col-md-9 col-sm-12 col-xs-12 pr-3">
-        <div class="search">
+      <div class="col-md-9 col-sm-12 col-xs-12 row-second-width">
+        <div class="search maximize-width-for-ipad">
           <!-- search -->
           {% include '_partials/search_form.html' %}
         </div>
-        <!--<section>-->
-          <p class="description bold text-uppercase text-dark  mb-0">Books we love</p>
-          <div class="row">
+        <section>
+          <p class="description bold text-uppercase text-dark  mb-0 ">Books we love</p>
+          <div class="row maximize-width-for-ipad">
             {% for book in featured_books %}
             <div class="col-md-2 col-sm-12  col-xs-12  p-0  pb-2 m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
               <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
@@ -284,10 +309,10 @@
             </div>
             {% endfor %}
           </div>
-        <!--</section>-->
+        </section>
 
         <!-- Education section -->
-    <div class="row m-0 " style="margin-left:-10px !important;">
+    <div class="row m-0 maximize-width-for-ipad" style="margin-left:-10px !important;">
       <div class="rounded pt-3 pb-3 pl-4 pr-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 content-box-shadow ">
         <p class="description text-uppercase rounded bold text-black    text-uppercase mb-2">
           {% trans 'Interactive educational software' %}
@@ -373,6 +398,7 @@
 
 
       </div>
+
     </div>
 <!--<br>-->
 
@@ -408,9 +434,9 @@
                   <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Major partners" %}</p>
 
                 <a class="nav-link active" href="https://idrf.com/" target="_blank" title="IDRF">
-                  <img src="{% static 'images/logos/logo_web.svg' %}"
+                  <img class="list-hover-style-slider" src="{% static 'images/logos/logo_web.svg' %}"
                        width="150px"
-                       height="50px"
+                       height="55px"
                        alt="IRDF"/>
                 </a>
                 </div>
@@ -423,7 +449,7 @@
 
                 <!-- TODO: replace with sliding banner -->
                 <ul class="nav">
-                  <li class="nav-item">
+                  <li class="nav-item list-hover-style-slider mr-1">
                     <a class="nav-link active" href="https://www.maitritrust.org.uk/" target="_blank"
                        title="Maitri Trust">
                       <img class="img img-responsive"
@@ -434,7 +460,7 @@
                     </a>
                   </li>
 
-                  <li class="nav-item">
+                  <li class="nav-item list-hover-style-slider mr-1">
                     <a class="nav-link active" href="http://www.nepallibrary.org/" target="_blank"
                        title="Nepal Library Foundation">
                       <img class="img" src="{% static 'images/logos/nepal-library-foundation.png' %}"
@@ -458,7 +484,7 @@
 
             <div class="text-center">
               <ul class="nav text-center">
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="https://www.britishcouncil.org.np/" target="_blank"
                      title="British Council">
                     <img class=" img img-responsive" src="{% static 'images/logos/bc.png' %}"
@@ -467,7 +493,7 @@
                   </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="http://gorkhapatraonline.com/" target="_blank"
                      title="Gorkhapatra Sansthan">
                     <img class="img img-responsive" src="{% static 'images/logos/gorkhapatra.png' %}"
@@ -476,20 +502,20 @@
                          alt="Gorkhapatra Sansthan">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="http://madanpuraskar.org/" target="_blank">
                     <img class="img img-responsive" src="{% static 'images/logos/madanpuraskar.gif' %}"
                          alt="Madanpuraskar" title="Madan Puraskar" width="50px" height="30px;">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="nepalacademy.org.np" target="_blank"
                      title="Nepal Academy">
                     <img class="img img-responsive" src="{% static 'images/logos/nepalacademy.png' %}"
                          alt="Nepal academy" width="60px" height="30px;">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active"
                      href="http://onlinesahitya.com/content/nepalese-society-childrens-literature-neschil"
                      target="_blank" title="Neschil">
@@ -497,14 +523,14 @@
                          alt="Neschil" width="50px" height="30px;">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="http://www.e-learningforkids.org/" target="_blank"
                      title="E-Learning For Kids">
                     <img class="img img-responsive" src="{% static 'images/logos/e-learning-for-kids.png' %}"
                          alt="E-Learning For Kids" width="80px" height="30px;">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="https://www.roomtoread.org/" target="_blank"
                      title="Room To Read">
                     <img class="img img-responsive" src="{% static 'images/logos/roomtoread.png' %}"
@@ -512,7 +538,7 @@
                   </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="http://nepal.worlded.org/" target="_blank"
                      title="World Education Nepal">
                     <img class="img img-responsive" src="{% static 'images/logos/xworld.png' %}"
@@ -520,20 +546,20 @@
                   </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="http://rbf.org.np/" target="_blank" title="Rato Bangala Foundation">
                     <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/rtf.png' %}"
                          alt="Rato Bangla Foundation" width="50px" height="30px;">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="http://www.savethechildren.org" target="_blank"
                      title="Save The Children">
                     <img class="img img-responsive" src="{% static 'base_assets/img/partnerslogo/stc.gif' %}"
                          alt="Save The Children" width="50px" height="30px;">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="https://practicalaction.org/nepal" target="_blank"
                      title="Practical Action">
                     <img class="img img-responsive"
@@ -541,7 +567,7 @@
                          alt="Pritical Action" height="30px;" width="60px;">
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item list-hover-style-slider mr-1">
                   <a class="nav-link active" href="http://www.digitalhimalaya.com/" target="_blank"
                      title="Digital Himalaya">
                     <img class="img img-responsive" src="{% static 'images/logos/DH_logo_small.gif' %}"
