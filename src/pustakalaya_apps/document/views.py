@@ -37,8 +37,11 @@ class DocumentDetailView(HitCountDetailView):  # Detail view is inherited from H
         # you need to pass it the request object as well
         hit_count_response = HitCountMixin.hit_count(request, hit_count)
         context = self.get_context_data(object=self.object)
-        data_review = Review.objects.filter(content_id=self.object.pk, content_type='document')
+        data_review = Review.objects.filter(content_id=self.object.pk, content_type='document',published=True)
 
+        #print("review_data= ",data_review)
+        #for item in data_review:
+        #    print("item comment ="+item.post+",publish status="+ str(item.published))
         favourite_data=""
         # favourite item data extractions
         if request.user.is_authenticated:

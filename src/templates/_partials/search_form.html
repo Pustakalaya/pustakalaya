@@ -7,7 +7,7 @@
 <script src="{% static "base_assets/js/plugins/vue-instant.browser.js" %}"></script>
   <div id="home-page-search-bar">
     <label>{{selectedEvent}}</label>
-    <form action="/search" method="GET" id="searchForm">
+    <form action="/search" method="GET" id="searchForm" class="content-box-shadow">
       <div class="input-group bg-white">
         <input type="hidden" id="filterData" name="form-filter"/>
         <input type="hidden" value="" name="q" id="queryData"/>
@@ -24,6 +24,7 @@
                    name="customName" placeholder="Search pustakalaya"
                    type="google"></vue-instant>
     </form>
+    <br>
   </div>
 </div>
 <script>
@@ -45,6 +46,7 @@
                 this.selectedEvent = 'click button'
                 // add value.
                  $("#queryData").val($('.sbx-google__input').val());
+                  if($('.sbx-google__input').val()==""){return;}
                  $("#searchForm").submit();
             },
             selected: function($event) {
