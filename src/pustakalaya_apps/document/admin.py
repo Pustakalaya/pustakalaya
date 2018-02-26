@@ -76,6 +76,7 @@ class DocumentAdmin(admin.ModelAdmin):
     list_display = ['title', 'published', 'updated_date', 'submitted_by']
 
     list_filter = ['published', 'title','featured']
+    list_per_page = 10
 
 
     def save_model(self, request, obj, form, change):

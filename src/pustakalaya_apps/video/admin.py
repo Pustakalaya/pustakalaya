@@ -24,6 +24,8 @@ class VideoAdmin(admin.ModelAdmin):
         VideoFileUploadAdmin
     ]
 
+    list_per_page = 10
+
     fields = (
         "title",
         "abstract",
