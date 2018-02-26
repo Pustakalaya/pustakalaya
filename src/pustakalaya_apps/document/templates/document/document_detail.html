@@ -54,6 +54,7 @@
                         style="border-radius: 3px;"><span class="fa fa-download"></span>&nbsp;{% trans 'download ' %}</a>
 
 
+
                         {% if document.total_pages >= 1 %}
                         <a style="border-radius: 3px;" class="pull-left ml-1 pr-5 pl-5 pt-2 pb-2 mt-2 text-white bg-primary text-capitalize"
                            href="{% url 'document:flipbook' document.pk %}#viewCenter"><span class="fa fa-book"></span>&nbsp;{% trans 'read' %}</a>
@@ -65,10 +66,20 @@
                             {% trans "File size: " %}{{ document.upload.size | file_size_format }}</p>
                     {% endfor %}
 
+
+
                     <!-- show count -->
                     <p class="pull-left bg-blue text-dark text-center paragraph-font mt-3">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
                   <br><br><br><br>
                     <!-- Rating -->
+                 {%  if request.user.is_superuser %}
+
+                     <p class="text-primary description">
+                      <a href="{{ object.get_admin_url }}">{%  trans "Edit" %}</a>
+                     </p>
+
+                    {%  endif %}
+
 
                     {% ratings object %}
 
@@ -126,11 +137,6 @@
 
                         {{ object.title }}
                     </h4>
-                      {%  if request.user.is_superuser %}
-
-                      <a href="{{ object.get_admin_url }}">{%  trans "Edit" %}</a>
-
-                    {%  endif %}
                     <!-- author section -->
                     <div class="pb-1 ">
                         <!-- Authors -->
@@ -400,7 +406,7 @@
                         </div>
 
                     </div>
-
+                    <br>
                   <!--Review system added-->
                    <div class="container" style="margin-left:-27px;">
 
