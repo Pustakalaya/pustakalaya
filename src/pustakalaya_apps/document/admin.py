@@ -73,7 +73,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "thumbnail",
     )
 
-    list_display = ['title', 'published', 'updated_date', 'submitted_by']
+    list_display = ['title', 'published','featured', 'updated_date', 'submitted_by']
 
     list_filter = ['published', 'title','featured']
 

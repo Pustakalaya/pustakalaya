@@ -64,6 +64,7 @@ THIRDPARTY_APPS = [
     'hitcount',
     'star_ratings',
     'analytical',
+    'bootstrap_pagination',
 
 ]
 
