@@ -41,7 +41,7 @@ def dashboard(request):
         'favourite_documents':users
     })
 
-
+@login_required()
 def profile(request):
     """
     Render the user profile template
