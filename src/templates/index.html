@@ -287,15 +287,14 @@
           <p class="description bold text-uppercase text-dark  mb-0 ">Books we love</p>
           <div class="row maximize-width-for-ipad">
             {% for book in featured_books %}
-            <div class="col-md-2 col-sm-12  col-xs-12  p-0  pb-2 m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
+            <div class="col-md-2 col-sm-12  col-xs-12  p-0   m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
               <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
-                height="165px">
-
-                <div class=" pl-3 text-capitalize  mt-4"> <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span></div>
-                {% if  book.document_authors.first %}
+                height="190px">
+                <div class=" pl-3 text-capitalize    "> <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span></div>
+                {% if  book.document_authors.first%}
                 <div class=" pl-3 author-name-size text-dark">By
                 <span class="text-secondary"> {{book.document_authors.first}}</span>
                 </div>
@@ -304,7 +303,7 @@
 
 
               {% if forloop.counter|divisibleby:"6" %}
-              <div class="mt-2"></div>
+              <div class="mt-1"></div>
               {% endif %}
             </div>
             {% endfor %}
@@ -314,7 +313,7 @@
         <!-- Education section -->
     <div class="row m-0 maximize-width-for-ipad" style="margin-left:-10px !important;">
       <div class="rounded pt-3 pb-3 pl-4 pr-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 content-box-shadow ">
-        <p class="description text-uppercase rounded bold text-black    text-uppercase mb-2">
+        <p class="description text-uppercase rounded bold text-black    text-uppercase mb-1">
           {% trans 'Interactive educational software' %}
         </p>
         <ul id="lightSlider">

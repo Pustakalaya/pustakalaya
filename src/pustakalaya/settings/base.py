@@ -64,8 +64,8 @@ THIRDPARTY_APPS = [
     'hitcount',
     'star_ratings',
     'analytical',
+    'bootstrap_pagination',
     'admin_reorder',
-
 ]
 
 PUSTAKALAYA_APPS = [

@@ -78,13 +78,21 @@
 
                     </ul>
                 </div>
+
+              <!--This is for favourite books list in admin section-->
+
                 <div class="container">
                   {% if favourite_documents %}
                     <h3>Your favourites Collection</h3>
 
                     <div class="row">
-                        {% for doc in favourite_documents %}
-                            <div class="col-lg-2 col-md-3 col-sm-6">
+
+
+                      {% for doc in favourite_documents %}
+
+
+
+                          <div class="col-lg-2 col-md-4 col-sm-6">
 
                                <div class="card"
                                      style="cursor: pointer;"
@@ -109,13 +117,37 @@
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                    <ul>
 
-                    </ul>
+                      {% if forloop.counter == 5 %}
+                         <div class="container"></div>
+                      <br>
+                          {% endif %}
+
+                      {% endfor %}
+
+                      <div class="container">  </div>
+
+                      <div class="pagination">
+                        <span class="step-links">
+                          {% if favourite_documents.has_previous %}
+                          <a href="?page={{ users.previous_page_number }}">previous</a>
+                          {% endif %}
+
+                          <!-- Showing the page numbers in Html Page -->
+                          <span class="current">
+                          Page {{ favourite_documents.number }} of {{ favourite_documents.paginator.num_pages }}.
+                        </span>
+
+                {% if favourite_documents.has_next %}
+                <a href="?page={{ favourite_documents.next_page_number }}">next</a>
+                {% endif %}
+                </span>
                 </div>
+
+
+            </div>
+                  {% endif %}
+      </div>
 
         {% block content %}
 
