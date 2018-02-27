@@ -2,6 +2,7 @@ version: '2'
 services:
   nginx:
     image: nginx:latest
+    restart: always
     hostname: nginx
     container_name: nginx_01
     networks:
@@ -19,6 +20,7 @@ services:
     build:
       context: .
       dockerfile: ./dockerfile-django-web/Dockerfile
+    restart: always
     hostname: web
     container_name: django_web_01
     command: ./run_web.sh
@@ -39,6 +41,7 @@ services:
       - redis
   db:
     image: postgres:9.6
+    restart: always
     environment:
       - POSTGRES_USER=pustakalaya_user
       - POSTGRES_DB=pustakalaya
@@ -60,6 +63,7 @@ services:
       context: .
       dockerfile: ./dockerfile-elastic/Dockerfile
     hostname: elastic
+    restart: always
     container_name: elasticsearch_01
     volumes:
       - ./conf:/conf
@@ -77,6 +81,7 @@ services:
 
   redis:
     image: redis:latest
+    restart: always
     hostname: redis
     container_name: redis_01
     networks:
@@ -89,6 +94,7 @@ services:
       context: .
       dockerfile: ./dockerfile-celery/Dockerfile
     hostname: celery
+    restart: always
     container_name: celery_01
     command: ./run_celery.sh
     networks:
