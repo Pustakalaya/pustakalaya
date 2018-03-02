@@ -40,7 +40,9 @@ services:
     links:
       - redis
   db:
-    image: postgres:9.6
+    build:
+      context: .
+      dockerfile: ./dockerfile-postgres/Dockerfile
     restart: always
     environment:
       - POSTGRES_USER=pustakalaya_user
