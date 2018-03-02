@@ -8,6 +8,9 @@ redf="${esc}[31m"
 whitef="${esc}[37m"
 reset="${esc}[0m"
 
+croncmd_backup="docker exec -it postgres_01 bash -c '/script/autopgsqlbackup'"
+cronjob_backup="*/5 * * * * $croncmd_backup"
+
 # print a pretty header
 echo
 echo " +---------------------------------------------------+"
@@ -79,7 +82,11 @@ if [ $(program_is_installed "docker") -eq 0 ] || [ $(program_is_installed "docke
 
 fi
 
+if [[ "$1" == "backup_cron" ]] ; then
+  ( crontab -l | grep -v -F "$croncmd_backup" ; echo "$cronjob_backup" ) | crontab -
+  echo "==>>> Backup task added to Local (not container) Cron"
 
+fi
 
 if [[ "$1" == "build" ]] ; then
         docker-compose build
