@@ -23,7 +23,7 @@ services:
     restart: always
     hostname: web
     container_name: django_web_01
-    command: ./run_web.sh
+    command: ./script.d/run_web.sh
     depends_on:
       - db
       - elastic
@@ -96,7 +96,7 @@ services:
     hostname: celery
     restart: always
     container_name: celery_01
-    command: ./run_celery.sh
+    command: ./script.d/run_celery.sh
     networks:
       - pustakalaya-network
     volumes:
