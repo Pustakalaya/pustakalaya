@@ -55,7 +55,7 @@ services:
       - pustakalaya-network
      # command: ./run_db.sh
     volumes:
-      - /library/backup_postgres:/pg_backups/autopgsqlbackup
+      - /library/backup_pg_pustakalaya:/pg_backups
       - ./src:/src
     expose:
       - "5432"
