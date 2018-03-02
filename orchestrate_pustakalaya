@@ -114,7 +114,7 @@ fi
 
 if [[ "$1" == "dump_sql" ]] ; then
         if [[ -f ./src/db_dump/pustakalaya.sql ]] ; then
-                  docker exec postgres_01 bash -c "psql --username pustakalaya_user -d pustakalaya -f /src/db_dump/pustakalaya.sql"
+                  docker exec postgres_01 bash -c "psql --username pustakalaya_user -d pustakalaya -f /src/db_dump/pustakalaya01.sql"
         fi
 fi
 
