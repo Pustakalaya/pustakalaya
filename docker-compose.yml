@@ -48,6 +48,7 @@ services:
       - POSTGRES_USER=pustakalaya_user
       - POSTGRES_DB=pustakalaya
       - POSTGRES_PASSWORD=pustakalaya123
+      - POSTGRES_BACKUP_DIR=/pg_backups
 
     hostname: db
     container_name: postgres_01
