@@ -29,7 +29,8 @@
 # (Detailed instructions below variables)
 #=====================================================================
 #Script path
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR=$POSTGRES_BACKUP_DIR
 
 # Username to access the PostgreSQL server e.g. dbuser
 USERNAME=$POSTGRES_USER
