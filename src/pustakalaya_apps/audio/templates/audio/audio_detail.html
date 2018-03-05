@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
 {% block style %}
 {{ block.super }}
@@ -29,8 +30,19 @@
   <div class="row">
     <div class="col-md-3 col-sm-12 col-xs-12">
       <!-- Logo -->
-      <img class="img-responsive rounded w-100" height="280px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
+
+
+
+      {% if object.thumbnail  %}
+       <img class="img-responsive rounded w-100" height="280px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
            alt="{{ object.title }}" title="{{ object.title }}">
+      {% else %}
+
+       <img class="img-responsive rounded w-100" height="280px" src="{% static 'base_assets/img/audio_book.png' %}"
+           alt="{{ object.title }}" title="{{ object.title }}">
+      {% endif %}
+
+
 
       <!-- share buttons -->
       <!--<div class="text-center">

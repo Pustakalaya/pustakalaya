@@ -7,11 +7,28 @@
   <div class="row ">
     <!-- Author Name -->
     <div class="col-md-2 col-xs-12 col-sm-12">
+      {% if object.thumbnail  %}
+
       <img src="{{ MEDIA_URL }}{{ object.thumbnail }}"
            width="210px"
            height="230px"
            title="{{ object }}"
            alt="{{ object }}" class="rounded img img-responsive">
+
+
+
+      {% else %}
+
+      <img src="{% static 'base_assets/img/author.png' %}"
+           width="210px"
+           height="230px"
+           title="{{ object }}"
+           alt="{{ object }}" class="rounded img img-responsive">
+
+
+      {% endif %}
+
+
       <p class="text-capitalize  text-dark description h5 mt-2 title-font ">{{ object }}</p>
       <p><strong class="text-capitalize paragraph-font"><a href="{%  url "author:books" object.getname|slugify %}">{% trans "View author's book" %}</a></strong></p>
       <hr>

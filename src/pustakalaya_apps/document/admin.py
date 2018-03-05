@@ -13,6 +13,7 @@ from .models import (
 class DocumentFileUploadInline(admin.TabularInline):
     model = DocumentFileUpload
     extra = 1
+    fields = ["upload"]
 
 
 class DocumentLinkInfoAdminInline(admin.TabularInline):
@@ -24,6 +25,11 @@ class DocumentIdentifierAdmin(admin.StackedInline):
     model = DocumentIdentifier
     extra = 1
     max_num = 1
+
+@admin.register(DocumentSeries)
+class DocumentSeriesAdmin(admin.ModelAdmin):
+    pass
+
 
 @admin.register(UnpublishedDocument)
 class UnpublishedDocumentAdmin(admin.ModelAdmin):
