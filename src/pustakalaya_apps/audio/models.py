@@ -63,7 +63,8 @@ class Audio(AbstractItem):
 
     keywords = models.ManyToManyField(
         Keyword,
-        verbose_name=_("Select list of keywords")
+        verbose_name=_("Select list of keywords"),
+        blank=True
     )
 
     audio_genre = models.ForeignKey(
@@ -98,7 +99,9 @@ class Audio(AbstractItem):
 
     thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/audio/%Y/%m/%d",
-        max_length=255
+        max_length=255,
+        blank=True
+
     )
 
     @property

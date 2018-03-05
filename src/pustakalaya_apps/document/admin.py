@@ -13,6 +13,7 @@ from .models import (
 class DocumentFileUploadInline(admin.TabularInline):
     model = DocumentFileUpload
     extra = 1
+    fields = ["upload"]
 
 
 class DocumentLinkInfoAdminInline(admin.TabularInline):
@@ -24,6 +25,11 @@ class DocumentIdentifierAdmin(admin.StackedInline):
     model = DocumentIdentifier
     extra = 1
     max_num = 1
+
+@admin.register(DocumentSeries)
+class DocumentSeriesAdmin(admin.ModelAdmin):
+    pass
+
 
 @admin.register(UnpublishedDocument)
 class UnpublishedDocumentAdmin(admin.ModelAdmin):
@@ -73,11 +79,12 @@ class DocumentAdmin(admin.ModelAdmin):
         "thumbnail",
     )
 
-    list_display = ['title', 'published', 'updated_date', 'submitted_by']
+    list_display = ['title', 'published','featured', 'updated_date', 'submitted_by']
+
 
     list_filter = ['published', 'title','featured']
-    list_per_page = 10
 
+    list_per_page = 10
 
     def save_model(self, request, obj, form, change):
         """Override the submitted_by field to admin user

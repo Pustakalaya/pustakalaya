@@ -452,8 +452,21 @@
 
                            <li style="position: relative; cursor: pointer" onclick='window.location.href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}"'>
 
-                                  <!--<a href="#">-->
-                                    <img class="shadow" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"/>
+                          {% if hit.thumbnail  %}
+
+                          <img class="shadow" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"/>
+                          {% else %}
+                           {% if hit.type == "document"%}
+                            <img class="shadow" src="{% static 'base_assets/img/book_image_default.png' %}"/>
+                           {% elif hit.type == "audio"%}
+                            <img class="shadow" src="{% static 'base_assets/img/audio_book.png' %}"/>
+
+                           {% else %}
+                                        <img class="shadow" src="{% static 'base_assets/img/video_book.png' %}"/>
+                            {% endif %}
+
+                            {% endif %}
+                                            <!--<a href="#">-->
 
                                   <p class="text-primary description lead" id="_itemTitle">
                                     <a href="{% url hit.type|add:':detail' hit.title|slugify hit.id %}">

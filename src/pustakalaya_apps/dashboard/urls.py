@@ -9,6 +9,7 @@ urlpatterns = [
     # url(r'^profile/$', views.profile, name="profile"),
     # /dashboard/profile/edit/
     url(r'^profile/edit/(?P<pk>\d+)/$', views.ProfileEdit.as_view(), name="profile_edit"),
+
     # dashboard/add/document/
     url(r'^document/add/$', document_views.AddDocumentView.as_view(), name="document_add"),
     # /dashboard/document/update/

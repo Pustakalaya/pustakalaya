@@ -6,7 +6,7 @@ from elasticsearch_dsl import Search
 from django.conf import settings
 from elasticsearch_dsl.connections import connections
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 
 
 def search(request):
@@ -18,7 +18,13 @@ def search(request):
 
     if request.method == "GET":
         # Grab query from form.
+
         query_string = request.GET.get('q')
+
+        # To prevent empty search using url only
+        if query_string == "":
+            return HttpResponseRedirect("/")
+
         print("Query string from form is", query_string)
 
         # Get data ajax request

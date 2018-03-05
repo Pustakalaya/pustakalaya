@@ -76,35 +76,102 @@ DocumentFileUploadFormSet = inlineformset_factory(
 class AudioForm(forms.ModelForm):
     class Meta:
         model = Audio
-        fields = (
-            "title",
-            "abstract",
-            "collections",
-            "education_levels",
-            "languages",
-            "year_of_available",
-            "audio_types",
-            "audio_running_time",
-            "published",
-            "audio_genre",
-            "keywords",
-            "license_type",
-            "custom_license",
-            "publication_year",
-            "sponsors",
-            "thumbnail"
-        )
+        fields = [
+            'title',
+            'collections',
+            'education_levels',
+            'languages',
+            'publisher',
+            'audio_types',
+            'audio_read_by',
+            'audio_genre',
+            'keywords',
+            'audio_series',
+            'license_type'
+        ]
 
 
 class AudioFileUploadForm(forms.ModelForm):
+    def clean(self):
+        cleaned_data = super(AudioFileUploadForm, self).clean()
+        #print(cleaned_data)
+
     class Meta:
         model = AudioFileUpload
-        fields = ["file_name", "upload"]
+        fields = (
+            'file_name',
+            'upload',
+        )
 
+    def __init__(self, *args, **kwargs):
+        super(AudioFileUploadForm, self).__init__(*args, **kwargs)
+
+        self.fields['upload'].widget.attrs = {
+            'class': 'btn btn-small btn-primary btn-block',
+            'name': 'myCustomName',
+            'placeholder': 'Upload file'
+        }
+
+
+# Audio child forms.
+AudioFileUploadFormSet = inlineformset_factory(
+    Audio,
+    AudioFileUpload,
+    form=AudioFileUploadForm,
+    extra=1,
+    can_delete=False,
+    can_order=False
+)
+
+
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = [
+            'title',
+            'collections',
+            'education_levels',
+            'languages',
+            'publisher',
+            'video_director',
+            'video_genre',
+            'keywords',
+            'video_series',
+            'license_type'
+        ]
 
 class VideoFileUploadForm(forms.ModelForm):
-    pass
+    # def clean(self):
+    #     cleaned_data = super(VideoFileUploadForm, self).clean()
+    #     #print(cleaned_data)
 
     class Meta:
         model = VideoFileUpload
-        fields = ["file_name", "upload"]
+        fields = (
+            'file_name',
+            'upload',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(VideoFileUploadForm, self).__init__(*args, **kwargs)
+
+        self.fields['upload'].widget.attrs = {
+            'class': 'btn btn-small btn-primary btn-block',
+            'name': 'myCustomName',
+            'placeholder': 'Upload file'
+        }
+
+
+
+# Audio child forms.
+VideoFileUploadFormSet = inlineformset_factory(
+    Video,
+    VideoFileUpload,
+    form=VideoFileUploadForm,
+    extra=1,
+    can_delete=False,
+    can_order=False
+)
+
+

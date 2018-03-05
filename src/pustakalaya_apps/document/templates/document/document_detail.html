@@ -44,9 +44,16 @@
 
                 <div class="col-md-3 col-sm-12  col-xs-12 ">
 
-                    <!-- Logo -->
-                    <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
+                  {% if object.thumbnail  %}
+                  <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
                          alt="{{ object.title }}" title="{{ object.title }}">
+                {% else %}
+                  <img class="img-responsive rounded w-100" height="300px" src="{% static 'base_assets/img/book_image_default.png' %}"
+                         alt="{{ object.title }}" title="{{ object.title }}">
+                  {% endif %}
+
+                    <!-- Logo -->
+
                     {% for document in object.documentfileupload_set.all %}
                            <div class="text-center">
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" target="_blank"
