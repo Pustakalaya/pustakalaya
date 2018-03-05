@@ -31,6 +31,8 @@ RUN npm install gulp -g
 
 RUN chown -R ${APP_USER}:${APP_USER} /library
 RUN chown -R ${APP_USER}:${APP_USER} /src
+RUN chown -R ${APP_USER}:${APP_USER} /var/log
+
 EXPOSE 8000
 USER ${APP_USER}
 ADD . ${APP_ROOT}
