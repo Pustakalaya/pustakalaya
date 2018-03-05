@@ -1,6 +1,6 @@
 from .base import *  # NOQA
 
-DEBUG = False
+DEBUG = True
 
 try:
     db_name = config["DATABASE"]["NAME"]

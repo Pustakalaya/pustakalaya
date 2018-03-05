@@ -54,4 +54,4 @@ gunicorn ${DJANGO_WSGI_MODULE}:application \
    --user=$APP_USER   \
   --bind=0.0.0.0:8001 \
   --log-level=debug \
-  --log-file=-
+  --log-file=/var/log/gunicorn-error.log
