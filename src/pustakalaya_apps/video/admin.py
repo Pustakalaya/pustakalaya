@@ -10,6 +10,7 @@ from .models import (
 class VideoFileUploadAdmin(admin.TabularInline):
     model = VideoFileUpload
     extra = 1
+    fields = ["upload"]
 
 
 class AudioLinkInfoAdminInline(admin.StackedInline):

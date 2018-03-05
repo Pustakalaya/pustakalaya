@@ -34,8 +34,9 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
         _("Description"),
         blank=True,
     )
-    dob = models.DateField(
+    dob = models.CharField(
         verbose_name=_("Date of birth"),
+        max_length=30,
         blank=True,
         null=True
     )
@@ -61,6 +62,18 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
         null=True,
         upload_to="uploads/creator"
     )
+    place_of_death = models.CharField(
+        verbose_name=_("Place of death"),
+        max_length=255,
+        blank=True,
+        default=""
+    )
+    date_of_death = models.CharField(
+        verbose_name=_("Date of death"),
+        max_length=255,
+        blank=True,
+        default=""
+    )
 
     @property
     def getname(self):
@@ -85,7 +98,8 @@ class AbstractSeries(AbstractTimeStampModel):
     )
 
     description = models.TextField(
-        verbose_name=_("Description")
+        verbose_name=_("Description"),
+        blank=True
     )
 
     class Meta:
@@ -147,6 +161,7 @@ class AbstractItem(AbstractTimeStampModel):
         _("License type"),
         choices=ITEM_LICENSE_TYPE,
         max_length=255,
+        blank=True
     )
 
     custom_license = models.TextField(

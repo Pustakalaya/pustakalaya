@@ -71,6 +71,7 @@ class Biography(AbstractBaseAuthor):
     keywords = models.ManyToManyField(
         Keyword,
         verbose_name=_("Search Keywords"),
+        blank=True
     )
 
     def __str__(self):

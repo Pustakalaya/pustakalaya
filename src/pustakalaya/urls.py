@@ -38,16 +38,16 @@ urlpatterns = [
     url(r'^review_system/', include('pustakalaya_apps.review_system.urls', namespace="review_system")),
 
     # /review_delete
-    url(r'^review_system/delete/', include('pustakalaya_apps.review_system.urls', namespace="review_system")),
+    url(r'^review_system/delete/', include('pustakalaya_apps.review_system.urls', namespace="review_system_delete")),
 
     # /review_edi
-    url(r'^review_edit/edit/', include('pustakalaya_apps.review_system.urls', namespace="review_system")),
+    url(r'^review_edit/edit/', include('pustakalaya_apps.review_system.urls', namespace="review_system_edit")),
 
     # /review_input
     url(r'^favourite_collection/', include('pustakalaya_apps.favourite_collection.urls', namespace="favourite_collection")),
 
     # /review_input
-    url(r'^favourite_collection/favourite_remove/',include('pustakalaya_apps.favourite_collection.urls', namespace="favourite_collection")),
+    url(r'^favourite_collection/favourite_remove/',include('pustakalaya_apps.favourite_collection.urls', namespace="favourite_collection_remove")),
 
 ]
 
