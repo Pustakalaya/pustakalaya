@@ -12,6 +12,8 @@ from .models import (
 class AudioFileUploadInline(admin.StackedInline):
     model = AudioFileUpload
     extra = 1
+    fields = ["upload"]
+
 
 
 class AudioLinkInfoAdminInline(admin.StackedInline):

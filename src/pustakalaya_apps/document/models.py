@@ -48,7 +48,7 @@ class Document(AbstractItem, HitCountMixin):
 
     ITEM_INTERACTIVE_TYPE = (
         ("yes", _("Yes")),
-        ("no", _("No")),
+        # ("no", _("No")),
         ("NA", _("Not applicable")),
     )
 
@@ -113,7 +113,9 @@ class Document(AbstractItem, HitCountMixin):
     document_interactivity = models.CharField(
         verbose_name=_("Interactive"),
         max_length=15,
-        choices=ITEM_INTERACTIVE_TYPE
+        choices=ITEM_INTERACTIVE_TYPE,
+        blank=True,
+        default="NA"
     )
 
     # This field should be same on all other model to make searching easy in search engine.
@@ -163,12 +165,17 @@ class Document(AbstractItem, HitCountMixin):
     # Better to have plural name
     keywords = models.ManyToManyField(
         Keyword,
-        verbose_name=_("Select list of keywords")
+        verbose_name=_("Select list of keywords"),
+        blank=True
+
+
     )
 
     thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/document/%Y/%m/%d",
-        max_length=255
+        max_length=255,
+        blank=True,
+        help_text=_("maximum size of thumbnail should be 255px by 300px")
     )
 
     sponsors = models.ManyToManyField(
@@ -366,6 +373,7 @@ class DocumentIdentifier(AbstractTimeStampModel):
     identifier_type = models.CharField(
         verbose_name=_("Identifier Type"),
         max_length=8,
+        blank=True,
         choices=(
             ("issn", _("ISSN")),
             ("ismn", _("ISMN")),

@@ -288,11 +288,39 @@
           <div class="row maximize-width-for-ipad">
             {% for book in featured_books %}
             <div class="col-md-2 col-sm-12  col-xs-12  p-0   m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
-              <a href="{% url 'document:detail' book.title|slugify book.pk %}"><img
+              <a href="{% url 'document:detail' book.title|slugify_unicode book.pk %}">
+
+
+
+                {% if book.thumbnail  %}
+                <img
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
                 height="190px">
+                {% else %}
+
+                {% if book.type == "document"%}
+                 <img
+                class="img-responsive rounded" style="border-bottom:1px solid #ccc"
+                src="{% static 'base_assets/img/book_image_default.png' %}"
+                width="100%"
+                height="190px">
+                {% elif book.type == "audio"%}
+                 <img
+                class="img-responsive rounded" style="border-bottom:1px solid #ccc"
+                src="{% static 'base_assets/img/audio_book.png' %}"
+                width="100%"
+                height="190px">
+                {% else %}
+                 <img
+                class="img-responsive rounded" style="border-bottom:1px solid #ccc"
+                src="{% static 'base_assets/img/video_book.png' %}"
+                width="100%"
+                height="190px">
+                {% endif %}
+
+                {% endif %}
                 <div class=" pl-3 text-capitalize    "> <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span></div>
                 {% if  book.document_authors.first%}
                 <div class=" pl-3 author-name-size text-dark">By
