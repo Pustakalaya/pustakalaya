@@ -19,8 +19,7 @@ ADD src/requirements/requirements_dev.txt /config/
 ADD src/requirements/base.txt /config/
 ADD src/requirements/requirements_prod.txt /config/
 RUN pip install -r /config/requirements_prod.txt
-RUN apt-get update &&
-    apt-get install poppler-utils -y
+RUN apt-get update && apt-get install poppler-utils -y
 
 
 
