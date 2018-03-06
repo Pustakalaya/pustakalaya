@@ -145,6 +145,7 @@ urlpatterns += i18n_patterns(
         r'^forget-password/$', TemplateView.as_view(template_name="static_pages/forgetpassword.html"),
         name="forget-password"
     ),
+    prefix_default_language=False,
 )
 
 if settings.DEBUG:
