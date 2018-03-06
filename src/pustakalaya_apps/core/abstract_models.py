@@ -170,7 +170,7 @@ class AbstractItem(AbstractTimeStampModel):
     )
 
     year_of_available = models.DateField(
-        _("Year of available"),
+        _("Year of available on text"),
         blank=True,
         null=True
     )
@@ -179,6 +179,20 @@ class AbstractItem(AbstractTimeStampModel):
         _("Publication year"),
         blank=True,
         null=True
+    )
+
+    year_of_available_on_text = models.CharField(
+        _("Year of available"),
+        blank=True,
+        null=True,
+        max_length=20
+    )
+
+    publication_year_on_text = models.CharField(
+        _("Publication year"),
+        blank=True,
+        null=True,
+        max_length=20
     )
 
     place_of_publication = models.CharField(

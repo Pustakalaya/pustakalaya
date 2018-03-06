@@ -74,6 +74,6 @@ def author_books(request, author_name):
     context = list_search_from_elastic(request, **kwargs)
 
     context["keyword"] = context
-    context["author"] = "Manoj"
+    context["author"] = author_name
     # Reuse the keyword template
     return render(request, "core/author_books.html", context)
