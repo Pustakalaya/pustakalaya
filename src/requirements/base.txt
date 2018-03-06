@@ -23,5 +23,9 @@ django-debug-toolbar
 # Model admin reorder.
 django-modeladmin-reorder==0.3
 
+#bootstrap_pagination
+django-bootstrap-pagination==1.6.4
+
+
 
 

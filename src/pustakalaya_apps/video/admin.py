@@ -10,6 +10,7 @@ from .models import (
 class VideoFileUploadAdmin(admin.TabularInline):
     model = VideoFileUpload
     extra = 1
+    fields = ["upload"]
 
 
 class AudioLinkInfoAdminInline(admin.StackedInline):
@@ -34,7 +35,8 @@ class VideoAdmin(admin.ModelAdmin):
         "languages",
         "place_of_publication",
         "publisher",
-        "year_of_available",
+        "publication_year_on_text",
+        "year_of_available_on_text",
         "video_running_time",
         "video_director",
         "video_producers",
@@ -58,7 +60,5 @@ class VideoAdmin(admin.ModelAdmin):
 
 @admin.register(VideoSeries)
 class VideoSeriesAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}
-
+    pass
 

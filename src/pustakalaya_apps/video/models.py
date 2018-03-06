@@ -103,12 +103,14 @@ class Video(AbstractItem):
 
     keywords = models.ManyToManyField(
         Keyword,
-        verbose_name=_("Keywords")
+        verbose_name=_("Keywords"),
+        blank=True
     )
 
     thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/video/%Y/%m/%d",
-        max_length=255
+        max_length=255,
+        blank=True
     )
 
     video_running_time = models.CharField(
