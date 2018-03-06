@@ -1,3 +1,4 @@
+from  django.utils.html import format_html
 from django.contrib import admin
 
 from .models import (
@@ -13,6 +14,7 @@ from .models import (
 class DocumentFileUploadInline(admin.TabularInline):
     model = DocumentFileUpload
     extra = 1
+    fields = ["upload"]
 
 
 class DocumentLinkInfoAdminInline(admin.TabularInline):
@@ -24,6 +26,11 @@ class DocumentIdentifierAdmin(admin.StackedInline):
     model = DocumentIdentifier
     extra = 1
     max_num = 1
+
+@admin.register(DocumentSeries)
+class DocumentSeriesAdmin(admin.ModelAdmin):
+    pass
+
 
 @admin.register(UnpublishedDocument)
 class UnpublishedDocumentAdmin(admin.ModelAdmin):
@@ -57,8 +64,8 @@ class DocumentAdmin(admin.ModelAdmin):
         "document_illustrators",
         "place_of_publication",
         "publisher",
-        "publication_year",
-        "year_of_available",
+        "publication_year_on_text",
+        "year_of_available_on_text",
         "keywords",
         "document_series",
         "volume",
@@ -73,11 +80,14 @@ class DocumentAdmin(admin.ModelAdmin):
         "thumbnail",
     )
 
-    list_display = ['title', 'published', 'updated_date', 'submitted_by']
+    list_display = ['title', 'published','featured', 'preview_link', 'updated_date', 'submitted_by']
+
+    ordering = ('-updated_date',)
+
 
     list_filter = ['published', 'title','featured']
-    list_per_page = 10
 
+    list_per_page = 10
 
     def save_model(self, request, obj, form, change):
         """Override the submitted_by field to admin user
@@ -86,5 +96,10 @@ class DocumentAdmin(admin.ModelAdmin):
         if obj.submitted_by is None:
             obj.submitted_by = request.user
         super().save_model(request, obj, form, change)
+
+    def preview_link(self, obj):
+        return format_html("<a href='{url}'>Preview</a>", url=obj.get_absolute_url())
+
+
 
 

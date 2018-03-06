@@ -27,15 +27,34 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     first_name = models.CharField(
         _("First name"),
         max_length=255,
+        null=True,
+        blank=True
     )
-    middle_name = models.CharField(_("Middle name"), max_length=255, blank=True)
-    last_name = models.CharField(_("Last name"), max_length=255)
+    middle_name = models.CharField(
+        _("Middle name"),
+        max_length=255,
+        blank=True
+    )
+    last_name = models.CharField(
+        _("Last name"),
+        max_length=255,
+        null=True,
+        blank=True
+    )
+
+    name = models.CharField(
+        _("Author"),
+        max_length=50,
+        default=""
+
+    )
     description = models.TextField(
         _("Description"),
         blank=True,
     )
-    dob = models.DateField(
+    dob = models.CharField(
         verbose_name=_("Date of birth"),
+        max_length=30,
         blank=True,
         null=True
     )
@@ -61,10 +80,22 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
         null=True,
         upload_to="uploads/creator"
     )
+    place_of_death = models.CharField(
+        verbose_name=_("Place of death"),
+        max_length=255,
+        blank=True,
+        default=""
+    )
+    date_of_death = models.CharField(
+        verbose_name=_("Date of death"),
+        max_length=255,
+        blank=True,
+        default=""
+    )
 
     @property
     def getname(self):
-        return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)
+        return self.name
 
     def __str__(self):
         return self.first_name
@@ -85,7 +116,8 @@ class AbstractSeries(AbstractTimeStampModel):
     )
 
     description = models.TextField(
-        verbose_name=_("Description")
+        verbose_name=_("Description"),
+        blank=True
     )
 
     class Meta:
@@ -147,6 +179,7 @@ class AbstractItem(AbstractTimeStampModel):
         _("License type"),
         choices=ITEM_LICENSE_TYPE,
         max_length=255,
+        blank=True
     )
 
     custom_license = models.TextField(
@@ -155,7 +188,7 @@ class AbstractItem(AbstractTimeStampModel):
     )
 
     year_of_available = models.DateField(
-        _("Year of available"),
+        _("Year of available on text"),
         blank=True,
         null=True
     )
@@ -164,6 +197,20 @@ class AbstractItem(AbstractTimeStampModel):
         _("Publication year"),
         blank=True,
         null=True
+    )
+
+    year_of_available_on_text = models.CharField(
+        _("Year of available"),
+        blank=True,
+        null=True,
+        max_length=20
+    )
+
+    publication_year_on_text = models.CharField(
+        _("Publication year"),
+        blank=True,
+        null=True,
+        max_length=20
     )
 
     place_of_publication = models.CharField(

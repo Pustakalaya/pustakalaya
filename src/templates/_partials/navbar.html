@@ -57,13 +57,7 @@
         <!-- navigation menu -->
         <div class="collapse navbar-collapse justify-content-end mr-5 pr-4" id="navigation">
             <ul class="navbar-nav text-primary index_tpyo">
-                <li class="nav-item">
-                    <a class="nav-link text-primary" href="/">
-                        {% trans "Home" %}
-                        <i class="fa fa-home"></i>
-                    </a>
 
-                </li>
                 <li class="nav-item">
                     <a class="nav-link text-black text-primary" href="{% url 'about' %}" style="margin-top:2px;">
                         {% trans "About" %}
@@ -125,19 +119,23 @@
                 {% if user.is_authenticated %}
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-primary text-capitalize" href="/dashboard/"
+                        <a class="nav-link dropdown-toggle text-primary text-capitalize"
+
+                           href="{% if request.user.is_superuser %}/admin/{% else %}/dashboard/{% endif %}"
+
+
                            id="navbarDropdownMenuLink"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {% trans "dashboard" %} <i class="fa fa-tachometer"></i>
+                            {{request.user}} <i class="fa fa-tachometer"></i>
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item text-primary text-capitalize"
-                               href="/dashboard/">{% trans "profile" %}</a>
+                               href="{% if request.user.is_superuser %}/admin/{% else %}/dashboard/{% endif %}">{% trans "profile" %}</a>
                             <a class="dropdown-item text-primary text-capitalize"
-                               href="/accounts/logout/">{% trans "logout" %}</a>
+                               href="{% if request.user.is_superuser %}/accounts/logout{% else %}/accounts/logout{% endif %}">{% trans "logout" %}</a>
                             <a class="dropdown-item text-primary text-capitalize"
-                               href="/dashboard/settings/">{% trans "settings" %}</a>
+                               href="{% if request.user.is_superuser %}/admin/{% else %}/dashboard/settings{% endif %}">{% trans "settings" %}</a>
                         </div>
                     </li>
                 {% endif %}

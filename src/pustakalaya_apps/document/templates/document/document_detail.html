@@ -44,9 +44,16 @@
 
                 <div class="col-md-3 col-sm-12  col-xs-12 ">
 
-                    <!-- Logo -->
-                    <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
+                  {% if object.thumbnail  %}
+                  <img class="img-responsive rounded w-100" height="300px" src="{{ MEDIA_URL }}{{ object.thumbnail }}"
                          alt="{{ object.title }}" title="{{ object.title }}">
+                {% else %}
+                  <img class="img-responsive rounded w-100" height="300px" src="{% static 'base_assets/img/book_image_default.png' %}"
+                         alt="{{ object.title }}" title="{{ object.title }}">
+                  {% endif %}
+
+                    <!-- Logo -->
+
                     {% for document in object.documentfileupload_set.all %}
                            <div class="text-center">
                         <a href="{{ MEDIA_URL }}{{ document.upload }}" target="_blank"
@@ -250,27 +257,28 @@
 
                             <!-- Publication year -->
                             <div class="pb-1 border-line"
-                                    {% if not object.publication_year %}
+                                    {% if not object.year_of_available_on_text %}
                                  style="display: none;"
                                     {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
-                                <span class="text-dark text-capitalize"> {{ object.publication_year }}</span>
+                                <span class="text-dark text-capitalize"> {{ object.year_of_available_on_text }}</span>
 
 
                             </div>
 
                             <!-- Available year -->
                             <div class="pb-1 border-line"
-                                    {% if not object.created_date %}
+                                    {% if not object.year_of_available_on_text %}
                                  style="display: none;"
                                     {% endif %}>
 
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
-                                <span class="text-dark text-capitalize"> {{ object.created_date }}</span>
+                                <span class="text-dark text-capitalize"> {{ object.year_of_available_on_text }}</span>
 
                             </div>
 
                             <!-- Keywords -->
+                            {%  if object.keywords  %}
                             <div class="pb-1 border-line">
 
                                 <!-- TODO pluralization -->
@@ -279,7 +287,12 @@
                               <span class="text-dark text-capitalize">
                                {% for keyword in object.keywords.all %}
 
-                                      <a href="{% url 'keyword:keyword_detail' keyword.keyword %}" class="mr-2">{{ keyword.keyword| transtolocal }}&nbsp;,</a>
+                                      <a href="{% url 'keyword:keyword_detail' keyword.keyword %}" class="mr-2">
+                                          {{ keyword.keyword| transtolocal }}&nbsp;{%  if not forloop.last %}
+                                            ,
+                                        {%  endif %}
+
+                                      </a>
 
 
                                 {% endfor %}
@@ -288,6 +301,7 @@
 
 
                             </div>
+                             {%  endif  %}
 
                             <!-- Description -->
                             <div class="pb-1 border-line"
@@ -378,11 +392,13 @@
                             </div>
 
                             <!-- Interactivity -->
+                            {%  if not object.document_interactivity or object.document_interactivity is "NA"  %}
                             <div class="pb-1 border-line">
                                 <!-- TODO: implement pluralization in total page -->
                                 <span class="text-capitalize font-weight-normal hidden text-dark text-capitalize">{% trans "interactivity" %}:</span>
                                 <span class="text-dark"> {{ object.document_interactivity }}</span>
                             </div>
+                            {%  endif %}
 
 
                             <!-- Rights -->
