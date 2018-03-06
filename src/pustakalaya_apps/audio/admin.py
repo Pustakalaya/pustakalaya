@@ -1,3 +1,4 @@
+from django.utils.html import format_html
 from django.contrib import admin
 from .models import (
     AudioFileUpload,
@@ -57,6 +58,11 @@ class DocumentAdmin(admin.ModelAdmin):
         "sponsors",
         "thumbnail"
     )
+
+    list_display = ['title', 'published', 'featured', 'preview_link', 'updated_date']
+
+    def preview_link(self, obj):
+        return format_html("<a href='{url}'>Preview</a>", url=obj.get_absolute_url())
 
 
 @admin.register(AudioGenre)
