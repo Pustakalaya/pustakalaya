@@ -15,7 +15,8 @@ RUN mkdir /src
 RUN adduser --disabled-password --gecos '' ${APP_USER}
 WORKDIR ${APP_ROOT}
 
-RUN mkdir /library
+RUN mkdir -p /library/media_root
+RUN mkdir -p  /library/static_root
 RUN mkdir /config
 ADD src/requirements/requirements_dev.txt /config/
 ADD src/requirements/base.txt /config/
@@ -30,7 +31,8 @@ RUN npm install gulp -g
 
 #RUN gulp sass
 
-RUN chown -R ${APP_USER}:${APP_USER} /library
+RUN chown -R ${APP_USER}:${APP_USER} /library/media_root
+RUN chown -R ${APP_USER}:${APP_USER} /library/media_root
 RUN chown -R ${APP_USER}:${APP_USER} /src
 RUN chown -R ${APP_USER}:${APP_USER} /var/log
 
