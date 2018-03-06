@@ -27,9 +27,27 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     first_name = models.CharField(
         _("First name"),
         max_length=255,
+        null=True,
+        blank=True
     )
-    middle_name = models.CharField(_("Middle name"), max_length=255, blank=True)
-    last_name = models.CharField(_("Last name"), max_length=255)
+    middle_name = models.CharField(
+        _("Middle name"),
+        max_length=255,
+        blank=True
+    )
+    last_name = models.CharField(
+        _("Last name"),
+        max_length=255,
+        null=True,
+        blank=True
+    )
+
+    name = models.CharField(
+        _("Author"),
+        max_length=50,
+        default=""
+
+    )
     description = models.TextField(
         _("Description"),
         blank=True,
@@ -77,7 +95,7 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
 
     @property
     def getname(self):
-        return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)
+        return self.name
 
     def __str__(self):
         return self.first_name
