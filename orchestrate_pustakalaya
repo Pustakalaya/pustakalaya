@@ -122,7 +122,7 @@ fi
 
 if [[ "$1" == "mkmigration" ]] ; then
         echo "making migration for django app"
-        docker exec django_web_01 bash -c "python manage.py makemigrations"
+        docker exec django_web_01 bash -c "python manage.py makemigrations --noinput"
 
 fi
 
@@ -144,7 +144,7 @@ fi
 
 if [[ "$1" == "collectstatic" ]] ; then
         echo "collecting static files"
-        docker exec django_web_01 bash -c "python manage.py collectstatic --settings=pustakalaya.settings.production"
+        docker exec django_web_01 bash -c "python manage.py collectstatic --settings=pustakalaya.settings.production --noinput"
 fi
 
 if [[ "$1" == "pustakalaya-run" ]] ; then
