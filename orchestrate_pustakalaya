@@ -126,6 +126,12 @@ if [[ "$1" == "mkmigration" ]] ; then
 
 fi
 
+if [[ "$1" == "getBack" ]] ; then
+        echo "making migration for django app"
+        docker exec postgres_01 bash -c "/script/autopgsqlbackup "
+
+fi
+
 if [[ "$1" == "migrate" ]] ; then
         echo "migrating for django app"
         docker exec django_web_01 bash -c "python manage.py migrate --settings=pustakalaya.settings.production"
