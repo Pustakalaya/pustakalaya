@@ -16,8 +16,8 @@
   }
 
 .box-model-head-new {
-   background-color:  #3742fa;;
-   border-bottom : 1px solid  #3742fa;
+   background-color: #54a0ff; /*blue=#3742fa;*/
+   border-bottom : 1px solid #54a0ff; /*#3742fa;*/
    width: 260px;
    border-top-left-radius: 5px;
    border-top-right-radius: 5px;
@@ -37,7 +37,7 @@
     margin-left:20px;
     /*position: fixed;*/
     background: #fff;
-    z-index: 100;
+    <!--z-index: 100;-->
     display: block;
     padding-left:0px;
     margin-top: 5px;
@@ -50,6 +50,7 @@
     }
     ol, ul {
     list-style: none;
+
 
 }
 
@@ -71,7 +72,7 @@
     padding-left:10px;
 }
 .format-dd li[data-v-03b85949]:hover{
-    background:#3742fa;
+    background:#576574;/*#3742fa;*/
     color:#fff
 
 
@@ -82,14 +83,18 @@
 
 }
 .format-dd li[data-v-03b85949]:hover a{
-    background:#3742fa;
+    background:#576574;/*#3742fa;*/
     color:#fff
 
 }
 .format-dd li[data-v-03b85949] a{
    display: block;
+   color:#576574;
 }
+.format-option>a{
+  color:#576574;
 
+}
 .format-dd li[data-v-1] {
     height: 40px;
     line-height: 40px;
@@ -188,12 +193,12 @@
         <ul   data-v-03b85949="" class="format-dd">
             <li data-v-1="" class="format-option">
               <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
-                 class="text-capitalize text-primary ">Titles</a>
+                 class="text-capitalize ">Titles</a>
             |
             </li>
             <li data-v-1="" class="format-option">
                     <a href="/authors"
-                    class="text-capitalize text-primary "><span>   Authors</span></a>
+                    class="text-capitalize  "><span>   Authors</span></a>
             </li>
         </ul>
     </div>
@@ -279,16 +284,16 @@
 
       <!-- Featured books -->
       <div class="col-md-9 col-sm-12 col-xs-12 row-second-width">
-        <div class="search maximize-width-for-ipad">
-          <!-- search -->
-          {% include '_partials/search_form.html' %}
-        </div>
+        <!--<div class="search maximize-width-for-ipad">-->
+          <!--&lt;!&ndash; search &ndash;&gt;-->
+          <!--{% include '_partials/search_form.html' %}-->
+        <!--</div>-->
         <section>
           <p class="description bold text-uppercase text-dark  mb-0 ">Books we love</p>
           <div class="row maximize-width-for-ipad">
             {% for book in featured_books %}
             <div class="col-md-2 col-sm-12  col-xs-12  p-0   m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
-              <a href="{% url 'document:detail' book.title|slugify_unicode book.pk %}">
+              <a href="{% url 'document:detail_without_slug'  book.pk %}">
 
 
 
@@ -460,8 +465,8 @@
                 <div class="container jumbotron mb-0 pt-3 content-box-shadow">
                   <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Major partners" %}</p>
 
-                <a class="nav-link active" href="https://idrf.com/" target="_blank" title="IDRF">
-                  <img class="list-hover-style-slider" src="{% static 'images/logos/logo_web.svg' %}"
+                <a class="nav-link active" href="http://www.idrf.org/" target="_blank" title="IDRF">
+                  <img class="list-hover-style-slider" src="{% static 'images/logos/idrf_new_logo.png' %}"
                        width="150px"
                        height="55px"
                        alt="IRDF"/>

@@ -17,6 +17,7 @@ input[type="submit"],
 .changeform-tabs-item {
 
     margin-right: 40px;
+    color:#444;
 }
 .changeform-tabs-item > a {
     color: #444;
@@ -34,4 +35,36 @@ input[type="submit"],
 
 .changeform-tabs-item > a:visited {
     color: #444;
+}
+
+
+    .aligned label {
+
+        color:#444;
+}
+
+
+
+input[type="text"],
+textarea,
+input[type="search"],
+input[type="number"],
+input[type="url"],
+.select2-search, .select2-search--inline,.select2,.select2-selection ,.select2-selection--single
+{
+
+width: 43.57143rem;
+max-width:43.57143rem;
+}
+
+.breadcrumbs>a {
+color:#black!important;
+}
+
+.changeform-navigation-button-label{
+color:#black!important;
+}
+
+.deletelink{
+color:white!important;
 }

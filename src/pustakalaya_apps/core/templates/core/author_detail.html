@@ -7,6 +7,8 @@
   <div class="row ">
     <!-- Author Name -->
     <div class="col-md-2 col-xs-12 col-sm-12">
+
+      <p class="text-capitalize  text-dark description h5 mt-2 title-font ">{{ object }}</p>
       {% if object.thumbnail  %}
 
       <img src="{{ MEDIA_URL }}{{ object.thumbnail }}"
@@ -27,9 +29,7 @@
 
 
       {% endif %}
-
-
-      <p class="text-capitalize  text-dark description h5 mt-2 title-font ">{{ object }}</p>
+      <br/><br/>
       <p><strong class="text-capitalize paragraph-font"><a href="{%  url "author:books" object.getname|slugify %}">{% trans "View author's book" %}</a></strong></p>
       <hr>
       <p>
@@ -43,17 +43,21 @@
     </div>
     <div class="col-md-10 col-xs-12 col-sm-12 paragraph-font" id="author-detail">
       <div class="p-4 rounded">
-                    <span class="description text-uppercase rounded text-black text-uppercase mb-2">
-                        <span class="border border-top-0 border-right-0 border-left-0 border-secondary title-font">{% trans "About" %} {{ object }}</span>
-                    </span><br><br>
-        <span class="text-dark">
-                        {{ object.description }}
-                    </span><br><br>
+
 
         <span><b>{% trans "Address" %}:</b><span class="ml-3">{{ object.address }}</span></span><br>
         <span><b>{% trans "Date of birth" %}: </b><span class="ml-3">{{ object.dob }}</span></span><br>
         <span><b>{% trans "Pen name" %}:</b><span class="ml-3">{{ object.pen_name }}</span></span><br>
         <span><b>{% trans "Genre" %}: </b><span class="ml-3">{{ object.genre }}</span></span>
+
+          <br><br>
+         <span class="description text-uppercase rounded text-black text-uppercase mb-2">
+                        <span class="border border-top-0 border-right-0 border-left-0 border-secondary title-font">{% trans "About" %} {{ object }}</span>
+                    </span><br><br>
+        <span class="text-dark">
+                        {{ object.description }}
+                    </span>
+
       </div>
 
 
