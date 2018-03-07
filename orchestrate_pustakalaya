@@ -126,7 +126,7 @@ if [[ "$1" == "mkmigration" ]] ; then
 
 fi
 
-if [[ "$1" == "getBack" ]] ; then
+if [[ "$1" == "getBackup" ]] ; then
         echo "getBack up of postgres"
         docker exec postgres_01 bash -c "/script/autopgsqlbackup "
 
