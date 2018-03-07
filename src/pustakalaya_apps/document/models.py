@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from elasticsearch.exceptions import NotFoundError
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
+from pustakalaya_apps.core.validators import validate_number
 from django.core import urlresolvers
 from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
@@ -129,10 +130,12 @@ class Document(AbstractItem, HitCountMixin):
     #     verbose_name=_("Document Category")
     # )
 
-    document_total_page = models.PositiveIntegerField(
+    document_total_page = models.CharField(
         verbose_name=_("Total Pages"),
         blank=True,
-        default=0
+        default=0,
+        validators=[validate_number],
+        max_length=4
     )
 
     document_authors = models.ManyToManyField(

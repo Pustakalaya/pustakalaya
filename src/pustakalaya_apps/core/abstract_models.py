@@ -98,7 +98,7 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
         return self.name
 
     def __str__(self):
-        return self.first_name
+        return self.name
 
     class Meta:
         abstract = True
