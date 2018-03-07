@@ -7,7 +7,7 @@
 <script src="{% static "base_assets/js/plugins/vue-instant.browser.js" %}"></script>
   <div id="home-page-search-bar">
     <label>{{selectedEvent}}</label>
-    <form action="/search" method="GET" id="searchForm" class="content-box-shadow">
+    <form action="/search" method="GET" id="searchForm" >
       <div class="input-group bg-white">
         <input type="hidden" id="filterData" name="form-filter"/>
         <input type="hidden" value="" name="q" id="queryData"/>
@@ -25,8 +25,10 @@
                    type="google"></vue-instant>
     </form>
     <br>
+
   </div>
 </div>
+
 <script>
  //Suggestion implementation.
     new Vue({
@@ -45,8 +47,8 @@
             clickButton: function() {
                 this.selectedEvent = 'click button'
                 // add value.
-                 $("#queryData").val($('.sbx-google__input').val());
-                  if($('.sbx-google__input').val()==""){return;}
+                 $("#queryData").val($('.sbx-google__input').val().trim());
+                  if($('.sbx-google__input').val().trim()==""){return;}
                  $("#searchForm").submit();
             },
             selected: function($event) {
@@ -88,7 +90,7 @@
 
 
 
-               axios.get('./search/completion/?suggest_text=' + this.value)
+               axios.get('/search/completion/?suggest_text=' + this.value)
                     .then(function(response) {
                         var response1 = JSON.parse(response.data)
                         response1.forEach(function(a, i) {
@@ -106,6 +108,7 @@
             'vue-instant': VueInstant.VueInstant
         }
     })
+
 
 </script>
 <script src="{% static "base_assets/js/plugins/axios.min.js" %}" defer></script>

@@ -75,7 +75,7 @@ class Biography(AbstractBaseAuthor):
     )
 
     def __str__(self):
-        return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)
+        return self.name
 
     class Meta:
         db_table = "biography"
