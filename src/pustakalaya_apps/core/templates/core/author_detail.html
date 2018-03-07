@@ -36,7 +36,9 @@
         <strong class="text-capitalize paragraph-font">{% trans "keywords" %}:</strong>
         {% for keyword in object.keywords.all %}
         <span><a href="{% url 'keyword:keyword_detail' keyword.keyword %}"
-                 style="text-decoration: none;">{{ keyword }}</a>,</span>
+                 style="text-decoration: none;">{{ keyword }}</a>
+            {%  if not forloop.last %},{%  endfor %}
+        </span>
 
         {% endfor %}
       </p>

@@ -15,7 +15,6 @@ input[type="submit"],
 }
 
 .changeform-tabs-item {
-
     margin-right: 40px;
     color:#444;
 }
@@ -42,9 +41,6 @@ input[type="submit"],
 
         color:#444;
 }
-
-
-
 input[type="text"],
 textarea,
 input[type="search"],

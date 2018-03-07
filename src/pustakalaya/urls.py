@@ -49,6 +49,18 @@ urlpatterns = [
     # /review_input
     url(r'^favourite_collection/favourite_remove/',include('pustakalaya_apps.favourite_collection.urls', namespace="favourite_collection_remove")),
 
+    # Document App
+    # /documents/
+    url(r'^documents/', include('pustakalaya_apps.document.urls', namespace="document")),
+
+    # Video app
+    # /videos/
+    url(r'^videos/', include('pustakalaya_apps.video.urls', namespace="video")),
+
+    # Audio app
+    # /audios/
+    url(r'^audios/', include('pustakalaya_apps.audio.urls', namespace="audio")),
+
 ]
 
 # Enable i18n based urls
@@ -61,18 +73,6 @@ urlpatterns += i18n_patterns(
 
     # Homepage and core urls
     url(r'^', include('pustakalaya_apps.core.urls', namespace="core")),
-
-    # Document App
-    # /documents/
-    url(r'^documents/', include('pustakalaya_apps.document.urls', namespace="document")),
-
-    # Video app
-    # /videos/
-    url(r'^videos/', include('pustakalaya_apps.video.urls', namespace="video")),
-
-    # Audio app
-    # /audios/
-    url(r'^audios/', include('pustakalaya_apps.audio.urls', namespace="audio")),
 
     # Community page aka category
     # /community/literatures-and-arts/
@@ -145,6 +145,7 @@ urlpatterns += i18n_patterns(
         r'^forget-password/$', TemplateView.as_view(template_name="static_pages/forgetpassword.html"),
         name="forget-password"
     ),
+    prefix_default_language=True   ,
 )
 
 if settings.DEBUG:

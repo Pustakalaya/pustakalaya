@@ -27,9 +27,27 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     first_name = models.CharField(
         _("First name"),
         max_length=255,
+        null=True,
+        blank=True
     )
-    middle_name = models.CharField(_("Middle name"), max_length=255, blank=True)
-    last_name = models.CharField(_("Last name"), max_length=255)
+    middle_name = models.CharField(
+        _("Middle name"),
+        max_length=255,
+        blank=True
+    )
+    last_name = models.CharField(
+        _("Last name"),
+        max_length=255,
+        null=True,
+        blank=True
+    )
+
+    name = models.CharField(
+        _("Author"),
+        max_length=50,
+        default=""
+
+    )
     description = models.TextField(
         _("Description"),
         blank=True,
@@ -77,10 +95,10 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
 
     @property
     def getname(self):
-        return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)
+        return self.name
 
     def __str__(self):
-        return self.first_name
+        return self.name
 
     class Meta:
         abstract = True
@@ -170,7 +188,7 @@ class AbstractItem(AbstractTimeStampModel):
     )
 
     year_of_available = models.DateField(
-        _("Year of available"),
+        _("Year of available on text"),
         blank=True,
         null=True
     )
@@ -179,6 +197,20 @@ class AbstractItem(AbstractTimeStampModel):
         _("Publication year"),
         blank=True,
         null=True
+    )
+
+    year_of_available_on_text = models.CharField(
+        _("Year of available"),
+        blank=True,
+        null=True,
+        max_length=20
+    )
+
+    publication_year_on_text = models.CharField(
+        _("Publication year"),
+        blank=True,
+        null=True,
+        max_length=20
     )
 
     place_of_publication = models.CharField(

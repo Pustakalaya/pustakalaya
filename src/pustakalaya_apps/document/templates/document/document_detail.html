@@ -257,27 +257,28 @@
 
                             <!-- Publication year -->
                             <div class="pb-1 border-line"
-                                    {% if not object.publication_year %}
+                                    {% if not object.year_of_available_on_text %}
                                  style="display: none;"
                                     {% endif %}>
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "publication year:" %}</span>
-                                <span class="text-dark text-capitalize"> {{ object.publication_year }}</span>
+                                <span class="text-dark text-capitalize"> {{ object.year_of_available_on_text }}</span>
 
 
                             </div>
 
                             <!-- Available year -->
                             <div class="pb-1 border-line"
-                                    {% if not object.created_date %}
+                                    {% if not object.year_of_available_on_text %}
                                  style="display: none;"
                                     {% endif %}>
 
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "available year:" %}</span>
-                                <span class="text-dark text-capitalize"> {{ object.created_date }}</span>
+                                <span class="text-dark text-capitalize"> {{ object.year_of_available_on_text }}</span>
 
                             </div>
 
                             <!-- Keywords -->
+                            {%  if object.keywords  %}
                             <div class="pb-1 border-line">
 
                                 <!-- TODO pluralization -->
@@ -286,7 +287,12 @@
                               <span class="text-dark text-capitalize">
                                {% for keyword in object.keywords.all %}
 
-                                      <a href="{% url 'keyword:keyword_detail' keyword.keyword %}" class="mr-2">{{ keyword.keyword| transtolocal }}&nbsp;,</a>
+                                      <a href="{% url 'keyword:keyword_detail' keyword.keyword %}" class="mr-2">
+                                          {{ keyword.keyword| transtolocal }}&nbsp;{%  if not forloop.last %}
+                                            ,
+                                        {%  endif %}
+
+                                      </a>
 
 
                                 {% endfor %}
@@ -295,6 +301,7 @@
 
 
                             </div>
+                             {%  endif  %}
 
                             <!-- Description -->
                             <div class="pb-1 border-line"
@@ -385,11 +392,13 @@
                             </div>
 
                             <!-- Interactivity -->
+                            {%  if not object.document_interactivity or object.document_interactivity is "NA"  %}
                             <div class="pb-1 border-line">
                                 <!-- TODO: implement pluralization in total page -->
                                 <span class="text-capitalize font-weight-normal hidden text-dark text-capitalize">{% trans "interactivity" %}:</span>
                                 <span class="text-dark"> {{ object.document_interactivity }}</span>
                             </div>
+                            {%  endif %}
 
 
                             <!-- Rights -->

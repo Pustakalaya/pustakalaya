@@ -20,7 +20,11 @@ class KeyWordAdmin(admin.ModelAdmin):
 
 @admin.register(Biography)
 class BiographyAdmin(admin.ModelAdmin):
-    pass
+    exclude = [
+        'first_name',
+        'middle_name',
+        'last_name',
+    ]
 
 
 @admin.register(Publisher)
