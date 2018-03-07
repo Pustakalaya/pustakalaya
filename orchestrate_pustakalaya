@@ -128,7 +128,7 @@ fi
 
 if [[ "$1" == "getBackup" ]] ; then
         echo "getBack up of postgres"
-        docker exec postgres_01 bash -c "/script/autopgsqlbackup "
+        docker exec postgres_01 bash -c "/script/autopgsqlbackup $BUILD_NUMBER"
 
 fi
 
