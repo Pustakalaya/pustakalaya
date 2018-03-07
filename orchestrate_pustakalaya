@@ -127,7 +127,7 @@ if [[ "$1" == "mkmigration" ]] ; then
 fi
 
 if [[ "$1" == "getBack" ]] ; then
-        echo "making migration for django app"
+        echo "getBack up of postgres"
         docker exec postgres_01 bash -c "/script/autopgsqlbackup "
 
 fi
