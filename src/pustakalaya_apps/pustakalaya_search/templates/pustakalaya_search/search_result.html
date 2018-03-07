@@ -795,22 +795,8 @@
 
 <script>
 
-
-function getUrlVars()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
-}
-var x = getUrlVars();
 $('.sbx-google__wrapper ').children('input.sbx-google__input-placeholder').attr("placeholder","");
-$('.sbx-google__wrapper ').children('input[name="qar"]').val(x["q"]);
+$('.sbx-google__wrapper ').children('input[name="qar"]').val("{{q}}");
 </script>
 
 
