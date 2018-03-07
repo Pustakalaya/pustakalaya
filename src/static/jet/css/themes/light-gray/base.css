@@ -43,12 +43,12 @@ input[type="submit"],
 }
 
 
-
-
 textarea,
 input[type="search"],
 input[type="number"],
 input[type="url"],
+
+
 input[id="id_title"]
 
 {
@@ -83,5 +83,3 @@ max-width:43.57143rem;
 width:43.57143rem;
 
 }
-
-
