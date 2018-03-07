@@ -6,11 +6,16 @@ from pustakalaya_apps.document.models import Document
 from pustakalaya_apps.favourite_collection.models import Favourite
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage , PageNotAnInteger
+from django.shortcuts import HttpResponseRedirect
 
 
 
 @login_required()
 def dashboard(request):
+    if request.user.is_superuser:
+        return HttpResponseRedirect("/")
+
+
     popular_documents = Document.objects.order_by('-updated_date')[:5]
 
     # Now lets get the users books first

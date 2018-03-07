@@ -1,3 +1,4 @@
+from django.utils.html import format_html
 from django.contrib import admin
 from .models import (
     Video,
@@ -27,6 +28,14 @@ class VideoAdmin(admin.ModelAdmin):
 
     list_per_page = 10
 
+    search_fields = (
+        'title',
+    )
+
+    list_display = ['title', 'preview_link']
+
+    list_filter = ['title', 'published']
+
     fields = (
         "title",
         "abstract",
@@ -52,10 +61,13 @@ class VideoAdmin(admin.ModelAdmin):
         "description",
         "license_type",
         "custom_license",
-        "publication_year",
         "sponsors",
         "thumbnail"
     )
+
+
+    def preview_link(self, obj):
+        return format_html("<a href='{url}'>Preview</a>", url=obj.get_absolute_url())
 
 
 @admin.register(VideoSeries)

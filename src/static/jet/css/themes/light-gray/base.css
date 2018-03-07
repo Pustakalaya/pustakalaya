@@ -15,6 +15,7 @@ input[type="submit"],
 }
 
 .changeform-tabs-item {
+
     margin-right: 40px;
     color:#444;
 }
@@ -41,14 +42,13 @@ input[type="submit"],
 
         color:#444;
 }
-input[type="text"],
+
 textarea,
 input[type="search"],
 input[type="number"],
 input[type="url"],
-.select2-search, .select2-search--inline,.select2,.select2-selection ,.select2-selection--single
+input[id="id_title"]
 {
-
 width: 43.57143rem;
 max-width:43.57143rem;
 }
@@ -64,3 +64,19 @@ color:#black!important;
 .deletelink{
 color:white!important;
 }
+
+/*#document_form>div>fieldset>div>div>span>span>ul{*/
+/*.select2-selection--multiple ,*/
+#select2-id_featured-container,#select2-id_published-container,#select2-id_document_file_type-container,#select2-id_document_interactivity-container,#select2-id_publisher-container,#select2-id_document_series-container,#select2-id_document_type-container,#select2-id_license_type-container{
+max-width:41.57143rem;
+width:41.57143rem;
+}
+
+.select2-selection--multiple,#id_place_of_publication ,#id_publication_year_on_text,#id_year_of_available_on_text,#id_volume,#id_edition,#id_document_total_page{
+
+max-width:43.57143rem;
+width:43.57143rem;
+
+}
+
+

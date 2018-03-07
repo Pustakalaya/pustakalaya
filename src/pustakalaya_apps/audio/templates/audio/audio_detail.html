@@ -100,8 +100,12 @@
         <!-- Read by/Voice -->
         <!-- TODO pluralization -->
         <span class="capitalize font-weight-normal text-dark">{% trans "Read by/Voice:" %}</span>
+        {%  if object.audio_read_by %}
         <a href="{% url 'author:author_detail' object.audio_read_by.getname|slugify object.audio_read_by.pk %}">
+
+
           <span class="text-dark text-capitalize text-primary">{{ object.audio_read_by.getname }}</span></a>
+        {% endif %}
       </div>
 
 

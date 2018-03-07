@@ -31,6 +31,8 @@ class Video(AbstractItem):
     collections = models.ManyToManyField(
         Collection,
         verbose_name=_("Add this video to these collection"),
+        blank=True,
+        null=True,
     )
 
     video_director = models.ForeignKey(
@@ -51,11 +53,15 @@ class Video(AbstractItem):
 
     education_levels = models.ManyToManyField(
         EducationLevel,
-        verbose_name=_("Education Level")
+        verbose_name=_("Education Level"),
+        blank=True,
+        null=True
     )
     languages = models.ManyToManyField(
         Language,
-        verbose_name=_("Languages")
+        verbose_name=_("Languages"),
+        blank=True,
+        null=True
     )
 
     video_series = models.ForeignKey(
@@ -99,12 +105,15 @@ class Video(AbstractItem):
     publisher = models.ForeignKey(
         Publisher,
         verbose_name=_("Publisher"),
+        blank=True,
+        null=True
     )
 
     keywords = models.ManyToManyField(
         Keyword,
         verbose_name=_("Keywords"),
-        blank=True
+        blank=True,
+        null=True
     )
 
     thumbnail = models.ImageField(
@@ -122,6 +131,8 @@ class Video(AbstractItem):
 
     @property
     def getauthors(self):
+        if not self.video_director:
+            return None
         author_list = [(author.getname, author.pk) for author in [self.video_director]]
         return author_list or [None]
 
@@ -135,7 +146,7 @@ class Video(AbstractItem):
         # Combine item attr and video attr to index in search server
         videoattr = dict(
             **item_attr,
-            publisher=self.publisher.publisher_name,
+            publisher=self.publisher.publisher_name if self.publisher else None,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             type=self.type,
@@ -185,6 +196,10 @@ class Video(AbstractItem):
 
 
 class VideoSeries(AbstractSeries):
+
+    class Meta:
+        verbose_name_plural = _("Video series")
+
     def __str__(self):
         return "{}".format(self.series_name)
 
