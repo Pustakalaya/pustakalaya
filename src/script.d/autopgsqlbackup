@@ -401,8 +401,8 @@ echo ======================================================================
 		eval rm -fv "$BACKUPDIR/daily/$DB/*.$DOW.sql.*"
 		echo
 			dbdump "$DB" "$BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.build_num-$BUILD_NUM.sql"
-			compression "$BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.sql"
-			BACKUPFILES="$BACKUPFILES $BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.sql$SUFFIX"
+			compression "$BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.build_num-$BUILD_NUM.sql"
+			BACKUPFILES="$BACKUPFILES $BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.build_num-$BUILD_NUM.sql$SUFFIX"
 		echo ----------------------------------------------------------------------
 	fi
 	done
