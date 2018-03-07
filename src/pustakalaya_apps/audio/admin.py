@@ -29,6 +29,11 @@ class DocumentAdmin(admin.ModelAdmin):
         AudioFileUploadInline,
     ]
 
+    list_filter = ['title', 'published','featured']
+    search_fields = (
+        'title',
+    )
+
     list_per_page = 10
 
     fields = (
