@@ -11,7 +11,8 @@ def community_detail(request, community_name):
 
     # s = Search(using=client, index=settings.ES_INDEX).query("match", )
 
-    es_count = Search(index="pustakalaya").using(client).query("match", communities=community_name).count()
+    # Query the total number of items in elastic search having the name of this community
+    # es_count = Search(index="pustakalaya").using(client).query("match", communities=community_name).count()
 
     # Context data
     context = {}
@@ -26,20 +27,20 @@ def community_detail(request, community_name):
     all_total = 0
 
     for collection in collections:
-        # Query the total no of object in this collection using elastic instance.
-        total_documents = collection.document_set.count()
-        total_audio = collection.audio_set.count()
-        total_video = collection.video_set.count()
-        total_count = total_documents + total_audio + total_video
-        pk = collection.pk
-        all_total += total_count
+        # Get the total no of items having this collection name in elastic search
+        # item_count_per_collection = Search(index="pustakalaya").using(client).query("match", communities=collection).count()
+        item_count_per_collection = Search(index="pustakalaya").using(client).query("match", collections=collection.collection_name).count()
 
+
+        all_total += item_count_per_collection
+
+        pk = collection.pk
 
         # Create a list to that contain collection_name and total count
         collection_list.append({
             "collection_name": collection.collection_name,
-            "total_count": total_count,
-            "es_count": es_count,
+            "total_count": all_total,
+            "es_count": item_count_per_collection,
             "pk": pk,
         })
 
