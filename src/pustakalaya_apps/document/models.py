@@ -312,6 +312,9 @@ class UnpublishedDocument(Document):
 class DocumentSeries(AbstractSeries):
     """BookSeries table inherited from AbstractSeries"""
 
+    class Meta:
+        verbose_name_plural = _("Document series")
+
     def __str__(self):
         return self.series_name
 

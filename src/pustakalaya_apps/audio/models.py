@@ -27,11 +27,15 @@ class Audio(AbstractItem):
     audio_types = models.ManyToManyField(
         "AudioType",
         verbose_name=_("Audio types"),
+        blank=True,
+        null=True
     )
 
     collections = models.ManyToManyField(
         Collection,
         verbose_name=_("Add this audio to these collection"),
+        blank=True,
+        null=True
     )
 
     type = models.CharField(
@@ -58,13 +62,16 @@ class Audio(AbstractItem):
 
     publisher = models.ForeignKey(
         Publisher,
-        verbose_name=_("Audio publisher")
+        verbose_name=_("Audio publisher"),
+        blank=True,
+        null=True
     )
 
     keywords = models.ManyToManyField(
         Keyword,
         verbose_name=_("Select list of keywords"),
-        blank=True
+        blank=True,
+        null=True
     )
 
     audio_genre = models.ForeignKey(
@@ -76,12 +83,16 @@ class Audio(AbstractItem):
 
     languages = models.ManyToManyField(
         Language,
-        verbose_name=_("Languages")
+        verbose_name=_("Languages"),
+        blank=True,
+        null=True
     )
 
     education_levels = models.ManyToManyField(
         EducationLevel,
-        verbose_name=("Education Levels")
+        verbose_name=("Education Levels"),
+        blank=True,
+        null=True
     )
 
     audio_series = models.ForeignKey(
@@ -94,7 +105,8 @@ class Audio(AbstractItem):
     sponsors = models.ManyToManyField(
         Sponsor,
         verbose_name=_("Sponsor"),
-        blank=True
+        blank=True,
+        null=True,
     )
 
     thumbnail = models.ImageField(
@@ -106,6 +118,8 @@ class Audio(AbstractItem):
 
     @property
     def getauthors(self):
+        if not self.audio_read_by:
+            return None
         author_list = [(author.getname, author.pk) for author in [self.audio_read_by]]
         return author_list or [None]
 
@@ -119,7 +133,7 @@ class Audio(AbstractItem):
         # Audio attributes
         audio_attr = dict(
             **item_attr,
-            publisher=self.publisher.publisher_name,
+            publisher=self.publisher.publisher_name if self.publisher else None,
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             audio_types=[audio.name for audio in self.audio_types.all()],
@@ -130,9 +144,9 @@ class Audio(AbstractItem):
             languages=[language.language.lower() for language in self.languages.all()],
             audio_running_time=self.audio_running_time,
             thumbnail=self.thumbnail.name,
-            audio_read_by=self.audio_read_by.getname,
-            audio_genre=self.audio_genre.genre,
-            audio_series=self.audio_series.series_name,
+            audio_read_by= self.audio_read_by.getname if self.audio_read_by else None,
+            audio_genre=self.audio_genre.genre if self.audio_genre else None,
+            audio_series=self.audio_series.series_name if self.audio_series else None,
             author_list = self.getauthors,
             url = self.get_absolute_url()
 

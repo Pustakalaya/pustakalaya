@@ -7,11 +7,44 @@
             onclick="window.location.href='{% url hit.type|add:":detail" hit.title|slugify hit.id %}'"
              style="cursor:pointer;">
             <span class="mr-2">{{ forloop.counter }}.</span>
-            <img class="mr-3 rounded" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
+
+          {% if hit.thumbnail  %}
+
+              <img class="mr-3 rounded" src="{{ MEDIA_URL }}{{ hit.thumbnail }}"
                  width="64px"
                  height="80px"
                  title="{{ hit.title }}"
                  alt="{{ hit.title }}">
+
+                {% else %}
+
+                {% if hit.type == "document"%}
+
+                <img class="mr-3 rounded" src="{% static 'base_assets/img/book_image_default.png' %}"
+                 width="64px"
+                 height="80px"
+                 title="{{ hit.title }}"
+                 alt="{{ hit.title }}">
+
+                {% elif hit.type == "audio"%}
+
+              <img class="mr-3 rounded" src="{% static 'base_assets/img/audio_book.png' %}"
+                 width="64px"
+                 height="80px"
+                 title="{{ hit.title }}"
+                 alt="{{ hit.title }}">
+                {% else %}
+
+              <img class="mr-3 rounded" src="{% static 'base_assets/img/video_book.png' %}"
+                 width="64px"
+                 height="80px"
+                 title="{{ hit.title }}"
+                 alt="{{ hit.title }}">
+                {% endif %}
+
+                {% endif %}
+
+
             <div class="media-body">
                 <p class="text-capitalize mt-0 mb-1">
                     <a class="text-capitalize text-dark bold-content"
