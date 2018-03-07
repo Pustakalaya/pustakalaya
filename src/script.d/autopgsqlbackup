@@ -400,9 +400,9 @@ echo ======================================================================
 		echo Rotating last weeks Backup...
 		eval rm -fv "$BACKUPDIR/daily/$DB/*.$DOW.sql.*"
 		echo
-			dbdump "$DB" "$BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.build_num-$1.sql"
-			compression "$BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.build_num-$1.sql"
-			BACKUPFILES="$BACKUPFILES $BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.build_num-$1.sql$SUFFIX"
+			dbdump "$DB" "$BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.sql"
+			compression "$BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.sql"
+			BACKUPFILES="$BACKUPFILES $BACKUPDIR/daily/$DB/${DB}_$DATE.$DOW.sql$SUFFIX"
 		echo ----------------------------------------------------------------------
 	fi
 	done
