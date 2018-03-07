@@ -37,7 +37,7 @@
         {% for keyword in object.keywords.all %}
         <span><a href="{% url 'keyword:keyword_detail' keyword.keyword %}"
                  style="text-decoration: none;">{{ keyword }}</a>
-            {%  if not forloop.last %},{%  endfor %}
+            {%  if not forloop.last %},{%  endif %}
         </span>
 
         {% endfor %}
