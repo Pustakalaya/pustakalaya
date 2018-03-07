@@ -37,6 +37,7 @@ class Collection(AbstractTimeStampModel):
 
     collection_description = models.TextField(
         _("Collection description"),
+        blank=True
     )
 
     def save(self, *args, **kwargs):
