@@ -130,7 +130,7 @@
                       <div class="pagination">
                         <span class="step-links">
                           {% if favourite_documents.has_previous %}
-                          <a href="?page={{ users.previous_page_number }}">previous</a>
+                          <a href="?page={{ favourite_documents.previous_page_number }}">previous</a>
                           {% endif %}
 
                           <!-- Showing the page numbers in Html Page -->
@@ -147,7 +147,8 @@
 
             </div>
                   {% endif %}
-      </div>
+
+                </div>
 
         {% block content %}
 
