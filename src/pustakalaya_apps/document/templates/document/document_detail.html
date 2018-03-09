@@ -140,22 +140,24 @@
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <!-- title of a document -->
 
-                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark" style="border-bottom: 1px dotted #ccccff;">
 
                         {{ object.title }}
                     </h4>
                     <!-- author section -->
+                  <!--<hr style="border:1px dotted">-->
                     <div class="pb-1 ">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
                         <!--strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong-->
                         {% for author in object.document_authors.all %}
-                            <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}"><span
-                                    style="font-size: 20px;"
+                            <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}">
+                             <div
+                                    style="font-size: 16px;"
                                     class="text-dark text-capitalize text-primary">
-                                {{ author }}
-                                {% if forloop.counter != object.document_authors.count %}|{% endif %}
-                            </span></a>
+                                {{ author }}<br>
+                                <!--{% if forloop.counter != object.document_authors.count %}|{% endif %}-->
+                            </div></a>
 
                         {% endfor %}
 
@@ -229,7 +231,11 @@
                             </div>
 
                             <!-- editor section -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                              {% if not object.document_editors.all %}
+                                 style="display: none;"
+                                    {% endif %}
+                              >
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Editors:" %}</span>
@@ -293,7 +299,11 @@
 
                             <!-- Keywords -->
                             {%  if object.keywords  %}
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {% if not object.keywords.all %}
+                                 style="display: none;"
+                                    {% endif %}
+                            >
 
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark" style="vertical-align: top;">{% trans "keywords:" %}</span>
@@ -329,7 +339,11 @@
                             </div>
 
                             <!-- License type -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {% if not object.license_type %}
+                                 style="display: none;"
+                                    {% endif %}
+                            >
                                 <!-- TODO pluralization -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.license_type }}</span>
@@ -395,7 +409,11 @@
                             </div>
 
                             <!-- Education level -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {% if not object.education_levels.all %}
+                                 style="display: none;"
+                                    {% endif %}
+                             >
                                 <!-- TODO: implement pluralization in total page -->
                                 <span class="text-capitalize font-weight-normal hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
                                 {% for education_level in object.education_levels.all %}
@@ -416,7 +434,11 @@
 
 
                             <!-- Rights -->
-                            <div class="pb-1 border-line" {% if not object.custom_license %} style="..." {% endif %}>
+                            <div class="pb-1 border-line"
+                            {% if not object.custom_license %}
+                                 style="display: none;"
+                                    {% endif %}
+                            >
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "rights:" %}</span>
                                 <span class="text-dark text-capitalize"
                                       style="vertical-align: top;"> {{ object.custom_license }}</span>

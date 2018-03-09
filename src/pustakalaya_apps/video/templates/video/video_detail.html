@@ -43,7 +43,7 @@
         <!--video title-->
     <h4 class="text-capitalize"><b>{{ object.title }}</b></h4>
         <h6 class="text-dark text-uppercase mb-4 description" id="video-title"
-            hidden>{{ object.videofileupload_set.first.file_name }}</h6>
+            hidden>{{ object.videofileupload_set.first.file_name }}_nishant</h6>
 
         <!-- video player -->
         <div class="row">
@@ -68,7 +68,12 @@
                                   onclick="playVideo(this)" class="
                                   {% if forloop.counter == 1 %} text-primary {% endif %}
                                   text-capitalize">
-                                 {{ forloop.counter }}&nbsp;.&nbsp;{{ video.file_name }}
+                                 {{ forloop.counter }}&nbsp;.&nbsp;
+                                {% if video.file_name %}
+                               {{ video.file_name }}
+                              {% else %}
+                              Video{{forloop.counter}}
+                              {% endif %}
 
                             </span>
                         </div>
@@ -140,15 +145,20 @@
 
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
+                    <span class="text-dark text-capitalize">
                     {% for keyword in object.keywords.all %}
-                        <span class="text-dark text-capitalize">
+
                             <a href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword }}</a>
-                        </span>
+                      {%  if not forloop.last %}
+                                            ,
+                      {%  endif %}
                     {% endfor %}
+                    </span>
+
                 </div>
 
                 <!-- Description -->
-       <div class="pb-1 border-line"
+                <div class="pb-1 border-line"
                         {% if not object.description %}
                      style="display: none;"
                         {% endif %}>
@@ -157,7 +167,11 @@
                 </div>
 
                 <!-- License type -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                {% if not object.license_type %}
+                     style="display: none;"
+                {% endif %}
+                >
                     <!-- TODO pluralization -->
                     <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
                     <span class="text-capitalize"> {{ object.license_type }}</span>
@@ -198,21 +212,36 @@
                 </div>
 
                 <!-- Language -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                {% if not object.languages.all %}
+                     style="display: none"
+                {% endif %}
+                >
                     <!-- TODO: implement pluralization in total page -->
                     <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
-                    {% for language in object.languages.all %}
-                        <a href=""><span class="text-capitalize"> {{ language }}</span></a>
+                  <span class="text-capitalize">
+                  {% for language in object.languages.all %}
+                        <a href="#"> {{ language }}</a>
+                    {%  if not forloop.last %}
+                    ,
+                   {%  endif %}
                     {% endfor %}
+                  </span>
                 </div>
 
                 <!-- Education level -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                {% if not object.education_levels.all %}
+                     style="display: none"
+                {% endif %}
+                >
                     <!-- TODO: implement pluralization in total page -->
                     <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
+                    <span class="text-capitalize">
                     {% for education_level in object.education_levels.all %}
-                        <span class="text-capitalize"> {{ education_level }}</span>
+                         {{ education_level }}
                     {% endfor %}
+                    </span>
 
 
                 </div>
@@ -220,11 +249,12 @@
                 <!-- Rights -->
                 <div class="pb-1 border-line"
                         {% if not object.custom_license %}
-                     style="display: none"
-                        {% endif %}>
-        <span class="text-capitalize font-weight-normal text-dark"
-              style="vertical-align: top;">{% trans "right:" %}</span>
-                    <span class="text-capitalize"> {{ object.custom_license }}</span>
+                           style="display: none"
+                        {% endif %} >
+
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</span>
+
+                    <span class="text-capitalize"> {{ object.custom_license }} </span>
                 </div>
 
                 <!-- sponsor -->
@@ -234,9 +264,11 @@
                 {% endif %}>
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</span>
-                    {% for sponsor in object.sponsors.all %}
-                        <span class="text-capitalize"> {{ sponsor }}</span>
+                  <span class="text-capitalize">
+                  {% for sponsor in object.sponsors.all %}
+                        {{ sponsor }}
                     {% endfor %}
+                  </span>
                 </div>
             </div>
         </div>

@@ -44,7 +44,7 @@ class DocumentDetailView(HitCountDetailView):  # Detail view is inherited from H
         number_per_page =15
         if length > number_per_page:
             #print("inside pagination")
-            #for pagination we have following code
+            #   for pagination we have following code
             paginator = Paginator(data_review, number_per_page)
             page = request.GET.get('page')
             try:
