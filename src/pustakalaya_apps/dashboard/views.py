@@ -19,7 +19,8 @@ def dashboard(request):
     popular_documents = Document.objects.order_by('-updated_date')[:5]
 
     # Now lets get the users books first
-    item_list = Favourite.objects.filter(favourite_item_type="document", user=request.user)
+    #item_list = Favourite.objects.filter(favourite_item_type="document", user=request.user)
+    item_list = Favourite.objects.filter(user=request.user)
 
     document_fav_list = []
 

@@ -300,6 +300,20 @@ class Document(AbstractItem, HitCountMixin):
     def get_admin_url(self):
         return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
 
+    def document_title(self):
+        return self.title
+
+    def published_yes_no(self):
+        return self.published
+
+    def featured_yes_no(self):
+        return self.featured
+
+    def updated_date_string(self):
+        return self.updated_date
+
+    def submited_by(self):
+        return self.submitted_by
 
 class UnpublishedDocument(Document):
     """

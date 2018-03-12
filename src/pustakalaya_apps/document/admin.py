@@ -80,7 +80,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "thumbnail",
     )
 
-    list_display = ['title', 'published','featured', 'preview_link', 'updated_date', 'submitted_by']
+    list_display = ['title_link', 'published_','featured_', 'edit_link', 'updated_date_', 'submitted_by_']
 
     ordering = ('-updated_date',)
 
@@ -97,9 +97,24 @@ class DocumentAdmin(admin.ModelAdmin):
             obj.submitted_by = request.user
         super().save_model(request, obj, form, change)
 
-    def preview_link(self, obj):
-        return format_html("<a href='{url}'>Preview</a>", url=obj.get_absolute_url())
+    def edit_link(self, obj):
+        return format_html("<a href='{url}'>Edit</a>", url=obj.get_admin_url())
 
+    def title_link(self,obj):
+        return format_html('<a href="%s">%s</a>' %(obj.get_absolute_url(), obj.document_title()))
+
+
+    def published_(self,obj):
+        return format_html('%s' % (obj.published_yes_no()))
+
+    def featured_(self,obj):
+        return format_html('%s' % (obj.featured_yes_no()))
+
+    def updated_date_(self,obj):
+        return format_html('%s' % (obj.updated_date_string()))
+
+    def submitted_by_(self,obj):
+        return format_html('%s' % (obj.submited_by()))
 
 
 

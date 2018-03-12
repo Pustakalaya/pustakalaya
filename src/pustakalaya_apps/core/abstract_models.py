@@ -43,7 +43,7 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     )
 
     name = models.CharField(
-        _("Author"),
+        _("Name"),
         max_length=50,
         default=""
 

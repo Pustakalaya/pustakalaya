@@ -52,11 +52,43 @@
                                      style="cursor: pointer;"
                                      onclick="window.location.href='{% url doc.type|add:':detail' doc.title|slugify doc.id %}'">
                                     <div class="content">
-                                        <img src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
+
+                                      {% if doc.thumbnail  %}
+
+
+                                      <img src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
                                              style="border-bottom:1px solid #ccc"
                                              width="120px"
                                              height="170px"
                                              alt="{{ doc.title|truncatechars:20}}">
+
+                                      {% else %}
+                                       {% if doc.type == "document"%}
+
+                                                  <img src="{% static 'base_assets/img/book_image_default.png' %}"
+                                                         style="border-bottom:1px solid #ccc"
+                                                         width="120px"
+                                                         height="170px"
+                                                         alt="{{ doc.title|truncatechars:20}}">
+
+                                       {% elif doc.type == "audio" %}
+
+                                         <img src="{% static 'base_assets/img/audio_book.png' %}"
+                                                         style="border-bottom:1px solid #ccc"
+                                                         width="120px"
+                                                         height="170px"
+                                                         alt="{{ doc.title|truncatechars:20}}">
+
+                                       {% else %}
+                                        <img src="{% static 'base_assets/img/video_book.png' %}"
+                                                         style="border-bottom:1px solid #ccc"
+                                                         width="120px"
+                                                         height="170px"
+                                                         alt="{{ doc.title|truncatechars:20}}">
+                                        {% endif %}
+
+                                        {% endif %}
+
                                         <p class="text-capitalize text-primary">{{ doc.title|truncatechars:20 }}</p>
 
                                         <div class="footer">
@@ -98,11 +130,43 @@
                                      style="cursor: pointer;"
                                      onclick="window.location.href='{% url doc.type|add:':detail' doc.title|slugify doc.id %}'">
                                     <div class="content">
-                                        <img src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
+
+                                     {% if doc.thumbnail  %}
+
+
+                                      <img src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
                                              style="border-bottom:1px solid #ccc"
                                              width="120px"
                                              height="170px"
                                              alt="{{ doc.title|truncatechars:20}}">
+
+                                      {% else %}
+                                       {% if doc.type == "document"%}
+
+                                                  <img src="{% static 'base_assets/img/book_image_default.png' %}"
+                                                         style="border-bottom:1px solid #ccc"
+                                                         width="120px"
+                                                         height="170px"
+                                                         alt="{{ doc.title|truncatechars:20}}">
+
+                                       {% elif doc.type == "audio" %}
+
+                                         <img src="{% static 'base_assets/img/audio_book.png' %}"
+                                                         style="border-bottom:1px solid #ccc"
+                                                         width="120px"
+                                                         height="170px"
+                                                         alt="{{ doc.title|truncatechars:20}}">
+
+                                       {% else %}
+                                        <img src="{% static 'base_assets/img/video_book.png' %}"
+                                                         style="border-bottom:1px solid #ccc"
+                                                         width="120px"
+                                                         height="170px"
+                                                         alt="{{ doc.title|truncatechars:20}}">
+                                        {% endif %}
+
+                                        {% endif %}
+
                                         <p class="text-capitalize text-primary">{{ doc.title|truncatechars:20 }}</p>
 
                                         <div class="footer">
@@ -120,7 +184,7 @@
 
                       {% if forloop.counter == 5 %}
                          <div class="container"></div>
-                      <br>
+                         <br>
                           {% endif %}
 
                       {% endfor %}
@@ -130,7 +194,7 @@
                       <div class="pagination">
                         <span class="step-links">
                           {% if favourite_documents.has_previous %}
-                          <a href="?page={{ users.previous_page_number }}">previous</a>
+                          <a href="?page={{ favourite_documents.previous_page_number }}">previous</a>
                           {% endif %}
 
                           <!-- Showing the page numbers in Html Page -->
@@ -147,7 +211,8 @@
 
             </div>
                   {% endif %}
-      </div>
+
+                </div>
 
         {% block content %}
 

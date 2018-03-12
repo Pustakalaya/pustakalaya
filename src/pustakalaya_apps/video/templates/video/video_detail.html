@@ -43,7 +43,7 @@
         <!--video title-->
     <h4 class="text-capitalize"><b>{{ object.title }}</b></h4>
         <h6 class="text-dark text-uppercase mb-4 description" id="video-title"
-            hidden>{{ object.videofileupload_set.first.file_name }}</h6>
+            hidden>{{ object.videofileupload_set.first.file_name }}_nishant</h6>
 
         <!-- video player -->
         <div class="row">
@@ -68,7 +68,12 @@
                                   onclick="playVideo(this)" class="
                                   {% if forloop.counter == 1 %} text-primary {% endif %}
                                   text-capitalize">
-                                 {{ forloop.counter }}&nbsp;.&nbsp;{{ video.file_name }}
+                                 {{ forloop.counter }}&nbsp;.&nbsp;
+                                {% if video.file_name %}
+                               {{ video.file_name }}
+                              {% else %}
+                              Video{{forloop.counter}}
+                              {% endif %}
 
                             </span>
                         </div>
@@ -140,15 +145,20 @@
 
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "keywords:" %}</span>
+                    <span class="text-dark text-capitalize">
                     {% for keyword in object.keywords.all %}
-                        <span class="text-dark text-capitalize">
+
                             <a href="{% url 'keyword:keyword_detail' keyword.keyword %}">{{ keyword.keyword }}</a>
-                        </span>
+                      {%  if not forloop.last %}
+                                            ,
+                      {%  endif %}
                     {% endfor %}
+                    </span>
+
                 </div>
 
                 <!-- Description -->
-       <div class="pb-1 border-line"
+                <div class="pb-1 border-line"
                         {% if not object.description %}
                      style="display: none;"
                         {% endif %}>
@@ -157,7 +167,11 @@
                 </div>
 
                 <!-- License type -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                {% if not object.license_type %}
+                     style="display: none;"
+                {% endif %}
+                >
                     <!-- TODO pluralization -->
                     <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
                     <span class="text-capitalize"> {{ object.license_type }}</span>
@@ -198,21 +212,36 @@
                 </div>
 
                 <!-- Language -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                {% if not object.languages.all %}
+                     style="display: none"
+                {% endif %}
+                >
                     <!-- TODO: implement pluralization in total page -->
                     <span class="text-capitalize hidden text-dark text-capitalize">{% trans "languages" %}:</span>
-                    {% for language in object.languages.all %}
-                        <a href=""><span class="text-capitalize"> {{ language }}</span></a>
+                  <span class="text-capitalize">
+                  {% for language in object.languages.all %}
+                        <a href="#"> {{ language }}</a>
+                    {%  if not forloop.last %}
+                    ,
+                   {%  endif %}
                     {% endfor %}
+                  </span>
                 </div>
 
                 <!-- Education level -->
-                <div class="pb-1 border-line">
+                <div class="pb-1 border-line"
+                {% if not object.education_levels.all %}
+                     style="display: none"
+                {% endif %}
+                >
                     <!-- TODO: implement pluralization in total page -->
                     <span class="text-capitalize hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
+                    <span class="text-capitalize">
                     {% for education_level in object.education_levels.all %}
-                        <span class="text-capitalize"> {{ education_level }}</span>
+                         {{ education_level }}
                     {% endfor %}
+                    </span>
 
 
                 </div>
@@ -220,11 +249,12 @@
                 <!-- Rights -->
                 <div class="pb-1 border-line"
                         {% if not object.custom_license %}
-                     style="display: none"
-                        {% endif %}>
-        <span class="text-capitalize font-weight-normal text-dark"
-              style="vertical-align: top;">{% trans "right:" %}</span>
-                    <span class="text-capitalize"> {{ object.custom_license }}</span>
+                           style="display: none"
+                        {% endif %} >
+
+                    <span class="text-capitalize font-weight-normal text-dark">{% trans "right:" %}</span>
+
+                    <span class="text-capitalize"> {{ object.custom_license }} </span>
                 </div>
 
                 <!-- sponsor -->
@@ -234,9 +264,11 @@
                 {% endif %}>
                     <!-- TODO pluralization -->
                     <span class="text-capitalize font-weight-normal text-dark">{% trans "sponsors:" %}</span>
-                    {% for sponsor in object.sponsors.all %}
-                        <span class="text-capitalize"> {{ sponsor }}</span>
+                  <span class="text-capitalize">
+                  {% for sponsor in object.sponsors.all %}
+                        {{ sponsor }}
                     {% endfor %}
+                  </span>
                 </div>
             </div>
         </div>
@@ -292,7 +324,51 @@
                            </div>
                          </li>
                          {% endfor %}
+                        {% elif paginated_data %}
+                        <!--Pagination links starts here-->
 
+                         {% for v in paginated_data %}
+                         <li style="list-style: none" id ="comment_{{ v.pk }}">
+
+                           <div class="jumbotron" id="div_comment_{{ v.pk }}">
+                              <p class="font-weight-bold input_post" style="word-wrap: break-word;">
+                                {{ v.post }}
+                                </p>
+                              <p>
+                                <small class="text-capitalize"> by: {{  v.user }}</small>
+                              </p>
+
+                               {% if user == v.user %}
+                                <!--<p>Welcome, {{ user.get_username }}. Thanks for logging <in class=""></in></p>-->
+
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>
+
+                                  {% else %}
+                                    <!--<p>Welcome,  user. Please log in.</p>-->
+                              {% endif %}
+                           </div>
+                         </li>
+                          {% endfor %}
+
+                       <div class="pagination">
+                        <span class="step-links">
+                          {% if paginated_data.has_previous %}
+                          <a href="?page={{ users.previous_page_number }}">previous</a>
+                          {% endif %}
+
+                          <!-- Showing the page numbers in Html Page -->
+                          <span class="current">
+                          Page {{ paginated_data.number }} of {{ paginated_data.paginator.num_pages }}.
+                        </span>
+
+                {% if paginated_data.has_next %}
+                <a href="?page={{ paginated_data.next_page_number }}">next</a>
+                {% endif %}
+                </span>
+                </div>
+
+                        <!--This is end of paginated links-->
 
                         {% endif %}
                         </ul>
