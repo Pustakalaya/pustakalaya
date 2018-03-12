@@ -140,22 +140,24 @@
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <!-- title of a document -->
 
-                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark">
+                    <h4 class="text-capitalize h4 lead mt-0 pt-0 description text-dark" style="border-bottom: 1px dotted #ccccff;">
 
                         {{ object.title }}
                     </h4>
                     <!-- author section -->
+                  <!--<hr style="border:1px dotted">-->
                     <div class="pb-1 ">
                         <!-- Authors -->
                         <!-- TODO pluralization -->
                         <!--strong class="text-capitalize font-weight-normal">{% trans "Authors:" %}</strong-->
                         {% for author in object.document_authors.all %}
-                            <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}"><span
-                                    style="font-size: 20px;"
+                            <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}">
+                             <div
+                                    style="font-size: 16px;"
                                     class="text-dark text-capitalize text-primary">
-                                {{ author }}
-                                {% if forloop.counter != object.document_authors.count %}|{% endif %}
-                            </span></a>
+                                {{ author }}<br>
+                                <!--{% if forloop.counter != object.document_authors.count %}|{% endif %}-->
+                            </div></a>
 
                         {% endfor %}
 
@@ -198,10 +200,14 @@
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "Authors:" %}</span>
+                                <span class="text-dark text-capitalize">
                                 {% for author in object.document_authors.all %}
-                                    <span class="text-dark text-capitalize">{{ author }}</span>
+                                   <a href="{% url 'author:author_detail' author.getname|slugify author.pk %}">{{ author }}</a>
+                                  {%  if not forloop.last %}
+                                            ,
+                                  {%  endif %}
                                 {% endfor %}
-
+                                </span>
                             </div>
 
                             <!-- Illustrator section -->
@@ -212,21 +218,35 @@
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
+                                <span class="text-dark text-capitalize">
                                 {% for illustrator in object.document_illustrators.all %}
-                                    <span class="text-dark text-capitalize"> {{ illustrator }}</span>
+                                  <a href="#">{{ illustrator }}</a>
+                                  {%  if not forloop.last %}
+                                            ,
+                                  {%  endif %}
                                 {% endfor %}
+                                </span>
 
 
                             </div>
 
                             <!-- editor section -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                              {% if not object.document_editors.all %}
+                                 style="display: none;"
+                                    {% endif %}
+                              >
                                 <!-- Authors -->
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Editors:" %}</span>
+                                <span class="text-dark text-capitalize">
                                 {% for editor in object.document_editors.all %}
-                                    <span class="text-dark text-capitalize"> {{ editor }}</span>
+                                    <a href="#"> {{ editor }}</a>
+                                  {%  if not forloop.last %}
+                                            ,
+                                  {%  endif %}
                                 {% endfor %}
+                                 </span>
 
 
                             </div>
@@ -242,7 +262,7 @@
                                 <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
 
                             </div>
-                        {%  endif %}
+                            {%  endif %}
 
                             <!-- place of publication -->
                             <div class="pb-1 border-line"
@@ -279,7 +299,11 @@
 
                             <!-- Keywords -->
                             {%  if object.keywords  %}
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {% if not object.keywords.all %}
+                                 style="display: none;"
+                                    {% endif %}
+                            >
 
                                 <!-- TODO pluralization -->
                                 <span class="text-capitalize font-weight-normal text-dark" style="vertical-align: top;">{% trans "keywords:" %}</span>
@@ -315,7 +339,11 @@
                             </div>
 
                             <!-- License type -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {% if not object.license_type %}
+                                 style="display: none;"
+                                    {% endif %}
+                            >
                                 <!-- TODO pluralization -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
                                 <span class="text-dark text-capitalize"> {{ object.license_type }}</span>
@@ -381,7 +409,11 @@
                             </div>
 
                             <!-- Education level -->
-                            <div class="pb-1 border-line">
+                            <div class="pb-1 border-line"
+                            {% if not object.education_levels.all %}
+                                 style="display: none;"
+                                    {% endif %}
+                             >
                                 <!-- TODO: implement pluralization in total page -->
                                 <span class="text-capitalize font-weight-normal hidden text-dark text-capitalize">{% trans "education levels" %}:</span>
                                 {% for education_level in object.education_levels.all %}
@@ -402,7 +434,11 @@
 
 
                             <!-- Rights -->
-                            <div class="pb-1 border-line" {% if not object.custom_license %} style="..." {% endif %}>
+                            <div class="pb-1 border-line"
+                            {% if not object.custom_license %}
+                                 style="display: none;"
+                                    {% endif %}
+                            >
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "rights:" %}</span>
                                 <span class="text-dark text-capitalize"
                                       style="vertical-align: top;"> {{ object.custom_license }}</span>
@@ -446,6 +482,7 @@
                        <input type="hidden" name="user" value="{{ user }}">
                        {% endif %}
 
+
                        {% if data_review %}
 
                          {% for v in data_review %}
@@ -470,11 +507,57 @@
                               {% endif %}
                            </div>
                          </li>
-                         {% endfor %}
+                          {% endfor %}
 
 
+                       {% elif paginated_data %}
+                        <!--Pagination links starts here-->
+
+                         {% for v in paginated_data %}
+                         <li style="list-style: none" id ="comment_{{ v.pk }}">
+
+                           <div class="jumbotron" id="div_comment_{{ v.pk }}">
+                              <p class="font-weight-bold input_post" style="word-wrap: break-word;">
+                                {{ v.post }}
+                                </p>
+                              <p>
+                                <small class="text-capitalize"> by: {{  v.user }}</small>
+                              </p>
+
+                               {% if user == v.user %}
+                                <!--<p>Welcome, {{ user.get_username }}. Thanks for logging <in class=""></in></p>-->
+
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>
+                                 <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>
+
+                                  {% else %}
+                                    <!--<p>Welcome,  user. Please log in.</p>-->
+                              {% endif %}
+                           </div>
+                         </li>
+                          {% endfor %}
+
+                       <div class="pagination">
+                        <span class="step-links">
+                          {% if paginated_data.has_previous %}
+                          <a href="?page={{ users.previous_page_number }}">previous</a>
+                          {% endif %}
+
+                          <!-- Showing the page numbers in Html Page -->
+                          <span class="current">
+                          Page {{ paginated_data.number }} of {{ paginated_data.paginator.num_pages }}.
+                        </span>
+
+                {% if paginated_data.has_next %}
+                <a href="?page={{ paginated_data.next_page_number }}">next</a>
+                {% endif %}
+                </span>
+                </div>
+
+                        <!--This is end of paginated links-->
                         {% endif %}
-                        </ul>
+
+                       </ul>
                      </div>
                     <!--model for login message -->
                    </div>

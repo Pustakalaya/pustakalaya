@@ -209,6 +209,8 @@ class AudioFileUpload(AbstractTimeStampModel):
     file_name = models.CharField(
         _("File name"),
         max_length=255,
+        blank=True,
+        null=True
     )
 
     audio = models.ForeignKey(
