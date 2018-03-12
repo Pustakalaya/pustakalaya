@@ -81,11 +81,13 @@ width:43.57143rem;
 
 }
 
-.delete{
+.delete >label{
+background-color:#34495e !important;
 
-background:#black!important;
 }
 
 span.related-widget-wrapper-icon{
 width:200%;
 }
+
+
