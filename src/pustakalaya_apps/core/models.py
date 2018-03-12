@@ -32,9 +32,10 @@ class Publisher(AbstractTimeStampModel):
         unique=True,
     )
 
-    publisher_description = models.CharField(
+    publisher_description = models.TextField(
         _("Publisher description"),
-        max_length=255
+        blank=True,
+        null=True
     )
 
     class Meta:
