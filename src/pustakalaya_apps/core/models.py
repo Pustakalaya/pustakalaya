@@ -147,3 +147,21 @@ class Language(models.Model):
 
     def __str__(self):
         return u"%s" % (self.get_language_display())
+
+
+class LicenseType(models.Model):
+
+    license = models.CharField(
+
+        max_length=50,
+        verbose_name=_("License"),
+        unique=True,
+
+    )
+
+    class Meta:
+        db_table = "tbl_license"
+
+    def __str__(self):
+        return u"%s" % (self.license)
+

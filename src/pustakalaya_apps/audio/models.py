@@ -16,7 +16,8 @@ from pustakalaya_apps.core.models import (
     Biography,
     Sponsor,
     Language,
-    EducationLevel
+    EducationLevel,
+    LicenseType
 )
 from .search import AudioDoc
 
@@ -72,6 +73,14 @@ class Audio(AbstractItem):
         verbose_name=_("Select list of keywords"),
         blank=True,
         null=True
+    )
+
+    license = models.OneToOneField(
+        LicenseType,
+        verbose_name=_("license"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     audio_genre = models.ForeignKey(
