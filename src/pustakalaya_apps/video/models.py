@@ -123,7 +123,6 @@ class Video(AbstractItem):
         verbose_name=_("license"),
         blank=True,
         null=True,
-
     )
 
     thumbnail = models.ImageField(

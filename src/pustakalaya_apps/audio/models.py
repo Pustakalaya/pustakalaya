@@ -80,7 +80,6 @@ class Audio(AbstractItem):
         verbose_name=_("license"),
         blank=True,
         null=True,
-
     )
 
     audio_genre = models.ForeignKey(
