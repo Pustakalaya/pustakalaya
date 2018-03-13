@@ -25,7 +25,8 @@ from pustakalaya_apps.core.models import (
     Keyword,
     Sponsor,
     EducationLevel,
-    Language
+    Language,
+    LicenseType
 )
 from .search import DocumentDoc
 
@@ -172,6 +173,15 @@ class Document(AbstractItem, HitCountMixin):
         blank=True
 
 
+    )
+
+
+    license = models.OneToOneField(
+        LicenseType,
+        verbose_name=_("license"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     thumbnail = models.ImageField(

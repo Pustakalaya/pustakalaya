@@ -57,7 +57,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "edition",
         "additional_note",
         "description",
-        "license_type",
+        "license",
         "custom_license",
         "publication_year",
         "sponsors",

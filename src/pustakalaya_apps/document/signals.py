@@ -18,6 +18,7 @@ from .tasks import convert_pdf
 @receiver(post_save, sender=Document)
 @transaction.atomic
 def index_or_update_document(sender, instance, **kwargs):
+    instance.license_type = instance.license.license
     # Save or update index
     instance.index()
 

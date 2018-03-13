@@ -74,7 +74,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "document_type",
         "additional_note",
         "description",
-        "license_type",
+        "license",
         "custom_license",
         "sponsors",
         "thumbnail",

@@ -20,6 +20,7 @@ from pustakalaya_apps.core.models import (
     Publisher,
     Language,
     EducationLevel,
+    LicenseType,
 )
 
 
@@ -114,6 +115,14 @@ class Video(AbstractItem):
         verbose_name=_("Keywords"),
         blank=True,
         null=True
+    )
+
+    license = models.OneToOneField(
+        LicenseType,
+        verbose_name=_("license"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     thumbnail = models.ImageField(
