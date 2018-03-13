@@ -152,11 +152,8 @@ class Language(models.Model):
 class LicenseType(models.Model):
 
     license = models.CharField(
-
         max_length=50,
         verbose_name=_("License"),
-        unique=True,
-
     )
 
     class Meta:
