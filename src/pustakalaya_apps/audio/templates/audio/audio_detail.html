@@ -98,6 +98,14 @@
   </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
+       {%  if request.user.is_superuser %}
+
+                     <p class="text-primary description">
+                      <a href="{{ object.get_admin_url }}" class="btn btn-sm">{%  trans "Edit" %}</a>
+                     </p>
+
+           {%  endif %}
+
       <h4 class="text-capitalize h4 lead mt-0 pt-0 "><b>{{ object.title }}</b></h4>
 
       <div class="border-line"
@@ -352,6 +360,7 @@
                         {% elif paginated_data %}
                         <!--Pagination links starts here-->
 
+
                          {% for v in paginated_data %}
                          <li style="list-style: none" id ="comment_{{ v.pk }}">
 
@@ -368,6 +377,7 @@
 
                                  <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>
                                  <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>
+
 
                                   {% else %}
                                     <!--<p>Welcome,  user. Please log in.</p>-->

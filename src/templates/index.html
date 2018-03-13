@@ -350,7 +350,11 @@
 
                 {% endif %}
 
-                <div class="pl-3 text-capitalize mt-2" style="min-height:45px!important;">
+
+
+                <div class="pl-3 text-capitalize mt-3" style="min-height:45px!important;">
+
+
                   <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span>
 
                 {% if  book.document_authors.first%}
@@ -371,8 +375,10 @@
         </section>
         <br>
 
+
+
         <!-- Education section -->
-    <div class="row m-0 maximize-width-for-ipad" style="margin-left:-10px !important;">
+    <div class="row m-0 maximize-width-for-ipad mt-5" style="margin-left:-10px !important;">
       <div class="rounded pt-3 pb-3 pl-4 pr-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 content-box-shadow ">
         <p class="description text-uppercase rounded bold text-black    text-uppercase mb-1">
           {% trans 'Interactive educational software' %}

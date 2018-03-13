@@ -101,6 +101,13 @@
             </div>
         </div> <!-- end row -->
         <div class="row">
+          {%  if request.user.is_superuser %}
+
+                     <p class="text-primary description">
+                      <a href="{{ object.get_admin_url }}" class="btn btn-sm">{%  trans "Edit" %}</a>
+                     </p>
+
+           {%  endif %}
             <!-- metadata section -->
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <p class="text-justify  tex-dark font-weight-normal"

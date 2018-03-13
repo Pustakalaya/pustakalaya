@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from elasticsearch.exceptions import NotFoundError
-
+from django.core import urlresolvers
 from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
@@ -75,10 +75,10 @@ class Audio(AbstractItem):
         null=True
     )
 
-    license = models.OneToOneField(
+
+    license = models.ForeignKey(
         LicenseType,
         verbose_name=_("license"),
-        on_delete=models.CASCADE,
         blank=True,
         null=True,
     )
@@ -185,6 +185,10 @@ class Audio(AbstractItem):
 
     class Meta:
         db_table = "audio"
+
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
 
 
 class AudioGenre(AbstractTimeStampModel):

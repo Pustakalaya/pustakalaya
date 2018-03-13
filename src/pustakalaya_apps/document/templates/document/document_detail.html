@@ -82,7 +82,7 @@
                  {%  if request.user.is_superuser %}
 
                      <p class="text-primary description">
-                      <a href="{{ object.get_admin_url }}">{%  trans "Edit" %}</a>
+                      <a href="{{ object.get_admin_url }}" class="btn btn-sm">{%  trans "Edit" %}</a>
                      </p>
 
                     {%  endif %}
