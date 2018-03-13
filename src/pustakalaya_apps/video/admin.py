@@ -59,7 +59,7 @@ class VideoAdmin(admin.ModelAdmin):
         "published",
         "additional_note",
         "description",
-        "license_type",
+        "license",
         "custom_license",
         "sponsors",
         "thumbnail"

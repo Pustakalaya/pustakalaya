@@ -39,7 +39,7 @@
 {% endblock style %}
 
 {% block content %}
-    <div class="container min_height pt-4" >
+    <div class=" min_height pt-4" style="margin-left:8.0rem;margin-right:8.0rem;" >
         <!--video title-->
     <h4 class="text-capitalize"><b>{{ object.title }}</b></h4>
         <h6 class="text-dark text-uppercase mb-4 description" id="video-title"
@@ -47,8 +47,8 @@
 
         <!-- video player -->
         <div class="row">
-            <div class="col-md-7 col-sm-12 col-xs-12">
-                <video class="video-js vjs-default-skin" width="640px" height="360px"
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <video class="video-js vjs-default-skin" width="100%" height="450px"
                        id="selectedVideo" controls="controls" loop controlsList="nodownload" preload="auto"
                        style="border: 5px solid rgba(127,140,141,0.11)"
                        src="{{ MEDIA_URL }}{{ object.videofileupload_set.first.upload }}"
@@ -56,9 +56,8 @@
                        data-setup='{ "aspectRatio":"640:360", "playbackRates": [1, 1.5, 2] }'>
                 </video>
             </div>
-            <div class="col-md-5 col-sm-12 col-xs-12 p-5 "
+            <div class="col-md-4 col-sm-12 col-xs-12 p-5 "
                  style="height: 360px; width:426px; overflow-y: scroll; margin-left: -15px;">
-
                 <div id="videoList">
                     {% for video in object.videofileupload_set.all %}
                         <div class="pt-1 pb-1 pl-3 text-capitalize">
