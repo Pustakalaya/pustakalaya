@@ -176,12 +176,12 @@ class Document(AbstractItem, HitCountMixin):
     )
 
 
-    license = models.OneToOneField(
+    license = models.ForeignKey(
         LicenseType,
         verbose_name=_("license"),
-        on_delete=models.CASCADE,
         blank=True,
         null=True,
+
     )
 
     thumbnail = models.ImageField(

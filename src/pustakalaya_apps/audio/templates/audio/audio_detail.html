@@ -98,6 +98,14 @@
   </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
+       {%  if request.user.is_superuser %}
+
+                     <p class="text-primary description">
+                      <a href="{{ object.get_admin_url }}" class="btn btn-sm">{%  trans "Edit" %}</a>
+                     </p>
+
+           {%  endif %}
+
       <h4 class="text-capitalize h4 lead mt-0 pt-0 "><b>{{ object.title }}</b></h4>
 
       <div class="border-line"
