@@ -2,32 +2,64 @@
 {% load i18n %}
 
 <!-- footer navigation -->
-<footer class="footer section-padding mt-3" style="color:white !important;background-color:rgb(13,146,63)!important;">
-    <div class="container">
-        <nav>
+<footer class=" section-padding mt-3" style="color:white !important;background-color:rgb(13,146,63)!important;">
+
+
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+
+      <div class="copyright">
+             {% trans "Developed and maintained By" %}
+            <a href="http://www.olenepal.org" target="_blank" style="color:white;font-weight:bold; " >{% trans "OLE Nepal" %}</a>.
+      </div>
+
+      <a href="https://www.facebook.com/olenepal/" target="_blank"><i class="fa fa-2x fa-facebook text-white p-2 "></i></a>
+      <a href="https://twitter.com/olenepal/" target="_blank"><i class="fa fa-2x fa-twitter text-white p-2 "></i></a>
+
+    </div>
+    <div class="col-sm">
+      Unless explicitly mentioned, all the contents
+      on this website are licensed under Creative Commons
+      See License Details
+      <br><br>
+      <img src="{%  static 'images/logos/creative-commons.png' %}" class="text-white" alt="Creative commons">
+    </div>
+    <div class="col-sm">
+
+      <div class="container text-white">
+
             <ul>
                 <li>
-                    <a href="{% url 'help' %}">
+                    <a href="{% url 'feedback' %}" class="text-white">
+                        {% trans "Contact" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'help' %}" class="text-white">
                         {% trans "Help" %}
                     </a>
                 </li>
                 <li>
-                    <a href="http://olenepal.org/blog" target="_blank">
+                    <a href="http://olenepal.org/blog" target="_blank" class="text-white">
                         {% trans "Blog" %}
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" class="text-white">
                         Terms and condition
                     </a>
                 </li>
             </ul>
-        </nav>
-        <div class="copyright">
-             {% trans "Developed and maintained By" %}
-            <a href="http://www.olenepal.org" target="_blank" style="color:white;font-weight:bold; " >{% trans "OLE Nepal" %}</a>.
-        </div>
+
+
     </div>
+
+    </div>
+  </div>
+</div>
+
+
 </footer>
 
 <!--These tow div close is navbar.html page, closing of class="content" and "content-inside"-->
