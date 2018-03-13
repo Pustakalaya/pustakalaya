@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 from pustakalaya_apps.collection.models import Collection
 from elasticsearch.exceptions import NotFoundError
 from .search import VideoDoc
+from django.core import urlresolvers
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
     AbstractSeries,
@@ -20,6 +21,7 @@ from pustakalaya_apps.core.models import (
     Publisher,
     Language,
     EducationLevel,
+    LicenseType,
 )
 
 
@@ -116,6 +118,15 @@ class Video(AbstractItem):
         null=True
     )
 
+
+    license = models.ForeignKey(
+        LicenseType,
+        verbose_name=_("license"),
+
+        blank=True,
+        null=True,
+    )
+
     thumbnail = models.ImageField(
         upload_to="uploads/thumbnails/video/%Y/%m/%d",
         max_length=255,
@@ -194,6 +205,10 @@ class Video(AbstractItem):
     def __str__(self):
         return self.title
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
 
 class VideoSeries(AbstractSeries):
 
@@ -210,6 +225,8 @@ class VideoFileUpload(AbstractTimeStampModel):
     file_name = models.CharField(
         _("File name"),
         max_length=255,
+        blank=True,
+        null=True
     )
 
     video = models.ForeignKey(

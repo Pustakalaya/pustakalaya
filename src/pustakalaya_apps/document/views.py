@@ -10,7 +10,7 @@ from django.core.exceptions import ValidationError
 #from pustakalaya_apps.review_system.forms import ReviewForm
 from pustakalaya_apps.review_system.models import Review
 from pustakalaya_apps.favourite_collection.models import Favourite
-
+from django.core.paginator import Paginator, EmptyPage , PageNotAnInteger
 
 
 def documents(request):
@@ -38,25 +38,42 @@ class DocumentDetailView(HitCountDetailView):  # Detail view is inherited from H
         hit_count_response = HitCountMixin.hit_count(request, hit_count)
         context = self.get_context_data(object=self.object)
         data_review = Review.objects.filter(content_id=self.object.pk, content_type='document',published=True)
+        ##########################Review pagination add########################
+        #print(len(data_review))
+        length = len(data_review)
+        number_per_page =15
+        if length > number_per_page:
+            #print("inside pagination")
+            #   for pagination we have following code
+            paginator = Paginator(data_review, number_per_page)
+            page = request.GET.get('page')
+            try:
+                users = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                users = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 7777), deliver last page of results.
+                users = paginator.page(paginator.num_pages)
 
-        #print("review_data= ",data_review)
-        #for item in data_review:
-        #    print("item comment ="+item.post+",publish status="+ str(item.published))
+            context["paginated_data"] = users
+
+        ########################Review Pagination end########################
+
         favourite_data=""
         # favourite item data extractions
         if request.user.is_authenticated:
             favourite_data = Favourite.objects.filter(favourite_item_id=self.object.pk, favourite_item_type='document', user=request.user);
 
-        #print("context= ",context['hitcount']['pk'])
-        #print("context= ", context)
-        #pkvalue = Document.collections.attname
-        #print("pk value = ",pkvalue)
-        context["data_review"]= data_review
+        if length > 0 and length <= number_per_page:
+            context["data_review"]= data_review
+
+
 
         context["favourite_data"]= favourite_data
 
-        print("favourite_data=",context["favourite_data"])
-        print("context= ", context)
+        # print("favourite_data=",context["favourite_data"])
+        # print("context= ", context)
         #print("user in the console= ",context["favourite_data"][0].user)
         return self.render_to_response(context)
 

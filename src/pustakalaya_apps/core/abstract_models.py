@@ -43,7 +43,7 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     )
 
     name = models.CharField(
-        _("Author"),
+        _("Name"),
         max_length=50,
         default=""
 
@@ -177,7 +177,6 @@ class AbstractItem(AbstractTimeStampModel):
 
     license_type = models.CharField(
         _("License type"),
-        choices=ITEM_LICENSE_TYPE,
         max_length=255,
         blank=True
     )

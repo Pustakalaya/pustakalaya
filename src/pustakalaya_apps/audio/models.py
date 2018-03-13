@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 from elasticsearch.exceptions import NotFoundError
-
+from django.core import urlresolvers
 from pustakalaya_apps.collection.models import Collection
 from pustakalaya_apps.core.abstract_models import (
     AbstractItem,
@@ -16,7 +16,8 @@ from pustakalaya_apps.core.models import (
     Biography,
     Sponsor,
     Language,
-    EducationLevel
+    EducationLevel,
+    LicenseType
 )
 from .search import AudioDoc
 
@@ -72,6 +73,14 @@ class Audio(AbstractItem):
         verbose_name=_("Select list of keywords"),
         blank=True,
         null=True
+    )
+
+
+    license = models.ForeignKey(
+        LicenseType,
+        verbose_name=_("license"),
+        blank=True,
+        null=True,
     )
 
     audio_genre = models.ForeignKey(
@@ -177,6 +186,10 @@ class Audio(AbstractItem):
     class Meta:
         db_table = "audio"
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
 
 class AudioGenre(AbstractTimeStampModel):
     genre = models.CharField(
@@ -209,6 +222,8 @@ class AudioFileUpload(AbstractTimeStampModel):
     file_name = models.CharField(
         _("File name"),
         max_length=255,
+        blank=True,
+        null=True
     )
 
     audio = models.ForeignKey(

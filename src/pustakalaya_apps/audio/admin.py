@@ -13,7 +13,7 @@ from .models import (
 class AudioFileUploadInline(admin.StackedInline):
     model = AudioFileUpload
     extra = 1
-    fields = ["upload"]
+    fields = ["file_name","upload"]
 
 
 
@@ -57,7 +57,7 @@ class DocumentAdmin(admin.ModelAdmin):
         "edition",
         "additional_note",
         "description",
-        "license_type",
+        "license",
         "custom_license",
         "publication_year",
         "sponsors",

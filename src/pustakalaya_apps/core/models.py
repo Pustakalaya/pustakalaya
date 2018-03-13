@@ -32,9 +32,10 @@ class Publisher(AbstractTimeStampModel):
         unique=True,
     )
 
-    publisher_description = models.CharField(
+    publisher_description = models.TextField(
         _("Publisher description"),
-        max_length=255
+        blank=True,
+        null=True
     )
 
     class Meta:
@@ -146,3 +147,19 @@ class Language(models.Model):
 
     def __str__(self):
         return u"%s" % (self.get_language_display())
+
+
+class LicenseType(models.Model):
+
+    license = models.CharField(
+        max_length=50,
+        verbose_name=_("License"),
+
+    )
+
+    class Meta:
+        db_table = "tbl_license"
+
+    def __str__(self):
+        return u"%s" % (self.license)
+

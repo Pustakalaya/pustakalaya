@@ -6,11 +6,17 @@ from .models import (
     Publisher,
     EducationLevel,
     Language,
+    LicenseType
+
 )
 
 
 @admin.register(Sponsor)
 class SponsorAdmin(admin.ModelAdmin):
+   pass
+
+@admin.register(LicenseType)
+class LicenseTypeAdmin(admin.ModelAdmin):
    pass
 
 @admin.register(Keyword)

@@ -21,9 +21,11 @@
    width: 260px;
    border-top-left-radius: 5px;
    border-top-right-radius: 5px;
-   box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
-   margin-left:5px;
 
+   box-shadow: 0 1px 1px rgba(50,50,93,.31), 0 1px 1px 1px rgba(0,0,0,.02);
+   margin-left:5px;
+   padding-left:15px;
+   padding-top:5px;
 }
 .box-model-head-new>p{
   color: white;
@@ -46,7 +48,8 @@
     font-size: 15px;
     font-weight: 550;
     color: #000;
-    box-shadow: 0 4px 6px rgba(50,50,93,.31), 0 1px 13px 10px rgba(0,0,0,.02);
+
+    box-shadow: 0 1px 1px rgba(50,50,93,.31), 0 1px 1px 1px rgba(0,0,0,.02);
     }
     ol, ul {
     list-style: none;
@@ -63,7 +66,7 @@
     height: 40px;
     line-height: 40px;
     cursor: pointer;
-    /*border-bottom: 1px solid #ecf0f1;*/
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -107,26 +110,31 @@
     user-select: none;
     letter-spacing: 1px;
     padding-left:10px;
+    padding-right: 10px;
+    margin-left: 5px;
 
 }
 
 .content-box-shadow {
-    box-shadow: 0 0 7px #7f8c8d;
+
+    box-shadow: 0 0 2px #7f8c8d;
 
 }
 
+
 .main-container-box-shadow {
-    box-shadow: 0 2px 2px 2px #7f8c8d;
+
+    box-shadow: 0 1px 1px 1px #7f8c8d;
 }
 .list-hover-style-slider{
   border:1px solid #7f8c8d;
   border-radius:5px;
-  /*box-shadow: 0 0 7px #7f8c8d;*/
+
 }
 .list-hover-style-slider:hover{
   border:1px solid #3742fa;
   border-radius:5px;
-  /*box-shadow: 0 0 7px #7f8c8d;*/
+
 }
 
 @media screen and (max-width: 1198px) and (min-width: 770px)
@@ -150,6 +158,18 @@
     overflow: auto;
   }
 }
+.button-hover:hover{
+
+  border-radius:2px;
+  background:#576574;
+
+}
+.button-hover:hover{
+
+
+  color:white
+
+}
 </style>
 
 
@@ -160,7 +180,7 @@
 <!--custom style backgound-color is in base.html body which includes for all-->
 <div class="for-bg-color-container background-color mt-1">
   <!--search-->
-  <div class="container pt-4 main-container-box-shadow ">
+  <div class=" pt-4  " style="margin-left:7.0rem;margin-right:7.0rem;">
     <!-- Search bar section -->
     <!--<div class="row">-->
       <!--<div class="col-md-12 col-xs-12 col-sm-12">-->
@@ -172,7 +192,7 @@
     <div class="row">
       <!-- Browse by -->
 
-      <div class="col-md-3 col-xs-12 col-sm-12 row-first-width" id="browse">
+      <div class="col-md-3 col-xs-12 col-sm-12 row-first-width"  id="browse">
 
         <!-- Browse Pustakalaya -->
         <div class="mt-0">
@@ -191,14 +211,17 @@
         </div>
         <div class="row box-model-body-new">
         <ul   data-v-03b85949="" class="format-dd">
-            <li data-v-1="" class="format-option">
+            <li data-v-1="" class="format-option  ">
               <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
-                 class="text-capitalize ">Titles</a>
-            |
+                 class="text-capitalize  button-hover p-2 " >Titles</a>
+
             </li>
             <li data-v-1="" class="format-option">
+            |
+            </li>
+            <li data-v-1="" class="format-option ">
                     <a href="/authors"
-                    class="text-capitalize  "><span>   Authors</span></a>
+                    class="text-capitalize  button-hover p-2"><span>   Authors</span></a>
             </li>
         </ul>
     </div>
@@ -283,16 +306,16 @@
       </div>
 
       <!-- Featured books -->
-      <div class="col-md-9 col-sm-12 col-xs-12 row-second-width">
+      <div class="col-md-9 col-sm-12 col-xs-12 row-second-width" style="padding-left:0px;">
         <!--<div class="search maximize-width-for-ipad">-->
           <!--&lt;!&ndash; search &ndash;&gt;-->
           <!--{% include '_partials/search_form.html' %}-->
         <!--</div>-->
         <section>
-          <p class="description bold text-uppercase text-dark  mb-0 ">Books we love</p>
+          <p class="description bold text-uppercase text-dark  m-0 ">Books we love</p>
           <div class="row maximize-width-for-ipad">
             {% for book in featured_books %}
-            <div class="col-md-2 col-sm-12  col-xs-12  p-0   m-3   thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;">
+            <div class="col-md-2 col-sm-12  col-xs-12  p-0      thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;margin:11px;">
               <a href="{% url 'document:detail_without_slug'  book.pk %}">
 
 
@@ -302,7 +325,7 @@
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{{ MEDIA_URL }}{{ book.thumbnail }}"
                 width="100%"
-                height="190px">
+                height="225px">
                 {% else %}
 
                 {% if book.type == "document"%}
@@ -310,28 +333,36 @@
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{% static 'base_assets/img/book_image_default.png' %}"
                 width="100%"
-                height="190px">
+                height="225px">
                 {% elif book.type == "audio"%}
                  <img
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{% static 'base_assets/img/audio_book.png' %}"
                 width="100%"
-                height="190px">
+                height="225px">
                 {% else %}
                  <img
                 class="img-responsive rounded" style="border-bottom:1px solid #ccc"
                 src="{% static 'base_assets/img/video_book.png' %}"
                 width="100%"
-                height="190px">
+                height="225px">
                 {% endif %}
 
                 {% endif %}
-                <div class=" pl-3 text-capitalize    "> <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span></div>
+
+
+
+                <div class="pl-3 text-capitalize mt-3" style="min-height:45px!important;">
+
+
+                  <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span>
+
                 {% if  book.document_authors.first%}
-                <div class=" pl-3 author-name-size text-dark">By
+                <span class=" pl-3 author-name-size text-dark">By
                 <span class="text-secondary"> {{book.document_authors.first}}</span>
-                </div>
+                </span>
                 {% endif %}
+                </div>
               </a>
 
 
@@ -342,9 +373,12 @@
             {% endfor %}
           </div>
         </section>
+        <br>
+
+
 
         <!-- Education section -->
-    <div class="row m-0 maximize-width-for-ipad" style="margin-left:-10px !important;">
+    <div class="row m-0 maximize-width-for-ipad mt-5" style="margin-left:-10px !important;">
       <div class="rounded pt-3 pb-3 pl-4 pr-4 col-md-12 col-sm-12 col-xs-12 jumbotron mt-0 content-box-shadow ">
         <p class="description text-uppercase rounded bold text-black    text-uppercase mb-1">
           {% trans 'Interactive educational software' %}
@@ -458,8 +492,8 @@
       <div class="col">
         <!-- Major and past partners -->
         <div class="section-padding bg-light">
-          <div class="container ">
-            <div class="row  ">
+          <div class=" ">
+            <div class="row m-0  ">
               <!-- Major partners -->
               <div class=" col-md-6 col-xs-12  md-height-same-as-container ipad-padding-left  sd-padding-left-right-zero lg-padding-left-zero">
                 <div class="container jumbotron mb-0 pt-3 content-box-shadow">
@@ -477,7 +511,7 @@
               <!-- Past partners -->
               <div class=" col-md-6 col-xs-12  ipad-padding-right sd-padding-left-right-zero ld-padding-right-zero">
                 <div class="container jumbotron mb-0 pt-3   sd-break-small-screen content-box-shadow">
-                  <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Past supporter" %}</p>
+                  <p class="description text-uppercase bold  text-dark text-uppercase ">{% trans "Past supporters" %}</p>
 
                 <!-- TODO: replace with sliding banner -->
                 <ul class="nav">
@@ -511,7 +545,7 @@
 
         <!-- Contributed partners -->
         <div class="section-padding mt-0 pt-0">
-          <div class="container jumbotron pb-4 pt-4 mt-0 mb-0 content-box-shadow">
+          <div class=" jumbotron pb-4 pt-4 mt-0 mb-0 content-box-shadow">
             <p class="description text-uppercase  bold text-dark text-uppercase mb-2">{% trans "Content contribution" %}</p>
 
             <div class="text-center">

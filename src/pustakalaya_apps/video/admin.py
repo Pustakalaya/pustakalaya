@@ -11,7 +11,7 @@ from .models import (
 class VideoFileUploadAdmin(admin.TabularInline):
     model = VideoFileUpload
     extra = 1
-    fields = ["upload"]
+    fields = ["file_name","upload"]
 
 
 class AudioLinkInfoAdminInline(admin.StackedInline):
@@ -59,7 +59,7 @@ class VideoAdmin(admin.ModelAdmin):
         "published",
         "additional_note",
         "description",
-        "license_type",
+        "license",
         "custom_license",
         "sponsors",
         "thumbnail"
