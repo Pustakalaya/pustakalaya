@@ -75,6 +75,7 @@ class Audio(AbstractItem):
         null=True
     )
 
+
     license = models.ForeignKey(
         LicenseType,
         verbose_name=_("license"),
