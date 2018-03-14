@@ -176,11 +176,9 @@ class Document(AbstractItem, HitCountMixin):
     )
 
 
-
     license = models.ForeignKey(
         LicenseType,
         verbose_name=_("license"),
-
         blank=True,
         null=True,
     )
@@ -292,6 +290,9 @@ class Document(AbstractItem, HitCountMixin):
         # Index to index server if any doc is not empty and published status is "yes"
         if self.published == "yes":
             self.doc().save()
+
+        # Print all the collections.
+        #print(self.collections)
 
     def bulk_index(self):
         # Do bulk index if doc item is not empty.

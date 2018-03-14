@@ -1,6 +1,7 @@
 <!-- pagination method 1 -->
 <nav>
     <ul class="pagination pagination-primary">
+      {{ page_obj.has_previous }}
         {% if page_obj.has_previous %}
             <li class="page-item">
                 <a href="?page=

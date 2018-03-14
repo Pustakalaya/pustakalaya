@@ -118,11 +118,9 @@ class Video(AbstractItem):
         null=True
     )
 
-
     license = models.ForeignKey(
         LicenseType,
         verbose_name=_("license"),
-
         blank=True,
         null=True,
     )

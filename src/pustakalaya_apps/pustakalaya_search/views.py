@@ -25,7 +25,7 @@ def search(request):
         if query_string == "":
             return HttpResponseRedirect("/")
 
-        print("Query string from form is", query_string)
+
 
         # Get data ajax request
         try:
