@@ -48,7 +48,9 @@ input[type="search"],
 input[type="number"],
 input[type="url"],
 
+
 input[id="id_title"]
+
 {
 
 width: 43.57143rem;
@@ -67,6 +69,7 @@ color:#black!important;
 color:white!important;
 }
 
+
 /*#document_form>div>fieldset>div>div>span>span>ul{*/
 /*.select2-selection--multiple ,*/
 #select2-id_featured-container,#select2-id_published-container,#select2-id_document_file_type-container,#select2-id_document_interactivity-container,#select2-id_publisher-container,#select2-id_document_series-container,#select2-id_document_type-container,#select2-id_license_type-container{
@@ -80,6 +83,7 @@ max-width:43.57143rem;
 width:43.57143rem;
 
 }
+
 
 .delete >label{
 background-color:#34495e !important;
