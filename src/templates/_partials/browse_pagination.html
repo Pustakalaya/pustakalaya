@@ -1,0 +1,16 @@
+ <div class="pagination">
+   <span class="step-links">
+                          {% if response.has_previous %}
+                          <a href="?page={{ response.previous_page_number }}">previous</a>
+                          {% endif %}
+
+                          <!-- Showing the page numbers in Html Page -->
+                          <span class="current">
+                          Page {{ response.number }} of {{ response.paginator.num_pages }}.
+                        </span>
+
+                {% if response.has_next %}
+                <a href="?page={{ response.next_page_number }}">next</a>
+                {% endif %}
+             </span>
+ </div>

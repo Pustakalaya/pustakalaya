@@ -291,6 +291,9 @@ class Document(AbstractItem, HitCountMixin):
         if self.published == "yes":
             self.doc().save()
 
+        # Print all the collections.
+        #print(self.collections)
+
     def bulk_index(self):
         # Do bulk index if doc item is not empty.
         return self.doc().to_dict(include_meta=True)

@@ -1,0 +1,75 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n %}
+{% block branding %}
+  Pustakalyaa admin
+
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+
+       addBtn =  function (el){
+
+          var referenceNode = document.getElementById(el);
+
+           //-- Create the button element.
+           var clearButton = document.createElement('span');
+
+           //-- set attribute of clearButton
+           clearButton.setAttribute('id', '_clearButton')
+           clearButton.innerHTML = "Remove";
+
+           //-- Insert the button element.
+           referenceNode.parentNode.insertBefore(clearButton, referenceNode.nextSibling);
+
+           //-- Listen the click event in clearButton
+            clearButton.onclick = function (event) {
+              referenceNode.value = "";
+            }
+        }
+
+           addBtn("id_thumbnail");
+           addBtn("id_documentfileupload_set-0-upload");
+
+
+
+
+
+        /*
+        //videos file main page
+        if(document.getElementById("id_videofileupload_set-1-upload") != ""){
+           addBtnUpload("id_videofileupload_set-1-upload");
+        }
+         if(document.getElementById("id_thumbnail") != ""){
+        }
+
+        if(document.getElementById("id_documentfileupload_set-1-upload") != ""){
+          addBtn("id_documentfileupload_set-1-upload");
+        }
+
+        //id_audiofileupload_set-0-upload
+        if(document.getElementById("id_audiofileupload_set-0-upload") != ""){
+           addBtnUpload("id_audiofileupload_set-0-upload");
+        }
+
+          //id_audiofileupload_set-1-upload
+         if(document.getElementById("id_audiofileupload_set-1-upload") != ""){
+           addBtnUpload("id_audiofileupload_set-1-upload");
+        }
+        */
+
+    }, false);
+</script>
+
+<style>
+  #_clearButton {
+    padding: 5px 10px;
+    color: #1cacfc;
+    border-radius: 5px;
+    cursor: pointer;
+    float:right;
+  }
+  #id_documentfileupload_set-0-upload+#_clearButton{
+  margin-right:-73px;
+  }
+</style>
+
+{% endblock %}

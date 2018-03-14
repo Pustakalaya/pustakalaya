@@ -14,11 +14,14 @@ from .tasks import convert_pdf
 @receiver(m2m_changed, sender=Document.education_levels.through)
 @receiver(m2m_changed, sender=Document.document_illustrators.through)
 @receiver(m2m_changed, sender=Document.document_editors.through)
+@receiver(m2m_changed, sender=Document.collections.through)
 @receiver(m2m_changed, sender=Document)
 @receiver(post_save, sender=Document)
 @transaction.atomic
 def index_or_update_document(sender, instance, **kwargs):
-    instance.license_type = instance.license.license
+    if instance.license:
+        instance.license_type = instance.license.license
+
     # Save or update index
     instance.index()
 

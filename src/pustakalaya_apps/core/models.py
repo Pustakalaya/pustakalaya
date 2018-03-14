@@ -135,8 +135,7 @@ class EducationLevel(models.Model):
 
 class Language(models.Model):
     language = models.CharField(
-        choices=LANGUAGES,
-        max_length=7,
+        max_length=30,
         verbose_name=_("Language"),
         unique=True
 
@@ -146,7 +145,7 @@ class Language(models.Model):
         db_table = "language"
 
     def __str__(self):
-        return u"%s" % (self.get_language_display())
+        return u"%s" % (self.language)
 
 
 class LicenseType(models.Model):

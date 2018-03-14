@@ -34,6 +34,30 @@
 
 }
 
+
+@media only screen and (min-width: 959px) {
+   /* #your_id {width:000px;height:000px;}*/
+   #lg_large_searchbar{
+   min-width:53%;
+   }
+
+   #lg-side-space{
+   margin-left:5rem;
+   margin-right:0rem;
+   }
+
+   #lg-index-page-spacing{
+    margin-left:7.0rem;margin-right:7.0rem;
+   }
+
+   #lg-thumbnail-spacing{
+   min-width:17.5%;
+   margin:11px;
+   }
+
+
+}
+
 </style>
 <!--THis 2 div closing is in the footer page-->
 <div class="" style="magrin:0px 0px 5px 0px;padding:0px;">
@@ -44,9 +68,9 @@
 <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-box-shadow  p-0 m-0">
     <div class="container-fluid pr-5 pl-5 " >
         <div class="navbar-translate  ">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand " href="/" id="sm-icon-small">
                 <img src="{% static 'images/logos/ep_logo.png' %}"
-                     height="50px" class="img-responsive"
+                     height="50px"
 
                      alt="Pustakalaya">
             </a>
@@ -61,10 +85,10 @@
 
         <!-- navigation menu -->
         <div class="collapse navbar-collapse  " id="navigation">
-            <ul class="navbar-nav  index_tpyo" style="margin-left:5rem;margin-right:0rem;">
+            <ul class="navbar-nav  index_tpyo" id="lg-side-space" >
 
-              <li class="nav-item mt-0 ">
-                <div id="main-search-bar" >
+              <li class="nav-item  " id="lg_large_searchbar">
+                <div   >
                     <!-- search -->
                     {% include '_partials/search_form.html' %}
                   </div>
