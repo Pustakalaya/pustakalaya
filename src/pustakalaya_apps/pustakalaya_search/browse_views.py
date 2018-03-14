@@ -1,4 +1,5 @@
 import json
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from collections import OrderedDict
 from django.shortcuts import render
 from .search import PustakalayaSearch
@@ -52,19 +53,33 @@ def browse(request):
         query = [
             {sort_by: {"order": sort_order}},
         ]
-        print(sort_by)
+
 
         client = connections.get_connection()
 
         s = Search(using=client, index="pustakalaya", doc_type=DocumentDoc).query("match_all").sort(
             *query
         )
-        print(s.to_dict())
+
         response = s.execute()
+        print(response)
+
+        # Pagination configuration before executing a query.
+        paginator = Paginator(response, 5)
+        page = request.GET.get('page')
+        try:
+            books = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            books = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 7777), deliver last page of results.
+            books = paginator.page(paginator.num_pages)
 
         return render(request, "pustakalaya_search/browse.html", {
-            "response": response,
+            "response": books,
             "sort_by": sort_by,
             "sort_order": sort_order,
+            "count":len(response)
 
         })

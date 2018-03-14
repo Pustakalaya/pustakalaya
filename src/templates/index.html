@@ -180,7 +180,7 @@
 <!--custom style backgound-color is in base.html body which includes for all-->
 <div class="for-bg-color-container background-color mt-1">
   <!--search-->
-  <div class=" pt-4  " style="margin-left:7.0rem;margin-right:7.0rem;">
+  <div class=" pt-4  " id="lg-index-page-spacing">
     <!-- Search bar section -->
     <!--<div class="row">-->
       <!--<div class="col-md-12 col-xs-12 col-sm-12">-->
@@ -204,22 +204,22 @@
             <!--i class="fa text-secondary fa-book mr-2" aria-hidden="true"></i-->
 
 
-<div class="box-model-new">
-        <div class="row box-model-head-new">
+<div class="box-model-new sm-sidebar-menu-content ">
+        <div class="row box-model-head-new ">
            <p class="description text-uppercase "> {% trans "browse the library" %}</p>
             </p>
         </div>
-        <div class="row box-model-body-new">
-        <ul   data-v-03b85949="" class="format-dd">
-            <li data-v-1="" class="format-option  ">
+        <div class="row box-model-body-new  ">
+        <ul   data-v-03b85949="" class="format-dd ">
+            <li data-v-1="" class="format-option pr-0 ">
               <a href="{% url 'browse:browse' %}?browse_by=title&sort_order=asc"
                  class="text-capitalize  button-hover p-2 " >Titles</a>
 
             </li>
-            <li data-v-1="" class="format-option">
+            <li data-v-1="" class="format-option m-0 p-0">
             |
             </li>
-            <li data-v-1="" class="format-option ">
+            <li data-v-1="" class="format-option pl-0 ml-0">
                     <a href="/authors"
                     class="text-capitalize  button-hover p-2"><span>   Authors</span></a>
             </li>
@@ -239,7 +239,7 @@
 
         <!-- Browse by subjects -->
 <!--<div class="container">-->
-    <div class="box-model-new " >
+    <div class="box-model-new sm-sidebar-menu-content " >
         <div class="row box-model-head-new">
            <p class="description  text-uppercase ">sections</p>
         </div>
@@ -270,7 +270,7 @@
 
     <!--<br>-->
     <!-- Browse by level -->
-        <div class="box-model-new " >
+        <div class="box-model-new sm-sidebar-menu-content" >
         <div class="row box-model-head-new">
            <p class="description  text-uppercase ">Education Level</p>
         </div>
@@ -306,16 +306,16 @@
       </div>
 
       <!-- Featured books -->
-      <div class="col-md-9 col-sm-12 col-xs-12 row-second-width" style="padding-left:0px;">
+      <div class="col-md-9 col-sm-12 col-xs-12 row-second-width" >
         <!--<div class="search maximize-width-for-ipad">-->
           <!--&lt;!&ndash; search &ndash;&gt;-->
           <!--{% include '_partials/search_form.html' %}-->
         <!--</div>-->
         <section>
-          <p class="description bold text-uppercase text-dark  m-0 ">Books we love</p>
-          <div class="row maximize-width-for-ipad">
+          <p class="description bold text-uppercase text-dark  m-0 sm-sidebar-menu-content ">Books we love</p>
+          <div class="row maximize-width-for-ipad sm-margin-main-container">
             {% for book in featured_books %}
-            <div class="col-md-2 col-sm-12  col-xs-12  p-0      thumbnail-box-shadow " title="{{ book.title }}" style="min-width:17.5%;margin:11px;">
+            <div class="col-md-2 col-sm-12  col-xs-12  p-0      thumbnail-box-shadow sm-margin-thumbnail-container" title="{{ book.title }}" id="lg-thumbnail-spacing">
               <a href="{% url 'document:detail_without_slug'  book.pk %}">
 
 
@@ -354,7 +354,6 @@
 
                 <div class="pl-3 text-capitalize mt-3" style="min-height:45px!important;">
 
-
                   <i class="fa fa-book text-dark"></i> <span class="text-dark bold">{{ book |truncatechars:15}}</span>
 
                 {% if  book.document_authors.first%}
@@ -373,7 +372,10 @@
             {% endfor %}
           </div>
         </section>
-        <br>
+
+
+
+
 
 
 
@@ -471,7 +473,7 @@
     <!-- Footer description -->
     <div class="row m-0">
       <div class="p-4 rounded jumbotron pb-4 pt-4 mt-4 mb-1 content-box-shadow">
-        <p class="description text-uppercase text-black text-uppercase bold mb-2">{% trans "About epustakalaya" %}</p>
+        <p class="description text-uppercase text-black text-uppercase bold mb-2">{% trans "About e-pustakalaya" %}</p>
         <p class="paragraph-font">{% blocktrans %}
           E-Pustakalaya is an education-focused digital library containing full-text documents, images,
           videos and
