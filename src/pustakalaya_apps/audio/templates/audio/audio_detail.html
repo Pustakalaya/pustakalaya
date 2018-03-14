@@ -360,6 +360,7 @@
                         {% elif paginated_data %}
                         <!--Pagination links starts here-->
 
+
                          {% for v in paginated_data %}
                          <li style="list-style: none" id ="comment_{{ v.pk }}">
 
@@ -376,6 +377,7 @@
 
                                  <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-primary font-weight-bold EditComment">Edit</button>
                                  <button type="button" value="{{ v.pk }}"  class ="btn btn-sm btn-warning font-weight-bold DeleteComment">Delete</button>
+
 
                                   {% else %}
                                     <!--<p>Welcome,  user. Please log in.</p>-->
