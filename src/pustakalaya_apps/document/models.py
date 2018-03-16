@@ -155,7 +155,7 @@ class Document(AbstractItem, HitCountMixin):
 
     document_illustrators = models.ManyToManyField(
         Biography,
-        verbose_name=_("Document Illustrator"),
+        verbose_name=_("Illustrator"),
         related_name="illustrators",
         blank=True
     )

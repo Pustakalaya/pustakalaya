@@ -51,6 +51,7 @@ class DocumentAdmin(admin.ModelAdmin):
 
     fields = (
         "title",
+        "document_authors",
         "abstract",
         "collections",
         "education_levels",
@@ -59,7 +60,6 @@ class DocumentAdmin(admin.ModelAdmin):
         "published",
         "document_file_type",
         "document_interactivity",
-        "document_authors",
         "document_editors",
         "document_illustrators",
         "place_of_publication",

@@ -79,7 +79,8 @@ class Audio(AbstractItem):
         LicenseType,
         verbose_name=_("license"),
         blank=True,
-        null=True,
+        null=True
+
     )
 
     audio_genre = models.ForeignKey(
@@ -105,7 +106,7 @@ class Audio(AbstractItem):
 
     audio_series = models.ForeignKey(
         'AudioSeries',
-        verbose_name=_("Audio Series / Volume"),
+        verbose_name=_("Series"),
         blank=True,
         null=True
     )
@@ -222,7 +223,7 @@ class AudioFileUpload(AbstractTimeStampModel):
         _("File name"),
         max_length=255,
         blank=True,
-        null=True
+
     )
 
     audio = models.ForeignKey(

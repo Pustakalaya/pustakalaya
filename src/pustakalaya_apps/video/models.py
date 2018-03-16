@@ -224,7 +224,7 @@ class VideoFileUpload(AbstractTimeStampModel):
         _("File name"),
         max_length=255,
         blank=True,
-        null=True
+
     )
 
     video = models.ForeignKey(
