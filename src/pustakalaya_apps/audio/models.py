@@ -29,14 +29,14 @@ class Audio(AbstractItem):
         "AudioType",
         verbose_name=_("Audio types"),
         blank=True,
-        null=True
+
     )
 
     collections = models.ManyToManyField(
         Collection,
         verbose_name=_("Add this audio to these collection"),
         blank=True,
-        null=True
+
     )
 
     type = models.CharField(
@@ -72,7 +72,7 @@ class Audio(AbstractItem):
         Keyword,
         verbose_name=_("Select list of keywords"),
         blank=True,
-        null=True
+
     )
 
     license = models.ForeignKey(
@@ -94,14 +94,14 @@ class Audio(AbstractItem):
         Language,
         verbose_name=_("Languages"),
         blank=True,
-        null=True
+
     )
 
     education_levels = models.ManyToManyField(
         EducationLevel,
         verbose_name=("Education Levels"),
         blank=True,
-        null=True
+
     )
 
     audio_series = models.ForeignKey(
@@ -115,7 +115,7 @@ class Audio(AbstractItem):
         Sponsor,
         verbose_name=_("Sponsor"),
         blank=True,
-        null=True,
+
     )
 
     thumbnail = models.ImageField(

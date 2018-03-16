@@ -34,7 +34,7 @@ class Video(AbstractItem):
         Collection,
         verbose_name=_("Add this video to these collection"),
         blank=True,
-        null=True,
+
     )
 
     video_director = models.ForeignKey(
@@ -50,20 +50,20 @@ class Video(AbstractItem):
         verbose_name=_("Producer"),
         related_name="producers",
         blank=True,
-        null=True
+
     )
 
     education_levels = models.ManyToManyField(
         EducationLevel,
         verbose_name=_("Education Level"),
         blank=True,
-        null=True
+
     )
     languages = models.ManyToManyField(
         Language,
         verbose_name=_("Languages"),
         blank=True,
-        null=True
+
     )
 
     video_series = models.ForeignKey(
@@ -94,7 +94,7 @@ class Video(AbstractItem):
         Sponsor,
         verbose_name=_("Sponsor"),
         blank=True,
-        null=True
+
     )
 
     video_genre = models.ForeignKey(
@@ -115,7 +115,7 @@ class Video(AbstractItem):
         Keyword,
         verbose_name=_("Keywords"),
         blank=True,
-        null=True
+
     )
 
     license = models.ForeignKey(
