@@ -20,7 +20,7 @@ def index_or_update_video(sender, instance, **kwargs):
     if instance.license is not None:
         if instance.license.license:
             instance.license_type = instance.license.license
-            print("license =",instance.license.license)
+
     # TODO: use logging system
     #print("Instance", sender, instance)
 
