@@ -85,7 +85,7 @@ class DocumentAdmin(admin.ModelAdmin):
     ordering = ('-updated_date',)
 
 
-    list_filter = ['published', 'title','featured']
+    list_filter = ['published', 'featured']
 
     list_per_page = 10
 

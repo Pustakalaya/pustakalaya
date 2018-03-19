@@ -78,16 +78,15 @@
                     <!-- show count -->
                     <p class="pull-left bg-blue text-dark text-center paragraph-font mt-3">Views:<span>&nbsp;{{ hitcount.total_hits }}</span></p>
                   <br><br><br><br>
-                    <!-- Rating -->
+
                  {%  if request.user.is_superuser %}
 
                      <p class="text-primary description">
                       <a href="{{ object.get_admin_url }}" class="btn btn-sm">{%  trans "Edit" %}</a>
                      </p>
+                 {%  endif %}
 
-                    {%  endif %}
-
-
+                  <!-- Rating -->
                     {% ratings object %}
 
 

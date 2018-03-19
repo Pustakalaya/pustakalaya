@@ -160,12 +160,21 @@ class Document(AbstractItem, HitCountMixin):
         blank=True
     )
 
-    publisher = models.ForeignKey(
+    # publisher = models.ForeignKey(
+    #     Publisher,
+    #     verbose_name=_("Publisher name"),
+    #     blank=True,
+    #     null=True
+    # )
+
+    publisher = models.ManyToManyField(
         Publisher,
         verbose_name=_("Publisher name"),
+        related_name="publisher",
         blank=True,
-        null=True
+
     )
+
     # Better to have plural name
     keywords = models.ManyToManyField(
         Keyword,
@@ -239,7 +248,7 @@ class Document(AbstractItem, HitCountMixin):
             communities=[collection.community_name for collection in self.collections.all()],
             collections=[collection.collection_name for collection in self.collections.all()],
             languages=[language.language.lower() for language in self.languages.all()],
-            publisher=self.get_publisher_name,
+            publisher=[publisher.publisher_name for publisher in self.publisher.all()],
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             # Document type specific

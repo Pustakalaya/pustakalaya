@@ -24,37 +24,115 @@
             clearButton.onclick = function (event) {
               referenceNode.value = "";
             }
+
+           // clearButton.setAttribute("style", "padding: 5px 10px;color: #1cacfc;border-radius: 5px;cursor: pointer;float:right;");
         }
 
-           addBtn("id_thumbnail");
-           addBtn("id_documentfileupload_set-0-upload");
+        //Function for audio
+        addBtnForAudio =  function (el){
 
+          var referenceNode1 = document.getElementById(el);
 
+           //-- Create the button element.
+           var clearButton1 = document.createElement('span');
 
+           //-- set attribute of clearButton
+           clearButton1.setAttribute('id', '_clearButton1')
+           clearButton1.innerHTML = "Remove";
 
+           //-- Insert the button element.
+           referenceNode1.parentNode.insertBefore(clearButton1, referenceNode1.nextSibling);
 
-        /*
-        //videos file main page
-        if(document.getElementById("id_videofileupload_set-1-upload") != ""){
-           addBtnUpload("id_videofileupload_set-1-upload");
+           //-- Listen the click event in clearButton
+            clearButton1.onclick = function (event) {
+              referenceNode1.value = "";
+            }
+
+            clearButton1.setAttribute("style", "padding: 5px 10px;color: #1cacfc;border-radius: 5px;cursor: pointer;float:right;");
         }
-         if(document.getElementById("id_thumbnail") != ""){
+
+        //Function for audio
+        addBtnForVideo =  function (el){
+
+          var referenceNode2 = document.getElementById(el);
+
+           //-- Create the button element.
+           var clearButton2 = document.createElement('span');
+
+           //-- set attribute of clearButton
+           clearButton2.setAttribute('id', '_clearButton2')
+           clearButton2.innerHTML = "Remove";
+
+           //-- Insert the button element.
+           referenceNode2.parentNode.insertBefore(clearButton2, referenceNode2.nextSibling);
+
+           //-- Listen the click event in clearButton
+            clearButton2.onclick = function (event) {
+              referenceNode2.value = "";
+            }
+
+            clearButton2.setAttribute("style", "padding: 5px 10px;color: #1cacfc;border-radius: 5px;cursor: pointer;float:right;");
         }
 
-        if(document.getElementById("id_documentfileupload_set-1-upload") != ""){
-          addBtn("id_documentfileupload_set-1-upload");
+        //For Document
+        addBtnForDocument =  function (el){
+
+          var referenceNode3 = document.getElementById(el);
+
+           //-- Create the button element.
+           var clearButton3 = document.createElement('span');
+
+           //-- set attribute of clearButton
+           clearButton3.setAttribute('id', '_clearButton3')
+           clearButton3.innerHTML = "Remove";
+
+           //-- Insert the button element.
+           referenceNode3.parentNode.insertBefore(clearButton3, referenceNode3.nextSibling);
+
+           //-- Listen the click event in clearButton
+            clearButton3.onclick = function (event) {
+              referenceNode3.value = "";
+            }
+
+            clearButton3.setAttribute("style", "padding: 5px 10px;color: #1cacfc;border-radius: 5px;cursor: pointer;float:right;");
         }
 
-        //id_audiofileupload_set-0-upload
-        if(document.getElementById("id_audiofileupload_set-0-upload") != ""){
-           addBtnUpload("id_audiofileupload_set-0-upload");
+        /*For document section*/
+        if(document.getElementById("id_thumbnail")){
+            addBtnForDocument("id_thumbnail");
         }
 
-          //id_audiofileupload_set-1-upload
-         if(document.getElementById("id_audiofileupload_set-1-upload") != ""){
-           addBtnUpload("id_audiofileupload_set-1-upload");
+
+        if(document.getElementById("id_documentfileupload_set-0-upload")){
+            addBtn("id_documentfileupload_set-0-upload");
         }
-        */
+
+
+        if(document.getElementById("id_documentfileupload_set-1-upload")){
+            addBtn("id_documentfileupload_set-1-upload");
+        }
+
+        /*For audio section*/
+
+        if(document.getElementById("id_audiofileupload_set-0-upload")){
+             addBtn("id_audiofileupload_set-0-upload");
+        }
+
+
+        if(document.getElementById("id_audiofileupload_set-1-upload")){
+             addBtnForAudio("id_audiofileupload_set-1-upload");
+        }
+
+        /*For video Remove section id_videofileupload_set-1-upload*/
+
+        if(document.getElementById("id_videofileupload_set-1-upload")){
+             addBtnForVideo("id_videofileupload_set-1-upload");
+        }
+
+        //Add Video has id = id_videofileupload_set-0-upload
+        if(document.getElementById("id_videofileupload_set-0-upload")){
+             addBtnForVideo("id_videofileupload_set-0-upload");
+        }
 
     }, false);
 </script>
@@ -68,8 +146,9 @@
     float:right;
   }
   #id_documentfileupload_set-0-upload+#_clearButton{
-  margin-right:-73px;
+  /*margin-right:-73px;*/
   }
 </style>
+
 
 {% endblock %}
