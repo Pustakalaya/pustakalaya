@@ -29,14 +29,14 @@ class Audio(AbstractItem):
         "AudioType",
         verbose_name=_("Audio types"),
         blank=True,
-        null=True
+
     )
 
     collections = models.ManyToManyField(
         Collection,
         verbose_name=_("Add this audio to these collection"),
         blank=True,
-        null=True
+
     )
 
     type = models.CharField(
@@ -61,18 +61,25 @@ class Audio(AbstractItem):
 
     )
 
-    publisher = models.ForeignKey(
+    # publisher = models.ForeignKey(
+    #     Publisher,
+    #     verbose_name=_("Audio publisher"),
+    #     blank=True,
+    #     null=True
+    # )
+
+    publisher = models.ManyToManyField(
         Publisher,
         verbose_name=_("Audio publisher"),
         blank=True,
-        null=True
+
     )
 
     keywords = models.ManyToManyField(
         Keyword,
         verbose_name=_("Select list of keywords"),
         blank=True,
-        null=True
+
     )
 
 
@@ -80,7 +87,8 @@ class Audio(AbstractItem):
         LicenseType,
         verbose_name=_("license"),
         blank=True,
-        null=True,
+        null=True
+
     )
 
     audio_genre = models.ForeignKey(
@@ -94,19 +102,19 @@ class Audio(AbstractItem):
         Language,
         verbose_name=_("Languages"),
         blank=True,
-        null=True
+
     )
 
     education_levels = models.ManyToManyField(
         EducationLevel,
         verbose_name=("Education Levels"),
         blank=True,
-        null=True
+
     )
 
     audio_series = models.ForeignKey(
         'AudioSeries',
-        verbose_name=_("Audio Series / Volume"),
+        verbose_name=_("Series"),
         blank=True,
         null=True
     )
@@ -115,7 +123,7 @@ class Audio(AbstractItem):
         Sponsor,
         verbose_name=_("Sponsor"),
         blank=True,
-        null=True,
+
     )
 
     thumbnail = models.ImageField(
@@ -142,7 +150,7 @@ class Audio(AbstractItem):
         # Audio attributes
         audio_attr = dict(
             **item_attr,
-            publisher=self.publisher.publisher_name if self.publisher else None,
+            publisher=[publisher.publisher_name for publisher in self.publisher.all()],
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             audio_types=[audio.name for audio in self.audio_types.all()],
@@ -174,6 +182,20 @@ class Audio(AbstractItem):
     def bulk_index(self):
         return self.doc().to_dict(include_meta=True)
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+    def audio_title(self):
+        return self.title;
+
+    def published_yes_no(self):
+        return self.published
+
+
+
+    def updated_date_string(self):
+        return self.updated_date
+
     def delete_index(self):
         try:
             self.doc().delete()
@@ -188,6 +210,8 @@ class Audio(AbstractItem):
 
     def get_admin_url(self):
         return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
 
 
 
@@ -224,6 +248,7 @@ class AudioFileUpload(AbstractTimeStampModel):
         max_length=255,
         blank=True,
         null=True
+
     )
 
     audio = models.ForeignKey(

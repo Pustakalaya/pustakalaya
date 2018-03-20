@@ -29,7 +29,7 @@ class DocumentAdmin(admin.ModelAdmin):
         AudioFileUploadInline,
     ]
 
-    list_filter = ['title', 'published','featured']
+    list_filter = [ 'published']
     search_fields = (
         'title',
     )
@@ -59,15 +59,25 @@ class DocumentAdmin(admin.ModelAdmin):
         "description",
         "license",
         "custom_license",
-        "publication_year",
         "sponsors",
         "thumbnail"
     )
 
-    list_display = ['title', 'published', 'featured', 'preview_link', 'updated_date']
+    list_display = ['title_link', 'published_',  'edit_link', 'updated_date_']
 
-    def preview_link(self, obj):
-        return format_html("<a href='{url}'>Preview</a>", url=obj.get_absolute_url())
+    def edit_link(self, obj):
+        return format_html("<a href='{url}'>Edit</a>", url=obj.get_admin_url())
+
+    def title_link(self,obj):
+        return format_html('<a href="%s">%s</a>' %(obj.get_absolute_url(), obj.audio_title()))
+
+    def published_(self,obj):
+        return format_html('%s' % (obj.published_yes_no()))
+
+
+
+    def updated_date_(self,obj):
+        return format_html('%s' % (obj.updated_date_string()))
 
 
 @admin.register(AudioGenre)

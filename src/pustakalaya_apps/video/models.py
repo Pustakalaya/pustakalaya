@@ -34,7 +34,7 @@ class Video(AbstractItem):
         Collection,
         verbose_name=_("Add this video to these collection"),
         blank=True,
-        null=True,
+
     )
 
     video_director = models.ForeignKey(
@@ -50,20 +50,20 @@ class Video(AbstractItem):
         verbose_name=_("Producer"),
         related_name="producers",
         blank=True,
-        null=True
+
     )
 
     education_levels = models.ManyToManyField(
         EducationLevel,
         verbose_name=_("Education Level"),
         blank=True,
-        null=True
+
     )
     languages = models.ManyToManyField(
         Language,
         verbose_name=_("Languages"),
         blank=True,
-        null=True
+
     )
 
     video_series = models.ForeignKey(
@@ -94,7 +94,7 @@ class Video(AbstractItem):
         Sponsor,
         verbose_name=_("Sponsor"),
         blank=True,
-        null=True
+
     )
 
     video_genre = models.ForeignKey(
@@ -104,18 +104,25 @@ class Video(AbstractItem):
         null=True
     )
 
-    publisher = models.ForeignKey(
+    # publisher = models.ForeignKey(
+    #     Publisher,
+    #     verbose_name=_("Publisher"),
+    #     blank=True,
+    #     null=True
+    # )
+
+    publisher = models.ManyToManyField(
         Publisher,
         verbose_name=_("Publisher"),
         blank=True,
-        null=True
+
     )
 
     keywords = models.ManyToManyField(
         Keyword,
         verbose_name=_("Keywords"),
         blank=True,
-        null=True
+
     )
 
 
@@ -156,7 +163,7 @@ class Video(AbstractItem):
         # Combine item attr and video attr to index in search server
         videoattr = dict(
             **item_attr,
-            publisher=self.publisher.publisher_name if self.publisher else None,
+            publisher=[publisher.publisher_name for publisher in self.publisher.all()],
             sponsors=[sponsor.name for sponsor in self.sponsors.all()],  # Multi value # TODO some generators
             keywords=[keyword.keyword for keyword in self.keywords.all()],
             type=self.type,
@@ -178,12 +185,27 @@ class Video(AbstractItem):
         obj = VideoDoc(**videoattr)
         return obj
 
+
     def index(self):
         """
         Call this method to index an instance to search server
         """
         # Save video instance
         self.doc().save()
+
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+    def video_title(self):
+        return self.title;
+
+    def published_yes_no(self):
+        return self.published
+
+
+
+    def updated_date_string(self):
+        return self.updated_date
 
     def bulk_index(self):
         """
@@ -226,6 +248,7 @@ class VideoFileUpload(AbstractTimeStampModel):
         max_length=255,
         blank=True,
         null=True
+
     )
 
     video = models.ForeignKey(

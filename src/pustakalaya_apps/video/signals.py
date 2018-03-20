@@ -17,8 +17,11 @@ from .models import Video
 @transaction.atomic
 def index_or_update_video(sender, instance, **kwargs):
     """Update or create an instance to index server."""
-    if instance.license.license:
-        instance.license_type = instance.license.license
+
+    if instance.license is not None:
+        if instance.license.license:
+            instance.license_type = instance.license.license
+
     # TODO: use logging system
     #print("Instance", sender, instance)
 
