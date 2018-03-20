@@ -50,8 +50,9 @@ def collection_detail(request, name, pk):
         page = paginator.page(paginator.num_pages)
 
     response = page.object_list.execute()
-
-    collection_name = " ".join(name.split("-"))
+    splitted_name = name.split()
+    collection_name = "-".join(splitted_name)
+    #print("splitted_name name = ","-".join(splitted_name))
     collection = Collection.objects.get(pk=pk)
 
     context["response"] = response
@@ -60,6 +61,7 @@ def collection_detail(request, name, pk):
     context["community_name"] = collection.community_name
     context["sort_order"] = sort_order
     context["sort_by"] = sort_by
+    # print("respoinse = ",collection)
     # context["page_obj"] = page
     # context["paginator"] = paginator
 

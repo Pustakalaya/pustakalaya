@@ -32,9 +32,8 @@ class VideoAdmin(admin.ModelAdmin):
         'title',
     )
 
-    list_display = ['title', 'preview_link']
 
-    list_filter = ['title', 'published']
+    list_filter = [ 'published']
 
     fields = (
         "title",
@@ -65,9 +64,24 @@ class VideoAdmin(admin.ModelAdmin):
         "thumbnail"
     )
 
+    list_display = ['title_link', 'published_',  'edit_link', 'updated_date_']
 
-    def preview_link(self, obj):
-        return format_html("<a href='{url}'>Preview</a>", url=obj.get_absolute_url())
+    def edit_link(self, obj):
+        return format_html("<a href='{url}'>Edit</a>", url=obj.get_admin_url())
+
+    def title_link(self, obj):
+        return format_html('<a href="%s">%s</a>' % (obj.get_absolute_url(), obj.video_title()))
+
+    def published_(self, obj):
+        return format_html('%s' % (obj.published_yes_no()))
+
+
+
+    def updated_date_(self, obj):
+        return format_html('%s' % (obj.updated_date_string()))
+
+    # def preview_link(self, obj):
+    #     return format_html("<a href='{url}'>Preview</a>", url=obj.get_absolute_url())
 
 
 @admin.register(VideoSeries)

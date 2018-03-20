@@ -16,6 +16,7 @@ def community_detail(request, community_name):
 
     # Context data
     context = {}
+    # print("community name =",community_name)
 
     community_name = " ".join(community_name.split("-"))
 
@@ -49,4 +50,5 @@ def community_detail(request, community_name):
     # Sort list to display in alphabetical order.
     context["collection_list"] = collection_list
     context["community_name"] = community_name
+    # print("colllist=",collection_list)
     return render(request, "collection/community_detail.html", context)

@@ -45,6 +45,11 @@
     </div>
     <div class="col-md-10 col-xs-12 col-sm-12 paragraph-font" id="author-detail">
       <div class="p-4 rounded">
+         {%  if request.user.is_superuser %}
+          <p class="text-primary description">
+          <a href="{{ object.get_admin_url }}" class="btn btn-sm">{%  trans "Edit" %}</a>
+          </p>
+        {%  endif %}
 
 
         <span><b>{% trans "Address" %}:</b><span class="ml-3">{{ object.address }}</span></span><br>

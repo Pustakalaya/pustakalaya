@@ -6,7 +6,7 @@ from .abstract_models import (
 
 )
 from .constants import LANGUAGES
-
+from django.core import urlresolvers
 
 class Category(AbstractTimeStampModel):
     category_name = models.CharField(
@@ -45,6 +45,10 @@ class Publisher(AbstractTimeStampModel):
     def __str__(self):
         return self.publisher_name
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
 
 class Keyword(AbstractTimeStampModel):
     keyword = models.CharField(
@@ -75,6 +79,9 @@ class Biography(AbstractBaseAuthor):
         blank=True
     )
 
+    def getName(self):
+        return self.name
+
     def __str__(self):
         return self.name
 
@@ -101,16 +108,22 @@ class Sponsor(AbstractTimeStampModel):
     class Meta:
         db_table = "sponsor"
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
 
 class EducationLevel(models.Model):
     """Education level"""
 
     EDUCATION_LEVEL = (
-        ("early primary level", _("Early primary level")),
-        ("primary level", _("Primary level")),
-        ("Middle school level", _("Middle school level")),
-        ("highschool level", _("Highschool level")),
-        ("intermediate level", _("Intermediate level")),
+        ("Basic school", _("Basic school")),
+        ("Early grade reading", _("Early grade reading")),
+        ("Intermediate level", _("Intermediate level")),
+        ("Middle school", _("Middle school")),
+        ("Primary school", _("Primary school")),
+        ("Secondary school", _("Secondary school")),
+        ("University level", _("University level")),
     )
 
     level = models.CharField(

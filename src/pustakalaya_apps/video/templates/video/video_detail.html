@@ -116,11 +116,12 @@
                         {% endif %}>
                     {{ object.abstract }}</p>
                 <!-- publisher section -->
+                  {% if object.publisher == "" %}
                 <div class="pb-1 border-line">
                     <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
                     <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
                 </div>
-
+                {% endif %}
                 <!-- place of publication -->
                 <div class="pb-1 border-line"
                         {% if not object.place_of_publication %}

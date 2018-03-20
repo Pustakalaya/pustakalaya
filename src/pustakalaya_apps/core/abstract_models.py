@@ -2,10 +2,11 @@
 
 import uuid
 import abc
-
+from django.template.defaultfilters import slugify
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from .constants import LANGUAGES
+from django.core import urlresolvers
 
 
 class AbstractTimeStampModel(models.Model):
@@ -100,8 +101,18 @@ class AbstractBaseAuthor(AbstractTimeStampModel):
     def __str__(self):
         return self.name
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("author:author_detail", kwargs={"author_name": slugify(self.name), "pk": self.pk})
+
+
     class Meta:
         abstract = True
+
+
 
 
 class AbstractSeries(AbstractTimeStampModel):
