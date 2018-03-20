@@ -52,7 +52,7 @@ padding-right:0%;
 
                                       <img src="{{ MEDIA_URL }}{{ doc.thumbnail }}"
                                              width="100%"
-                                             height="170px"
+                                             height="225px"
                                              alt="{{ doc.title|truncatechars:20}}">
 
                                       {% else %}
@@ -60,7 +60,7 @@ padding-right:0%;
 
                                                   <img src="{% static 'base_assets/img/book_image_default.png' %}"
                                                          width="100%"
-                                                         height="170px"
+                                                         height="225px"
                                                          alt="{{ doc.title|truncatechars:20}}">
 
                                        {% elif doc.type == "audio" %}
