@@ -134,6 +134,7 @@
       <div class="read-section">
 
         <!-- publisher section -->
+        {% if object.publisher == "" %}
         <div class="pb-1 border-line"
         {% if not object.publisher %}
         style="display: none"
@@ -141,7 +142,7 @@
           <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
           <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
         </div>
-
+          {% endif %}
         <!-- place of publication -->
         <div class="pb-1 border-line"
         {% if not  object.place_of_publication %}

@@ -6,7 +6,7 @@ from .abstract_models import (
 
 )
 from .constants import LANGUAGES
-
+from django.core import urlresolvers
 
 class Category(AbstractTimeStampModel):
     category_name = models.CharField(
@@ -45,6 +45,10 @@ class Publisher(AbstractTimeStampModel):
     def __str__(self):
         return self.publisher_name
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
 
 class Keyword(AbstractTimeStampModel):
     keyword = models.CharField(
@@ -75,6 +79,9 @@ class Biography(AbstractBaseAuthor):
         blank=True
     )
 
+    def getName(self):
+        return self.name
+
     def __str__(self):
         return self.name
 
@@ -100,6 +107,10 @@ class Sponsor(AbstractTimeStampModel):
 
     class Meta:
         db_table = "sponsor"
+
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
 
 
 class EducationLevel(models.Model):
