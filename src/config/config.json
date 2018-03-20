@@ -1,0 +1,45 @@
+{
+  "MEDIA_ROOT": "/library/media_root/",
+  "STATIC_ROOT": "/library/static_root/",
+
+  "DATABASE":{
+    "NAME": "pustakalaya",
+    "USER": "pustakalaya_user",
+    "PASSWORD":"pustakalaya123",
+    "HOST": "db",
+    "PORT": "5432"
+
+  },
+  "ELASTIC": {
+    "ES_HOST": "elastic",
+    "ES_NUMBER_OF_SHARDS": "1",
+    "ES_NUMBER_OF_REPLICAS": "0",
+    "ES_USE_SSL": "False",
+    "ES_PORT": "9200"
+  },
+  "EMAIL": {
+    "EMAIL_HOST": "smtp.gmail.com",
+    "EMAIL_PORT": "587",
+    "EMAIL_HOST_USER": "manoj.gautam@olenepal.org",
+    "EMAIL_HOST_PASSWORD": "Colleges123",
+    "EMAIL_USE_TLS": "True",
+    "FEEDBACK_MESSAGE_TO": [
+      "bikram.dhoju@olenepal.org"
+    ],
+    "ADMIN_EMAILS": [
+      [
+        "Sys admin 1",
+        "admins@olenepal.org"
+      ],
+      [
+        "system admin 2",
+        "manojit.gautam@olenepal.org"
+      ]
+    ]
+  },
+  "REDIS": {
+    "IP": "redis",
+    "PORT": "6379"
+  },
+  "GOOGLE_ANALYTICS_PROPERTY_ID": "UA-110685789-1"
+}
