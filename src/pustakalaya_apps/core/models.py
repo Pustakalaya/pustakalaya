@@ -117,11 +117,13 @@ class EducationLevel(models.Model):
     """Education level"""
 
     EDUCATION_LEVEL = (
-        ("early primary level", _("Early primary level")),
-        ("primary level", _("Primary level")),
-        ("Middle school level", _("Middle school level")),
-        ("highschool level", _("Highschool level")),
-        ("intermediate level", _("Intermediate level")),
+        ("Basic school", _("Basic school")),
+        ("Early grade reading", _("Early grade reading")),
+        ("Intermediate level", _("Intermediate level")),
+        ("Middle school", _("Middle school")),
+        ("Primary school", _("Primary school")),
+        ("Secondary school", _("Secondary school")),
+        ("University level", _("University level")),
     )
 
     level = models.CharField(
