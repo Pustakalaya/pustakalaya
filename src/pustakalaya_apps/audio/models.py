@@ -82,7 +82,6 @@ class Audio(AbstractItem):
 
     )
 
-
     license = models.ForeignKey(
         LicenseType,
         verbose_name=_("license"),
@@ -210,6 +209,8 @@ class Audio(AbstractItem):
 
     def get_admin_url(self):
         return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
 
 
 
