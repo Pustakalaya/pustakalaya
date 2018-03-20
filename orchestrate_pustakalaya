@@ -1,0 +1,165 @@
+#!/bin/bash
+
+#Author Bikram Dhoju <bikram.dhoju@olenepal.org>
+
+set -o errexit
+esc=""
+redf="${esc}[31m"
+whitef="${esc}[37m"
+reset="${esc}[0m"
+
+croncmd_backup="docker exec -it postgres_01 bash -c '/script/autopgsqlbackup'"
+cronjob_backup="*/5 * * * * $croncmd_backup"
+
+# print a pretty header
+echo
+echo " +---------------------------------------------------+"
+echo " |            Orchestrating Pustakalaya           |"
+echo " +---------------------------------------------------+"
+echo
+
+
+
+if [[ "$1" == "-h" || "$1" == "--help"|| "$#" == 0 ]]; then
+  echo "${redf}Usage:${reset} `basename $0` rund: ${whitef}docker-compose up -d${reset}"
+  echo "${redf}Usage:${reset} `basename $0` run:  ${whitef}docker-compose up${reset}"
+  echo "${redf}Usage:${reset} `basename $0` build: ${whitef}docker-compose --build${reset}"
+  echo "${redf}Usage:${reset} `basename $0` mkmigration: ${whitef}making gration in django_web_01${reset}"
+  echo "${redf}Usage:${reset} `basename $0` migrate: ${whitef}migrating in django_web_01${reset}"
+  echo "${redf}Usage:${reset} `basename $0` remove: ${whitef}docker-compose rm${reset}"
+  echo "${redf}Usage:${reset} `basename $0` dump_sql: ${whitef}./src/db_dump/pustakalaya.sql${reset}"
+  exit 0
+fi
+
+
+
+
+
+if [ $# -ne 1 ] ; then
+ echo "Usage: $0 command" >&2 ; exit 1
+fi
+# runs as root or needs sudo?
+if [[ "$EUID" -ne 0 ]]; then
+  sudo='sudo'
+else
+  sudo=''
+fi
+
+function die {
+    echo 1>&2 ERROR: "$*"
+    exit 1
+}
+spinner()
+{
+    local pid=$1
+    local delay=0.75
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
+
+
+function program_is_installed {
+    # set to 1 initially
+    local return_=1
+    # set to 0 if not found
+    type $1 >/dev/null 2>&1 || { local return_=0; }
+    # return value
+    echo $return_
+}
+
+# Checking if docker and docker-compose has been pre installed or not
+# echo "Checking if docker and docker-compose has been pre installed or not"
+
+if [ $(program_is_installed "docker") -eq 0 ] || [ $(program_is_installed "docker-compose") -eq 0 ] ; then
+    die "Docker and/or Docker-compose does not seem to be installed in the system. Please install it"
+
+fi
+
+if [[ "$1" == "backup_cron" ]] ; then
+  ( crontab -l | grep -v -F "$croncmd_backup" ; echo "$cronjob_backup" ) | crontab -
+  echo "==>>> Backup task added to Local (not container) Cron"
+
+fi
+
+if [[ "$1" == "build" ]] ; then
+        docker-compose build
+
+fi
+
+
+
+
+if [[ "$1" == "rund" ]] ; then
+        echo "running docker daemon"
+        docker-compose up -d
+fi
+
+if [[ "$1" == "run" ]] ; then
+        echo "running docker with logs"
+        docker-compose up
+fi
+
+if [[ "$1" == "remove" ]] ; then
+        echo "removing stopped containers"
+        docker-compose rm -f
+fi
+
+
+if [[ "$1" == "dump_sql" ]] ; then
+        if [[ -f ./src/db_dump/pustakalaya.sql ]] ; then
+                  docker exec postgres_01 bash -c "psql --username pustakalaya_user -d pustakalaya -f /src/db_dump/pustakalaya01.sql"
+        fi
+fi
+
+
+
+if [[ "$1" == "mkmigration" ]] ; then
+        echo "making migration for django app"
+        docker exec django_web_01 bash -c "python manage.py makemigrations --merge --noinput"
+
+fi
+
+if [[ "$1" == "getBackup" ]] ; then
+        echo "getBack up of postgres"
+        docker exec postgres_01 bash -c "/script/autopgsqlbackup "
+
+fi
+
+if [[ "$1" == "migrate" ]] ; then
+        echo "migrating for django app"
+        docker exec django_web_01 bash -c "python manage.py migrate --settings=pustakalaya.settings.production"
+fi
+if [[ "$1" == "syncdb" ]] ; then
+        echo "syncing db for django app"
+        docker exec django_web_01 bash -c "python manage.py syncdb"
+fi
+
+
+if [[ "$1" == "index" ]] ; then
+        echo "Elastic search indexing"
+        docker exec django_web_01 bash -c "python manage.py index_pustakalaya --settings=pustakalaya.settings.production"
+fi
+
+
+if [[ "$1" == "collectstatic" ]] ; then
+        echo "collecting static files"
+        docker exec django_web_01 bash -c "python manage.py collectstatic --settings=pustakalaya.settings.production --noinput"
+fi
+
+if [[ "$1" == "pustakalaya-run" ]] ; then
+         echo "Building and runing pustakalaya"
+         docker-compose up --build -d
+         echo "dumping sql"
+         docker exec postgres_01 bash -c "psql --username postgres -d postgres -f /src/db_dump/pustakalaya.sql"
+         echo "indexing"
+         docker exec django_web_01 bash -c "python manage.py index_pustakalaya --settings=pustakalaya.settings.production"
+
+         exit 0
+fi

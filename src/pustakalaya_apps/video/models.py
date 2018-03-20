@@ -125,6 +125,7 @@ class Video(AbstractItem):
 
     )
 
+
     license = models.ForeignKey(
         LicenseType,
         verbose_name=_("license"),

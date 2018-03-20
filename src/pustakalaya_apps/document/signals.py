@@ -20,6 +20,7 @@ from .tasks import convert_pdf
 @transaction.atomic
 def index_or_update_document(sender, instance, **kwargs):
 
+
     if instance.license is not None:
         if instance.license:
             instance.license_type = instance.license.license
