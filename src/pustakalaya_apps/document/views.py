@@ -94,6 +94,6 @@ def document_page_view(request, pk):
             pass
 
     # Create json response
-    print(json_response)
+    #print(json_response)
     json_response = json.dumps(json_response)
     return HttpResponse(json_response, content_type="application/json")

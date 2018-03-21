@@ -219,7 +219,7 @@
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "illustrators:" %}</span>
                                 <span class="text-dark text-capitalize">
                                 {% for illustrator in object.document_illustrators.all %}
-                                  <a href="#">{{ illustrator }}</a>
+                                  {{ illustrator }}
                                   {%  if not forloop.last %}
                                             ,
                                   {%  endif %}
@@ -240,7 +240,7 @@
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Editors:" %}</span>
                                 <span class="text-dark text-capitalize">
                                 {% for editor in object.document_editors.all %}
-                                    <a href="#"> {{ editor }}</a>
+                                    {{ editor }}
                                   {%  if not forloop.last %}
                                             ,
                                   {%  endif %}
@@ -251,19 +251,22 @@
                             </div>
 
 
-                            <!-- publisher section -->
-                            {% if object.publisher == ""%}
-                            {%  if  object.publisher or object.publisher == "_" %}
-                            <div class="pb-1 border-line"
-                                    {% if not object.publisher %}
-                                 style="display: none;"
-                                    {% endif %}>
+                            {% if  object.publisher.all %}
+                            <div class="pb-1 border-line">
+
                                 <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
-                                <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
+                                <span class="text-dark text-capitalize">
+                                 {% for publisher in object.publisher.all %}
+                                  {{ publisher.publisher_name }}
+                                  {%  if not forloop.last %}
+                                            ,
+                                  {%  endif %}
+                                 {% endfor %}
+                                </span>
 
                             </div>
-                            {%  endif %}
                            {% endif %}
+
 
                             <!-- place of publication -->
                             <div class="pb-1 border-line"
@@ -341,13 +344,13 @@
 
                             <!-- License type -->
                             <div class="pb-1 border-line"
-                            {% if not object.license_type %}
+                            {% if not object.license.license %}
                                  style="display: none;"
                                     {% endif %}
                             >
                                 <!-- TODO pluralization -->
                                 <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
-                                <span class="text-dark text-capitalize"> {{ object.license_type }}</span>
+                                <span class="text-dark text-capitalize"> {{ object.license.license }}</span>
                             </div>
 
                             {%  if not object.document_series or object.document_series == "_" %}
