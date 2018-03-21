@@ -62,7 +62,7 @@ def collection_detail(request, name, pk):
     context["sort_order"] = sort_order
     context["sort_by"] = sort_by
     # print("respoinse = ",collection)
-    # context["page_obj"] = page
+    context["page_obj"] = page
     # context["paginator"] = paginator
 
     return render(request, "collection/collection_detail.html", context)

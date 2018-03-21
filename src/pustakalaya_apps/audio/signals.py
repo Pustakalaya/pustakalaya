@@ -14,12 +14,10 @@ def index_or_update_audio(sender, instance, **kwargs):
     """
     Index or update audio instance to es server
     """
-
     if instance.license is not None:
         if instance.license.license:
             instance.license_type = instance.license.license
             #print(instance.license.license)
-
 
     # Update or index audio doc type
     instance.index()

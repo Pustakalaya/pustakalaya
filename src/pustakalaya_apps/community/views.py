@@ -34,6 +34,6 @@ def index(request):
 
 def community_detail(request):
     communities1 = Community.objects.raw('SELECT * FROM community')
-    print(communities1)
+    #print(communities1)
     communities = Community.objects.all()
     return render(request, 'community/detail.html', {'communities':communities})

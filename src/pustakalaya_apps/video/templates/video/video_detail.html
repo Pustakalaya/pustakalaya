@@ -116,12 +116,21 @@
                         {% endif %}>
                     {{ object.abstract }}</p>
                 <!-- publisher section -->
-                  {% if object.publisher == "" %}
-                <div class="pb-1 border-line">
-                    <span class="capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
-                    <span class="text-dark text-capitalize"> {{ object.publisher }}</span>
-                </div>
-                {% endif %}
+                  {% if  object.publisher.all %}
+                            <div class="pb-1 border-line">
+
+                                <span class="text-capitalize font-weight-normal text-dark">{% trans "Publisher:" %}</span>
+                                <span class="text-dark text-capitalize">
+                                 {% for publisher in object.publisher.all %}
+                                  {{ publisher.publisher_name }}
+                                  {%  if not forloop.last %}
+                                            ,
+                                  {%  endif %}
+                                 {% endfor %}
+                                </span>
+
+                            </div>
+                           {% endif %}
                 <!-- place of publication -->
                 <div class="pb-1 border-line"
                         {% if not object.place_of_publication %}
@@ -175,13 +184,13 @@
 
                 <!-- License type -->
                 <div class="pb-1 border-line"
-                {% if not object.license_type %}
+                {% if not object.license.license %}
                      style="display: none;"
                 {% endif %}
                 >
                     <!-- TODO pluralization -->
                     <span class="capitalize font-weight-normal text-dark">{% trans "License type:" %}</span>
-                    <span class="text-capitalize"> {{ object.license_type }}</span>
+                    <span class="text-capitalize"> {{ object.license.license }}</span>
                 </div>
 
                 <!-- video series -->

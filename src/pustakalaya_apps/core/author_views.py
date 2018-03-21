@@ -25,12 +25,12 @@ def author_list(request):
                       'ष', 'ह']
 
     if request.method == "GET":
-        query_letter = request.GET.get('letter', None)
+        query_letter = request.GET.get('letter',None)
 
         if not query_letter:
             author_list = Biography.objects.all()
         else:
-            author_list = Biography.objects.filter(first_name__startswith=query_letter)
+            author_list = Biography.objects.filter(name__startswith=query_letter)
 
         # Get the page no.
         page = request.GET.get('page', 1)
