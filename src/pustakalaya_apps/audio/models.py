@@ -207,6 +207,14 @@ class Audio(AbstractItem):
     class Meta:
         db_table = "audio"
 
+    def get_admin_url(self):
+        return urlresolvers.reverse("admin:%s_%s_change" %(self._meta.app_label, self._meta.model_name), args=(self.pk,))
+
+
+
+
+
+
 
 
 
@@ -242,7 +250,6 @@ class AudioFileUpload(AbstractTimeStampModel):
         _("File name"),
         max_length=255,
         blank=True,
-
 
     )
 

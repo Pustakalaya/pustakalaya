@@ -1,0 +1,114 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    hostname: nginx
+    container_name: nginx_01
+    networks:
+      - pustakalaya-network
+    ports:
+     - "8000:8000"
+    volumes:
+     - ./src:/src
+     - ./conf/nginx:/etc/nginx/conf.d
+     - /library/media_root:/library/media_root
+     - /library/static_root:/library/static_root
+    depends_on:
+     - web
+  web:
+    build:
+      context: .
+      dockerfile: ./dockerfile-django-web/Dockerfile
+    restart: always
+    hostname: web
+    container_name: django_web_01
+    command: ./script.d/run_web.sh
+    depends_on:
+      - db
+      - elastic
+    volumes:
+      - ./src:/src
+      - /library/media_root:/library/media_root
+      - /library/static_root:/library/static_root
+    networks:
+      - pustakalaya-network
+    ports:
+      - "8001:8001"
+    # expose:
+    #   - "8001"
+    links:
+      - redis
+  db:
+    build:
+      context: .
+      dockerfile: ./dockerfile-postgres/Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_USER=pustakalaya_user
+      - POSTGRES_DB=pustakalaya
+      - POSTGRES_PASSWORD=pustakalaya123
+      - POSTGRES_BACKUP_DIR=/pg_backups
+      # - BUILD_NUM=${BUILD_NUMBER}
+
+    hostname: db
+    container_name: postgres_01
+    networks:
+      - pustakalaya-network
+     # command: ./run_db.sh
+    volumes:
+      - /library/backup_pg_pustakalaya:/pg_backups
+      - ./src:/src
+    expose:
+      - "5432"
+
+
+  elastic:
+    build:
+      context: .
+      dockerfile: ./dockerfile-elastic/Dockerfile
+    hostname: elastic
+    restart: always
+    container_name: elasticsearch_01
+    volumes:
+      - ./conf:/conf
+    networks:
+      - pustakalaya-network
+    # command: ./run_db.sh
+    depends_on:
+      - db
+    expose:
+      -  "9200"
+      -  "9300"
+    ports:
+      -  '9200:9200'
+
+
+  redis:
+    image: redis:latest
+    restart: always
+    hostname: redis
+    container_name: redis_01
+    networks:
+      - pustakalaya-network
+    ports:
+     - '6379:6379'
+
+  celery:
+    build:
+      context: .
+      dockerfile: ./dockerfile-celery/Dockerfile
+    hostname: celery
+    restart: always
+    container_name: celery_01
+    command: ./script.d/run_celery.sh
+    networks:
+      - pustakalaya-network
+    volumes:
+      - ./src:/src
+    links:
+      - db
+      - redis
+networks:
+  pustakalaya-network:
+    driver: bridge
