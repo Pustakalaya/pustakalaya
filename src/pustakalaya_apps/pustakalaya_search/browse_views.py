@@ -62,10 +62,9 @@ def browse(request):
         )
 
         response = s.execute()
-        print(response)
 
         # Pagination configuration before executing a query.
-        paginator = Paginator(response, 5)
+        paginator = Paginator(response, 25)
         page = request.GET.get('page')
         try:
             books = paginator.page(page)
