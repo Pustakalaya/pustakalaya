@@ -30,7 +30,7 @@ def author_list(request):
         if not query_letter:
             author_list = Biography.objects.all()
         else:
-            author_list = Biography.objects.filter(name__startswith=query_letter)
+            author_list = Biography.objects.filter(name__startswith=query_letter or query_letter.upper())
 
         # Get the page no.
         page = request.GET.get('page', 1)
