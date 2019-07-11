@@ -38,7 +38,7 @@
     "gulp-sass": "^3.1.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.12",
     "node-sass": "^4.5.3",
     "pdfjs-dist": "^1.9.646",
     "popper.js": "1.11",
