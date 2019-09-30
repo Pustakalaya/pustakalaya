@@ -40,7 +40,7 @@
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "node-sass": "^4.5.3",
-    "pdfjs-dist": "^1.9.646",
+    "pdfjs-dist": "^2.0.943",
     "popper.js": "1.11",
     "postcss-loader": "^2.0.7",
     "precss": "^2.0.0",
