@@ -39,7 +39,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.9.0",
     "pdfjs-dist": "^1.9.646",
     "popper.js": "1.11",
     "postcss-loader": "^2.0.7",
