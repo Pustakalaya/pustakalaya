@@ -52,7 +52,7 @@
     "redux": "^3.7.2",
     "redux-devtools": "^3.4.0",
     "redux-thunk": "^2.2.0",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^6.0.7",
     "style-loader": "^0.19.0",
     "video.js": "^6.2.8",
     "webpack-merge": "^4.1.0"
