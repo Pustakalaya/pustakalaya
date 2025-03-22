@@ -46,7 +46,7 @@
     "precss": "^2.0.0",
     "radium": "^0.19.5",
     "react": "^15.3.0",
-    "react-cookie": "^2.1.1",
+    "react-cookie": "^8.0.1",
     "react-dom": "^15.3.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
